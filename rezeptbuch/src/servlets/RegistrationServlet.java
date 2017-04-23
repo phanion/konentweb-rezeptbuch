@@ -36,7 +36,7 @@ public class RegistrationServlet extends HttpServlet {
 		final String password_retype = request.getParameter("password_retype");
 		
 		if(!password.equals(password_retype)){
-			response.getWriter().append("Passwort nicht richitg wiederholt");
+			response.getWriter().append("Passwort nicht richtig wiederholt");
 		}
 		else{
 			User user = new User(mail, name, prename, password);
