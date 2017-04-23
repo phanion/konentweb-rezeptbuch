@@ -1,4 +1,4 @@
-package java;
+package nutzer;
 
 /**
  * Created by Lorenz on 17.04.2017.

@@ -1,12 +1,15 @@
 package servlets;
 
-import java.User;
+
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import nutzer.User;
 
 /**
  * Servlet implementation class registration
@@ -39,9 +42,20 @@ public class RegistrationServlet extends HttpServlet {
 			response.getWriter().append("Passwort nicht richitg wiederholt");
 		}
 		else{
-			User user = new User(mail, name, prename, password);
-			response.getWriter().append((CharSequence) user.getName()).append((CharSequence) user.getVorname());
+			try{
+				User user = new User(mail, name, prename, password);
+				response.getWriter().append((CharSequence) "Neuer Nutzer: ").append((CharSequence) user.getName()).append((CharSequence) user.getVorname());	
+			}
+			catch (Exception e){
+				System.out.println(e.getMessage());
+			}
+			
 		}
+		
+//		RequestDispatcher rd = request.getRequestDispatcher("index.html");
+//		rd.forward(request, response);
+
+
 	}
 
 	/**
