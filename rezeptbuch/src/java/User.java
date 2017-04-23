@@ -2,64 +2,61 @@ package java;
 
 /**
  * Created by Lorenz on 17.04.2017.
+ * habe ein bisschen refactoring betrieben - Michael
  */
 public class User {
-    String user_mail;
-    String user_name;
-    String user_prename;
-    String user_password;
-
+    String mail;
+    String name;
+    String vorname;
+    String passwort;
 
 
 
     /**
-	 * @param user_mail
-	 * @param user_name
-	 * @param user_prename
-	 * @param user_password
+	 * @param mail
+	 * @param name
+	 * @param vorname
+	 * @param passwort
 	 */
-	public User(String user_mail, String user_name, String user_prename, String user_password) {
-		super();
-		this.user_mail = user_mail;
-		this.user_name = user_name;
-		this.user_prename = user_prename;
-		this.user_password = user_password;
+	public User(String mail, String name, String vorname, String passwort) {
+		this.mail = mail;
+		this.name = name;
+		this.vorname = vorname;
+		this.passwort = passwort;
 	}
 
-	public String getUser_mail() {
-        return user_mail;
-    }
 
-    public String getUser_name() {
-        return user_name;
-    }
+	public String getMail() {
+		return mail;
+	}
 
-    public void setUser_prename(String user_prename) {
-        this.user_prename = user_prename;
-    }
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
 
-    public void setUser_password(String user_password) {
-        this.user_password = user_password;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getUser_password() {
-        return user_password;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getUser_prename() {
-        return user_prename;
-    }
+	public String getVorname() {
+		return vorname;
+	}
 
-    public void setUser_mail(String user_mail) {
-        this.user_mail = user_mail;
-    }
+	public void setVorname(String vorname) {
+		this.vorname = vorname;
+	}
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
-    }
+	public String getPasswort() {
+		return passwort;
+	}
 
-
-
+	public void setPasswort(String passwort) {
+		this.passwort = passwort;
+	}
 
 
 }
