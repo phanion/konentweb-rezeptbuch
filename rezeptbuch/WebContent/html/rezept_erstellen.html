@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Kochrezepte - Erstellen</title>
+</head>
+<body>
+	<header>
+		<a href="./login.html">Login</a>
+		<a href="./registration.html">Registrieren</a>
+	</header>
+	<main>
+
+	<h1>Rezept erstellen</h1>
+	<form action="http://localhost:8080/rezeptbuch/ErstellenServlet" method="post" enctype="multipart/form-data">
+		<p>
+			<label for="zutaten">Zutaten:</label>
+			<textarea name="zutaten" id="zutaten" placeholder="Hier die Zutaten mit Menge und Einheit eingeben..." rows="10"  required></textarea>
+		</p>
+		<p>
+			<label for="beschreibung">Beschreibung:</label>
+			<textarea name="beschreibung" id="beschreibung" placeholder="Hier die Beschreibung eingeben..." cols="50" rows="7" required></textarea>
+		</p>
+		<p>
+			Bild auswählen:
+			<input type="file" name="bild" accept="image/*">
+		</p>
+		<p>
+			<button name="absenden" type="submit">Absenden</button>
+		</p>
+	</form>
+
+	</main>
+</body>
+</html>
