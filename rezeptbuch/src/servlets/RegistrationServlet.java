@@ -3,11 +3,13 @@ package servlets;
 
 import java.io.IOException;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 import nutzer.User;
 
@@ -25,6 +27,9 @@ public class RegistrationServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    @Resource(lookup="jdbc/MyRezeptbuchPool")
+	private DataSource ds;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -43,6 +48,7 @@ public class RegistrationServlet extends HttpServlet {
 		}
 		else{
 			try{
+				
 				User user = new User(mail, name, prename, password);
 				response.getWriter().append((CharSequence) "Neuer Nutzer: ").append((CharSequence) user.getName()).append((CharSequence) user.getVorname());	
 			}
