@@ -19,10 +19,11 @@ public class ErstellenServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		// Parameter von dem Request werden geholt
-		final String zutat = request.getParameter("zutaten");
+		final String rezept = request.getParameter("rezept");
+		final String zutaten = request.getParameter("zutaten");
 		final String beschreibung = request.getParameter("beschreibung");
 		
-		final String bild = request.getParameter("bild");
+		//final String bild = request.getParameter("bild");
 		
 		// Response vorbereiten
 		response.setContentType("text/html");
@@ -32,7 +33,9 @@ public class ErstellenServlet extends HttpServlet {
 		out.println("<!DOCTYPE html>");
 		out.println("<html>");
 		out.println("<body>");
-		out.println("<h4>" + zutat + " und " + beschreibung + "<h4>");
+		out.println("<h2> Das Rezept " + rezept + " wurde erstellt!</h2>");
+		out.println("<h3> Zutaten: </h3>" + zutaten);
+		out.println("<h3> Beschreibung </h3>" + beschreibung);
 		out.println("</body>");
 		out.println("</html>");
 			

@@ -16,6 +16,10 @@
 	<h1>Rezept erstellen</h1>
 	<form action="http://localhost:8080/rezeptbuch/ErstellenServlet" method="post">
 		<p>
+			<label for="rezept">Name:</label>
+			<input type="text" name="rezept" size="30" maxlength="40">
+		</p>
+		<p>
 			<label for="zutaten">Zutaten:</label>
 			<textarea name="zutaten" id="zutaten" placeholder="Hier die Zutaten mit Menge und Einheit eingeben..." rows="10"  required maxlength="2500"></textarea>
 		</p>
@@ -24,17 +28,17 @@
 			<textarea name="beschreibung" id="beschreibung" placeholder="Hier die Beschreibung eingeben..." cols="50" rows="7" required maxlength="2500"></textarea>
 		</p>
 		<p>
+			<!--  Input Type Submit soll laut Skript nicht verwendet werden (02_HTML -> Seite 54) -->
 			<button name="absenden" type="submit">Absenden</button>
 		</p>
-		
 	</form>
 	
-	<form action="http://localhost:8080/rezeptbuch/ErstellenServlet" method="post" enctype="multipart/form-data">
+	<!--   <form action="http://localhost:8080/rezeptbuch/ErstellenServlet" method="post" enctype="multipart/form-data">
 		<p>
 			Bild auswählen:
 			<input type="file" name="bild" accept="image/*">
-		</p>
-	</form>
+		</p> 
+	</form> -->
 
 	</main>
 </body>
