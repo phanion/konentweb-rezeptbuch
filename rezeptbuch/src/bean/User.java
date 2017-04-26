@@ -1,5 +1,6 @@
 package bean;
 
+
 /**
  * Created by Lorenz on 17.04.2017.
  * habe ein bisschen refactoring betrieben - Michael
