@@ -3,6 +3,9 @@
  */
 package classes;
 
+import java.util.EnumSet;
+
+import enums.Allergen;
 import enums.Einheit;
 
 /**
@@ -13,7 +16,7 @@ public class Zutat {
 	private String name;
 	private float menge;
 	private Einheit einheit;
-
+	private EnumSet<Allergen> allergene;
 
 	public String getName() {
 		return name;
@@ -41,6 +44,12 @@ public class Zutat {
 	public void setEinheit(Einheit einheit) {
 		this.einheit = einheit;
 	}
-	
+	/**
+	 * @return the allergenes
+	 */
+	public EnumSet<Allergen> getAllergene() {
+		return allergene;
+	}
+
 	
 }
