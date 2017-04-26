@@ -1,4 +1,4 @@
-package nutzer;
+package bean;
 
 /**
  * Created by Lorenz on 17.04.2017.
