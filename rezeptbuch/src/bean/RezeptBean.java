@@ -9,7 +9,7 @@ public class RezeptBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String rezept;
-	private String zutaten;
+	private String zutatenText;
 	private String beschreibung;
 
 	private List<Zutat> zutatenListe;
@@ -18,8 +18,8 @@ public class RezeptBean implements Serializable {
 	public String getRezept() { return rezept; }
 	public void setRezept(String rezept) { this.rezept = rezept; }
 
-	public String getZutaten() { return zutaten; }
-	public void setZutaten(String zutaten) { this.zutaten = zutaten; }
+	public String getZutatenText() { return zutatenText; }
+	public void setZutatenText(String zutaten) { this.zutatenText = zutaten; }
 
 	public String getBeschreibung() { return beschreibung; }
 	public void setBeschreibung(String beschreibung) { this.beschreibung = beschreibung; }
