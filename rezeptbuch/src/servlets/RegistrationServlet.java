@@ -46,9 +46,9 @@ public class RegistrationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Anmerkung: Später muss das weg. Es gibt für PW-Übertragung keine GET Methode
-		final String mail = request.getParameter("mail");
-		final String name = request.getParameter("name");
-		final String prename = request.getParameter("prename");
+		final String mail = request.getParameter("mail").toLowerCase();
+		final String lastName = request.getParameter("lastName");
+		final String firstName = request.getParameter("firstName");
 		final String password = request.getParameter("password");
 		final String password_retype = request.getParameter("password_retype");
 		
@@ -62,13 +62,13 @@ public class RegistrationServlet extends HttpServlet {
 				final Connection con = ds.getConnection();
 				
 				//https://www.javatpoint.com/example-of-registration-form-in-servlet
-				PreparedStatement ps = con.prepareStatement("insert into users values('" + mail + "','" + name + "','" + prename + "','" + password + "')");
+				PreparedStatement ps = con.prepareStatement("insert into users values('" + mail + "','" + lastName + "','" + firstName + "','" + password + "')");
 				ps.executeUpdate();
 				
 				
-				User user = new User(mail, name, prename, password);
+				User user = new User(mail, lastName, firstName, password);
 				
-				response.getWriter().append((CharSequence) "Neuer Nutzer: ").append((CharSequence) user.getName()).append((CharSequence) user.getVorname());	
+				response.getWriter().append((CharSequence) "Neuer Nutzer: ").append((CharSequence) user.getLastName()).append((CharSequence) user.getFirstName());	
 			}
 			catch (Exception e){
 				response.getWriter().append(e.getMessage());
