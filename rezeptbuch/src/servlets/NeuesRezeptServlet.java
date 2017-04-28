@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/ErstellenServlet")
-public class ErstellenServlet extends HttpServlet {
+@WebServlet("/NeuesRezeptServlet")
+public class NeuesRezeptServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	

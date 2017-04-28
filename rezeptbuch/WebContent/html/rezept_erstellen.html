@@ -2,46 +2,50 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <title>Kochrezepte - Erstellen</title>
 </head>
+
+
 <body>
 	<header>
-	<!-- Der Link zum Login wird noch entfernt, da nur eingeloggte Nutzer 
+		<!-- Der Link zum Login wird noch entfernt, da nur eingeloggte Nutzer 
 		ein Rezept erstellen können -->
-		<a href="./login.html">Login</a>
-		<a href="./registration.html">Registrieren</a>
+		<a href="./login.html">Login</a> <a href="./registration.html">Registrieren</a>
 	</header>
 	<main>
 
 	<h1>Rezept erstellen</h1>
-	<form action="/rezeptbuch/ErstellenServlet" method="post">
+	<form action="/rezeptbuch/NeuesRezeptServlet" method="post">
 		<p>
-			<label for="rezept">Name:</label>
-			<input type="text" name="rezept" size="30" maxlength="40">
+			<label for="rezept">Name:</label> <input type="text" name="rezept"
+				id="rezept" size="30" maxlength="40">
 		</p>
 		<p>
 			<label for="zutatenText">Zutaten:</label>
-			<textarea name="zutatenText" id="zutatenText" placeholder="Hier die Zutaten mit Menge und Einheit eingeben..." rows="10"  required maxlength="2500"></textarea>
+			<textarea name="zutatenText" id="zutatenText"
+				placeholder="Hier die Zutaten mit Menge und Einheit eingeben..."
+				rows="10" required maxlength="2500"></textarea>
 		</p>
 		<p>
 			<label for="beschreibung">Beschreibung:</label>
-			<textarea name="beschreibung" id="beschreibung" placeholder="Hier die Beschreibung eingeben..." cols="50" rows="7" required maxlength="2500"></textarea>
+			<textarea name="beschreibung" id="beschreibung"
+				placeholder="Hier die Beschreibung eingeben..." cols="50" rows="7"
+				required maxlength="2500"></textarea>
 		</p>
 		<p>
 			<!--  Input Type Submit soll laut Skript nicht verwendet werden (02_HTML -> Seite 54) -->
 			<button name="absenden" type="submit">Absenden</button>
 		</p>
 	</form>
-	
+
 	<!--   <form action="http://localhost:8080/rezeptbuch/ErstellenServlet" method="post" enctype="multipart/form-data">
 		<p>
 			Bild auswählen:
 			<input type="file" name="bild" accept="image/*">
 		</p> 
-	</form> -->
-
-	</main>
+	</form> --> </main>
 </body>
 </html>

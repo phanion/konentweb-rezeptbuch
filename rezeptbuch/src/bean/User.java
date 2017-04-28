@@ -10,8 +10,7 @@ public class User {
     String name;
     String vorname;
     String passwort;
-
-
+    
 
     /**
 	 * @param mail
