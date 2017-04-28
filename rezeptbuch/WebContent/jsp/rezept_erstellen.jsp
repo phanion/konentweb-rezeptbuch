@@ -1,5 +1,5 @@
-<!--  Autor Florian  -->
-
+<%@ page errorPage="errorpage.jsp" language="java"
+	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -10,11 +10,7 @@
 
 
 <body>
-	<header>
-		<!-- Der Link zum Login wird noch entfernt, da nur eingeloggte Nutzer 
-		ein Rezept erstellen können -->
-		<a href="./login.html">Login</a> <a href="./registration.html">Registrieren</a>
-	</header>
+	<%@ includefile="fragments/nav.jspf" %>
 	<main>
 
 	<h1>Rezept erstellen</h1>
@@ -43,7 +39,7 @@
 
 	<!--   <form action="http://localhost:8080/rezeptbuch/ErstellenServlet" method="post" enctype="multipart/form-data">
 		<p>
-			Bild auswählen:
+			Bild auswÃ¤hlen:
 			<input type="file" name="bild" accept="image/*">
 		</p> 
 	</form> --> </main>

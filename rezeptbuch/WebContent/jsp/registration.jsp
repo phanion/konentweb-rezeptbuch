@@ -1,7 +1,5 @@
-<!-- Autor: Lorenz 
-Refactoring Florian-->
-
-
+<%@ page errorPage="errorpage.jsp" language="java"
+	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +7,7 @@ Refactoring Florian-->
 <title>Kochrezepte - Registrierung2</title>
 </head>
 <body>
+	<%@ includefile="fragments/nav.jspf" %>
 	<main>
 	<h1>Registration</h1>
 	<form action="/rezeptbuch/registration" method="post">

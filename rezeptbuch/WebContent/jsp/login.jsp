@@ -1,8 +1,5 @@
-<!-- Autor: Lorenz -->
-
-
-
-
+<%@ page errorPage="errorpage.jsp" language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +7,7 @@
 <title>Kochrezepte - Login</title>
 </head>
 <body>
+	<%@ includefile="fragments/nav.jspf" %>
 	<main>
 	<h1>Login</h1>
 	<form action="/rezeptbuch/login" method="post">
