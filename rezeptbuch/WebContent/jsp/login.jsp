@@ -27,7 +27,7 @@
 	</form>
 	<main>
 	<p>
-		<a href="registration.html">Noch keinen Account?</a>
+		<a href="registration.jsp">Noch keinen Account?</a>
 
 	</p>
 	</main></main>

@@ -40,7 +40,7 @@
 	</form>
 
 	<p>
-		<a href="login.html">Bereits ein Account?</a>
+		<a href="login.jsp">Bereits ein Account?</a>
 	</p>
 	</main>
 </body>
