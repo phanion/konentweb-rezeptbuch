@@ -61,6 +61,9 @@ public class LoginServlet extends HttpServlet {
 					session.setAttribute("user", user);
 					
 					message = "Der Nutzer " + user.getFirstName() + " " + user.getLastName() + " wurde erfolgreich eingeloggt!";
+					
+					RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
+					disp.forward(request, response);
 				}
 				else message = "Der Nutzer konnte nicht eingeloggt werden! Aber existiert!";
 				
