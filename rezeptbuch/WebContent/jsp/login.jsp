@@ -10,6 +10,9 @@
 	<%@ includefile="fragments/nav.jspf" %>
 	<main>
 	<h1>Login</h1>
+	<c:if test="${not empty message}">
+		<h2>${message}</h2>
+	</c:if>
 	<form action="/rezeptbuch/login" method="post">
 		<p>
 			<label>E-Mail</label><input name="mail" type="email" size="30"

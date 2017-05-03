@@ -8,14 +8,19 @@
 package servlets;
 
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import javax.annotation.Resource;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import bean.User;
@@ -51,40 +56,59 @@ public class RegistrationServlet extends HttpServlet {
 		final String firstName = request.getParameter("firstName");
 		final String password = request.getParameter("password");
 		final String password_retype = request.getParameter("password_retype");
-
+		String message = null;
+		
+		HttpSession session = request.getSession();
+		
 		if (!password.equals(password_retype)) {
-			response.getWriter().append("Passwort nicht richtig wiederholt");
-		} else {
+			message = "Die eingegebenen Passwörter stimmen nicht überein!";
+		}
+		
+		else {
+			
 			try {
+				
 				final Connection con = ds.getConnection();
 				// https://www.mkyong.com/jdbc/jdbc-statement-example-select-list-of-the-records/
 				Statement statement = con.createStatement();
 				ResultSet rs = statement.executeQuery("select mail from users where mail='" + mail + "';");
+				
 				if (rs.next()) {
 					if (rs.getString(1).equals(mail)) {
-
-						response.getWriter().append("Der Nutzer existiert bereits!");
+						message = "Der User existiert bereits!";
+						
 					}
-				} else {
+				}
+				
+				else {
 
 					// https://www.javatpoint.com/example-of-registration-form-in-servlet
 					PreparedStatement ps = con.prepareStatement("insert into users values('" + mail + "','" + lastName
 							+ "','" + firstName + "','" + password + "')");
 					ps.executeUpdate();
-
+					
 					User user = new User(mail, lastName, firstName, password);
-
-					response.getWriter().append((CharSequence) "Neuer Nutzer: ")
-							.append((CharSequence) user.getLastName()).append((CharSequence) user.getFirstName());
+					session.setAttribute("user", user);
+					
+					message = "Der User " + user.getFirstName() + " " + user.getLastName() + " wurde erfolgreich angelegt!";
+				
 				}
-			} catch (Exception e) {
+				
+				
+				
+				
+			}
+			
+			catch (Exception e) {
 				response.getWriter().append(e.getMessage());
 			}
 
 		}
 
-		// RequestDispatcher rd = request.getRequestDispatcher("index.html");
-		// rd.forward(request, response);
+		//http://stackoverflow.com/questions/6452537/servlet-send-response-to-jsp
+		request.setAttribute("message", message);
+		RequestDispatcher disp = request.getRequestDispatcher("/jsp/registration.jsp");
+		disp.forward(request, response);
 
 	}
 

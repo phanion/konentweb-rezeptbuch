@@ -1,3 +1,6 @@
+<!-- Refactoring: Lorenz -->
+
+
 <%@ page errorPage="errorpage.jsp" language="java"
 	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,17 +19,17 @@
 		<p>
 			<label for="vorname">Vorname</label> <input type="text"
 				name="vorname" id="vorname" placeholder="Ihr Vorname" disabled
-				value="${'Max-Hardcodiert'}">
+				value="${user.getFirstName()}">
 		</p>
 		<p>
 			<label for="nachname">Nachname</label> <input type="text"
 				name="nachname" id="nachname" placeholder="Ihr Nachname" disabled
-				value="${'Mustermann-Hardcodiert'}">
+				value="${user.getLastName()}">
 		</p>
 		<p>
 			<label for="mail">E-Mail</label> <input type="text" name="mail"
 				id="mail" placeholder="Ihre E-Mail" disabled
-				value="${'max.mustermann@hardcodiert.de'}">
+				value="${user.getMail()}">
 		</p>
 		<p>
 			<label for="beschreibung">Profilbeschreibung</label>

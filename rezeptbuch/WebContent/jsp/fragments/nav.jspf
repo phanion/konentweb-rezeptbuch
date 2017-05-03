@@ -1,6 +1,15 @@
+<!-- Refactoring: Lorenz -->
+
 <nav>
-	<a href="./login.jsp">Login</a> | <a
-		href="./registration.jsp">Registrieren</a> | <a
-		href="./rezept_erstellen.jsp">Rezept erstellen</a> | <a
-		href="./profile.jsp">Profil anzeigen</a>
+	<!-- ToDo -->
+	<c:choose>
+		<c:when test="${not empty user}">
+				<a href="/rezeptbuch/jsp/rezept_erstellen.jsp">Rezept erstellen</a> | <a
+				href="/rezeptbuch/jsp/profile.jsp">Profil anzeigen</a>
+		</c:when>
+		<c:otherwise>
+			<a href="/rezeptbuch/jsp/login.jsp">Login</a> | <a href="/rezeptbuch/jsp/registration.jsp">Registrieren</a> | <a
+				href="/rezeptbuch/jsp/rezept_erstellen.jsp">Rezept erstellen</a>
+		</c:otherwise>
+	</c:choose>
 </nav>
