@@ -4,20 +4,14 @@ package bean;
  * 
  */
 public class User {
-	private String ID;
-	public String getID() {
-		return ID;
-	}
-
-	public void setID(String iD) {
-		ID = iD;
-	}
-
+	private String id;
 	private String mail;
 	private String lastName;
 	private String firstName;
 	private String password;
 
+	
+	public User(){}
 	/**
 	 * @param mail
 	 * @param lastName
@@ -61,6 +55,13 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public void setID(String id) {
+		this.id = id;
+	}
+	
+	public String getID() {
+		return id;
 	}
 
 }

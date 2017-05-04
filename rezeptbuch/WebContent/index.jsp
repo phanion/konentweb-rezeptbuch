@@ -12,6 +12,10 @@
 	<main>
 	<h1>Herzlich Willkommen.</h1>
 	<p>Hier können Sie Kochbücher speichern, teilen und lesen!</p>
+	
+		<c:if test="${not empty message}">
+		<h2>${message}</h2>
+	</c:if>
 
 	</main>
 
