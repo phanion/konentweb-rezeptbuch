@@ -17,8 +17,8 @@
 	<h1>Rezept erstellen</h1>
 	<form action="/rezeptbuch/NeuesRezeptServlet" method="post">
 		<p>
-			<label for="rezept">Name:</label> <input type="text" name="rezept"
-				id="rezept" size="30" maxlength="40">
+			<label for="name">Name:</label> <input type="text" name="name"
+				id="name" size="30" maxlength="40">
 		</p>
 		<p>
 			<label for="zutatenText">Zutaten:</label>
@@ -27,10 +27,34 @@
 				rows="10" required maxlength="2500"></textarea>
 		</p>
 		<p>
-			<label for="beschreibung">Beschreibung:</label>
-			<textarea name="beschreibung" id="beschreibung"
+			<label for="description">Beschreibung:</label>
+			<textarea name="description" id="description"
 				placeholder="Hier die Beschreibung eingeben..." cols="50" rows="7"
 				required maxlength="2500"></textarea>
+		</p>
+		<p>
+			<label for="durationPreparation">Vorbereitungsdauer:</label>
+			<input name="durationPreparation" id="durationPreparation"
+				placeholder="Hier die Vorbereitungsdauer in Minuten angeben" type="number"
+				min="1" max="500" value="null"/>
+		</p>
+		<p>
+			<label for="durationCooking">Kochzeit:</label>
+			<input name="durationCooking" id="durationCooking"
+				placeholder="Hier die Kochzeit in Minuten angeben" type="number"
+				min="1" max="500" value="null"/>
+		</p>
+		<p>
+			<label for="difficulty">Schwierigkeit:</label>
+			<input name="difficulty" id="difficulty"
+				placeholder="Hier die Schwierigkeit angeben" type="number"
+				max="5" min="1" value="null"/>
+		</p>
+		<p>
+			<label for="servings">Portionen:</label>
+			<input name="servings" id="servings"
+				placeholder="Hier die Schwierigkeit angeben" type="number"
+				max="99" min="1" value="null"/>
 		</p>
 		<p>
 			<!--  Input Type Submit soll laut Skript nicht verwendet werden (02_HTML -> Seite 54) -->

@@ -57,7 +57,8 @@ public class LoginServlet extends HttpServlet {
 			ResultSet rs = statement.executeQuery("select * from users where mail='" + mail + "';");
 			if (rs.next()) {
 				if (rs.getString("mail").equals(mail) && rs.getString("password").equals(password)) {
-					User user = new User(rs.getString("mail"), rs.getString("lastName"), rs.getString("firstName"), rs.getString("password"));
+					User user = new User(rs.getInt("ID"), rs.getString("mail"), rs.getString("lastName"), rs.getString("firstName"), rs.getString("password"));
+					
 					session.setAttribute("user", user);
 					
 					message = "Der Nutzer " + user.getFirstName() + " " + user.getLastName() + " wurde erfolgreich eingeloggt!";

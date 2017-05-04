@@ -4,7 +4,7 @@ package bean;
  * 
  */
 public class User {
-	private String id;
+	private Integer id;
 	private String mail;
 	private String lastName;
 	private String firstName;
@@ -18,13 +18,19 @@ public class User {
 	 * @param firstName
 	 * @param password
 	 */
-	public User(String mail, String lastName, String firstName, String password) {
+	public User(Integer id, String mail, String lastName, String firstName, String password) {
+		this.id = id;
 		this.mail = mail;
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.password = password;
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", mail=" + mail + ", lastName=" + lastName + ", firstName=" + firstName
+				+ ", password=" + password + "]";
+	}
 	public String getMail() {
 		return mail;
 	}
@@ -56,11 +62,11 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public void setID(String id) {
+	public void setID(Integer id) {
 		this.id = id;
 	}
 	
-	public String getID() {
+	public Integer getID() {
 		return id;
 	}
 

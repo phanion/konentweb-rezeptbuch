@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
@@ -167,7 +165,7 @@ public class RegistrationServlet extends HttpServlet {
 
 			ResultSet rs = ps.getGeneratedKeys();
 			while (rs.next()) {
-				user.setID(rs.getString(1));
+				user.setID(rs.getInt(1));
 			}
 			return true;
 
