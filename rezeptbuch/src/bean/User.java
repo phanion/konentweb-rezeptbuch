@@ -4,6 +4,15 @@ package bean;
  * 
  */
 public class User {
+	private String ID;
+	public String getID() {
+		return ID;
+	}
+
+	public void setID(String iD) {
+		ID = iD;
+	}
+
 	private String mail;
 	private String lastName;
 	private String firstName;

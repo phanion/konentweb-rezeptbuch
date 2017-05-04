@@ -81,10 +81,15 @@ public class RegistrationServlet extends HttpServlet {
 				}
 				
 				else {
-
+					String[] generatedKeys = new String[] {"id"};
 					// https://www.javatpoint.com/example-of-registration-form-in-servlet
-					PreparedStatement ps = con.prepareStatement("insert into users values('" + mail + "','" + lastName
-							+ "','" + firstName + "','" + password + "')");
+					PreparedStatement ps = con.prepareStatement("insert into users(mail,lastName,firstName,password) values(?,?,?,?)",generatedKeys);
+					ps.setString(1,mail);
+					ps.setString(2, lastName);
+					ps.setString(3, firstName);
+					ps.setString(4, password);
+					
+					
 					ps.executeUpdate();
 					
 					User user = new User(mail, lastName, firstName, password);
