@@ -1,31 +1,36 @@
 package bean;
 
 /**
- * Created by Lorenz on 17.04.2017.
- * habe ein bisschen refactoring betrieben - Michael
+ * 
  */
 public class User {
-    String mail;
-    String name;
-    String vorname;
-    String passwort;
+	private Integer id;
+	private String mail;
+	private String lastName;
+	private String firstName;
+	private String password;
 
-
-
-    /**
+	
+	public User(){}
+	/**
 	 * @param mail
-	 * @param name
-	 * @param vorname
-	 * @param passwort
+	 * @param lastName
+	 * @param firstName
+	 * @param password
 	 */
-	public User(String mail, String name, String vorname, String passwort) {
+	public User(Integer id, String mail, String lastName, String firstName, String password) {
+		this.id = id;
 		this.mail = mail;
-		this.name = name;
-		this.vorname = vorname;
-		this.passwort = passwort;
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.password = password;
 	}
 
-
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", mail=" + mail + ", lastName=" + lastName + ", firstName=" + firstName
+				+ ", password=" + password + "]";
+	}
 	public String getMail() {
 		return mail;
 	}
@@ -34,29 +39,35 @@ public class User {
 		this.mail = mail;
 	}
 
-	public String getName() {
-		return name;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-	public String getVorname() {
-		return vorname;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setVorname(String vorname) {
-		this.vorname = vorname;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getPasswort() {
-		return passwort;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPasswort(String passwort) {
-		this.passwort = passwort;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-
+	public void setID(Integer id) {
+		this.id = id;
+	}
+	
+	public Integer getID() {
+		return id;
+	}
 
 }
