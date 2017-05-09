@@ -1,8 +1,22 @@
-create database rezeptbuch;
 use rezeptbuch;
 CREATE TABLE users (
-    mail VARCHAR(30) PRIMARY KEY,
-    lastName VARCHAR(30),
-    firstName VARCHAR(30),
-    password VARCHAR(30)
+    ID BIGINT NOT NULL auto_increment primary key,
+    mail varchar(255) unique,
+    lastName TINYTEXT,
+    firstName TINYTEXT,
+    password TINYTEXT
 );
+create table recipes(
+    ID BIGINT NOT NULL auto_increment,
+    name TINYTEXT not null,
+    creator BIGINT NOT NULL,
+    description TEXT not null,
+    durationPreparation INTEGER,
+    durationCooking INTEGER,
+    difficulty INTEGER,
+    ratingCount INTEGER,
+    ratingSum INTEGER,
+    image BLOB,
+    primary key (ID),
+    foreign key (creator) references users(id)
+    );
