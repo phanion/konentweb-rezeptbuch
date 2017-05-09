@@ -16,6 +16,7 @@ create table recipes(
     difficulty INTEGER,
     ratingCount INTEGER,
     ratingSum INTEGER,
+    image BLOB,
     primary key (ID),
     foreign key (creator) references users(id)
     );
