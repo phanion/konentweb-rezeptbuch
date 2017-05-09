@@ -14,7 +14,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <base href="${pageContext.request.requestURI}" />
 
-<title>Rezept</title>
+<title>Rezept erstellen</title>
 
 </head>
 <body>
