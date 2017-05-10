@@ -9,7 +9,7 @@ package bean;
 import java.io.Serializable;
 import java.util.List;
 
-import classes.Zutat;
+import classes.Ingredient;
 
 public class RezeptBean implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -25,20 +25,14 @@ public class RezeptBean implements Serializable {
 	private Integer ratingCount;
 	private Integer ratingSum;
 	private Integer servings;
+	private List<Ingredient> ingredients;
 
-	private List<Zutat> zutatenListe;
-	
+
 	public RezeptBean(){}
 
 
 
-	@Override
-	public String toString() {
-		return "RezeptBean [id=" + id + ", creator=" + creator.toString() + ", name=" + name + ", zutatenText=" + zutatenText
-				+ ", description=" + description + ", durationPreparation=" + durationPreparation + ", durationCooking="
-				+ durationCooking + ", difficulty=" + difficulty + ", ratingCount=" + ratingCount + ", ratingSum="
-				+ ratingSum + ", servings=" + servings + ", zutatenListe=" + zutatenListe + "]";
-	}
+	
 
 
 
@@ -134,9 +128,6 @@ public class RezeptBean implements Serializable {
 		return serialVersionUID;
 	}
 
-	public void setZutatenListe(List<Zutat> zutatenListe) {
-		this.zutatenListe = zutatenListe;
-	}
 
 
 	public String getZutatenText() {
@@ -147,9 +138,18 @@ public class RezeptBean implements Serializable {
 		this.zutatenText = zutaten;
 	}
 
-
-	public List<Zutat> getZutatenListe() {
-		return zutatenListe;
+	public void addIngredient(String ingredient, String unit, Integer quantity){
+		ingredients.add(new Ingredient(ingredient, quantity, unit));
 	}
+
+
+
+
+
+
+
+
+
+	
 
 }
