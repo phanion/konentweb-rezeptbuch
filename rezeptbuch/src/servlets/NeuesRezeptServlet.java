@@ -57,14 +57,15 @@ public class NeuesRezeptServlet extends HttpServlet {
 		rezept.setServings(servings);
 		
 		
-		/**for(int i = 0; i < ingredients.length; i++){
+		for(int i = 0; i < ingredients.length; i++){
 			rezept.addIngredient(ingredients[i], units[i], Integer.parseInt(quantities[i]));
-		}**/
+		}
 		
 		request.setAttribute("rezept", rezept);
 		
 		try {
 			createRezept(rezept);
+			insertIngredients(rezept);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -101,6 +102,24 @@ public class NeuesRezeptServlet extends HttpServlet {
 		while (rs.next()) {
 			rezept.setId(rs.getLong(1));
 		}
+		
+		
 
+	}
+	
+	public void insertIngredients(RezeptBean rezept) throws SQLException{
+		final Connection con = ds.getConnection();
+		
+		for(int i = 0; i < rezept.getIngredients().size(); i++){
+		PreparedStatement ps = con.prepareStatement("insert into ingredients(recipe, ingredient, unit, quantity) values(?,?,?,?)");
+		
+		ps.setLong(1, rezept.getId());
+		ps.setString(2, rezept.getIngredients().get(i).getIngredient());
+		ps.setString(3, rezept.getIngredients().get(i).getUnit());
+		ps.setInt(4, rezept.getIngredients().get(i).getQuantity());		
+		
+		ps.executeUpdate();
+		}
+		
 	}
 }
