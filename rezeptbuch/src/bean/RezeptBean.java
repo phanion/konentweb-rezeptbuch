@@ -7,6 +7,8 @@
 package bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import classes.Ingredient;
@@ -14,7 +16,7 @@ import classes.Ingredient;
 public class RezeptBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private Integer id;
+	private Long id;
 	private User creator;
 	private String name;
 	private String zutatenText;
@@ -25,7 +27,7 @@ public class RezeptBean implements Serializable {
 	private Integer ratingCount;
 	private Integer ratingSum;
 	private Integer servings;
-	private List<Ingredient> ingredients;
+	private List<Ingredient> ingredients = new ArrayList<Ingredient>();
 
 
 	public RezeptBean(){}
@@ -33,6 +35,36 @@ public class RezeptBean implements Serializable {
 
 
 	
+
+
+
+	
+
+
+
+
+
+
+
+	@Override
+	public String toString() {
+		return "RezeptBean [id=" + id + ", creator=" + creator + ", name=" + name + ", zutatenText=" + zutatenText
+				+ ", description=" + description + ", durationPreparation=" + durationPreparation + ", durationCooking="
+				+ durationCooking + ", difficulty=" + difficulty + ", ratingCount=" + ratingCount + ", ratingSum="
+				+ ratingSum + ", servings=" + servings + ", ingredients=" + ingredients + "]";
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -60,11 +92,11 @@ public class RezeptBean implements Serializable {
 		this.name = name;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -139,7 +171,8 @@ public class RezeptBean implements Serializable {
 	}
 
 	public void addIngredient(String ingredient, String unit, Integer quantity){
-		ingredients.add(new Ingredient(ingredient, quantity, unit));
+		ingredients.add(new Ingredient(ingredient,quantity, unit));
+		
 	}
 
 

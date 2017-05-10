@@ -165,7 +165,7 @@ public class RegistrationServlet extends HttpServlet {
 
 			ResultSet rs = ps.getGeneratedKeys();
 			while (rs.next()) {
-				user.setID(rs.getInt(1));
+				user.setID(rs.getLong(1));
 			}
 			return true;
 
