@@ -174,6 +174,17 @@ public class RezeptBean implements Serializable {
 		ingredients.add(new Ingredient(ingredient,quantity, unit));
 		
 	}
+	
+	public String ingredientsToString(){
+		String result = "";
+		
+		for(int i = 0; i < ingredients.size(); i++){
+			result += ingredients.get(i).outputString() + "</br>";
+		}
+		
+		return result;
+
+	}
 
 
 

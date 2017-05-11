@@ -44,6 +44,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		// TODO Auto-generated method stub
 		final String mail = request.getParameter("mail").toLowerCase();
 		final String password = request.getParameter("password");
@@ -70,14 +71,15 @@ public class LoginServlet extends HttpServlet {
 				
 			}
 			else message = "Der Nutzer konnte nicht eingeloggt werden. Nutzer existiert nicht!";
+			//http://stackoverflow.com/questions/6452537/servlet-send-response-to-jsp
+			request.setAttribute("message", message);
+			RequestDispatcher disp = request.getRequestDispatcher("/jsp/login.jsp");
+			disp.forward(request, response);
 		}
 		catch(Exception e){
 			response.getWriter().append(e.toString());
 		}
-				//http://stackoverflow.com/questions/6452537/servlet-send-response-to-jsp
-				request.setAttribute("message", message);
-				RequestDispatcher disp = request.getRequestDispatcher("/jsp/login.jsp");
-				disp.forward(request, response);
+				
 		
 	
 	}

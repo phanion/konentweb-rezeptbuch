@@ -5,10 +5,10 @@
 package classes;
 
 public class Ingredient {
-	private String ingredient;
+	
 	private Integer quantity;
 	private String unit;
-	
+	private String ingredient;
 	
 	
 	
@@ -38,6 +38,18 @@ public class Ingredient {
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Ingredient [quantity=" + quantity + ", unit=" + unit + ", ingredient=" + ingredient + "]";
+	}
+	
+	public String outputString(){
+		return quantity + " " + unit + " " + ingredient;
+	}
+	
+	
 	
 	
 	

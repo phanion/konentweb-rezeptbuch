@@ -49,6 +49,9 @@ public class RegistrationServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// Anmerkung: Später muss das weg. Es gibt für PW-Übertragung keine GET
 		// Methode
+		
+		request.setCharacterEncoding("UTF-8");
+		
 		final String mail = request.getParameter("mail").toLowerCase();
 		final String lastName = request.getParameter("lastName");
 		final String firstName = request.getParameter("firstName");

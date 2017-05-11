@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.annotation.Resource;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +29,7 @@ public class NeuesRezeptServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-
+		request.setCharacterEncoding("UTF-8");
 
 		// Parameter von dem Request werden geholt
 		final String name = request.getParameter("name");
@@ -40,6 +41,8 @@ public class NeuesRezeptServlet extends HttpServlet {
 		final Integer durationCooking = Integer.parseInt(request.getParameter("durationCooking"));
 		final Integer difficulty = Integer.parseInt(request.getParameter("difficulty"));
 		final Integer servings = Integer.parseInt(request.getParameter("servings"));
+		
+		String message = null;
 		
 		
 		//response.getWriter().append(ingredients[0] + " " + quantities[0] + " " + units[0]);
@@ -56,22 +59,28 @@ public class NeuesRezeptServlet extends HttpServlet {
 		rezept.setDurationPreparation(durationPreparation);
 		rezept.setServings(servings);
 		
-		
+		if(ingredients != null){
 		for(int i = 0; i < ingredients.length; i++){
 			rezept.addIngredient(ingredients[i], units[i], Integer.parseInt(quantities[i]));
-		}
+		}}
 		
 		request.setAttribute("rezept", rezept);
 		
 		try {
 			createRezept(rezept);
 			insertIngredients(rezept);
+			message = "Das Rezept wurde erfolgreich angelegt!";
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		response.getWriter().append(rezept.toString());
+		request.setAttribute("message", message);
+		
+		//http://stackoverflow.com/questions/12021087/passing-data-between-two-servlets
+		getServletContext().getRequestDispatcher("/LoadRecipeServlet");
+		RequestDispatcher disp = request.getRequestDispatcher("/LoadRecipeServlet?id=" + rezept.getId());
+		disp.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -80,7 +89,7 @@ public class NeuesRezeptServlet extends HttpServlet {
 
 	}
 	
-	public void createRezept(RezeptBean rezept) throws SQLException{
+	public RezeptBean createRezept(RezeptBean rezept) throws SQLException{
 		final Connection con = ds.getConnection();
 
 		String[] generatedKeys = new String[] { "id" };
@@ -103,7 +112,7 @@ public class NeuesRezeptServlet extends HttpServlet {
 			rezept.setId(rs.getLong(1));
 		}
 		
-		
+		return rezept;
 
 	}
 	
