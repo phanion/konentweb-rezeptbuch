@@ -54,7 +54,7 @@
 	<main>
 
 	<h1>Rezept erstellen</h1>
-	<form action="/rezeptbuch/NeuesRezeptServlet" method="post">
+	<form action="/rezeptbuch/NeuesRezeptServlet" method="post" enctype="multipart/form-data">
 		<p>
 			<label for="name">Name:</label> <input type="text" name="name"
 				id="name" size="30" maxlength="40">
@@ -98,16 +98,15 @@
 				type="number" max="99" min="0" value="0" />
 		</p>
 		<p>
+			<label for="image">Bild auswählen:</label>
+			<input type="file" name="image" id="image" accept="image/*">
+		</p> 
+		<p>
 			<!--  Input Type Submit soll laut Skript nicht verwendet werden (02_HTML -> Seite 54) -->
 			<button name="absenden" type="submit">Absenden</button>
 		</p>
 	</form>
 
-	<!--   <form action="http://localhost:8080/rezeptbuch/ErstellenServlet" method="post" enctype="multipart/form-data">
-		<p>
-			Bild auswÃ¤hlen:
-			<input type="file" name="bild" accept="image/*">
-		</p> 
-	</form> --> </main>
+	</main>
 </body>
 </html>

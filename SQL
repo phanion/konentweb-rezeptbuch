@@ -18,7 +18,8 @@ create table recipes(
     ratingCount INTEGER,
     ratingSum INTEGER,
     servings INTEGER,
-    image BLOB,
+    image MEDIUMBLOB,
+    filename varchar(255),
     primary key (ID),
     foreign key (creator) references users(id)
     );

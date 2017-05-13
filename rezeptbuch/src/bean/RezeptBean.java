@@ -27,6 +27,8 @@ public class RezeptBean implements Serializable {
 	private Integer ratingCount;
 	private Integer ratingSum;
 	private Integer servings;
+	private String filename;
+	private byte[] image;
 	private List<Ingredient> ingredients = new ArrayList<Ingredient>();
 
 
@@ -53,18 +55,6 @@ public class RezeptBean implements Serializable {
 				+ durationCooking + ", difficulty=" + difficulty + ", ratingCount=" + ratingCount + ", ratingSum="
 				+ ratingSum + ", servings=" + servings + ", ingredients=" + ingredients + "]";
 	}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -175,40 +165,28 @@ public class RezeptBean implements Serializable {
 		
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	public List<Ingredient> getIngredients() {
 		return ingredients;
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	public void setIngredients(List<Ingredient> ingredients) {
 		this.ingredients = ingredients;
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 
