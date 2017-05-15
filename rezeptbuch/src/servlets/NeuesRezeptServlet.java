@@ -1,14 +1,18 @@
 package servlets;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Part;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +24,12 @@ import bean.RezeptBean;
 import bean.User;
 
 @WebServlet("/NeuesRezeptServlet")
+//Bild-Upload einschränken
+@MultipartConfig(
+		maxFileSize =1024*1024*5,
+		maxRequestSize =1024*1024*5,
+		location="/tmp",
+		fileSizeThreshold=1024*1024)
 public class NeuesRezeptServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -30,6 +40,7 @@ public class NeuesRezeptServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
+
 
 		// Parameter von dem Request werden geholt
 		final String name = request.getParameter("name");
@@ -64,6 +75,23 @@ public class NeuesRezeptServlet extends HttpServlet {
 			rezept.addIngredient(ingredients[i], units[i], Integer.parseInt(quantities[i]));
 		}}
 		
+		//File-Behandlung
+		Part filepart = request.getPart("image");
+		rezept.setFilename(filepart.getSubmittedFileName());
+		
+		//Bild in Bean speichern
+		try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				InputStream in = filepart.getInputStream() ) {
+			int i = 0;
+			while ((i = in.read()) != -1) {
+				baos.write(i);
+			}
+			rezept.setImage(baos.toByteArray());
+			baos.flush();
+		} catch (IOException ex) {
+			throw new ServletException(ex.getMessage());
+		}
+		
 		request.setAttribute("rezept", rezept);
 		
 		try {
@@ -94,7 +122,7 @@ public class NeuesRezeptServlet extends HttpServlet {
 
 		String[] generatedKeys = new String[] { "id" };
 
-		PreparedStatement ps = con.prepareStatement("insert into recipes(name,creator,description,difficulty,durationCooking,durationPreparation,servings) values(?,?,?,?,?,?,?)",generatedKeys);
+		PreparedStatement ps = con.prepareStatement("insert into recipes(name,creator,description,difficulty,durationCooking,durationPreparation,servings,filename,image) values(?,?,?,?,?,?,?,?,?)",generatedKeys);
 
 
 		ps.setString(1, rezept.getName());
@@ -104,6 +132,8 @@ public class NeuesRezeptServlet extends HttpServlet {
 		ps.setInt(5, rezept.getDurationCooking());
 		ps.setInt(6, rezept.getDurationPreparation());
 		ps.setInt(7, rezept.getServings());
+		ps.setString(8, rezept.getFilename());
+		ps.setBytes(9, rezept.getImage());
 		
 		ps.executeUpdate();
 
