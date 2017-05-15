@@ -6,13 +6,16 @@
 
 <head>
 <meta charset="UTF-8">
+<c:choose>
+<c:when test="${empty user}">
+	<c:redirect url="login.jsp"/>
+</c:when>
+</c:choose>
 <script type="text/javascript">
 	function add() {
 		//http://stackoverflow.com/questions/34127450/dynamically-add-forminput-textbox-in-jsp
 		var paragraph = document.createElement("P")
-
 		var Menge  = document.createElement("input");
-
 		Menge.setAttribute("type", "number");
 		Menge.setAttribute("name", "zutatenMenge");
 		Menge.setAttribute("id","zutatenMenge");
@@ -34,15 +37,12 @@
 		Zutat.setAttribute("id","zutatenZutat")
 		Zutat.setAttribute("placeholder", "Zutat");
 		Zutat.setAttribute("required","");
-
-
 		paragraph.appendChild(Menge);
 		paragraph.appendChild(Einheit);
 		paragraph.appendChild(Zutat);
 		
 		var div = document.getElementById("zutaten");
 		div.appendChild(paragraph);
-
 	}
 </script>
 <title>Kochrezepte - Erstellen</title>
@@ -54,7 +54,7 @@
 	<main>
 
 	<h1>Rezept erstellen</h1>
-	<form action="/rezeptbuch/NeuesRezeptServlet" method="post">
+	<form action="/rezeptbuch/NeuesRezeptServlet" method="post" enctype="multipart/form-data">
 		<p>
 			<label for="name">Name:</label> <input type="text" name="name"
 				id="name" size="30" maxlength="40">
@@ -98,16 +98,15 @@
 				type="number" max="99" min="0" value="0" />
 		</p>
 		<p>
+			<label for="image">Bild auswählen:</label>
+			<input type="file" name="image" id="image" accept="image/*">
+		</p> 
+		<p>
 			<!--  Input Type Submit soll laut Skript nicht verwendet werden (02_HTML -> Seite 54) -->
 			<button name="absenden" type="submit">Absenden</button>
 		</p>
 	</form>
 
-	<!--   <form action="http://localhost:8080/rezeptbuch/ErstellenServlet" method="post" enctype="multipart/form-data">
-		<p>
-			Bild auswÃ¤hlen:
-			<input type="file" name="bild" accept="image/*">
-		</p> 
-	</form> --> </main>
+	</main>
 </body>
 </html>
