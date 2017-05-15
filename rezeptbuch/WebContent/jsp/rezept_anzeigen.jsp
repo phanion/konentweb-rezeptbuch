@@ -24,6 +24,7 @@
 	<c:if test="${not empty message}">
 		<h2>${message}</h2>
 	</c:if>
+<img src="../LoadImage?id=${rezept.id}&table=recipes">
 <h2>ID: ${rezept.id}</h2>
 <h2>Zutaten:</h2>
 ${rezept.ingredientsToString()}

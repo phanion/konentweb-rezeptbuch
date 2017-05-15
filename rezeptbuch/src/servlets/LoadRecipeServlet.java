@@ -1,7 +1,9 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -71,10 +73,12 @@ public class LoadRecipeServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	public RezeptBean loadRecipeFromDB(Long id) throws SQLException{
+	public RezeptBean loadRecipeFromDB(Long id) throws SQLException, ServletException{
 		final Connection con = ds.getConnection();
-		Statement statement = con.createStatement();
-		ResultSet rs = statement.executeQuery("select * from recipes where id='" + id + "';");
+		PreparedStatement ps = con.prepareStatement("select * from recipes where id=?;");
+		
+		ps.setLong(1, id);
+		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
 			RezeptBean recipe = new RezeptBean();
 			recipe.setId(rs.getLong("id"));
@@ -86,10 +90,12 @@ public class LoadRecipeServlet extends HttpServlet {
 			recipe.setRatingSum(rs.getInt("ratingSum"));
 			recipe.setRatingCount(rs.getInt("ratingCount"));
 			recipe.setServings(rs.getInt("servings"));
+			recipe.setImage(rs.getBytes("image"));
 			
 			recipe.setCreator(loadCreator(rs.getLong("creator")));
 			
 			recipe.setIngredients(loadIngredients(recipe.getId()));
+			
 			
 			
 			return recipe;
@@ -131,4 +137,6 @@ public class LoadRecipeServlet extends HttpServlet {
 		return ingredients;
 		
 	}
+	
+
 }

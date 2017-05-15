@@ -26,7 +26,7 @@ import bean.User;
 @WebServlet("/NeuesRezeptServlet")
 //Bild-Upload einschränken
 @MultipartConfig(
-		maxFileSize =1024*1024*5,
+		maxFileSize =1024*1024*15,
 		maxRequestSize =1024*1024*5,
 		location="/tmp",
 		fileSizeThreshold=1024*1024)
