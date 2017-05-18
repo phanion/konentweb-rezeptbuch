@@ -45,6 +45,7 @@ create table comments(
     recipe bigint,
     comment text not null,
     author bigint,
+    primary key (ID),
     foreign key (recipe) references recipes(id),
     foreign key (author) references users(id)
     );
