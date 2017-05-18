@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -107,8 +106,9 @@ public class LoadRecipeServlet extends HttpServlet {
 		User creator = new User();
 
 		final Connection con = ds.getConnection();
-		Statement statement = con.createStatement();
-		ResultSet rs = statement.executeQuery("select firstName, lastName from users where id='" + id + "';");
+		PreparedStatement ps = con.prepareStatement("select firstName, lastName from users where id=?");
+		ps.setLong(1, id);
+		ResultSet rs = ps.executeQuery();
 		
 		if(rs.next()){
 			creator.setFirstName(rs.getString("firstName"));

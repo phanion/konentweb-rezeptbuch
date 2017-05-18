@@ -38,5 +38,9 @@ ${rezept.durationCooking}
 ${rezept.difficulty}
 <h2>Portionen:</h2>
 ${rezept.servings}
+<h2>Anzahl Bewertungen:</h2>
+${rezept.ratingCount}
+<h2>Summe Bewertungen:</h2>
+${rezept.ratingSum}
 </body>
 </html>

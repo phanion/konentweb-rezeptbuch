@@ -122,7 +122,7 @@ public class NeuesRezeptServlet extends HttpServlet {
 
 		String[] generatedKeys = new String[] { "id" };
 
-		PreparedStatement ps = con.prepareStatement("insert into recipes(name,creator,description,difficulty,durationCooking,durationPreparation,servings,filename,image) values(?,?,?,?,?,?,?,?,?)",generatedKeys);
+		PreparedStatement ps = con.prepareStatement("insert into recipes(name,creator,description,difficulty,durationCooking,durationPreparation,servings,filename,image, ratingCount, ratingSum) values(?,?,?,?,?,?,?,?,?,?,?)",generatedKeys);
 
 
 		ps.setString(1, rezept.getName());
@@ -134,6 +134,8 @@ public class NeuesRezeptServlet extends HttpServlet {
 		ps.setInt(7, rezept.getServings());
 		ps.setString(8, rezept.getFilename());
 		ps.setBytes(9, rezept.getImage());
+		ps.setInt(10, 0);
+		ps.setInt(11, 0);
 		
 		ps.executeUpdate();
 
