@@ -130,6 +130,7 @@ public class Rating extends HttpServlet {
 				setRating.executeUpdate();
 			}
 		}
+		con.close();
 
 	}
 

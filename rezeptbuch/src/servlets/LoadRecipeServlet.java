@@ -113,12 +113,13 @@ public class LoadRecipeServlet extends HttpServlet {
 		if(rs.next()){
 			creator.setFirstName(rs.getString("firstName"));
 			creator.setLastName(rs.getString("lastName"));
+			con.close();
 			return creator;
 		}
 
 		
 		
-		
+		con.close();
 		return null;
 	}
 	
@@ -133,7 +134,7 @@ public class LoadRecipeServlet extends HttpServlet {
 		while(rs.next()){
 			ingredients.add(new Ingredient(rs.getString("ingredient"),rs.getInt("quantity"), rs.getString("unit")));
 		}
-		
+		con.close();
 		return ingredients;
 		
 	}

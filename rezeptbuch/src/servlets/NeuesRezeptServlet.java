@@ -1,3 +1,7 @@
+/**
+ * Autor: Florian, Lorenz
+ */
+
 package servlets;
 
 import java.io.ByteArrayOutputStream;
@@ -143,7 +147,7 @@ public class NeuesRezeptServlet extends HttpServlet {
 		while (rs.next()) {
 			rezept.setId(rs.getLong(1));
 		}
-		
+		con.close();
 		return rezept;
 
 	}
@@ -161,6 +165,7 @@ public class NeuesRezeptServlet extends HttpServlet {
 		
 		ps.executeUpdate();
 		}
+		con.close();
 		
 	}
 }

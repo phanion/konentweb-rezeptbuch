@@ -170,9 +170,10 @@ public class RegistrationServlet extends HttpServlet {
 			while (rs.next()) {
 				user.setID(rs.getLong(1));
 			}
+			con.close();
 			return true;
-
-		} 
+			
+		}
 		
 		catch (Exception e) {
 			// TODO Auto-generated catch block

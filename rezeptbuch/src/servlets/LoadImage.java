@@ -71,10 +71,12 @@ public class LoadImage extends HttpServlet {
 			catch(Exception e){
 				throw new ServletException(e.getMessage());
 			}
+			con.close();
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
 	}
 
 	/**

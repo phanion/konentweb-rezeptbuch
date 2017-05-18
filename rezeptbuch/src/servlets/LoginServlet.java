@@ -73,6 +73,7 @@ public class LoginServlet extends HttpServlet {
 				
 			}
 			else message = "Der Nutzer konnte nicht eingeloggt werden. Nutzer existiert nicht!";
+			con.close();
 			//http://stackoverflow.com/questions/6452537/servlet-send-response-to-jsp
 			request.setAttribute("message", message);
 			RequestDispatcher disp = request.getRequestDispatcher("/jsp/login.jsp");

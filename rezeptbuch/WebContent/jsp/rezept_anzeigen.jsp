@@ -1,4 +1,4 @@
-<!-- Autor Flo -->
+<!-- Autor Flo, Lorenz -->
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page errorPage="errorpage.jsp" language="java"
@@ -24,7 +24,9 @@
 	<c:if test="${not empty message}">
 		<h2>${message}</h2>
 	</c:if>
-<img src="../LoadImage?id=${rezept.id}&table=recipes">
+<c:if test="${not empty rezept.filename}">
+	<img src="../LoadImage?id=${rezept.id}&table=recipes">
+</c:if>
 <h2>ID: ${rezept.id}</h2>
 <h2>Zutaten:</h2>
 ${rezept.ingredientsToString()}
