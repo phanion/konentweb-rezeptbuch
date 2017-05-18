@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+
+
 import bean.RezeptBean;
 import bean.User;
+import classes.Comment;
 import classes.Ingredient;
 
 /**
@@ -91,19 +93,22 @@ public class LoadRecipeServlet extends HttpServlet {
 			recipe.setServings(rs.getInt("servings"));
 			recipe.setImage(rs.getBytes("image"));
 			
-			recipe.setCreator(loadCreator(rs.getLong("creator")));
+			recipe.setCreator(loadUser(rs.getLong("creator")));
 			
 			recipe.setIngredients(loadIngredients(recipe.getId()));
+			recipe.setComments(loadComments(recipe));
 			
 			
 			
+			con.close();
 			return recipe;
 	}
+		con.close();
 		return null;
 	}
 	
-	public User loadCreator(Long id) throws SQLException{
-		User creator = new User();
+	public User loadUser(Long id) throws SQLException{
+		User user = new User();
 
 		final Connection con = ds.getConnection();
 		PreparedStatement ps = con.prepareStatement("select firstName, lastName from users where id=?");
@@ -111,10 +116,11 @@ public class LoadRecipeServlet extends HttpServlet {
 		ResultSet rs = ps.executeQuery();
 		
 		if(rs.next()){
-			creator.setFirstName(rs.getString("firstName"));
-			creator.setLastName(rs.getString("lastName"));
+			user.setFirstName(rs.getString("firstName"));
+			user.setLastName(rs.getString("lastName"));
+			user.setID(id);
 			con.close();
-			return creator;
+			return user;
 		}
 
 		
@@ -128,14 +134,33 @@ public class LoadRecipeServlet extends HttpServlet {
 		List<Ingredient> ingredients = new ArrayList<Ingredient>();
 		
 		final Connection con = ds.getConnection();
-		Statement statement = con.createStatement();
-		ResultSet rs = statement.executeQuery("select * from ingredients where recipe='" + id + "';");
+		PreparedStatement ps = con.prepareStatement("select * from ingredients where recipe=?");
+		ps.setLong(1, id);
+		ResultSet rs = ps.executeQuery();
 		
 		while(rs.next()){
 			ingredients.add(new Ingredient(rs.getString("ingredient"),rs.getInt("quantity"), rs.getString("unit")));
 		}
 		con.close();
 		return ingredients;
+		
+	}
+	
+	public List<Comment> loadComments(RezeptBean recipe) throws SQLException{
+		List<Comment> comments = new ArrayList<Comment>();
+		
+		final Connection con = ds.getConnection();
+		PreparedStatement ps = con.prepareStatement("select * from comments where recipe=?");
+		ps.setLong(1, recipe.getId());
+		ResultSet rs = ps.executeQuery();
+		
+		
+		while(rs.next()){
+			comments.add(new Comment(rs.getLong("ID"), loadUser(rs.getLong("author")),rs.getString("comment"), recipe));
+			
+		}
+		con.close();
+		return comments;
 		
 	}
 	

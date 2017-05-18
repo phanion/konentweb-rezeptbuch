@@ -9,10 +9,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+
 
 import javax.annotation.Resource;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,13 +26,13 @@ import bean.User;
  * Servlet implementation class Rating
  */
 @WebServlet("/Rating")
-public class Rating extends HttpServlet {
+public class RatingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Rating() {
+	public RatingServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -61,9 +60,10 @@ public class Rating extends HttpServlet {
 			e.printStackTrace();
 
 		}
+		
+		
+		response.sendRedirect("LoadRecipeServlet?id=" + recipe);
 
-		RequestDispatcher disp = request.getRequestDispatcher("/LoadRecipeServlet?id=" + recipe);
-		disp.forward(request, response);
 
 	}
 
