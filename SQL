@@ -39,3 +39,12 @@ create table ratings(
     foreign key (recipe) references recipes(id),
     foreign key (evaluator) references users(id)
     );
+ 
+create table comments(
+    ID BIGINT NOT NULL auto_increment,
+    recipe bigint,
+    comment text not null,
+    author bigint,
+    foreign key (recipe) references recipes(id),
+    foreign key (author) references users(id)
+    );
