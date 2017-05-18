@@ -15,7 +15,7 @@
 	<%@ includefile="./fragments/nav.jspf" %>
 	<main>
 	<h1>Dein Profil</h1>
-	<form action="/profile" method="post">
+	<form action="/rezeptbuch/profile" method="post">
 		<p>
 			<label for="vorname">Vorname</label> <input type="text"
 				name="vorname" id="vorname" placeholder="Ihr Vorname" disabled
