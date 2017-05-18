@@ -30,3 +30,11 @@ create table ingredients(
     quantity integer,
     foreign key (recipe) references recipes(id)
     );
+    
+create table ratings(
+	recipe bigint,
+    evaluator bigint,
+    rating INTEGER,
+    foreign key (recipe) references recipes(id),
+    foreign key (evaluator) references users(id)
+    );
