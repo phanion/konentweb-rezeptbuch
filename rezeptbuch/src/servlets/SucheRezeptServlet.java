@@ -80,6 +80,9 @@ public class SucheRezeptServlet extends HttpServlet {
 					Integer difficulty = rs.getInt("difficulty");
 					rezBean.setDifficulty(difficulty);
 					
+					String description = rs.getString("description");
+					rezBean.setDescription(description);
+					
 					rezepte.add(rezBean);
 				}
 			}
