@@ -31,9 +31,11 @@
 							return;
 						}
 						
-						var ausgabe = "<table><tr><th>Id</th><th>Rezept</th><th>Vorbereitungsdauer</th><th>Kochdauer</th><th>Schwierigkeit</th></tr>";
+						var ausgabe = "<table><tr><th></th><th>Id</th><th>Rezept</th><th>Vorbereitungsdauer</th><th>Kochdauer</th><th>Schwierigkeit</th></tr>";
 						for (var i=0; i < rezeptList.length; i++) {
-							ausgabe += "<tr><td>";
+							ausgabe += "<tr><td rowspan=\"2\">";
+							ausgabe += "<img src=\"../LoadImage?id="+rezeptList[i].id+"&table=recipes\" width=\"200\" heigt=\"180\">";
+							ausgabe += "</td><td>";
 							ausgabe += rezeptList[i].id;
 							ausgabe += "</td><td>";
 							ausgabe += rezeptList[i].name;
@@ -43,6 +45,9 @@
 							ausgabe += rezeptList[i].durCook;
 							ausgabe += "</td><td>";
 							ausgabe += rezeptList[i].difficulty;
+							ausgabe += "</td></tr>";
+							ausgabe += "<tr><td colspan=\"5\">";
+							ausgabe += rezeptList[i].description;
 							ausgabe += "</td></tr>";
 						}
 						ausgabe += "</table>";
