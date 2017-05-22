@@ -27,17 +27,12 @@ public class SucheRezeptServlet extends HttpServlet {
        
 	@Resource(lookup = "jdbc/MyRezeptbuchPool")
 	private DataSource ds;
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public SucheRezeptServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Servlet zur Entgegennahme von Formularinhalten, Lesen der Daten in einer DB und Generierung
 				// eines Beans zur Weitergabe der Formulardaten an eine JSP
@@ -95,10 +90,7 @@ public class SucheRezeptServlet extends HttpServlet {
 		return rezepte;
 	}
 
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

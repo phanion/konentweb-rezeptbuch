@@ -28,7 +28,7 @@ import bean.RezeptBean;
 import bean.User;
 
 @WebServlet("/NeuesRezeptServlet")
-//Bild-Upload einschränken
+//Bild-Upload einschrï¿½nken
 @MultipartConfig(
 		maxFileSize =1024*1024*15,
 		maxRequestSize =1024*1024*5,
@@ -140,6 +140,7 @@ public class NeuesRezeptServlet extends HttpServlet {
 		ps.setBytes(9, rezept.getImage());
 		ps.setInt(10, 0);
 		ps.setInt(11, 0);
+		
 		
 		ps.executeUpdate();
 
