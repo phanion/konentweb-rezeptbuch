@@ -1,3 +1,6 @@
+<!--  Autor: Flo -->
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -54,6 +57,7 @@
 		</script>
 	</head>
 	<body>
+		<%@ includefile="/jsp/fragments/nav.jspf" %>
 		<form id="myForm">
 			<fieldset><legend>Rezeptsuche</legend>
 				<div>
@@ -62,7 +66,7 @@
 				</div>
 				<div>
 				  <button type="button" id="button" name="button" >Suchen</button>
-				  <button name="reset" type="reset">ZurÃ¼cksetzen</button>
+				  <button name="reset" type="reset">Zurücksetzen</button>
 				</div>
 			</fieldset>
 		</form>
