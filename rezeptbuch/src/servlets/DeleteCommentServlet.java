@@ -1,16 +1,12 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,20 +14,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 /**
- * Servlet implementation class LoadImage
+ * Servlet implementation class DeleteCommentServlet
  */
-@WebServlet({ "/LoadImage", "/loadimage" })
-public class LoadImage extends HttpServlet {
+@WebServlet({ "/DeleteCommentServlet", "/deletecomment" })
+public class DeleteCommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoadImage() {
+    public DeleteCommentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
-    
+
     @Resource(lookup = "jdbc/MyRezeptbuchPool")
 	private DataSource ds;
     
@@ -41,42 +37,24 @@ public class LoadImage extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		final Long id = Long.parseLong(request.getParameter("id"));
-		final String table = request.getParameter("table");
+		final Long recipe = Long.parseLong(request.getParameter("recipe"));
 		
-		try(Connection con = ds.getConnection();
-				PreparedStatement ps = con.prepareStatement("SELECT image from " + table + "  where id=?")){
-			
+		try {
+			Connection con = ds.getConnection();
+			PreparedStatement ps = con.prepareStatement("DELETE FROM comments WHERE id=?");
 			ps.setLong(1, id);
+			ps.executeUpdate();
 			
-			try(ResultSet rs = ps.executeQuery()){
-				if(rs!= null && rs.next()){
-					Blob image = rs.getBlob("image");
-					response.reset();
-					long length = image.length();
-					response.setHeader("Content-Length", String.valueOf(length));
-					
-					try(InputStream in = image.getBinaryStream();){
-						final int bufferSize = 256;
-						byte[] buffer = new byte[bufferSize];
-						
-						ServletOutputStream out = response.getOutputStream();
-						while ((length = in.read(buffer)) != -1){
-							out.write(buffer, 0, (int) length);
-							
-						}
-						out.flush();
-					}
-				}
-			}
-			catch(Exception e){
-				throw new ServletException(e.getMessage());
-			}
 			con.close();
-		} catch (SQLException e1) {
+			
+			
+			
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			e.printStackTrace();
 		}
 		
+		response.sendRedirect("LoadRecipeServlet?id=" + recipe);
 	}
 
 	/**

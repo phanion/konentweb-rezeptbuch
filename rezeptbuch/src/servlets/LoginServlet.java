@@ -9,8 +9,9 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
+
 
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
@@ -54,8 +55,9 @@ public class LoginServlet extends HttpServlet {
 		
 		try{
 			final Connection con = ds.getConnection();
-			Statement statement = con.createStatement();
-			ResultSet rs = statement.executeQuery("select * from users where mail='" + mail + "';");
+			PreparedStatement ps = con.prepareStatement("select * from users where mail=?");
+			ps.setString(1, mail);
+			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				if (rs.getString("mail").equals(mail) && rs.getString("password").equals(password)) {
 					User user = new User(rs.getLong("ID"), rs.getString("mail"), rs.getString("lastName"), rs.getString("firstName"), rs.getString("password"));
@@ -71,6 +73,7 @@ public class LoginServlet extends HttpServlet {
 				
 			}
 			else message = "Der Nutzer konnte nicht eingeloggt werden. Nutzer existiert nicht!";
+			con.close();
 			//http://stackoverflow.com/questions/6452537/servlet-send-response-to-jsp
 			request.setAttribute("message", message);
 			RequestDispatcher disp = request.getRequestDispatcher("/jsp/login.jsp");

@@ -1,6 +1,6 @@
 /**
  * Autor: Florian
- * Refactoring: Lorenz
+ * Erweiterung: Lorenz
  * 
  */
 
@@ -8,9 +8,9 @@ package bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import classes.Comment;
 import classes.Ingredient;
 
 public class RezeptBean implements Serializable {
@@ -30,6 +30,7 @@ public class RezeptBean implements Serializable {
 	private String filename;
 	private byte[] image;
 	private List<Ingredient> ingredients = new ArrayList<Ingredient>();
+	private List<Comment> comments = new ArrayList<Comment>();
 
 
 	public RezeptBean(){}
@@ -198,6 +199,14 @@ public class RezeptBean implements Serializable {
 
 	public void setImage(byte[] image) {
 		this.image = image;
+	}
+	
+	public List<Comment> getComments(){
+		return comments;
+	}
+	
+	public void setComments(List<Comment> comments){
+		this.comments = comments;
 	}
 
 
