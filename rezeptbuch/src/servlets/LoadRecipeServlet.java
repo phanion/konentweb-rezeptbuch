@@ -92,6 +92,7 @@ public class LoadRecipeServlet extends HttpServlet {
 			recipe.setRatingCount(rs.getInt("ratingCount"));
 			recipe.setServings(rs.getInt("servings"));
 			recipe.setImage(rs.getBytes("image"));
+			recipe.setFilename(rs.getString("filename"));
 			
 			recipe.setCreator(loadUser(rs.getLong("creator")));
 			
