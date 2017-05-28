@@ -11,8 +11,15 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Date;
 
 import javax.annotation.Resource;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,6 +39,9 @@ public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Resource(lookup = "jdbc/MyRezeptbuchPool")
 	private DataSource ds;
+	
+	@Resource(lookup = "mail/MyMailSession")
+	private Session mailSession;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -89,6 +99,7 @@ public class RegistrationServlet extends HttpServlet {
 					if(createUser(user)){
 						message = "Der User " + user.getFirstName() + " " + user.getLastName()
 							+ " wurde mit ID " + user.getID() + " erfolgreich angelegt!";
+						sendWelcomeEmail(user.getMail(), user.getFirstName() + " " + user.getLastName());
 						
 					}
 					else{
@@ -180,5 +191,21 @@ public class RegistrationServlet extends HttpServlet {
 			throw new ServletException(e.getMessage());
 		}
 	}
+	
+	//https://dzone.com/articles/sending-email-using-javamail
+	public void sendWelcomeEmail(String to, String name) {
+        MimeMessage message = new MimeMessage(mailSession);
+        try {
+            message.setFrom(new InternetAddress(mailSession.getProperty("mail.from")));
+            InternetAddress[] address = {new InternetAddress(to)};
+            message.setRecipients(Message.RecipientType.TO, address);
+            message.setSubject("Herzlich Willkommen");
+            message.setSentDate(new Date());
+            message.setText("Hallo " + name + "Herzlich Willkommen bei Rezeptbuch.");
+            Transport.send(message);
+        } catch (MessagingException ex) {
+            ex.printStackTrace();
+        }
+    }
 
 }

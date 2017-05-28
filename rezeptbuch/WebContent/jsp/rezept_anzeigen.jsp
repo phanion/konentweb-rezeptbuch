@@ -13,7 +13,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <base href="${pageContext.request.requestURI}" />
 
-<title>Rezept erstellen</title>
+<title>Rezeptbuch - ${rezept.name}</title>
 
 </head>
 <body>
@@ -22,7 +22,7 @@
 	<c:if test="${not empty message}">
 		<h2>${message}</h2>
 	</c:if>
-	<c:if test="${not empty rezept.filename}">
+	<c:if test="${not empty rezept.getFilename()}">
 		<img src="../LoadImage?id=${rezept.id}&table=recipes">
 	</c:if>
 	<h2>ID: ${rezept.id}</h2>
