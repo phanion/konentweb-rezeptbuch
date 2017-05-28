@@ -33,7 +33,7 @@
 				value="${user.getMail()}">
 		</p>
 		<p>
-			<label for="beschreibung">Profilbeschreibung</label>
+			<label class="labelfortextarea" for="beschreibung">Profilbeschreibung</label>
 			<textarea name="beschreibung" id="beschreibung" cols="50"
 				placeholder="Ihre Profilbeschreibung" disabled>
 				${'Profilbeschreibung: Lorem ipsum dolor sit amet.'}

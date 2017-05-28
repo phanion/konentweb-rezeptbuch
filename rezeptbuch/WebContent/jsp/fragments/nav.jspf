@@ -4,18 +4,23 @@
 	<!-- ToDo -->
 	<c:choose>
 		<c:when test="${not empty user}">
-			<a href="/rezeptbuch/index.jsp">Startseite</a>
-			<a href="/rezeptbuch/jsp/rezept_erstellen.jsp">Rezept erstellen</a>
-			<a href="/rezeptbuch/jsp/profile.jsp">Profil anzeigen</a>
-			<a href="/rezeptbuch/logoutservlet">Logout</a>
-			<a href="/rezeptbuch/jsp/rezeptsuche.jsp">Rezept suchen</a>
+			<ul>
+				<li><a href="/rezeptbuch/index.jsp">Startseite</a></li>
+				<li><a href="/rezeptbuch/jsp/rezept_erstellen.jsp">Rezept erstellen</a></li>
+				<li><a href="/rezeptbuch/jsp/profile.jsp">Profil anzeigen</a></li>
+				<li><a href="/rezeptbuch/logoutservlet">Logout</a></li>
+				<li><a href="/rezeptbuch/jsp/rezeptsuche.jsp">Rezept suchen</a>
+				</li>
+			</ul>
 		</c:when>
 		<c:otherwise>
-			<a href="/rezeptbuch/index.jsp">Startseite</a>
-			<a href="/rezeptbuch/jsp/login.jsp">Rezept erstellen</a>
-			<a href="/rezeptbuch/jsp/login.jsp">Login</a>
-			<a href="/rezeptbuch/jsp/registration.jsp">Registrieren</a>
-			<a href="/rezeptbuch/jsp/rezeptsuche.jsp">Rezept suchen</a>
+			<ul>
+				<li><a href="/rezeptbuch/index.jsp">Startseite</a></li>
+				<li><a href="/rezeptbuch/jsp/login.jsp">Rezept erstellen</a></li>
+				<li><a href="/rezeptbuch/jsp/login.jsp">Login</a></li>
+				<li><a href="/rezeptbuch/jsp/registration.jsp">Registrieren</a></li>
+				<li><a href="/rezeptbuch/jsp/rezeptsuche.jsp">Rezept suchen</a></li>
+			</ul>
 		</c:otherwise>
 	</c:choose>
 </nav>

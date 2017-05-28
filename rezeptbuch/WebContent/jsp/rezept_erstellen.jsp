@@ -90,7 +90,7 @@
 				value="Zutat hinzufügen" onclick="add();" />
 		</p>
 		<p>
-			<label for="description">Beschreibung:</label>
+			<label class="labelfortextarea" for="description">Beschreibung:</label>
 			<textarea name="description" id="description"
 				placeholder="Hier die Beschreibung eingeben..." cols="50" rows="7"
 				required maxlength="2500"></textarea>

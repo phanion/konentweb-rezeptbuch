@@ -1,15 +1,42 @@
 body {
-	background-color: #FFDBAA;
+	background-color: #E8E8E8;
 }
 
 main {
 	padding: 20px 20%;
 }
 
-p {
+main p {
 	margin: 5px 0px;
 }
 
+table{
+	border-collapse: collapse;
+}
+
 table th, td {
-   border: 1px solid #553100;
+   border: 1px solid #424B54;
+   text-align: left;
+}
+
+th, td {
+	padding: 8px;
+}
+
+label {
+	min-width: 10em;
+	display: inline-block;
+	text-align: left;
+}
+
+.labelfortextarea {
+	display: block;
+}
+
+input, textarea, select, button {
+	font-size: 1em;
+}
+
+input:not([type="button"]) {
+	min-width: 5em;
 }

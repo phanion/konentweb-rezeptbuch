@@ -74,6 +74,13 @@ public class LoadRecipeServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
+	/**
+	 * TODO: JavaDoc ausfüllen
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 * @throws ServletException
+	 */
 	public RezeptBean loadRecipeFromDB(Long id) throws SQLException, ServletException{
 		final Connection con = ds.getConnection();
 		PreparedStatement ps = con.prepareStatement("select * from recipes where id=?;");
@@ -99,8 +106,6 @@ public class LoadRecipeServlet extends HttpServlet {
 			recipe.setIngredients(loadIngredients(recipe.getId()));
 			recipe.setComments(loadComments(recipe));
 			
-			
-			
 			con.close();
 			return recipe;
 	}
@@ -108,6 +113,12 @@ public class LoadRecipeServlet extends HttpServlet {
 		return null;
 	}
 	
+	/**
+	 * TODO: Ausfüllen
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
 	public User loadUser(Long id) throws SQLException{
 		User user = new User();
 
@@ -124,13 +135,16 @@ public class LoadRecipeServlet extends HttpServlet {
 			return user;
 		}
 
-		
-		
 		con.close();
 		return null;
 	}
 	
-	
+	/**
+	 * TODO: Ausfüllen
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<Ingredient> loadIngredients(Long id) throws SQLException{
 		List<Ingredient> ingredients = new ArrayList<Ingredient>();
 		
@@ -147,6 +161,12 @@ public class LoadRecipeServlet extends HttpServlet {
 		
 	}
 	
+	/**
+	 * TODO: Ausfüllen
+	 * @param recipe
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<Comment> loadComments(RezeptBean recipe) throws SQLException{
 		List<Comment> comments = new ArrayList<Comment>();
 		

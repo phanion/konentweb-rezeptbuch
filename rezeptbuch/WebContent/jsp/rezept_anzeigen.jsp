@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="../main.css">
+<link rel="stylesheet" type="text/css" href="main.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <base href="${pageContext.request.requestURI}" />
 
@@ -21,14 +21,21 @@
 	<%@ includefile="fragments/nav.jspf" %>
 	<main>
 	<h1>${rezept.name}</h1>
+
 	<c:if test="${not empty message}">
-		<h2>${message}</h2>
-	</c:if> <c:if test="${not empty rezept.getFilename()}">
+		<p>${message}</p><br>
+	</c:if> 
+	
+	<h2>Details zum Rezept</h2>
+	
+	<c:if test="${not empty rezept.getFilename()}">
 		<img src="../LoadImage?id=${rezept.id}&table=recipes">
-	</c:if>
-	<h2>ID: ${rezept.id}</h2>
-	<h2>Zutaten:</h2>
-	<table border="solid">
+	</c:if> 
+	
+	<label for="id">ID:</label> <input disabled type="text" name="id" id="id" value="${rezept.id}">
+
+	<label class="labelfortextarea">Zutaten:</label>
+	<table>
 		<tr>
 			<th>Menge</th>
 			<th>Einheit</th>
@@ -42,38 +49,41 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<h2>Beschreibung:</h2>
-	${rezept.description}
-	<h2>Vorbereitsungszeit:</h2>
-	${rezept.durationPreparation}
-	<h2>Kochzeit:</h2>
-	${rezept.durationCooking}
-	<h2>Schwierigkeitsgrad:</h2>
-	${rezept.difficulty}
-	<h2>Portionen:</h2>
-	${rezept.servings}
-	<h2>Anzahl Bewertungen:</h2>
-	${rezept.ratingCount}
-	<h2>Summe Bewertungen:</h2>
-	${rezept.ratingSum}
+	
+	<br><label for="description">Beschreibung:</label> <input disabled type="text" name="description" id="description" value="${rezept.description}">
+	<br><label for="durationPreparation">Vorbereitungszeit:</label> <input  disabled type="text" name="durationPreparation" id="durationPreparation" value="${rezept.durationPreparation}">
+	<br><label for="durationCooking">Kochzeit:</label> <input  disabled type="text" name="durationCooking" id="durationCooking" value="${rezept.durationCooking}">
+	<br><label for="difficulty">Schwierigkeitsgrad:</label> <input  disabled type="text" name="difficulty" id="difficulty" value="${rezept.difficulty}">
+	<br><label for="servings">Portionen:</label> <input  disabled type="text" name="servings" id="servings" value="${rezept.servings}">
+	<br><label for="ratingCount">Anzahl Bewertungen:</label> <input  disabled type="text" name="ratingCount" id="ratingCount" value="${rezept.ratingCount}">
+	<br><label for="ratingSum">Summe Bewertungen:</label> <input disabled  type="text" name="ratingSum" id="ratingSum" value="${rezept.ratingSum}">
+	
+
+
+	<br><br>
 	<h2>Bewertung</h2>
 	<c:choose>
 		<c:when test="${rezept.ratingCount == 0}">
-	Es wurden noch keine Bewertungeng abgegeben!
-	</c:when>
+			<p>Es wurden noch keine Bewertungen abgegeben!</p>
+		</c:when>
+	
 		<c:otherwise>
-	${rezept.ratingSum / rezept.ratingCount}
-	</c:otherwise>
-	</c:choose> <c:if test="${not empty user}">
+			<p>Aktuelle Bewertung: ${rezept.ratingSum / rezept.ratingCount}</p>
+		</c:otherwise>
+	</c:choose>
+	
+	<c:if test="${not empty user}">
 		<form action="/rezeptbuch/RatingServlet" method="post">
 			<p>
 				<label for="rating">Bewertung abgeben:</label> <input name="rating"
 					id="rating" type="number" max="5" min="0" required></input>
 			</p>
 			<input type="hidden" name="recipe" id="recipe" value="${rezept.id}" />
-			<button type="submit">Bewerten</button>
+			<button class="button" type="submit">Bewerten</button>
 		</form>
 	</c:if>
+	
+	<br>
 	<h2>Kommentare</h2>
 	<table border="solid">
 		<tr>
@@ -96,13 +106,13 @@
 	<c:if test="${not empty user}">
 		<form action="/rezeptbuch/AddCommentServlet" method="post">
 			<p>
-				<label for="comment">Kommentar abgeben:</label>
+				<label class="labelfortextarea" for="comment">Kommentar abgeben:</label>
 				<textarea name="comment" id="comment"
-					placeholder="Hier Kommentar eingeben..." cols="50" rows="7"
+					placeholder="Kommentar verfassen..." cols="50" rows="7"
 					required maxlength="2500"></textarea>
 			</p>
 			<input type="hidden" name="recipe" id="recipe" value="${rezept.id}" />
-			<button type="submit">Kommentieren</button>
+			<button class="button" type="submit">Kommentieren</button>
 		</form>
 	</c:if> </main>
 </body>

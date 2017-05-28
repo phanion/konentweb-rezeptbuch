@@ -6,11 +6,33 @@
 @import url("css/nav.css");
 @import url("css/controls.css");
 
+/* Google Font importieren: https://fonts.google.com */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+
+/* 
+	Farbpalette: https://coolors.co/424b54-93a8ac-ffffff-e2b4bd-9b6a6c
+		#424B54	Outer Space
+		#93A8AC	Cadet Grey
+		#FFFFFF	White
+		#E2B4BD	Pale Chestnut
+		#9B6A6C	Copper Rose
+	
+	Falls weitere Farben gebraucht werden, erst auf der Seite nach anderen Stärken schauen
+*/
+
 
 * {
 	box-sizing: border-box;
 	margin: 0;
     padding: 0;
     border: 0;
+    
+    font-family: 'Open Sans', sans-serif;
+    color: #424B54;
+}
 
+*:DISABLED {
+	background-color: #D1D1D1;
+	color: #747474;
 }

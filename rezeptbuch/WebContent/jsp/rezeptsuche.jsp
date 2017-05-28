@@ -73,8 +73,8 @@
 					id="rezept" placeholder="Ihr Rezept">
 			</div>
 			<div>
-				<button type="button" id="button" name="button">Suchen</button>
-				<button name="reset" type="reset">Zurücksetzen</button>
+				<button type="button" class="button" id="button" name="button">Suchen</button>
+				<button name="reset" class="button-secondary" type="reset">Zurücksetzen</button>
 			</div>
 		</fieldset>
 	</form>

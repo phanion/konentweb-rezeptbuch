@@ -1,23 +1,34 @@
 nav {
-	background-color: #123652;
+	/*background-color: #123652;*/
+	background-color: #757C82;
 	
-	padding: 20px 20%;
+	padding: 0% 20%;
 	
 	
 }
 
-nav a {
-	color: #718EA4;
-	font-size: 100%;
-	font-family: sans-serif;
-    text-decoration: none !important;
-    padding: 20px 5px;
+/* keine Bulletpoints in der Liste */
+nav ul {
+    list-style-type: none;
+    overflow: hidden;
     
-
-
 }
-nav a:HOVER {
-	/*color: #FFFFFF;*/
-	color: #FFC2AA;
-	font-weight: bold;
+
+nav li {
+	display: inline !important;
+}
+li a {
+ 	display: inline-block; 
+    
+	/* color: #718EA4; */
+	color: #FFFFFF;
+	text-align: center;
+    text-decoration: none;
+    padding: 20px 5px;
+}
+
+li a:HOVER { 
+	background-color: #424B54;
+	/* color: #F5F0F6; */
+	
 }
