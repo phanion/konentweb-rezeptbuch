@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="../main.css">
 <meta charset="UTF-8">
 <title>Kochrezepte - Registrierung</title>
 </head>
@@ -36,12 +37,10 @@
 			<label>Passwort wiederholen</label><input name="password_retype"
 				type="password" size="30" maxlength="30" required>
 		</p>
-		<button type="submit">Registrieren</button>
+		<button type="submit" class="button">Registrieren</button>
+		<a href="login.jsp" class="button-secondary">Bereits ein Account?</a>
 	</form>
 
-	<p>
-		<a href="login.jsp">Bereits ein Account?</a>
-	</p>
 	</main>
 </body>
 </html>

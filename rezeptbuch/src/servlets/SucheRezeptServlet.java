@@ -28,29 +28,14 @@ public class SucheRezeptServlet extends HttpServlet {
 	@Resource(lookup = "jdbc/MyRezeptbuchPool")
 	private DataSource ds;
 
-    public SucheRezeptServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Servlet zur Entgegennahme von Formularinhalten, Lesen der Daten in einer DB und Generierung
-				// eines Beans zur Weitergabe der Formulardaten an eine JSP
-				
-				request.setCharacterEncoding("UTF-8");	// In diesem Format erwartet das Servlet jetzt die Formulardaten
-				String rezept = request.getParameter("rezept");
-				
-				// DB-Zugriff
-				List<RezeptBean> rezepte = search(rezept);
-						
-				// Scope "Request"
-				request.setAttribute("rezepte", rezepte);
-				
-				// Weiterleiten an JSP
-				final RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/rezepte_gefunden.jsp");
-				dispatcher.forward(request, response);	
-	}
-	
+	/**
+	 * Gibt eine Liste mit Rezepten zurück, die den eingegebenen Namen enthalten.
+	 * <p>
+	 * Dafür wird eine Datenbankabfrage durchgeführt, und die Treffer in einer Liste von RezeptBeans abgespeichert.
+	 * @param rezept Der Name/Namensbestandteil eines Rezepts, wird mit den Rezeptnamen der Rezept-Datenbank abgeglichen
+	 * @return Eine Liste von RezeptBeans
+	 * @throws ServletException 
+	 */
 	private List<RezeptBean> search(String rezept) throws ServletException {
 		rezept = (rezept == null || rezept == "") ? "%" : "%" + rezept + "%";
 		List<RezeptBean> rezepte = new ArrayList<RezeptBean>();
@@ -93,6 +78,29 @@ public class SucheRezeptServlet extends HttpServlet {
 		return rezepte;
 	}
 
+	
+    public SucheRezeptServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// Servlet zur Entgegennahme von Formularinhalten, Lesen der Daten in einer DB und Generierung
+				// eines Beans zur Weitergabe der Formulardaten an eine JSP
+				
+				request.setCharacterEncoding("UTF-8");	// In diesem Format erwartet das Servlet jetzt die Formulardaten
+				String rezept = request.getParameter("rezept");
+				
+				// DB-Zugriff
+				List<RezeptBean> rezepte = search(rezept);
+						
+				// Scope "Request"
+				request.setAttribute("rezepte", rezepte);
+				
+				// Weiterleiten an JSP
+				final RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/rezepte_gefunden.jsp");
+				dispatcher.forward(request, response);	
+	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub

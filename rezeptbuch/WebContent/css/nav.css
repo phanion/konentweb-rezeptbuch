@@ -1,0 +1,23 @@
+nav {
+	background-color: #123652;
+	
+	padding: 20px 20%;
+	
+	
+}
+
+nav a {
+	color: #718EA4;
+	font-size: 100%;
+	font-family: sans-serif;
+    text-decoration: none !important;
+    padding: 20px 5px;
+    
+
+
+}
+nav a:HOVER {
+	/*color: #FFFFFF;*/
+	color: #FFC2AA;
+	font-weight: bold;
+}

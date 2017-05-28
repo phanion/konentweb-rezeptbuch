@@ -7,6 +7,7 @@
 <html>
 
 <head>
+<link rel="stylesheet" type="text/css" href="../main.css">
 <meta charset="UTF-8">
 <c:choose>
 	<c:when test="${empty user}">
@@ -85,7 +86,7 @@
 
 		<div id="zutaten"></div>
 		<p>
-			<input type="button" id="addrow" name="addrow"
+			<input type="button" class="button" id="addrow" name="addrow"
 				value="Zutat hinzufügen" onclick="add();" />
 		</p>
 		<p>
@@ -123,7 +124,7 @@
 		</p>
 		<p>
 			<!--  Input Type Submit soll laut Skript nicht verwendet werden (02_HTML -> Seite 54) -->
-			<button name="absenden" type="submit">Absenden</button>
+			<button name="absenden" class="button" type="submit">Absenden</button>
 		</p>
 	</form>
 

@@ -1,9 +1,10 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page errorPage="errorpage.jsp" language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page errorPage="errorpage.jsp" language="java"
+	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="../main.css">
 <meta charset="utf-8">
 <title>Kochrezepte - Login</title>
 </head>
@@ -23,13 +24,10 @@
 			<label>Passwort</label><input name="password" type="password"
 				size="30" maxlength="30" required>
 		</p>
-		<button type="submit">Login</button>
+		<button class="button" type="submit">Login</button>
+		<a class="button-secondary" href="registration.jsp">Noch keinen
+			Account?</a>
 	</form>
-	<main>
-	<p>
-		<a href="registration.jsp">Noch keinen Account?</a>
-
-	</p>
-	</main></main>
+	</main>
 </body>
 </html>

@@ -1,0 +1,39 @@
+.button {
+	background-color: #AA7939;
+    border: none;
+    color: #FFDBAA;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 100%;
+}
+.button:hover, .button-secondary:hover {
+    color: #red;
+}
+
+.button-secondary {
+	background-color: #AA5939;
+    border: none;
+    color: #FFC2AA;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 100%;
+}
+
+.button-disabled {
+	background-color: #D3D3D3;
+    border: none;
+    color: 	#778899;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 100%;
+}
+
+input {
+	margin: 10px 5px 10px 0px; /* links 0, falls es das erste Element der Zeile ist */
+}
