@@ -7,6 +7,7 @@ package servlets;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.annotation.Resource;
@@ -52,7 +53,6 @@ public class EditProfileServlet extends HttpServlet {
 		final String mail = request.getParameter("mail").toLowerCase();
 		final String lastName = request.getParameter("lastName");
 		final String firstName = request.getParameter("firstName");
-		
 
 		String message = null;
 
@@ -63,23 +63,33 @@ public class EditProfileServlet extends HttpServlet {
 			request.setAttribute("message", message);
 			RequestDispatcher disp = request.getRequestDispatcher("/jsp/login.jsp");
 			disp.forward(request, response);
-			
-		} 
-		
+
+		}
+
 		else {
+
 			User user = new User();
 			user.setFirstName(firstName);
 			user.setID(id);
 			user.setLastName(lastName);
 			user.setMail(mail);
-			
-			try {
-				updateUser(user);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+
+			if (!userUnique(user.getMail())) {
+				message = "Es existierte bereits ein User unter dieser Mailadresse";
+
+				request.setAttribute("message", message);
+
+			} else {
+				try {
+					updateUser(user);
+					message = "Deine persönlichen Daten wurden erfolgreich geändert!";
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-			
+			request.setAttribute("message", message);
+
 			RequestDispatcher disp = request.getRequestDispatcher("/jsp/profile.jsp");
 			disp.forward(request, response);
 		}
@@ -97,19 +107,42 @@ public class EditProfileServlet extends HttpServlet {
 
 	public void updateUser(User user) throws SQLException {
 		Connection con = ds.getConnection();
-		
+
 		PreparedStatement ps = con.prepareStatement("update users SET mail=?, firstName=?, lastName=? WHERE id=?");
-		
+
 		ps.setString(1, user.getMail());
 		ps.setString(2, user.getFirstName());
 		ps.setString(3, user.getLastName());
 		ps.setLong(4, user.getID());
-		
+
 		ps.executeUpdate();
-		
-		
+
 		con.close();
-		
+
+	}
+
+	public boolean userUnique(String mail) throws ServletException {
+		try {
+			final Connection con = ds.getConnection();
+
+			PreparedStatement ps = con.prepareStatement("select mail from users where mail=?;");
+			ps.setString(1, mail);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				if (rs.getString(1).equals(mail)) {
+					return false;
+
+				}
+				return true;
+			}
+			return true;
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw new ServletException(e.getMessage());
+		}
+
 	}
 
 }
