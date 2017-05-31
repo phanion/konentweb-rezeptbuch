@@ -21,8 +21,8 @@ import javax.sql.DataSource;
 
 import bean.RezeptBean;
 import bean.User;
-import classes.Comment;
-import classes.Ingredient;
+import bean.Comment;
+import bean.Ingredient;
 
 /**
  * Servlet implementation class LoadRecipeServlet
