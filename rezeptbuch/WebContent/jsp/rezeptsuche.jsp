@@ -40,7 +40,7 @@
 					ausgabe += "</td><td>";
 					ausgabe += rezeptList[i].id;
 					ausgabe += "</td><td>";
-					ausgabe += rezeptList[i].name;
+					ausgabe += "<a href=\"/rezeptbuch/LoadRecipeServlet?id="+rezeptList[i].id+"\">" +rezeptList[i].name+"</a>";
 					ausgabe += "</td><td>";
 					ausgabe += rezeptList[i].durPrep;
 					ausgabe += "</td><td>";

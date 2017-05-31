@@ -22,6 +22,7 @@ import bean.Ingredient;
 import bean.RezeptBean;
 import bean.User;
 
+
 /**
  * Servlet implementation class LoadRecipeServlet
  */
