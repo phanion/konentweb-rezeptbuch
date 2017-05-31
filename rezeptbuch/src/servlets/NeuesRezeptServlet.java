@@ -28,23 +28,23 @@ import bean.RezeptBean;
 import bean.User;
 
 @WebServlet("/NeuesRezeptServlet")
-//Bild-Upload einschr�nken
-@MultipartConfig(
-		maxFileSize =1024*1024*15,
-		maxRequestSize =1024*1024*5,
-		location="/tmp",
-		fileSizeThreshold=1024*1024)
+// Bild-Upload einschr�nken
+@MultipartConfig(maxFileSize = 1024 * 1024 * 15, maxRequestSize = 1024 * 1024
+		* 5, location = "/tmp", fileSizeThreshold = 1024 * 1024)
 public class NeuesRezeptServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	@Resource(lookup = "jdbc/MyRezeptbuchPool")
 	private DataSource ds;
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-
 
 		// Parameter von dem Request werden geholt
 		final String name = request.getParameter("name");
@@ -56,12 +56,12 @@ public class NeuesRezeptServlet extends HttpServlet {
 		final Integer durationCooking = Integer.parseInt(request.getParameter("durationCooking"));
 		final Integer difficulty = Integer.parseInt(request.getParameter("difficulty"));
 		final Integer servings = Integer.parseInt(request.getParameter("servings"));
-		
+
 		String message = null;
-		
-		
-		//response.getWriter().append(ingredients[0] + " " + quantities[0] + " " + units[0]);
-		
+
+		// response.getWriter().append(ingredients[0] + " " + quantities[0] + "
+		// " + units[0]);
+
 		HttpSession session = request.getSession();
 
 		RezeptBean rezept = new RezeptBean();
@@ -73,19 +73,19 @@ public class NeuesRezeptServlet extends HttpServlet {
 		rezept.setDurationCooking(durationCooking);
 		rezept.setDurationPreparation(durationPreparation);
 		rezept.setServings(servings);
-		
-		if(ingredients != null){
-		for(int i = 0; i < ingredients.length; i++){
-			rezept.addIngredient(ingredients[i], units[i], Integer.parseInt(quantities[i]));
-		}}
-		
-		//File-Behandlung
+
+		if (ingredients != null) {
+			for (int i = 0; i < ingredients.length; i++) {
+				rezept.addIngredient(ingredients[i], units[i], Integer.parseInt(quantities[i]));
+			}
+		}
+
+		// File-Behandlung
 		Part filepart = request.getPart("image");
 		rezept.setFilename(filepart.getSubmittedFileName());
-		
-		//Bild in Bean speichern
-		try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
-				InputStream in = filepart.getInputStream() ) {
+
+		// Bild in Bean speichern
+		try (ByteArrayOutputStream baos = new ByteArrayOutputStream(); InputStream in = filepart.getInputStream()) {
 			int i = 0;
 			while ((i = in.read()) != -1) {
 				baos.write(i);
@@ -95,9 +95,9 @@ public class NeuesRezeptServlet extends HttpServlet {
 		} catch (IOException ex) {
 			throw new ServletException(ex.getMessage());
 		}
-		
+
 		request.setAttribute("rezept", rezept);
-		
+
 		try {
 			createRezept(rezept);
 			insertIngredients(rezept);
@@ -106,28 +106,45 @@ public class NeuesRezeptServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		request.setAttribute("message", message);
-		
-		//http://stackoverflow.com/questions/12021087/passing-data-between-two-servlets
+
+		// http://stackoverflow.com/questions/12021087/passing-data-between-two-servlets
 		getServletContext().getRequestDispatcher("/LoadRecipeServlet");
 		RequestDispatcher disp = request.getRequestDispatcher("/LoadRecipeServlet?id=" + rezept.getId());
 		disp.forward(request, response);
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
 
 	}
-	
-	public RezeptBean createRezept(RezeptBean rezept) throws SQLException{
+
+	/**
+	 * Liest ein RezeptBean ein, persistiert dieses in einer Tabelle und gibt das Rezept wieder zurück.
+	 * <p>
+	 * Der generierte ID-Schlüssel des Rezepts wird dabei aus der Datenbank gelesen und im RezeptBean hinterlegt.
+	 * Es werden sämtiche eingelesene Informationen zu Namen, Autor, Zubereitung und Bewertung ... des Rezepts abgespeichert.
+	 * 
+	 * @param rezept
+	 *            Ein RezeptBean, das ein Rezeptes repräsentiert
+	 * @return
+	 * @throws SQLException
+	 *             wenn ein Fehler beim Datenbankzugriff auftritt
+	 */
+	public RezeptBean createRezept(RezeptBean rezept) throws SQLException {
 		final Connection con = ds.getConnection();
 
 		String[] generatedKeys = new String[] { "id" };
 
-		PreparedStatement ps = con.prepareStatement("insert into recipes(name,creator,description,difficulty,durationCooking,durationPreparation,servings,filename,image, ratingCount, ratingSum) values(?,?,?,?,?,?,?,?,?,?,?)",generatedKeys);
-
+		PreparedStatement ps = con.prepareStatement(
+				"insert into recipes(name,creator,description,difficulty,durationCooking,durationPreparation,servings,filename,image, ratingCount, ratingSum) values(?,?,?,?,?,?,?,?,?,?,?)",
+				generatedKeys);
 
 		ps.setString(1, rezept.getName());
 		ps.setLong(2, rezept.getCreator().getID());
@@ -140,8 +157,7 @@ public class NeuesRezeptServlet extends HttpServlet {
 		ps.setBytes(9, rezept.getImage());
 		ps.setInt(10, 0);
 		ps.setInt(11, 0);
-		
-		
+
 		ps.executeUpdate();
 
 		ResultSet rs = ps.getGeneratedKeys();
@@ -152,21 +168,33 @@ public class NeuesRezeptServlet extends HttpServlet {
 		return rezept;
 
 	}
-	
-	public void insertIngredients(RezeptBean rezept) throws SQLException{
+
+	/**
+	 * Liest die Zutaten aus einem RezeptBean aus, und persistiert diese in einer
+	 * Zutaten-Tabelle.
+	 * <p>
+	 * Dabei werden Rezept, Zutat, Einheit und Menge abgespeichert.
+	 * 
+	 * @param rezept
+	 *            Ein RezeptBean, das ein Rezeptes repräsentiert
+	 * @throws SQLException
+	 *             wenn ein Fehler beim Datenbankzugriff auftritt
+	 */
+	public void insertIngredients(RezeptBean rezept) throws SQLException {
 		final Connection con = ds.getConnection();
-		
-		for(int i = 0; i < rezept.getIngredients().size(); i++){
-		PreparedStatement ps = con.prepareStatement("insert into ingredients(recipe, ingredient, unit, quantity) values(?,?,?,?)");
-		
-		ps.setLong(1, rezept.getId());
-		ps.setString(2, rezept.getIngredients().get(i).getIngredient());
-		ps.setString(3, rezept.getIngredients().get(i).getUnit());
-		ps.setInt(4, rezept.getIngredients().get(i).getQuantity());		
-		
-		ps.executeUpdate();
+
+		for (int i = 0; i < rezept.getIngredients().size(); i++) {
+			PreparedStatement ps = con
+					.prepareStatement("insert into ingredients(recipe, ingredient, unit, quantity) values(?,?,?,?)");
+
+			ps.setLong(1, rezept.getId());
+			ps.setString(2, rezept.getIngredients().get(i).getIngredient());
+			ps.setString(3, rezept.getIngredients().get(i).getUnit());
+			ps.setInt(4, rezept.getIngredients().get(i).getQuantity());
+
+			ps.executeUpdate();
 		}
 		con.close();
-		
+
 	}
 }

@@ -85,7 +85,7 @@
 	
 	<br>
 	<h2>Kommentare</h2>
-	<table border="solid">
+	<table>
 		<tr>
 			<th>Nutzer</th>
 			<th>Kommentar</th>

@@ -9,7 +9,7 @@ nav {
 
 /* keine Bulletpoints in der Liste */
 nav ul {
-    list-style-type: none;
+    list-style-type: none;	
     overflow: hidden;
     
 }

@@ -36,6 +36,8 @@
 		var einheiten = [ "Stück", "Liter", "Milliliter", "Teelöffel",
 			"Esslöffel", "Tasse", "Gramm", "Kilogramm", "Prise",
 			"sonstiges" ];
+		
+		
 	var options = [];
 
 	for
