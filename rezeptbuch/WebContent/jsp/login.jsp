@@ -24,8 +24,8 @@
 			<label>Passwort</label><input name="password" type="password"
 				size="30" maxlength="30" required>
 		</p>
-		<button class="button" type="submit">Login</button>
-		<a class="button-secondary" href="registration.jsp">Noch keinen
+		<button class="button" role="button" type="submit">Login</button>
+		<a class="button-secondary" role="button" href="registration.jsp">Noch keinen
 			Account?</a>
 	</form>
 	</main>

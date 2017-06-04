@@ -35,8 +35,13 @@
 				var ausgabe = "<table><tr><th></th><th>Id</th><th>Rezept</th><th>Vorbereitungsdauer</th><th>Kochdauer</th><th>Schwierigkeit</th></tr>";
 				for (var i = 0; i < rezeptList.length; i++) {
 					ausgabe += "<tr><td rowspan=\"2\">";
-					ausgabe += "<img src=\"../LoadImage?id=" + rezeptList[i].id
-							+ "&table=recipes\" width=\"200\" heigt=\"180\">";
+					
+					// Wenn kein Filename vorhanden, wird auch nicht versucht ein Bild zu laden.
+					if(rezeptList[i].filename != null){
+						ausgabe += "<img src=\"../LoadImage?id=" + rezeptList[i].id
+						+ "&table=recipes\" width=\"200\" heigt=\"180\">";
+			
+					}
 					ausgabe += "</td><td>";
 					ausgabe += rezeptList[i].id;
 					ausgabe += "</td><td>";

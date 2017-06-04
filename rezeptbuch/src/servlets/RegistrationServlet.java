@@ -57,9 +57,7 @@ public class RegistrationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Anmerkung: Sp�ter muss das weg. Es gibt f�r PW-�bertragung keine GET
-		// Methode
-
+	
 		request.setCharacterEncoding("UTF-8");
 
 		final String mail = request.getParameter("mail").toLowerCase();
@@ -72,7 +70,7 @@ public class RegistrationServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		if (!password.equals(password_retype)) {
-			message = "Die eingegebenen Passw�rter stimmen nicht �berein!";
+			message = "Die eingegebenen Passwörter stimmen nicht überein!";
 		}
 
 		else {
@@ -227,7 +225,7 @@ public class RegistrationServlet extends HttpServlet {
 			message.setRecipients(Message.RecipientType.TO, address);
 			message.setSubject("Herzlich Willkommen");
 			message.setSentDate(new Date());
-			message.setText("Hallo " + recipientName + "\n\rHerzlich Willkommen bei Rezeptbuch.");
+			message.setContent("Hallo " + recipientName + "<p>Herzlich Willkommen bei Rezeptbuch.", "text/html; charset=utf-8");
 			Transport.send(message);
 		} catch (MessagingException ex) {
 			ex.printStackTrace();

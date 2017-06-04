@@ -9,7 +9,8 @@
 		"durPrep":${rezept.durationPreparation},
 		"durCook":${rezept.durationCooking},
 		"difficulty":${rezept.difficulty},
-		"description":"${rezept.description}"
+		"description":"${rezept.description}",
+		"filename": "${rezept.getFilename()}"
 	}<c:if test="${not status.last}">,</c:if>
 </c:forEach>
 ]

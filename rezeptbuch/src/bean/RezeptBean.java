@@ -12,7 +12,7 @@ import java.util.List;
 
 public class RezeptBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long id;
 	private User creator;
 	private String name;
@@ -29,22 +29,8 @@ public class RezeptBean implements Serializable {
 	private List<Ingredient> ingredients = new ArrayList<Ingredient>();
 	private List<Comment> comments = new ArrayList<Comment>();
 
-
-	public RezeptBean(){}
-
-
-
-	
-
-
-
-	
-
-
-
-
-
-
+	public RezeptBean() {
+	}
 
 	@Override
 	public String toString() {
@@ -54,19 +40,13 @@ public class RezeptBean implements Serializable {
 				+ ratingSum + ", servings=" + servings + ", ingredients=" + ingredients + "]";
 	}
 
-
-
 	public Integer getServings() {
 		return servings;
 	}
 
-
-
 	public void setServings(Integer servings) {
 		this.servings = servings;
 	}
-
-
 
 	public String getRezept() {
 		return name;
@@ -148,8 +128,6 @@ public class RezeptBean implements Serializable {
 		return serialVersionUID;
 	}
 
-
-
 	public String getZutatenText() {
 		return zutatenText;
 	}
@@ -158,18 +136,18 @@ public class RezeptBean implements Serializable {
 		this.zutatenText = zutaten;
 	}
 
-	public void addIngredient(String ingredient, String unit, Integer quantity){
-		ingredients.add(new Ingredient(ingredient,quantity, unit));
-		
+	public void addIngredient(String ingredient, String unit, Integer quantity) {
+		ingredients.add(new Ingredient(ingredient, quantity, unit));
+
 	}
-	
-	public String ingredientsToString(){
+
+	public String ingredientsToString() {
 		String result = "";
-		
-		for(int i = 0; i < ingredients.size(); i++){
+
+		for (int i = 0; i < ingredients.size(); i++) {
 			result += ingredients.get(i).outputString() + "</br>";
 		}
-		
+
 		return result;
 
 	}
@@ -197,23 +175,13 @@ public class RezeptBean implements Serializable {
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
-	
-	public List<Comment> getComments(){
+
+	public List<Comment> getComments() {
 		return comments;
 	}
-	
-	public void setComments(List<Comment> comments){
+
+	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
-
-
-
-
-
-
-
-
-
-	
 
 }

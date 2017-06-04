@@ -121,7 +121,7 @@
 				type="number" max="99" min="0" value="0" />
 		</p>
 		<p>
-			<label for="image">Bild auswählen:</label> <input type="file"
+			<label for="image" class="file-upload-label">Bild auswählen ...</label> <input type="file"
 				name="image" id="image" accept="image/*">
 		</p>
 		<p>

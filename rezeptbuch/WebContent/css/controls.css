@@ -8,7 +8,7 @@
     display: inline-block;
     font-size: 100%;
 }
-.button-secondary {
+.button-secondary, .file-upload-label {
 	background-color: #93A8AC;
     border: none;
     color: #FFFFFF;
@@ -19,12 +19,20 @@
     font-size: 100%;
 }
 
+/* Damit ein File-Input wie ein Button aussehen kann */
+input[type="file"] {
+    display: none;
+}
+
 .button:hover
 {
-	background-color: #E7C1C9;
+/* 	background-color: #E7C1C9; */
+	background-color:  #ffffff;
+	cursor: pointer;
 } 
 .button-secondary:hover {
     background-color: #798A8D;
+    cursor: pointer;
 }
 
 .button-disabled {
@@ -36,6 +44,7 @@
     text-decoration: none;
     display: inline-block;
     font-size: 100%;
+    cursor: default;
 }
 
 input {

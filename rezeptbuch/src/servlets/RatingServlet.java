@@ -25,7 +25,7 @@ import bean.User;
 /**
  * Servlet implementation class Rating
  */
-@WebServlet("/Rating")
+@WebServlet({"/Rating", "/RatingServlet"})
 public class RatingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
