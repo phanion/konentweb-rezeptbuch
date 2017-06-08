@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="../main.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/main.css">
 <meta charset="UTF-8">
 <title>Kochrezepte - Registrierung</title>
 </head>

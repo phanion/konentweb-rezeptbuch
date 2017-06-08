@@ -70,7 +70,7 @@ public class RegistrationServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		if (!password.equals(password_retype)) {
-			message = "Die eingegebenen PasswÃ¶rter stimmen nicht Ã¼berein!";
+			message = "Die eingegebenen Passwörter stimmen nicht überein!";
 		}
 
 		else {
