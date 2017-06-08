@@ -113,7 +113,7 @@ public class LoadRecipeServlet extends HttpServlet {
 			
 			user.setFirstName(rs.getString("users.firstName"));
 			user.setLastName(rs.getString("users.lastName"));
-			user.setID(id);
+			user.setID(rs.getLong("recipes.creator"));
 			recipe.setCreator(user);
 
 			recipe.setIngredients(loadIngredients(recipe.getId()));
