@@ -201,7 +201,7 @@ public class RegistrationServlet extends HttpServlet {
             message.setRecipients(Message.RecipientType.TO, address);
             message.setSubject("Herzlich Willkommen");
             message.setSentDate(new Date());
-            message.setText("Hallo " + name + "Herzlich Willkommen bei Rezeptbuch.");
+            message.setText("Hallo " + name + "/n/rHerzlich Willkommen bei Rezeptbuch.");
             Transport.send(message);
         } catch (MessagingException ex) {
             ex.printStackTrace();
