@@ -89,25 +89,32 @@ public class LoadRecipeServlet extends HttpServlet {
 	 */
 	public RezeptBean loadRecipeFromDB(Long id) throws SQLException, ServletException {
 		final Connection con = ds.getConnection();
-		PreparedStatement ps = con.prepareStatement("select * from recipes where id=?;");
+		PreparedStatement ps = con.prepareStatement("select recipes.*, users.firstName, users.lastName "
+													+ "from recipes "
+													+ "inner join users on users.id = recipes.creator "
+													+ "where recipes.id=?");
 
 		ps.setLong(1, id);
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
 			RezeptBean recipe = new RezeptBean();
-			recipe.setId(rs.getLong("id"));
-			recipe.setName(rs.getString("name"));
-			recipe.setDescription(rs.getString("description"));
-			recipe.setDifficulty(rs.getInt("difficulty"));
-			recipe.setDurationCooking(rs.getInt("durationCooking"));
-			recipe.setDurationPreparation(rs.getInt("durationPreparation"));
-			recipe.setRatingSum(rs.getInt("ratingSum"));
-			recipe.setRatingCount(rs.getInt("ratingCount"));
-			recipe.setServings(rs.getInt("servings"));
-			recipe.setImage(rs.getBytes("image"));
-			recipe.setFilename(rs.getString("filename"));
-
-			recipe.setCreator(loadUser(rs.getLong("creator")));
+			User user = new User();
+			recipe.setId(rs.getLong("recipes.id"));
+			recipe.setName(rs.getString("recipes.name"));
+			recipe.setDescription(rs.getString("recipes.description"));
+			recipe.setDifficulty(rs.getInt("recipes.difficulty"));
+			recipe.setDurationCooking(rs.getInt("recipes.durationCooking"));
+			recipe.setDurationPreparation(rs.getInt("recipes.durationPreparation"));
+			recipe.setRatingSum(rs.getInt("recipes.ratingSum"));
+			recipe.setRatingCount(rs.getInt("recipes.ratingCount"));
+			recipe.setServings(rs.getInt("recipes.servings"));
+			recipe.setImage(rs.getBytes("recipes.image"));
+			recipe.setFilename(rs.getString("recipes.filename"));
+			
+			user.setFirstName(rs.getString("users.firstName"));
+			user.setLastName(rs.getString("users.lastName"));
+			user.setID(id);
+			recipe.setCreator(user);
 
 			recipe.setIngredients(loadIngredients(recipe.getId()));
 			recipe.setComments(loadComments(recipe));

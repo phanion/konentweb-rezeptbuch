@@ -20,7 +20,9 @@
 <body>
 	<%@ includefile="fragments/nav.jspf" %>
 	<main>
+	
 	<h1>${rezept.name}</h1>
+	<button class="button" type="button">Rezept bearbeiten</button>
 
 	<c:if test="${not empty message}">
 		<p>${message}</p><br>
@@ -57,6 +59,7 @@
 	<br><label for="servings">Portionen:</label> <input  disabled type="text" name="servings" id="servings" value="${rezept.servings}">
 	<br><label for="ratingCount">Anzahl Bewertungen:</label> <input  disabled type="text" name="ratingCount" id="ratingCount" value="${rezept.ratingCount}">
 	<br><label for="ratingSum">Summe Bewertungen:</label> <input disabled  type="text" name="ratingSum" id="ratingSum" value="${rezept.ratingSum}">
+	<br><label for="creator">Ersteller:</label> <input  disabled type="text" name="creator" id="creator" value="${rezept.creator.lastName}, ${rezept.creator.firstName}">
 	
 
 
