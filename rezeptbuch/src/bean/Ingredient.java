@@ -4,11 +4,19 @@
 
 package bean;
 
-public class Ingredient {
+import java.io.Serializable;
+
+public class Ingredient implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private Integer quantity;
 	private String unit;
 	private String ingredient;
+
+	public Ingredient() {
+		super();
+	}
 
 	public Ingredient(String ingredient, Integer quantity, String unit) {
 		super();

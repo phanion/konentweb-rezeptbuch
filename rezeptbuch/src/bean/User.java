@@ -10,14 +10,9 @@ public class User {
 	private String firstName;
 	private String password;
 
-	
-	public User(){}
-	/**
-	 * @param mail
-	 * @param lastName
-	 * @param firstName
-	 * @param password
-	 */
+	public User() {
+	}
+
 	public User(Long id, String mail, String lastName, String firstName, String password) {
 		this.id = id;
 		this.mail = mail;
@@ -31,6 +26,7 @@ public class User {
 		return "User [id=" + id + ", mail=" + mail + ", lastName=" + lastName + ", firstName=" + firstName
 				+ ", password=" + password + "]";
 	}
+
 	public String getMail() {
 		return mail;
 	}
@@ -62,10 +58,11 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public void setID(Long id) {
 		this.id = id;
 	}
-	
+
 	public Long getID() {
 		return id;
 	}

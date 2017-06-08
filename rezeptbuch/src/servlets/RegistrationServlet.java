@@ -39,7 +39,7 @@ public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Resource(lookup = "jdbc/MyRezeptbuchPool")
 	private DataSource ds;
-	
+
 	@Resource(lookup = "mail/MyMailSession")
 	private Session mailSession;
 
@@ -57,23 +57,20 @@ public class RegistrationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Anmerkung: Später muss das weg. Es gibt für PW-Übertragung keine GET
-		// Methode
-		
+	
 		request.setCharacterEncoding("UTF-8");
-		
+
 		final String mail = request.getParameter("mail").toLowerCase();
 		final String lastName = request.getParameter("lastName");
 		final String firstName = request.getParameter("firstName");
 		final String password = request.getParameter("password");
 		final String password_retype = request.getParameter("password_retype");
 		String message = null;
-		
 
 		HttpSession session = request.getSession();
 
 		if (!password.equals(password_retype)) {
-			message = "Die eingegebenen Passwörter stimmen nicht überein!";
+			message = "Die eingegebenen PasswÃ¶rter stimmen nicht Ã¼berein!";
 		}
 
 		else {
@@ -82,7 +79,7 @@ public class RegistrationServlet extends HttpServlet {
 
 				if (!userUnique(mail)) {
 					message = "Der Nutzer existiert bereits!";
-					
+
 				}
 
 				else {
@@ -95,16 +92,15 @@ public class RegistrationServlet extends HttpServlet {
 					user.setPassword(password);
 
 					session.setAttribute("user", user);
-					
-					if(createUser(user)){
-						message = "Der User " + user.getFirstName() + " " + user.getLastName()
-							+ " wurde mit ID " + user.getID() + " erfolgreich angelegt!";
+
+					if (createUser(user)) {
+						message = "Der User " + user.getFirstName() + " " + user.getLastName() + " wurde mit ID "
+								+ user.getID() + " erfolgreich angelegt!";
 						sendWelcomeEmail(user.getMail(), user.getFirstName() + " " + user.getLastName());
-						
-					}
-					else{
+
+					} else {
 						message = "Der User konnte nicht angelegt werden!";
-						
+
 					}
 
 				}
@@ -116,12 +112,12 @@ public class RegistrationServlet extends HttpServlet {
 			}
 
 		}
-		
+
 		// http://stackoverflow.com/questions/6452537/servlet-send-response-to-jsp
 		request.setAttribute("message", message);
 		String target = (session.getAttribute("user") != null) ? "/index.jsp" : "/jsp/registration.jsp";
 		RequestDispatcher disp = request.getRequestDispatcher(target);
-		
+
 		disp.forward(request, response);
 
 	}
@@ -135,6 +131,17 @@ public class RegistrationServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
+	/**
+	 * PrÃ¼ft, ob die eingegebene E-Mail (und der zugehÃ¶rige Nutzer) bereits in
+	 * der Datenbank vorhanden sind.
+	 * 
+	 * @param mail
+	 *            Ein String einer E-Mail-Adresse
+	 * @return true, falls die E-Mail noch nicht in der Datenbank vorhanden ist,
+	 *         false, falls sie bereits vorhanden ist.
+	 * @throws ServletException
+	 *             wenn ein Datenbank-Fehler auftritt
+	 */
 	public boolean userUnique(String mail) throws ServletException {
 		try {
 			final Connection con = ds.getConnection();
@@ -156,10 +163,18 @@ public class RegistrationServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			throw new ServletException(e.getMessage());
 		}
-		
-		
+
 	}
 
+	/**
+	 * Schreibt einen User in die Datenbank
+	 * 
+	 * @param user
+	 *            Der eingelesene User
+	 * @return true, wenn Der User erfolgreich in die Datebank eingetragen wurde
+	 * @throws ServletException
+	 *             Bei einem Datenbankfehler
+	 */
 	public boolean createUser(User user) throws ServletException {
 		try {
 			final Connection con = ds.getConnection();
@@ -183,29 +198,39 @@ public class RegistrationServlet extends HttpServlet {
 			}
 			con.close();
 			return true;
-			
+
 		}
-		
+
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			throw new ServletException(e.getMessage());
 		}
 	}
-	
-	//https://dzone.com/articles/sending-email-using-javamail
-	public void sendWelcomeEmail(String to, String name) {
-        MimeMessage message = new MimeMessage(mailSession);
-        try {
-            message.setFrom(new InternetAddress(mailSession.getProperty("mail.from")));
-            InternetAddress[] address = {new InternetAddress(to)};
-            message.setRecipients(Message.RecipientType.TO, address);
-            message.setSubject("Herzlich Willkommen");
-            message.setSentDate(new Date());
-            message.setText("Hallo " + name + "/n/rHerzlich Willkommen bei Rezeptbuch.");
-            Transport.send(message);
-        } catch (MessagingException ex) {
-            ex.printStackTrace();
-        }
-    }
+
+
+	/**
+	 * Sendet eine Willkommensnachricht an einen neuen Nutzer
+	 * <p>
+	 * @see https://dzone.com/articles/sending-email-using-javamail
+	 * 
+	 * @param recipientMail Die E-Mail-Adresse des neuen Nutzers
+	 * @param recipientName Der Name des neuen Nutzers
+	 */
+	public void sendWelcomeEmail(String recipientMail, String recipientName) {
+		MimeMessage message = new MimeMessage(mailSession);
+
+		try {
+			message.setFrom(new InternetAddress(mailSession.getProperty("mail.from")));
+			InternetAddress[] address = { new InternetAddress(recipientMail) };
+			message.setRecipients(Message.RecipientType.TO, address);
+			message.setSubject("Herzlich Willkommen");
+			message.setSentDate(new Date());
+			message.setContent("Hallo " + recipientName + "<p>Herzlich Willkommen bei Rezeptbuch.", "text/html; charset=utf-8");
+			Transport.send(message);
+		} catch (MessagingException ex) {
+			ex.printStackTrace();
+		}
+	}
 
 }
+

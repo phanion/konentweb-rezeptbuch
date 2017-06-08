@@ -29,7 +29,7 @@
 	<h2>Details zum Rezept</h2>
 	
 	<c:if test="${not empty rezept.getFilename()}">
-		<img src="../LoadImage?id=${rezept.id}&table=recipes">
+		<img src="../LoadImage?id=${rezept.id}&table=recipes" width="250" height="200" alt="Ein Foto vom Rezept ${rezept.name}">
 	</c:if> 
 	
 	<label for="id">ID:</label> <input disabled type="text" name="id" id="id" value="${rezept.id}">
@@ -78,14 +78,14 @@
 				<label for="rating">Bewertung abgeben:</label> <input name="rating"
 					id="rating" type="number" max="5" min="0" required></input>
 			</p>
-			<input type="hidden" name="recipe" id="recipe" value="${rezept.id}" />
+			<input type="hidden" name="recipe" value="${rezept.id}" />
 			<button class="button" type="submit">Bewerten</button>
 		</form>
 	</c:if>
 	
 	<br>
 	<h2>Kommentare</h2>
-	<table border="solid">
+	<table>
 		<tr>
 			<th>Nutzer</th>
 			<th>Kommentar</th>
@@ -111,7 +111,7 @@
 					placeholder="Kommentar verfassen..." cols="50" rows="7"
 					required maxlength="2500"></textarea>
 			</p>
-			<input type="hidden" name="recipe" id="recipe" value="${rezept.id}" />
+			<input type="hidden" name="recipe" value="${rezept.id}" />
 			<button class="button" type="submit">Kommentieren</button>
 		</form>
 	</c:if> </main>

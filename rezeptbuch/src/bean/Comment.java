@@ -1,11 +1,21 @@
 package bean;
 
-public class Comment {
+import java.io.Serializable;
+
+public class Comment implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
 	private Long id;
 	private User author;
 	private String comment;
 	private RezeptBean receipe;
 
+
+	public Comment() {
+		super();
+	}
+	
 	public Comment(Long id, User author, String comment, RezeptBean receipe) {
 		super();
 		this.id = id;
