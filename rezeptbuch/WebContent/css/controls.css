@@ -7,6 +7,8 @@
     text-decoration: none;
     display: inline-block;
     font-size: 100%;
+    
+    border-radius: 4px;
 }
 .button-secondary, .file-upload-label {
 	background-color: #93A8AC;
@@ -17,6 +19,8 @@
     text-decoration: none;
     display: inline-block;
     font-size: 100%;
+    
+    border-radius: 4px;
 }
 
 /* Damit ein File-Input wie ein Button aussehen kann */
@@ -29,7 +33,7 @@ input[type="file"] {
  	background-color: #E7C1C9;
 	cursor: pointer;
 } 
-.button-secondary:hover {
+.button-secondary:hover, .file-upload-label:hover {
     background-color: #798A8D;
     cursor: pointer;
 }
@@ -44,8 +48,20 @@ input[type="file"] {
     display: inline-block;
     font-size: 100%;
     cursor: default;
+    border-radius: 4px;
 }
 
 input {
 	margin: 10px 5px 10px 0px; /* links 0, falls es das erste Element der Zeile ist */
+}
+
+.textarea-transitional {
+/* 	min-width: 600px; */
+	width: 100%;
+	height: 3em;
+	transition: height 0.5s ease-in-out;
+}
+
+.textarea-transitional:focus {
+	height: 8em;
 }

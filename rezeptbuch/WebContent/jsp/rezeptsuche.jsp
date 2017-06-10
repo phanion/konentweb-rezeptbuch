@@ -37,15 +37,18 @@
 					ausgabe += "<tr><td rowspan=\"2\">";
 					
 					// Wenn kein Filename vorhanden, wird auch nicht versucht ein Bild zu laden.
-					if(rezeptList[i].filename != null){
-						ausgabe += "<img src=\"../LoadImage?id=" + rezeptList[i].id
-						+ "&table=recipes\" width=\"200\" heigt=\"180\">";
-			
+					if (rezeptList[i].filename != null) {
+						ausgabe += "<img src=\"../LoadImage?id="
+								+ rezeptList[i].id
+								+ "&table=recipes\" width=\"200\" heigt=\"180\">";
+
 					}
 					ausgabe += "</td><td>";
 					ausgabe += rezeptList[i].id;
 					ausgabe += "</td><td>";
-					ausgabe += "<a href=\"/rezeptbuch/LoadRecipeServlet?id="+rezeptList[i].id+"\">" +rezeptList[i].name+"</a>";
+					ausgabe += "<a href=\"/rezeptbuch/LoadRecipeServlet?id="
+							+ rezeptList[i].id + "\">" + rezeptList[i].name
+							+ "</a>";
 					ausgabe += "</td><td>";
 					ausgabe += rezeptList[i].durPrep;
 					ausgabe += "</td><td>";
@@ -72,7 +75,9 @@
 	<main>
 	<form id="myForm">
 		<fieldset>
-			<legend><h1>Rezeptsuche</h1></legend>
+			<legend>
+				<h1>Rezeptsuche</h1>
+			</legend>
 			<div>
 				<label for="rezept">Rezept:</label> <input type="text" name="rezept"
 					id="rezept" placeholder="Ihr Rezept">
@@ -86,6 +91,6 @@
 	<br>
 	<h3>Trefferliste</h3>
 	<div id="hitlist">Keine Treffer</div>
-	</main>
+ </main>
 </body>
 </html>

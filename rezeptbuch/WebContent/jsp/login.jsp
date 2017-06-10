@@ -3,11 +3,14 @@
 	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
 <head>
 <link rel="stylesheet" type="text/css" href="../main.css">
 <meta charset="utf-8">
+<base href="${pageContext.request.requestURI}" />
 <title>Kochrezepte - Login</title>
 </head>
+
 <body>
 	<%@ includefile="fragments/nav.jspf" %>
 	<main>

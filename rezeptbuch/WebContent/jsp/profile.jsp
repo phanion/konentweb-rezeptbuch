@@ -34,7 +34,7 @@
 		</p>
 		<p>
 			<label class="labelfortextarea" for="beschreibung">Profilbeschreibung</label>
-			<textarea name="beschreibung" id="beschreibung" cols="50"
+			<textarea name="beschreibung" id="beschreibung" class="textarea-transitional"
 				placeholder="Ihre Profilbeschreibung" disabled>
 				${'Profilbeschreibung: Lorem ipsum dolor sit amet.'}
 			</textarea>
