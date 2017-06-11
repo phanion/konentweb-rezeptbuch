@@ -94,7 +94,7 @@
 		<p>
 			<label class="labelfortextarea" for="description">Beschreibung:</label>
 			<textarea name="description" id="description"
-				placeholder="Hier die Beschreibung eingeben..." cols="50" rows="7"
+				placeholder="Hier die Beschreibung eingeben..." class="textarea-transitional"
 				required maxlength="2500"></textarea>
 		</p>
 		<p>

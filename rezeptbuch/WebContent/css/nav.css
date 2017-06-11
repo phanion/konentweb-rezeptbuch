@@ -1,34 +1,134 @@
-nav {
+nav, .nav-container {
 	/*background-color: #123652;*/
 	background-color: #757C82;
-	
 	padding: 0% 20%;
-	
-	
 }
 
 /* keine Bulletpoints in der Liste */
 nav ul {
-    list-style-type: none;	
-    overflow: hidden;
-    
+	list-style-type: none;
+	overflow: hidden;
+	display: inline-block;
+	width: auto;
 }
 
-nav li {
-	display: inline !important;
+nav ul#navlist-left {
+	float: left;
 }
+
+nav ul#navlist-right {
+	float: right;
+}
+
+nav li, nav span {
+	display: inline-block;
+}
+
 li a {
- 	display: inline-block; 
-    
+	display: inline-block;
 	/* color: #718EA4; */
 	color: #FFFFFF;
 	text-align: center;
-    text-decoration: none;
-    padding: 20px 5px;
+	text-decoration: none;
+	padding: 20px 5px;
 }
 
-li a:HOVER { 
+li a:hover {
 	background-color: #424B54;
 	/* color: #F5F0F6; */
-	
+}
+
+
+input.search {
+	display: inline-block;
+	width: 150px;
+	/* 	border: 2px solid #93A8AC; */
+	border-radius: 4px;
+	padding: 10px 20px 10px 20px;
+	/* 	transition: width 0.5s ease-in-out; */
+	background-color: #24292E;
+}
+
+input.search:hover {
+	cursor: text;
+}
+
+input.search:focus {
+	/* 	width: 100%; */
+	background-color: #ffffff;
+}
+
+.button-nav {
+	display: inline-block;
+	width: 3.5em;
+	height: 3.5em;
+	cursor: pointer;
+	border: none;
+	/* 	border-radius: 4px; */ background-size : 48px 48px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-color: transparent;
+	background-size: 48px 48px;
+}
+
+li.nav-but ~ li.nav-but {
+	margin-left: 20px;
+}
+
+.button-nav#search-b {
+	background-image: url('../icons/search_white.png');
+}
+
+.button-nav#search-b:hover {
+	background-image: url('../icons/search_rose.png');
+}
+
+.button-nav#profile-b {
+	background-image: url('../icons/profile_white.png');
+	background-size: 38px 38px;
+}
+
+.button-nav#profile-b:hover {
+	background-image: url('../icons/profile_rose.png');
+}
+
+.nav-container {
+	margin: 0 auto;
+	background-color: #757C82;
+	text-align: center;
+	vertical-align: middle;
+	height: 66.6px;
+	opacity: 1;
+	transition: all 0.6s ease-in-out;
+}
+
+.nav-container.hide {
+	height: 0;
+	opacity: 0;
+}
+
+div.nav-container * {
+	opacity: 1;
+	visibility: visible;
+	transition: opacity 0.8s ease-in;
+}
+
+div.nav-container.hide * {
+	/* 	display: none; */
+	/* 	visibility: hidden; */
+	opacity: 0;
+	transition: opacity 0.4s ease-out;
+}
+
+#search-container input {
+	width: 75%;
+	margin-right: 0;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+#searchbutton {
+	width: 25%;
+	border-bottom-left-radius: 0;
+	border-top-left-radius: 0;
 }

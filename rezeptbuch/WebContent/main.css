@@ -21,12 +21,21 @@
 	Falls weitere Farben gebraucht werden, erst auf der Seite nach anderen Stärken schauen
 */
 
+/*
+	Verwendete Icons (i.d.R. bearbeitet), keine Lizenz benötigt:
+	
+	https://www.iconfinder.com/icons/2125607/blue_free_outline_people_profile_ui_icon
+	https://www.iconfinder.com/icons/314478/search_icon
+*/
+	
+
 
 * {
 	box-sizing: border-box;
 	margin: 0;
     padding: 0;
     border: 0;
+/* 	border: 1px solid red; */
     
     font-family: 'Open Sans', sans-serif;
     color: #424B54;

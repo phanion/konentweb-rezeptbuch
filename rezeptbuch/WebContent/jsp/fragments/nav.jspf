@@ -1,26 +1,94 @@
 <!-- Refactoring: Lorenz -->
 
+<script type="text/javascript">
+	document.addEventListener("DOMContentLoaded", init);
+	function init() {
+
+		handle = function() {
+
+			alert();
+			var xhr = new XmlHttpRequest();
+			var searchstring = "/newsearch=" + encodeURIComponent(searchstring);
+			xhr.open("POST", searchstring, true);
+			xhr.send();
+
+		}
+
+		handlekey = function(e) {
+
+			if (e.keyCode === 13) {
+
+				alert();
+				var xhr = new XmlHttpRequest();
+
+				var searchstring = "/newsearch="
+						+ encodeURIComponent(searchstring);
+				xhr.open("POST", searchstring, true);
+				xhr.send();
+			}
+		}
+	}
+
+	var toggleSearch = function() {
+
+		var searchbox = document.getElementById('search-container');
+		if (searchbox.classList.contains('hide')) {
+			searchbox.classList.remove('hide');
+		} else {
+			searchbox.classList.add('hide');
+		}
+	}
+	var toggleProfile = function() {
+
+		var searchbox = document.getElementById('profile-container');
+		if (searchbox.classList.contains('hide')) {
+			searchbox.classList.remove('hide');
+		} else {
+			searchbox.classList.add('hide');
+		}
+	}
+	var waitProfile = function() {
+		setTimeout(toggleProfile, 1800);
+	}
+</script>
 <nav>
-	<!-- ToDo -->
+	<ul id="navlist-left">
+		<li><a href="/rezeptbuch/index.jsp">Startseite</a></li>
+		<c:if test="${not empty user}">
+			<li><a href="/rezeptbuch/jsp/rezept_erstellen.jsp">Rezept
+					erstellen</a></li>
+		</c:if>
+
+	</ul>
+	<ul id="navlist-right">
+		<li class="nav-but"><button type="button" class="button-nav" id="profile-b"
+				onclick="window.location.href='/rezeptbuch/jsp/profile.jsp'"
+				onmouseover="toggleProfile();" onmouseleave="waitProfile();"></button>
+		</li>
+		<li class="nav-but"><button type="button" class="button-nav" id="search-b"
+				onclick="toggleSearch();"></button></li>
+	</ul>
+	<div style="clear: both;"></div>
+</nav>
+
+<div id="profile-container" class="hide nav-container"
+	style="text-align: right;">
 	<c:choose>
 		<c:when test="${not empty user}">
-			<ul>
-				<li><a href="/rezeptbuch/index.jsp">Startseite</a></li>
-				<li><a href="/rezeptbuch/jsp/rezept_erstellen.jsp">Rezept erstellen</a></li>
-				<li><a href="/rezeptbuch/jsp/profile.jsp">Profil anzeigen</a></li>
-				<li><a href="/rezeptbuch/logoutservlet">Logout</a></li>
-				<li><a href="/rezeptbuch/jsp/rezeptsuche.jsp">Rezept suchen</a>
-				</li>
-			</ul>
+			<button type="button" class="button"
+				onclick="window.location.href='/rezeptbuch/logoutservlet'">Logout</button>
 		</c:when>
 		<c:otherwise>
-			<ul>
-				<li><a href="/rezeptbuch/index.jsp">Startseite</a></li>
-				<li><a href="/rezeptbuch/jsp/login.jsp">Rezept erstellen</a></li>
-				<li><a href="/rezeptbuch/jsp/login.jsp">Login</a></li>
-				<li><a href="/rezeptbuch/jsp/registration.jsp">Registrieren</a></li>
-				<li><a href="/rezeptbuch/jsp/rezeptsuche.jsp">Rezept suchen</a></li>
-			</ul>
+			<button type="button" class="button"
+				onclick="window.location.href='/rezeptbuch/jsp/login.jsp'">Login</button>
+				<button type="button" class="button-secondary"
+				onclick="window.location.href='/rezeptbuch/jsp/registration.jsp'">Registrieren</button>
 		</c:otherwise>
 	</c:choose>
-</nav>
+</div>
+<div id="search-container" class="hide nav-container">
+	<form action="/rezeptbuch/newsearch" method="get">
+		<input type="search" name="searchstring" id="searchinput"
+			class="search" placeholder="Suche" onfocus="this.value = '';"><button type="submit" id="searchbutton" class="button">Finden</button>
+	</form>
+</div>
