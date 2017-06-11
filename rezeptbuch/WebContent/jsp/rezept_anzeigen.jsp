@@ -22,7 +22,12 @@
 	<main>
 	
 	<h1>${rezept.name}</h1>
-	<button class="button" type="button">Rezept bearbeiten</button>
+	
+	<c:if test="${not empty user}">
+		<c:if test="${user.getID() == rezept.getCreator().getID()}">
+			<button class="button" type="button">Rezept bearbeiten</button>
+		</c:if>
+	</c:if>
 
 	<c:if test="${not empty message}">
 		<p>${message}</p><br>
