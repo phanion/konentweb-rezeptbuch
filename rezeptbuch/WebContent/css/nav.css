@@ -71,7 +71,7 @@ input.search:focus {
 	background-size: 48px 48px;
 }
 
-li.nav-but ~ li.nav-but {
+.nav-but ~ .nav-but {
 	margin-left: 20px;
 }
 
@@ -99,7 +99,7 @@ li.nav-but ~ li.nav-but {
 	vertical-align: middle;
 	height: 66.6px;
 	opacity: 1;
-	transition: all 0.6s ease-in-out;
+	transition: all 0.4s ease-in-out;
 }
 
 .nav-container.hide {
@@ -110,14 +110,14 @@ li.nav-but ~ li.nav-but {
 div.nav-container * {
 	opacity: 1;
 	visibility: visible;
-	transition: opacity 0.8s ease-in;
+	transition: opacity 0.6s ease-in;
 }
 
 div.nav-container.hide * {
 	/* 	display: none; */
-	/* 	visibility: hidden; */
+	visibility: hidden; 
 	opacity: 0;
-	transition: opacity 0.4s ease-out;
+	transition: opacity 0.3s ease-out;
 }
 
 #search-container input {

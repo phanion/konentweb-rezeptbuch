@@ -1,13 +1,16 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
@@ -16,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import com.sun.research.ws.wadl.Request;
@@ -55,6 +59,9 @@ public class NewSearchServlet extends HttpServlet {
 
 		System.out.println("--------------" + request.getParameter("searchstring") + "---------------");
 
+//		HttpSession session = request.getSession();
+		request.setAttribute("searchstring",  request.getParameter("searchstring"));
+		
 		RequestDispatcher disp = request.getRequestDispatcher("/jsp/rezeptsuche2.jsp");
 		disp.forward(request, response);
 	}
@@ -71,18 +78,19 @@ public class NewSearchServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		String searchstring = request.getParameter("searchstring");
-		List<Object> treffer = new ArrayList<Object>();
+		List<HashMap<String, Object>> treffer = new ArrayList<HashMap<String, Object>>();
 		try {
 			treffer = search(searchstring);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}		
 		
 		request.setAttribute("treffer",  treffer);
 		
 		RequestDispatcher disp = request.getRequestDispatcher("/jsp/searchresults.jsp");
 		disp.forward(request, response);
+		
 	}
 
 	/**
@@ -98,43 +106,39 @@ public class NewSearchServlet extends HttpServlet {
 	 * @return Eine Liste von RezeptBeans
 	 * @throws ServletException
 	 */
-	protected List<Object> search(String searchstring) throws ServletException, SQLException {
+	protected List<HashMap<String, Object>> search(String searchstring) throws ServletException, SQLException {
+		List<HashMap<String, Object>> trefferMapListe = new ArrayList<HashMap<String, Object>>();
 
 		searchstring = (searchstring == null || searchstring == "") ? "%" : "%" + searchstring + "%";
-
-		List<Object> trefferListe = new ArrayList<Object>();
-
-		// DB-Zugriff
+		
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(
 						"SELECT * FROM v_rezeptuser WHERE CONCAT_WS('', authorfirstname, authorlastname, recipename, description) LIKE ?")) {
 
 			pstmt.setString(1, searchstring);
-
 			try (ResultSet rs = pstmt.executeQuery()) {
-
 				while (rs.next()) {
-					Object treffer = new Object() {
-						public final Long authorID = rs.getLong("authorid");
-						public final String authorFullName = rs.getLong("authorfirstname") + " "
-								+ rs.getString("authorlastname");
-						public final Long recipeID = rs.getLong("recipeid");
-						public final String recipeName = rs.getString("recipename");
-						public final String recipedescription = rs.getString("description");
-						public final Integer prepDuration = rs.getInt("durationPreparation");
-						public final Integer cookDuration = rs.getInt("durationCooking");
-						public final Integer difficulty = rs.getInt("difficulty");
-						public final Integer servings = rs.getInt("servings");
-						public final Blob image = rs.getBlob("image");
-						public final String filename = rs.getString("filename");
-					};
-
-					trefferListe.add(treffer);
+					HashMap<String, Object> trefferMap = new HashMap<String, Object>();
+					
+					trefferMap.put("authorID", rs.getLong("authorid"));
+					trefferMap.put("authorFullName", rs.getString("authorfirstname") + " " + rs.getString("authorlastname"));
+					trefferMap.put("recipeID", rs.getLong("recipeid"));
+					trefferMap.put("recipeName", rs.getString("recipename"));
+					trefferMap.put("recipeDescription", rs.getString("description"));
+					trefferMap.put("prepDuration", rs.getInt("durationPreparation"));
+					trefferMap.put("cookDuration", rs.getInt("durationCooking"));
+					trefferMap.put("difficulty", rs.getInt("difficulty"));
+					trefferMap.put("servings", rs.getInt("servings"));
+					trefferMap.put("image", rs.getBlob("image"));
+					trefferMap.put("filename", rs.getString("filename"));
+					
+					trefferMapListe.add(trefferMap);
 				}
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
-		} 
-		return trefferListe;
+		}
+		return trefferMapListe;
 	}
+
 }

@@ -17,7 +17,7 @@
 <meta charset="UTF-8">
 <base href="${pageContext.request.requestURI}" />
 <title>Rezeptsuche</title>
-<script type="text/javascript" src="../js/search.js" async></script>
+<script src="../js/search.js"></script>
 <link rel="stylesheet" type="text/css" href="../main.css">
 </head>
 
@@ -29,9 +29,11 @@
 <!-- 		<input type="search" name="searchstring" class="search" placeholder="Suche"> -->
 <!-- 		<button type="submit" id="submitsearch" class="button">M</button> -->
 <!-- 	</form> -->
-	<input type="search" name="searchstring" placeholder="Suche">
-	<button type="submit" id="submitsearch" class="button" onclick="doSearch()">Suchen</button>
-	<div id="treffer">${requestScope.searchstring }</div>
+	<input type="search" id="searchstring-input" name="searchstring" placeholder="Suche">
+	<input type="hidden" id="searchstring-hidden" value="${requestScope.searchstring}">
+	<button type="button" id="submitsearch" class="button" onclick="doSearch()">Suchen</button>
+	<div id="treffer"><p class="search-entry">Suchen Sie nach einem Begriff</p></div>
 	</main>
 </body>
 </html>
+

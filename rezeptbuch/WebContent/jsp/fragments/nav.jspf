@@ -1,33 +1,6 @@
 <!-- Refactoring: Lorenz -->
 
 <script type="text/javascript">
-	document.addEventListener("DOMContentLoaded", init);
-	function init() {
-
-		handle = function() {
-
-			alert();
-			var xhr = new XmlHttpRequest();
-			var searchstring = "/newsearch=" + encodeURIComponent(searchstring);
-			xhr.open("POST", searchstring, true);
-			xhr.send();
-
-		}
-
-		handlekey = function(e) {
-
-			if (e.keyCode === 13) {
-
-				alert();
-				var xhr = new XmlHttpRequest();
-
-				var searchstring = "/newsearch="
-						+ encodeURIComponent(searchstring);
-				xhr.open("POST", searchstring, true);
-				xhr.send();
-			}
-		}
-	}
 
 	var toggleSearch = function() {
 
@@ -43,12 +16,14 @@
 		var searchbox = document.getElementById('profile-container');
 		if (searchbox.classList.contains('hide')) {
 			searchbox.classList.remove('hide');
+
 		} else {
 			searchbox.classList.add('hide');
+
 		}
 	}
 	var waitProfile = function() {
-		setTimeout(toggleProfile, 1800);
+		setTimeout(toggleProfile, 1000);
 	}
 </script>
 <nav>
@@ -81,7 +56,7 @@
 		<c:otherwise>
 			<button type="button" class="button"
 				onclick="window.location.href='/rezeptbuch/jsp/login.jsp'">Login</button>
-				<button type="button" class="button-secondary"
+				<button type="button" class="button-secondary" style="margin-right: 90px;"
 				onclick="window.location.href='/rezeptbuch/jsp/registration.jsp'">Registrieren</button>
 		</c:otherwise>
 	</c:choose>
