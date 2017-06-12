@@ -3,9 +3,11 @@ package servlets;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.annotation.Resource;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
+import bean.Comment;
+import bean.RezeptBean;
 import bean.User;
 
 /**
@@ -41,26 +45,54 @@ public class AddCommentServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		final User author = (User) session.getAttribute("user");
+		/**final User author = (User) session.getAttribute("user");
 		final Long recipe = Long.parseLong(request.getParameter("recipe"));
-		final String comment = request.getParameter("comment");
+		final String comment = request.getParameter("comment");**/
+		
+		final Comment comment = new Comment();
+		final RezeptBean recipe = new RezeptBean();
+		
+		
+		recipe.setId(Long.parseLong(request.getParameter("recipe")));
+		
+		comment.setAuthor((User) session.getAttribute("user"));
+		comment.setRecipe(recipe);
+		comment.setComment(request.getParameter("comment"));
+		
+		
 
 		try {
+			
+			
 			final Connection con = ds.getConnection();
-			PreparedStatement ps = con.prepareStatement("INSERT INTO comments(author,recipe,comment) values(?,?,?)");
-			ps.setLong(1, author.getID());
-			ps.setLong(2, recipe);
-			ps.setString(3, comment);
+			String[] generatedKeys = new String[] { "id" };
+			
+			
+			PreparedStatement ps = con.prepareStatement("INSERT INTO comments(author,recipe,comment) values(?,?,?)",generatedKeys);
+			ps.setLong(1, comment.getAuthor().getID());
+			ps.setLong(2, comment.getRecipe().getId());
+			ps.setString(3, comment.getComment());
 
 			ps.executeUpdate();
+			
+			ResultSet rs = ps.getGeneratedKeys();
+			while (rs.next()) {
+				comment.setId(rs.getLong(1));
+			}
+			
 			con.close();
+			
+			session.setAttribute("comment", comment);
+			
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/commentResponse.jsp");
+			dispatcher.forward(request, response);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		response.sendRedirect("LoadRecipeServlet?id=" + recipe);
+		
 
 	}
 
