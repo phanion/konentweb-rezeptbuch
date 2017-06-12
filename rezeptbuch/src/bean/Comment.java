@@ -44,7 +44,7 @@ public class Comment implements Serializable{
 		return recipe;
 	}
 
-	public void setReceipe(RezeptBean recipe) {
+	public void setRecipe(RezeptBean recipe) {
 		this.recipe = recipe;
 	}
 
