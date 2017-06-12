@@ -9,19 +9,19 @@ public class Comment implements Serializable{
 	private Long id;
 	private User author;
 	private String comment;
-	private RezeptBean receipe;
+	private RezeptBean recipe;
 
 
 	public Comment() {
 		super();
 	}
 	
-	public Comment(Long id, User author, String comment, RezeptBean receipe) {
+	public Comment(Long id, User author, String comment, RezeptBean recipe) {
 		super();
 		this.id = id;
 		this.author = author;
 		this.comment = comment;
-		this.receipe = receipe;
+		this.recipe = recipe;
 	}
 
 	public User getAuthor() {
@@ -40,12 +40,12 @@ public class Comment implements Serializable{
 		this.comment = comment;
 	}
 
-	public RezeptBean getReceipe() {
-		return receipe;
+	public RezeptBean getRecipe() {
+		return recipe;
 	}
 
-	public void setReceipe(RezeptBean receipe) {
-		this.receipe = receipe;
+	public void setReceipe(RezeptBean recipe) {
+		this.recipe = recipe;
 	}
 
 	public Long getId() {
