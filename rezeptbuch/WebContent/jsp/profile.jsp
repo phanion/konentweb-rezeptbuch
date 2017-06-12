@@ -13,7 +13,7 @@
 </head>
 
 <body>
-	<%@ includefile="./fragments/nav.jspf" %>
+	<%@ include file="./fragments/nav.jspf" %>
 	<main>
 	<h1>Dein Profil</h1>
 	<form action="/rezeptbuch/profile" method="post">

@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", init);
 
 </head>
 <body>
-	<%@ includefile="fragments/nav.jspf" %>
+	<%@ include file="fragments/nav.jspf" %>
 	<main>
 	
 	<h1>${rezept.name}</h1>
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", init);
 		</c:forEach>
 	</table>
 	
-	<br><label for="description">Beschreibung:</label> <input disabled type="text" name="description" id="description" value="${rezept.description}">
+	<br><label for="description">Beschreibung:</label> <textarea disabled type="text" name="description" id="description">${rezept.description}</textarea>
 	<br><label for="durationPreparation">Vorbereitungszeit:</label> <input  disabled type="text" name="durationPreparation" id="durationPreparation" value="${rezept.durationPreparation}">
 	<br><label for="durationCooking">Kochzeit:</label> <input  disabled type="text" name="durationCooking" id="durationCooking" value="${rezept.durationCooking}">
 	<br><label for="difficulty">Schwierigkeitsgrad:</label> <input  disabled type="text" name="difficulty" id="difficulty" value="${rezept.difficulty}">

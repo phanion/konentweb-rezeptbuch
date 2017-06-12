@@ -30,18 +30,33 @@
 	
 
 
-* {
-	box-sizing: border-box;
-	margin: 0;
+
+*
+{
+    font-family: 'Open Sans', sans-serif;
+
+    box-sizing: border-box;
+    margin: 0;
     padding: 0;
+
+    color: #424b54;
     border: 0;
 /* 	border: 1px solid red; */
-    
-    font-family: 'Open Sans', sans-serif;
-    color: #424B54;
 }
 
-*:DISABLED {
-	background-color: #D1D1D1;
-	color: #747474;
+*:DISABLED
+{
+    color: #747474;
+    background-color: #d1d1d1;
 }
+
+h1
+{
+    margin-bottom: 20px;
+}
+
+h2
+{
+    margin-bottom: 10px;
+}
+

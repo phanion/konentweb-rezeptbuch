@@ -13,14 +13,15 @@
 <!-- <!DOCTYPE html> -->
 <c:if test="${fn:length(requestScope.treffer) eq 0}">
 	<div class="sorry search-entry">Leider keine Treffer zu diesem
-		Begriff :(</div>
+		Begriff &#9785</div>
 </c:if>
 
 <c:forEach var="tmap" items="${requestScope.treffer}">
 	<div class="search-entry clearfix">
 
-		<h2>${tmap["recipeName"]}</h2><!-- TODO: Bei Klick zur Rezept-seite -->
-
+		<!-- TODO: Bei Klick zur Rezept-seite -->
+		<h2 class="recipe-title"><a href="/rezeptbuch/LoadRecipeServlet?id=${tmap['recipeID']}">${tmap["recipeName"]}</a></h2>
+							
 		<c:if
 			test="${not(tmap['filename'] eq null or fn:length(tmap['filename']) eq 0)}">
 			<img alt="Ein Bild von ${tmap['recipename']}" class="search-img"
