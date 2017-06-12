@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", init);
 				
 				newCommentComment.innerHTML = commentResponse.comment;
 				newCommentAuthor.innerHTML = commentResponse.author;
-				newCommentDelete.innerHTML = "<a href=\"/rezeptbuch/DeleteCommentServlet?id= " + commentResponse.id + "&recipe=" + commentResponse.recipe + "\">Löschen</a>";
+				newCommentDelete.innerHTML = "<a href=\"/rezeptbuch/DeleteCommentServlet?id=" + commentResponse.id + "&recipe=" + comm	entResponse.recipe + "\">Löschen</a>";
 					
 			
 		}
