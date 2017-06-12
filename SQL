@@ -52,8 +52,9 @@ create table comments(
     );
     
 create table abos(
-    recipe bigint,
+	recipe bigint,
     user bigint,
     foreign key (recipe) references recipes(id),
-    foreign key (user) references users(id)
+    foreign key (user) references users(id),
+    primary key (recipe, user)
     );
