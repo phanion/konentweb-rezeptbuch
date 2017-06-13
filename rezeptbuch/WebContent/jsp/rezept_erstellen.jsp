@@ -72,7 +72,7 @@
 
 
 <body>
-	<%@ includefile="fragments/nav.jspf" %>
+	<%@ include file="fragments/nav.jspf" %>
 	<main>
 
 	<h1>Rezept erstellen</h1>
@@ -88,8 +88,8 @@
 
 		<div id="zutaten"></div>
 		<p>
-			<input type="button" class="button" id="addrow" name="addrow"
-				value="Zutat hinzufügen" onclick="add();" />
+			<button type="button" class="button"
+				onclick="add();">Zutat hinzufügen</button>
 		</p>
 		<p>
 			<label class="labelfortextarea" for="description">Beschreibung:</label>

@@ -1,87 +1,144 @@
-body {
-	background-color: #E8E8E8;
+/* https://css-tricks.com/all-about-floats/ */
+.clearfix::after
+{
+    display: block;
+    visibility: hidden;
+    clear: both;
+
+    height: 0;
+
+    content: '.';
 }
 
-main {
-	padding: 20px 20%;
+.labelfortextarea
+{
+    display: block;
 }
 
-main p {
-	margin: 5px 0px;
+.recipe-title
+{
+    margin-bottom: 10px;
+
+    text-decoration: none;
 }
 
-table {
-	border-collapse: collapse;
+.recipe-title:hover
+{
+    color: #9b6a6c;
 }
 
-table th, td {
-	border: 1px solid #424B54;
-	text-align: left;
+.search-entry
+{
+    margin: 20px 0;
+    padding: 20px 40px;
+
+    border-radius: 5px;
+    background: #fff;
 }
 
-th, td {
-	padding: 8px;
+.search-img
+{
+    float: left;
+
+    width: 30%;
+    height: auto;
+
+    object-fit: cover;
 }
 
-label {
-	min-width: 10em;
-	display: inline-block;
-	text-align: left;
+.search-img ~ dl
+{
+    width: 70%;
+    padding-left: 5%;
+}
+
+body
+{
+    background: #e8e8e8;
+}
+
+dd
+{
+    font-weight: bold;
 }
 
 /* Inspiriert von https://stackoverflow.com/questions/1713048/how-to-style-dt-and-dd-so-they-are-on-the-same-line */
-dl {
-	width: 100%;
-	overflow: hidden;
-	float: left;
+dl
+{
+    float: left;
+    overflow: hidden;
+
+    width: 100%;
 }
 
-dt, dd{
-	display: inline-block;
-	float: left;
-	width: 50%;
+dt,
+dd
+{
+    display: inline-block;
+    float: left;
+
+    width: 50%;
 }
 
-dd {
-	font-weight: bold;
+h1,
+h2,
+h3
+{
+    margin-bottom: 5px;
 }
 
+input,
+textarea,
+select,
+button
+{
+    font-size: 1em;
 
-
-.labelfortextarea {
-	display: block;
+    border-radius: 5px;
 }
 
-input, textarea, select, button {
-	font-size: 1em;
-	border-radius: 4px;
+input:not([type='button']),
+textarea
+{
+    min-width: 5em;
+    padding: 5px;
 }
 
-input:not([type="button"]){
-	min-width:5em;
+label
+{
+    display: inline-block;
+
+    min-width: 10em;
+    padding: 5px 0;
+
+    text-align: left;
 }
 
-.search-entry {
-	padding: 20px 40px;
-	margin: 20px 0px;
-	background-color: white;
-	border-radius: 4px;
+main
+{
+    padding: 20px 20%;
 }
 
-.search-img {
-	float: left;
-	object-fit: cover;
-	margin-right: 40px;
+main p
+{
+    margin: 5px 0;
 }
 
-.clearfix:after {
-	content: ".";
-	visibility: hidden;
-	display: block;
-	height: 0;
-	clear: both;
+table
+{
+    border-collapse: collapse;
 }
 
-h1, h2, h3 {
-	margin-bottom: 5px;
+table th,
+td
+{
+    text-align: left;
+
+    border: 1px solid #424b54;
+}
+
+th,
+td
+{
+    padding: 8px;
 }

@@ -50,3 +50,34 @@ create table comments(
     foreign key (recipe) references recipes(id),
     foreign key (author) references users(id)
     );
+    
+create table abos(
+	recipe bigint,
+    user bigint,
+    foreign key (recipe) references recipes(id),
+    foreign key (user) references users(id),
+    primary key (recipe, user)
+    );
+
+    CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `v_rezeptuser` AS
+    SELECT DISTINCT
+        `u`.`ID` AS `authorid`,
+        `u`.`lastName` AS `authorlastname`,
+        `u`.`firstName` AS `authorfirstname`,
+        `r`.`ID` AS `recipeid`,
+        `r`.`name` AS `recipename`,
+        `r`.`description` AS `description`,
+        `r`.`durationPreparation` AS `durationPreparation`,
+        `r`.`durationCooking` AS `durationCooking`,
+        `r`.`difficulty` AS `difficulty`,
+        `r`.`servings` AS `servings`,
+        `r`.`image` AS `image`,
+        `r`.`filename` AS `filename`
+    FROM
+        (`users` `u`
+        JOIN `recipes` `r` ON ((`u`.`ID` = `r`.`creator`)));
+    

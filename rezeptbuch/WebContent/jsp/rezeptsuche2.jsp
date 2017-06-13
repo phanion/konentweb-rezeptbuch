@@ -22,17 +22,25 @@
 </head>
 
 <body>
-	<%@ includefile="./fragments/nav.jspf" %>
+	<%@ include file="./fragments/nav.jspf" %>
 	<main>
 	<h1>Suche</h1>
 <!-- 	<form action="../newsearch" method="POST"> -->
 <!-- 		<input type="search" name="searchstring" class="search" placeholder="Suche"> -->
 <!-- 		<button type="submit" id="submitsearch" class="button">M</button> -->
-<!-- 	</form> -->
-	<input type="search" id="searchstring-input" name="searchstring" placeholder="Suche" onkeydown="return keyEnterSearch(event);">
-	<input type="hidden" id="searchstring-hidden" value="${requestScope.searchstring}">
-	<button type="button" id="submitsearch" class="button" onclick="doSearch()">Suchen</button>
-	<div id="treffer"><p class="search-entry">Suchen Sie nach einem Begriff</p></div>
+<!-- 	</form> --> 
+
+	<input type="hidden" id="searchstring-hidden"
+		value="${requestScope.searchstring}">
+	<input type="search"
+		id="searchstring-input" name="searchstring" placeholder="Suche"
+		onkeydown="return keyEnterSearch(event);" onfocus="this.value = '';"><button type="button" id="submitsearch" class="button-secondary button-input-search"
+		onclick="doSearch()">
+		Finden
+	</button>
+	<div id="treffer">
+		<p class="search-entry">Suchen Sie nach einem Begriff</p>
+	</div>
 	</main>
 </body>
 </html>

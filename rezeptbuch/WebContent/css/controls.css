@@ -1,67 +1,135 @@
-.button {
-	background-color: #E2B4BD;
-    border: none;
-    color: #FFFFFF;
+.button
+{
+    font-size: 100%;
+
+    display: inline-block;
+
     padding: 10px 25px;
+
     text-align: center;
     text-decoration: none;
-    display: inline-block;
-    font-size: 100%;
-    
-    border-radius: 4px;
-}
-.button-secondary, .file-upload-label {
-	background-color: #93A8AC;
+
+    color: #fff;
     border: none;
-    color: #FFFFFF;
-    padding: 10px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 100%;
-    
-    border-radius: 4px;
+    border-radius: 5px;
+    background-color: #e4bac3;
 }
 
-/* Damit ein File-Input wie ein Button aussehen kann */
-input[type="file"] {
-    display: none;
+.button,
+.button-secondary,
+.button-disabled,
+.file-upload-label
+{
+    min-width: 10em;
 }
+
+.button-disabled
+{
+    font-size: 100%;
+
+    display: inline-block;
+
+    padding: 10px 25px;
+
+    cursor: default;
+    text-align: center;
+    text-decoration: none;
+
+    color: #789;
+    border: none;
+    border-radius: 5px;
+    background-color: #d3d3d3;
+}
+
+
+input + .button-input-search
+{
+    width: 25%;
+
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+
+.button-secondary,
+.file-upload-label
+{
+    font-size: 100%;
+
+    display: inline-block;
+
+    padding: 10px 25px;
+
+    text-align: center;
+    text-decoration: none;
+
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    background-color: #93a8ac;
+}
+
+.button-secondary:hover,
+.file-upload-label:hover
+{
+    cursor: pointer;
+
+    background-color: #798a8d;
+}
+
 
 .button:hover
 {
- 	background-color: #E7C1C9;
-	cursor: pointer;
-} 
-.button-secondary:hover, .file-upload-label:hover {
-    background-color: #798A8D;
     cursor: pointer;
+
+    background-color: #b9949b;
 }
 
-.button-disabled {
-	background-color: #D3D3D3;
-    border: none;
-    color: 	#778899;
-    padding: 10px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 100%;
-    cursor: default;
-    border-radius: 4px;
+
+.textarea-transitional
+{
+    /* 	min-width: 600px; */
+    width: 100%;
+    height: 3em;
+
+    transition: height .5s ease-in-out;
 }
 
-input {
-	margin: 10px 5px 10px 0px; /* links 0, falls es das erste Element der Zeile ist */
+.textarea-transitional:focus
+{
+    height: 8em;
 }
 
-.textarea-transitional {
-/* 	min-width: 600px; */
-	width: 100%;
-	height: 3em;
-	transition: height 0.5s ease-in-out;
+input
+{
+    margin: 10px 5px 10px 0;
+    /* links 0, falls es das erste Element der Zeile ist */
 }
 
-.textarea-transitional:focus {
-	height: 8em;
+/* Damit ein File-Input wie ein Button aussehen kann */
+input[type='file']
+{
+    display: none;
+}
+
+input[type='search']
+{
+    width: 75%;
+    margin: 0;
+    padding: 10px 20px;
+
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: #a6b7bb;
+}
+
+input[type='search']::placeholder
+{
+    color: #e8e8e8;
+}
+
+input[type='search']:focus
+{
+    color: #424b54;
+    background-color: #fff;
 }

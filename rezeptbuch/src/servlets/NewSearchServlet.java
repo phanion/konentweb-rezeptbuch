@@ -1,8 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
@@ -19,12 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
-
-import com.sun.research.ws.wadl.Request;
-
-import bean.RezeptBean;
 
 /**
  * Servlet implementation class NewSearchServlet
@@ -113,7 +105,7 @@ public class NewSearchServlet extends HttpServlet {
 		
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(
-						"SELECT * FROM v_rezeptuser WHERE CONCAT_WS('', authorfirstname, authorlastname, recipename, description) LIKE ?")) {
+						"SELECT * FROM v_rezeptuser WHERE CONCAT_WS(' ', authorfirstname, authorlastname, recipename, description) LIKE ?")) {
 
 			pstmt.setString(1, searchstring);
 			try (ResultSet rs = pstmt.executeQuery()) {

@@ -9,7 +9,7 @@
 <title>Kochrezepte - Registrierung</title>
 </head>
 <body>
-	<%@ includefile="fragments/nav.jspf" %>
+	<%@ include file="fragments/nav.jspf" %>
 	<main>
 	<h1>Registration</h1>
 	<c:if test="${not empty message}">

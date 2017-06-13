@@ -1,7 +1,6 @@
 <!-- Refactoring: Lorenz -->
 
 <script type="text/javascript">
-
 	var toggleSearch = function() {
 
 		var searchbox = document.getElementById('search-container');
@@ -27,27 +26,43 @@
 	}
 </script>
 <nav>
-	<ul id="navlist-left">
-		<li><a href="/rezeptbuch/index.jsp">Startseite</a></li>
-		<c:if test="${not empty user}">
-			<li><a href="/rezeptbuch/jsp/rezept_erstellen.jsp">Rezept
-					erstellen</a></li>
-		</c:if>
+	<div class="clearfix">
+		<ul id="navlist-left">
+			<li><a href="/rezeptbuch/index.jsp">Startseite</a></li>
+			<c:if test="${not empty user}">
+				<li><a href="/rezeptbuch/jsp/rezept_erstellen.jsp">Rezept
+						erstellen</a></li>
+			</c:if>
 
-	</ul>
-	<ul id="navlist-right">
-		<li class="nav-but"><button type="button" class="button-nav" id="profile-b"
-				onclick="window.location.href='/rezeptbuch/jsp/profile.jsp'"
-				onmouseover="toggleProfile();" onmouseleave="waitProfile();"></button>
-		</li>
-		<li class="nav-but"><button type="button" class="button-nav" id="search-b"
-				onclick="toggleSearch();"></button></li>
-	</ul>
-	<div style="clear: both;"></div>
+		</ul>
+
+		<ul id="navlist-right">
+			<c:choose>
+				<c:when test="${not empty user}">
+					<li class="nav-but"><a id="username-label"
+						href="${pageContext.request.contextPath}/jsp/profile.jsp">${user.firstName}
+							${user.lastName}</a></li>
+					<li class="nav-but"><button type="button" class="button-nav" id="profile-b"
+							onclick="window.location.href='/rezeptbuch/jsp/profile.jsp'"
+							onmouseover="toggleProfile();" onmouseleave="waitProfile();"></button></li>
+				</c:when>
+				<c:otherwise>
+					<li class="nav-but"><button type="button" class="button-nav" id="profile-b"
+							onclick="window.location.href='/rezeptbuch/jsp/login.jsp'"
+							onmouseover="toggleProfile();" onmouseleave="waitProfile();"></button></li>
+				</c:otherwise>
+			</c:choose>
+
+			<li class="nav-but"><button type="button" class="button-nav"
+					id="search-b" onclick="toggleSearch();"></button></li>
+		</ul>
+	</div>
+	<!-- 	<div style="clear: both;"></div> -->
+
 </nav>
 
-<div id="profile-container" class="hide nav-container"
-	style="text-align: right;">
+<div id="profile-container" class="hide nav-container">
+	<!--  style="text-align: right;"-->
 	<c:choose>
 		<c:when test="${not empty user}">
 			<button type="button" class="button" style="margin-right: 90px;"
@@ -56,7 +71,8 @@
 		<c:otherwise>
 			<button type="button" class="button"
 				onclick="window.location.href='/rezeptbuch/jsp/login.jsp'">Login</button>
-				<button type="button" class="button-secondary" style="margin-right: 90px;"
+			<button type="button" class="button-secondary"
+				style="margin-right: 90px;"
 				onclick="window.location.href='/rezeptbuch/jsp/registration.jsp'">Registrieren</button>
 		</c:otherwise>
 	</c:choose>
@@ -64,6 +80,6 @@
 <div id="search-container" class="hide nav-container">
 	<form action="/rezeptbuch/newsearch" method="get">
 		<input type="search" name="searchstring" id="searchinput"
-			class="search" placeholder="Suche" onfocus="this.value = '';"><button type="submit" id="searchbutton" class="button">Finden</button>
+			class="search-bar" placeholder="Suche" onfocus="this.value = '';"><button type="submit" id="searchbutton" class="button button-input-search">Finden</button>
 	</form>
 </div>

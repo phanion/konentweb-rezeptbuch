@@ -71,13 +71,11 @@
 </script>
 </head>
 <body>
-	<%@ includefile="/jsp/fragments/nav.jspf" %>
+	<%@ include file="/jsp/fragments/nav.jspf" %>
 	<main>
 	<form id="myForm">
 		<fieldset>
-			<legend>
-				<h1>Rezeptsuche</h1>
-			</legend>
+			<legend>Rezeptsuche</legend>
 			<div>
 				<label for="rezept">Rezept:</label> <input type="text" name="rezept"
 					id="rezept" placeholder="Ihr Rezept">
