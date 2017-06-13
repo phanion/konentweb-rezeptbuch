@@ -80,7 +80,7 @@
 		enctype="multipart/form-data">
 		<p>
 			<label for="name">Name:</label> <input type="text" name="name"
-				id="name" size="30" maxlength="40">
+				id="name" size="30" maxlength="40" required>
 		</p>
 		<p>
 		<h3>Zutaten</h3>

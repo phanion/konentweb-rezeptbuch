@@ -5,9 +5,7 @@
 
 package servlets;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -20,7 +18,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 import javax.sql.DataSource;
 
 import bean.RezeptBean;
@@ -158,8 +155,7 @@ public class EditRecipeServlet extends HttpServlet {
 		delete.executeUpdate();
 
 		for (int i = 0; i < recipe.getIngredients().size(); i++) {
-			PreparedStatement ps = con
-					.prepareStatement("insert into ingredients(recipe, ingredient, unit, quantity) values(?,?,?,?)");
+			PreparedStatement ps = con.prepareStatement("insert into ingredients(recipe, ingredient, unit, quantity) values(?,?,?,?)");
 
 			ps.setLong(1, recipe.getId());
 			ps.setString(2, recipe.getIngredients().get(i).getIngredient());
