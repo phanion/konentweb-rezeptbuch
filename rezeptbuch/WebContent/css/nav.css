@@ -34,14 +34,6 @@
     cursor: text;
 }
 
-#searchbutton
-{
-    width: 25%;
-
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-}
-
 #username-label
 {
     display: inline-block;
