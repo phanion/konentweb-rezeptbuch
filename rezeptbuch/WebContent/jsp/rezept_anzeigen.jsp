@@ -105,15 +105,24 @@
 	<c:if test="${not empty rezept.getFilename()}">
 		<img src="../LoadImage?id=${rezept.id}&table=recipes" width="250"
 			height="200" alt="Ein Foto vom Rezept ${rezept.name}">
-	</c:if> <!-- Form für das ändern des Rezeptes --> <c:if
-		test="${not empty user}">
+	</c:if>
+	
+	 <c:if test="${not empty user}">
 		<form>
+		<c:choose>
+		<c:when test="${aboStatus == false }">
 			<input type="hidden" id="aboAction" name="aboAction" value="addAbo" />
 			<button id="aboButton" name="aboButton" class="button" type="button">Abonieren</button>
+		</c:when>
+		<c:otherwise>
+			<input type="hidden" id="aboAction" name="aboAction" value="deleteAbo" />
+			<button id="aboButton" name="aboButton" class="button" type="button">Deabonieren</button>
+		</c:otherwise>
+		</c:choose>
 		</form>
 	</c:if>
 
-
+	<!-- Form für das ändern des Rezeptes -->
 	<form action="/rezeptbuch/EditRecipeServlet" method="post">
 
 
@@ -218,13 +227,23 @@
 	</c:choose> <c:if test="${not empty user}">
 		<form action="/rezeptbuch/RatingServlet" method="post">
 			<p>
-				<label for="rating">Bewertung abgeben:</label> <input name="rating"
-					id="rating" type="number" max="5" min="0" required></input>
+				<label for="rating">Bewertung abgeben:</label>
+				<c:choose>
+					<c:when test="${currentRating > 0}">
+						<input name="rating" id="rating" type="number" max="5" min="0"
+							required value="${currentRating}"></input>
+					</c:when>
+					<c:otherwise>
+						<input name="rating" id="rating" type="number" max="5" min="0"
+							required></input>
+					</c:otherwise>
+				</c:choose>
 			</p>
 			<input type="hidden" name="recipe" value="${rezept.id}" />
 			<button class="button" type="submit">Bewerten</button>
 		</form>
-	</c:if> <br>
+	</c:if>
+	<br>
 	<h2>Kommentare</h2>
 	<table id="commentsTable">
 		<tr>

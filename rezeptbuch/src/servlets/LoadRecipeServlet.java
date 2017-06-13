@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import bean.Comment;
@@ -53,6 +54,14 @@ public class LoadRecipeServlet extends HttpServlet {
 
 		try {
 			RezeptBean recipe = loadRecipeFromDB(id);
+			
+			HttpSession session = request.getSession();
+			User sessionUser = (User) session.getAttribute("user");
+			
+			if(sessionUser != null){
+				request.setAttribute("aboStatus", loadAbo(recipe, sessionUser));
+				request.setAttribute("currentRating", loadRating(recipe, sessionUser));
+			}
 
 			request.setAttribute("rezept", recipe);
 		} catch (SQLException e) {
@@ -209,6 +218,33 @@ public class LoadRecipeServlet extends HttpServlet {
 		con.close();
 		return comments;
 
+	}
+	
+	public int loadRating(RezeptBean recipe, User user) throws SQLException{
+		final Connection con = ds.getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM ratings WHERE recipe=? AND evaluator=?");
+		ps.setLong(1, recipe.getId());
+		ps.setLong(2, user.getID());
+		ResultSet rs = ps.executeQuery();
+		
+		while(rs.next()){
+			return rs.getInt("rating");
+		}
+		return 0;
+		}
+	
+	public boolean loadAbo(RezeptBean recipe, User user) throws SQLException{
+		final Connection con = ds.getConnection();
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM abos WHERE recipe=? AND user=?");
+		ps.setLong(1, recipe.getId());
+		ps.setLong(2, user.getID());
+		ResultSet rs = ps.executeQuery();
+		
+		while(rs.next()){
+			return true;
+		}
+		
+		return false;
 	}
 
 }
