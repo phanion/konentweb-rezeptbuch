@@ -36,7 +36,7 @@ create table ratings(
 	recipe bigint,
     evaluator bigint,
     rating INTEGER,
-    key (recipe,evaluator),
+    primary key (recipe,evaluator),
     foreign key (recipe) references recipes(id),
     foreign key (evaluator) references users(id)
     );
