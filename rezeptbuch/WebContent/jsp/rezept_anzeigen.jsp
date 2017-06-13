@@ -16,6 +16,8 @@
 
 <title>Rezeptbuch - ${rezept.name}</title>
 
+<script src="../js/editRecipe.js"></script>
+
 </head>
 <body>
 	<%@ includefile="fragments/nav.jspf" %>
@@ -25,7 +27,7 @@
 	
 	<c:if test="${not empty user}">
 		<c:if test="${user.getID() == rezept.getCreator().getID()}">
-			<button class="button" type="button">Rezept bearbeiten</button>
+			<button class="button" type="button" onclick="edit()">Rezept bearbeiten</button>
 		</c:if>
 	</c:if>
 
@@ -39,10 +41,14 @@
 		<img src="../LoadImage?id=${rezept.id}&table=recipes" width="250" height="200" alt="Ein Foto vom Rezept ${rezept.name}">
 	</c:if> 
 	
-	<label for="id">ID:</label> <input disabled type="text" name="id" id="id" value="${rezept.id}">
+	<!-- Form für das ändern des Rezeptes -->
+	<form action="/rezeptbuch/EditRecipeServlet" method="post">
+	
+	<input type="hidden" name="id" id="id" value="${rezept.id}">
+	<input type="hidden" name="creatorID" id="creatorID" value="${rezept.creator.getID()}">
 
 	<label class="labelfortextarea">Zutaten:</label>
-	<table>
+	<table id = "recipeIngredients">
 		<tr>
 			<th>Menge</th>
 			<th>Einheit</th>
@@ -57,21 +63,63 @@
 		</c:forEach>
 	</table>
 	
-	<br><label for="description">Beschreibung:</label> <input disabled type="text" name="description" id="description" value="${rezept.description}">
-	<br><label for="durationPreparation">Vorbereitungszeit:</label> <input  disabled type="text" name="durationPreparation" id="durationPreparation" value="${rezept.durationPreparation}">
-	<br><label for="durationCooking">Kochzeit:</label> <input  disabled type="text" name="durationCooking" id="durationCooking" value="${rezept.durationCooking}">
-	<br><label for="difficulty">Schwierigkeitsgrad:</label> <input  disabled type="text" name="difficulty" id="difficulty" value="${rezept.difficulty}">
-	<br><label for="servings">Portionen:</label> <input  disabled type="text" name="servings" id="servings" value="${rezept.servings}">
+	
+	
+	<div id="zutaten" style="display:none">
+		<c:forEach var="ingredient" items="${rezept.ingredients}">
+		<br>
+				<input type="number" name="zutatenMenge" class="zutatenMenge" placeholder="Menge" value="${ingredient.quantity}">
+				<select name="zutatenEinheit" class="zutatenEinheit"></select>
+				<input type="text" name="zutatenZutat" class="zutatenZutat" placeholder="Zutat" value="${ingredient.ingredient}">
+				<!--  ein versteckter Input, um in Javascript die ausgewählte Einheit zu setzen -->
+				<input type="hidden" name="selectedValue" class="selectedValue" value="${ingredient.unit}">
+	</c:forEach>	
+	</div>
+	
+	<input type="button" class="button" id="addrow" name="addrow" value="Zutat hinzufügen" onclick="add();" style="display:none"/>
+	
+	<!-- Felder des Rezeptes, die später geändert werden sollen -->
+	<div id="editRecipe">
+		<br><label for="description">Beschreibung:</label> 
+		<textarea disabled name="description" id="description" class="textarea-transitional" required maxlength="2500">${rezept.description}</textarea>
+		
+		<br><label for="durationPreparation">Vorbereitungszeit:</label> 
+		<input  disabled type="number" name="durationPreparation" id="durationPreparation" min="0" max="500" value="${rezept.durationPreparation}">
+		
+		<br><label for="durationCooking">Kochzeit:</label> 
+		<input  disabled type="number" name="durationCooking" id="durationCooking" min="0" max="500" value="${rezept.durationCooking}">
+		
+		<br><label for="difficulty">Schwierigkeitsgrad:</label> 
+		<input  disabled type="number" name="difficulty" id="difficulty" max="5" min="0" value="${rezept.difficulty}">
+		
+		<br><label for="servings">Portionen:</label> 
+		<input  disabled type="number" name="servings" id="servings" max="99" min="0" value="${rezept.servings}">
+		
+	</div>
+	
+	<!-- Buttons zum Speichern und Verwerfen -->
+	<div id="editButtons" style="display:none">
+		<br><button name="save" class="button" type="submit" >Speichern</button>
+		<input type="button" class="button" id="refresh" name="refresh" onclick="refreshPage();" value="Verwerfen"/>
+	</div>	
+	</form>
+
+		
+		
+	
+	
+	
+	<!-- Zur Programmierhilfe werden diese Felder bisher angezeigt -->
 	<br><label for="ratingCount">Anzahl Bewertungen:</label> <input  disabled type="text" name="ratingCount" id="ratingCount" value="${rezept.ratingCount}">
 	<br><label for="ratingSum">Summe Bewertungen:</label> <input disabled  type="text" name="ratingSum" id="ratingSum" value="${rezept.ratingSum}">
 	<br><label for="creator">Ersteller:</label> <input  disabled type="text" name="creator" id="creator" value="${rezept.creator.lastName}, ${rezept.creator.firstName}">
-	
+		
 
 
 	<br><br>
 	<h2>Bewertung</h2>
 	<c:choose>
-		<c:when test="${rezept.ratingCount == 0}">
+		<c:when test="${rezept.ratingCount == 0}">	
 			<p>Es wurden noch keine Bewertungen abgegeben!</p>
 		</c:when>
 	

@@ -8,6 +8,11 @@
 <head>
 <link rel="stylesheet" type="text/css" href="../main.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<c:choose>
+	<c:when test="${empty user}">
+		<c:redirect url="login.jsp" />
+	</c:when>
+</c:choose>
 <base href="${pageContext.request.requestURI}" />
 <title>Profil</title>
 </head>

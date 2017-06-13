@@ -53,8 +53,7 @@ public class EditRecipeServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		// Parameter von dem Request werden geholt
-		final Long recipeID = Long.parseLong(request.getParameter("recipeID"));
-		final String name = request.getParameter("name");
+		final Long recipeID = Long.parseLong(request.getParameter("id"));
 		final String[] ingredients = request.getParameterValues("zutatenZutat");
 		final String[] quantities = request.getParameterValues("zutatenMenge");
 		final String[] units = request.getParameterValues("zutatenEinheit");
@@ -63,15 +62,13 @@ public class EditRecipeServlet extends HttpServlet {
 		final Integer durationCooking = Integer.parseInt(request.getParameter("durationCooking"));
 		final Integer difficulty = Integer.parseInt(request.getParameter("difficulty"));
 		final Integer servings = Integer.parseInt(request.getParameter("servings"));
-		final Long userID = Long.parseLong(request.getParameter("userID"));
+		final Long creatorID = Long.parseLong(request.getParameter("creatorID"));
 		String message = null;
 
 		HttpSession session = request.getSession();
 
 		RezeptBean rezept = new RezeptBean();
-
 		rezept.setId(recipeID);
-		rezept.setName(name);
 		rezept.setDescription(description);
 		rezept.setDifficulty(difficulty);
 		rezept.setDurationCooking(durationCooking);
@@ -84,7 +81,7 @@ public class EditRecipeServlet extends HttpServlet {
 			}
 		}
 
-		// File-Behandlung
+		/* File-Behandlung
 		Part filepart = request.getPart("image");
 		rezept.setFilename(filepart.getSubmittedFileName());
 
@@ -98,13 +95,13 @@ public class EditRecipeServlet extends HttpServlet {
 			baos.flush();
 		} catch (IOException ex) {
 			throw new ServletException(ex.getMessage());
-		}
+		}*/
 
 		request.setAttribute("rezept", rezept);
 
 		User sessionUser = (User) session.getAttribute("user");
 
-		if (sessionUser.getID() == userID) {
+		if (sessionUser.getID() == creatorID) {
 			try {
 				updateRecipe(rezept);
 				replaceIngredients(rezept);
@@ -138,18 +135,15 @@ public class EditRecipeServlet extends HttpServlet {
 		final Connection con = ds.getConnection();
 
 		PreparedStatement ps = con.prepareStatement(
-				"UPDATE recipe SET name=?, description=?, difficulty=?, durationCooking=?, durationPreparation=?, servings=?, filename=?, image=? where id=?");
+				"UPDATE recipes SET description=?, difficulty=?, durationCooking=?, durationPreparation=?, servings=? where id=?");
 
-		ps.setString(1, recipe.getName());
-		ps.setString(2, recipe.getDescription());
-		ps.setInt(3, recipe.getDifficulty());
-		ps.setInt(4, recipe.getDurationCooking());
-		ps.setInt(5, recipe.getDurationPreparation());
-		ps.setInt(6, recipe.getServings());
-		ps.setString(7, recipe.getFilename());
-		ps.setBytes(8, recipe.getImage());
-		ps.setLong(9, recipe.getId());
-
+		ps.setString(1, recipe.getDescription());
+		ps.setInt(2, recipe.getDifficulty());
+		ps.setInt(3, recipe.getDurationCooking());
+		ps.setInt(4, recipe.getDurationPreparation());
+		ps.setInt(5, recipe.getServings());
+		ps.setLong(6, recipe.getId());
+		
 		ps.executeUpdate();
 
 		con.close();
@@ -160,6 +154,7 @@ public class EditRecipeServlet extends HttpServlet {
 		final Connection con = ds.getConnection();
 
 		PreparedStatement delete = con.prepareStatement("delete from ingredients where recipe=?");
+		delete.setLong(1, recipe.getId());
 		delete.executeUpdate();
 
 		for (int i = 0; i < recipe.getIngredients().size(); i++) {
