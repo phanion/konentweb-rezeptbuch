@@ -47,6 +47,8 @@
 							onmouseover="toggleProfile();" onmouseleave="waitProfile();"></button></li>
 				</c:when>
 				<c:otherwise>
+				<!-- evtl noch verschönern, ist dafür da damit die Breite der UL gleich ist egal ob man eingeloggt ist oder nicht -->
+					<li><a href="#" style="visibility: hidden;">.</a></li>
 					<li class="nav-but"><button type="button" class="button-nav" id="profile-b"
 							onclick="window.location.href='/rezeptbuch/jsp/login.jsp'"
 							onmouseover="toggleProfile();" onmouseleave="waitProfile();"></button></li>
