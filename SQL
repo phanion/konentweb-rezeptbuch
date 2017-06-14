@@ -59,25 +59,24 @@ create table abos(
     primary key (recipe, user)
     );
 
-    CREATE 
-    ALGORITHM = UNDEFINED 
-    DEFINER = `root`@`localhost` 
-    SQL SECURITY DEFINER
-VIEW `v_rezeptuser` AS
-    SELECT DISTINCT
-        `u`.`ID` AS `authorid`,
-        `u`.`lastName` AS `authorlastname`,
-        `u`.`firstName` AS `authorfirstname`,
-        `r`.`ID` AS `recipeid`,
-        `r`.`name` AS `recipename`,
-        `r`.`description` AS `description`,
-        `r`.`durationPreparation` AS `durationPreparation`,
-        `r`.`durationCooking` AS `durationCooking`,
-        `r`.`difficulty` AS `difficulty`,
-        `r`.`servings` AS `servings`,
-        `r`.`image` AS `image`,
-        `r`.`filename` AS `filename`
+
+/* Rezeptview für die Suchfunktion */
+CREATE VIEW v_rezeptuser AS
+	SELECT
+        u.ID AS authorid,
+        u.lastName AS authorlastname,
+        u.firstName AS authorfirstname,
+        r.ID AS recipeid,
+        r.name AS recipename,
+        r.description AS description,
+        r.durationPreparation AS durationPreparation,
+        r.durationCooking AS durationCooking,
+        r.difficulty AS difficulty,
+        r.servings AS servings,
+        r.image AS image,
+        r.filename AS filename,
+        i.ingredient as ingredient
     FROM
-        (`users` `u`
-        JOIN `recipes` `r` ON ((`u`.`ID` = `r`.`creator`)));
-    
+	((users u join recipes r on (u.ID = r.creator)) left join ingredients i on (r.ID = i.recipe))
+    order by
+    r.ID;
