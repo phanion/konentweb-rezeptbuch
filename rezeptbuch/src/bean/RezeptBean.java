@@ -7,6 +7,8 @@
 package bean;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +30,8 @@ public class RezeptBean implements Serializable {
 	private byte[] image;
 	private List<Ingredient> ingredients = new ArrayList<Ingredient>();
 	private List<Comment> comments = new ArrayList<Comment>();
+	private Timestamp created;
+	private Timestamp modified;
 
 	public RezeptBean() {
 	}
@@ -182,6 +186,27 @@ public class RezeptBean implements Serializable {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public Timestamp getCreated() {
+		return created;
+	}
+
+	public void setCreated(Timestamp timestamp) {
+		this.created = timestamp;
+	}
+
+	public Timestamp getModified() {
+		return modified;
+	}
+
+	public void setModified(Timestamp modified) {
+		this.modified = modified;
+	}
+
+	public String timestampToDate(Timestamp timestamp) {
+		// https://stackoverflow.com/questions/1156468/how-to-format-a-java-sql-timestamp-for-displaying
+		return new SimpleDateFormat("dd.MM.yyyy").format(timestamp);
 	}
 
 }

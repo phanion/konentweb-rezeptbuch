@@ -119,6 +119,9 @@ public class LoadRecipeServlet extends HttpServlet {
 			recipe.setServings(rs.getInt("recipes.servings"));
 			recipe.setImage(rs.getBytes("recipes.image"));
 			recipe.setFilename(rs.getString("recipes.filename"));
+			recipe.setCreated(rs.getTimestamp("created"));
+			recipe.setModified(rs.getTimestamp("modified"));
+			
 			
 			user.setFirstName(rs.getString("users.firstName"));
 			user.setLastName(rs.getString("users.lastName"));

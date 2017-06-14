@@ -88,6 +88,9 @@ public class LoadOwnRecipesServlet extends HttpServlet {
 			recipe.setName(rs.getString("name"));
 			recipe.setRatingCount(rs.getInt("ratingCount"));
 			recipe.setRatingSum(rs.getInt("ratingSum"));
+			recipe.setFilename(rs.getString("filename"));
+			recipe.setCreated(rs.getTimestamp("created"));
+			recipe.setModified(rs.getTimestamp("modified"));
 			
 			recipes.add(recipe);
 			
