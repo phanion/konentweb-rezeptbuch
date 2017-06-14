@@ -51,9 +51,9 @@ public class NewSearchServlet extends HttpServlet {
 
 		System.out.println("--------------" + request.getParameter("searchstring") + "---------------");
 
-//		HttpSession session = request.getSession();
-		request.setAttribute("searchstring",  request.getParameter("searchstring"));
-		
+		// HttpSession session = request.getSession();
+		request.setAttribute("searchstring", request.getParameter("searchstring"));
+
 		RequestDispatcher disp = request.getRequestDispatcher("/jsp/rezeptsuche2.jsp");
 		disp.forward(request, response);
 	}
@@ -68,7 +68,7 @@ public class NewSearchServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		String searchstring = request.getParameter("searchstring");
 		List<HashMap<String, Object>> treffer = new ArrayList<HashMap<String, Object>>();
 		try {
@@ -76,44 +76,53 @@ public class NewSearchServlet extends HttpServlet {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
-		
-		request.setAttribute("treffer",  treffer);
-		
+		}
+
+		request.setAttribute("treffer", treffer);
+
 		RequestDispatcher disp = request.getRequestDispatcher("/jsp/searchresults.jsp");
 		disp.forward(request, response);
-		
+
 	}
 
 	/**
-	 * Gibt eine Liste mit Rezepten zurück, die den eingegebenen Namen
+	 * Gibt eine Liste mit Rezepten zurück, die den eingegebenen Suchstring
 	 * enthalten.
 	 * <p>
 	 * Dafür wird eine Datenbankabfrage durchgeführt, und die Treffer in einer
-	 * Liste von RezeptBeans abgespeichert.
+	 * Liste von RezeptBeans (aktuell: HashMaps) abgespeichert. Es werden
+	 * Autorname, Rezeptname, Rezeptbeschreibung und Rezeptzutaten durchsucht.
+	 * Die Ergebnisliste wird nach der Anzahl der Treffer sortiert.
 	 * 
 	 * @param searchstring
-	 *            Der Name/Namensbestandteil eines Rezepts, wird mit den
-	 *            Rezeptnamen der Rezept-Datenbank abgeglichen
-	 * @return Eine Liste von RezeptBeans
+	 *            Der Suchbegriff der mit den Rezepten der Rezept-Datenbank
+	 *            abgeglichen wird.
+	 * @return Eine Liste von RezeptBeans (aktuell: HashMaps)
 	 * @throws ServletException
+	 *             bei einem Servletfehler
+	 * @throws SQLException
+	 *             bei eiem Datenbankfehler
 	 */
 	protected List<HashMap<String, Object>> search(String searchstring) throws ServletException, SQLException {
 		List<HashMap<String, Object>> trefferMapListe = new ArrayList<HashMap<String, Object>>();
 
 		searchstring = (searchstring == null || searchstring == "") ? "%" : "%" + searchstring + "%";
-		
+
 		try (Connection con = ds.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(
-						"SELECT * FROM v_rezeptuser WHERE CONCAT_WS(' ', authorfirstname, authorlastname, recipename, description) LIKE ?")) {
+				PreparedStatement pstmt = con.prepareStatement("SELECT "
+						+ "authorid, authorfirstname, authorlastname, recipeid, recipename, description, durationPreparation, durationCooking, difficulty, servings, filename "
+						+ "FROM v_rezeptuser "
+						+ "WHERE concat_ws(' ', authorfirstname, authorlastname, recipename, description, ingredient) LIKE ? "
+						+ "group by recipeid " + "order by count(recipeid) desc")) {
 
 			pstmt.setString(1, searchstring);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs.next()) {
 					HashMap<String, Object> trefferMap = new HashMap<String, Object>();
-					
+
 					trefferMap.put("authorID", rs.getLong("authorid"));
-					trefferMap.put("authorFullName", rs.getString("authorfirstname") + " " + rs.getString("authorlastname"));
+					trefferMap.put("authorFullName",
+							rs.getString("authorfirstname") + " " + rs.getString("authorlastname"));
 					trefferMap.put("recipeID", rs.getLong("recipeid"));
 					trefferMap.put("recipeName", rs.getString("recipename"));
 					trefferMap.put("recipeDescription", rs.getString("description"));
@@ -121,9 +130,12 @@ public class NewSearchServlet extends HttpServlet {
 					trefferMap.put("cookDuration", rs.getInt("durationCooking"));
 					trefferMap.put("difficulty", rs.getInt("difficulty"));
 					trefferMap.put("servings", rs.getInt("servings"));
-					trefferMap.put("image", rs.getBlob("image"));
+					// trefferMap.put("image", rs.getBlob("image"));
 					trefferMap.put("filename", rs.getString("filename"));
-					
+					// Zutat kann mit der bestehenden Abfrage nicht in die
+					// Ergebnisliste geholt werden
+					// trefferMap.put("ingredient", rs.getString("ingredient"));
+
 					trefferMapListe.add(trefferMap);
 				}
 			} catch (Exception ex) {
