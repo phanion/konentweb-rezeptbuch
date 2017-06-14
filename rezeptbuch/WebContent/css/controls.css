@@ -1,17 +1,6 @@
 .button
 {
-    font-size: 100%;
-
-    display: inline-block;
-
-    padding: 10px 25px;
-
-    text-align: center;
-    text-decoration: none;
-
     color: #fff;
-    border: none;
-    border-radius: 5px;
     background-color: #e4bac3;
 }
 
@@ -20,24 +9,25 @@
 .button-disabled,
 .file-upload-label
 {
-    min-width: 10em;
-}
-
-.button-disabled
-{
     font-size: 100%;
 
     display: inline-block;
 
+    min-width: 10em;
     padding: 10px 25px;
 
-    cursor: default;
     text-align: center;
     text-decoration: none;
 
-    color: #789;
     border: none;
     border-radius: 5px;
+}
+
+.button-disabled
+{
+    cursor: default;
+
+    color: #789;
     background-color: #d3d3d3;
 }
 
@@ -54,18 +44,7 @@ input + .button-input-search
 .button-secondary,
 .file-upload-label
 {
-    font-size: 100%;
-
-    display: inline-block;
-
-    padding: 10px 25px;
-
-    text-align: center;
-    text-decoration: none;
-
     color: #fff;
-    border: none;
-    border-radius: 5px;
     background-color: #93a8ac;
 }
 

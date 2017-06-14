@@ -59,16 +59,16 @@
 	</div>
 	<!-- 	<div style="clear: both;"></div> -->
 
-</nav>
 
-<div id="profile-container" class="hide nav-container">
+<div id="profile-container" class="hide nav-container clearfix">
 	<!--  style="text-align: right;"-->
+	<div>
 	<c:choose>
 		<c:when test="${not empty user}">
-			<button type="button" class="button" style="margin-right: 90px;"
+			<button type="button" class="button"
 				onclick="window.location.href='/rezeptbuch/LoadOwnRecipesServlet'">Eigene
 				Rezepte</button>
-			<button type="button" class="button" style="margin-right: 90px;"
+			<button type="button" class="button-secondary"
 				onclick="window.location.href='/rezeptbuch/logoutservlet'">Logout</button>
 
 		</c:when>
@@ -76,14 +76,16 @@
 			<button type="button" class="button"
 				onclick="window.location.href='/rezeptbuch/jsp/login.jsp'">Login</button>
 			<button type="button" class="button-secondary"
-				style="margin-right: 90px;"
 				onclick="window.location.href='/rezeptbuch/jsp/registration.jsp'">Registrieren</button>
 		</c:otherwise>
 	</c:choose>
+	</div>
 </div>
-<div id="search-container" class="hide nav-container">
+<div id="search-container" class="hide nav-container clearfix">
 	<form action="/rezeptbuch/newsearch" method="get">
 		<input type="search" name="searchstring" id="searchinput"
 			class="search-bar" placeholder="Suche" onfocus="this.value = '';"><button type="submit" id="searchbutton" class="button button-input-search">Finden</button>
 	</form>
 </div>
+</nav>
+

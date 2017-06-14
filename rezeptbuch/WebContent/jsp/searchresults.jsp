@@ -19,22 +19,26 @@
 <c:forEach var="tmap" items="${requestScope.treffer}">
 	<div class="search-entry clearfix">
 
-		<!-- TODO: Bei Klick zur Rezept-seite -->
-		<h2 class="recipe-title"><a href="/rezeptbuch/LoadRecipeServlet?id=${tmap['recipeID']}">${tmap["recipeName"]}</a></h2>
-							
+		<!-- Bei Klick zur Rezept-seite -->
+		<h2 class="recipe-title">
+			<a href="/rezeptbuch/LoadRecipeServlet?id=${tmap['recipeID']}">${tmap['recipeName']}</a>
+		</h2>
+
 		<c:if
 			test="${not(tmap['filename'] eq null or fn:length(tmap['filename']) eq 0)}">
 			<img alt="Ein Bild von ${tmap['recipename']}" class="search-img"
-				src="../LoadImage?id=${tmap['recipeID']}&table=recipes" width="200px"
-				height="180px">
-<!-- 			<div style="clear: both;"></div> -->
+				src="../LoadImage?id=${tmap['recipeID']}&table=recipes"
+				width="200px" height="180px">
+			<!-- 			<div style="clear: both;"></div> -->
 		</c:if>
-		
-		<dl><dd>Autor</dd><dt>${tmap["authorFullName"]}</dt>
-			<dd>Zubereitungsdauer</dd><dt>${tmap["prepDuration"]} Minuten</dt>
-			<dd>Kochdauer</dd><dt>${tmap["cookDuration"]} Minuten</dt>
-			<dd>Schwierigkeitsgrad</dd><dt>${tmap["difficulty"]}/5</dt>
-			<dd>Portionen</dd><dt>${tmap["servings"]}</dt></dl>
+
+		<dl>
+			<dd>Autor</dd><dt>${tmap['authorFullName']}</dt>
+			<dd>Zubereitungsdauer</dd><dt>${tmap['prepDuration']}Minuten</dt>
+			<dd>Kochdauer</dd><dt>${tmap['cookDuration']}Minuten</dt>
+			<dd>Schwierigkeitsgrad</dd><dt>${tmap['difficulty']}/5</dt>
+			<dd>Portionen</dd><dt>${tmap['servings']}</dt>
+		</dl>
 
 	</div>
 
