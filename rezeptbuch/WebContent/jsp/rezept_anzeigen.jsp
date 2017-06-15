@@ -10,15 +10,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="main.css">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <base href="${pageContext.request.requestURI}" />
+<title>Rezeptbuch - ${rezept.name}</title>
+
 <script>
 	"use strict";
 	document.addEventListener("DOMContentLoaded", init);
 	function init() {
-		document.getElementById("commentButton").addEventListener("click", addComment);
-		document.getElementById("aboButton").addEventListener("click", aboHandling);
+		document.getElementById("commentButton").addEventListener("click",
+				addComment);
+		document.getElementById("aboButton").addEventListener("click",
+				aboHandling);
 	}
 
 	function addComment() {
@@ -53,36 +56,34 @@
 				"application/x-www-form-urlencoded");
 		xmlhttp.send("recipe=" + id + "&comment=" + comment);
 	}
-	
-	function aboHandling(){
+
+	function aboHandling() {
 		var recipe = document.getElementById("id").value;
 		var action = document.getElementById("aboAction").value;
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function() {
 			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-				if(action === "addAbo"){
+				if (action === "addAbo") {
 					document.getElementById("aboAction").value = "deleteAbo";
 					document.getElementById("aboButton").innerHTML = "Deabonieren";
-				}
-				else{
+				} else {
 					document.getElementById("aboAction").value = "addAbo";
 					document.getElementById("aboButton").innerHTML = "Abonieren";
 				}
-				}
 			}
-			xmlhttp.open("POST", "../AboHandlingServlet", true);
-			xmlhttp.setRequestHeader("Content-Type",
-					"application/x-www-form-urlencoded");
-			xmlhttp.send("recipe=" + recipe + "&action=" + action);
-		
-		
+		}
+		xmlhttp.open("POST", "../AboHandlingServlet", true);
+		xmlhttp.setRequestHeader("Content-Type",
+				"application/x-www-form-urlencoded");
+		xmlhttp.send("recipe=" + recipe + "&action=" + action);
+
 	}
 </script>
 
-<title>Rezeptbuch - ${rezept.name}</title>
-
 <script src="../js/editRecipe.js"></script>
-
+<script src="${pageContext.request.contextPath}/js/nav.js"></script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/main.css">
 </head>
 <body>
 	<%@ include file="fragments/nav.jspf"%>
@@ -105,31 +106,31 @@
 	<c:if test="${not empty rezept.getFilename()}">
 		<img src="../LoadImage?id=${rezept.id}&table=recipes" width="250"
 			height="200" alt="Ein Foto vom Rezept ${rezept.name}">
-	</c:if>
-	
-	 <c:if test="${not empty user}">
+	</c:if> <c:if test="${not empty user}">
 		<form>
-		<c:choose>
-		<c:when test="${aboStatus == false }">
-			<input type="hidden" id="aboAction" name="aboAction" value="addAbo" />
-			<button id="aboButton" name="aboButton" class="button" type="button">Abonieren</button>
-		</c:when>
-		<c:otherwise>
-			<input type="hidden" id="aboAction" name="aboAction" value="deleteAbo" />
-			<button id="aboButton" name="aboButton" class="button" type="button">Deabonieren</button>
-		</c:otherwise>
-		</c:choose>
+			<c:choose>
+				<c:when test="${aboStatus == false }">
+					<input type="hidden" id="aboAction" name="aboAction" value="addAbo" />
+					<button id="aboButton" name="aboButton" class="button"
+						type="button">Abonieren</button>
+				</c:when>
+				<c:otherwise>
+					<input type="hidden" id="aboAction" name="aboAction"
+						value="deleteAbo" />
+					<button id="aboButton" name="aboButton" class="button"
+						type="button">Deabonieren</button>
+				</c:otherwise>
+			</c:choose>
 		</form>
-	</c:if>
-
-	<!-- Form für das ändern des Rezeptes -->
+	</c:if> <!-- Form für das ändern des Rezeptes -->
 	<form action="/rezeptbuch/EditRecipeServlet" method="post">
 
 
 
-		<input type="hidden" name="id" id="id" value="${rezept.id}">
-		<input type="hidden" name="creatorID" id="creatorID" value="${rezept.creator.getID()}">
-		<label class="labelfortextarea">Zutaten:</label>
+		<input type="hidden" name="id" id="id" value="${rezept.id}"> <input
+			type="hidden" name="creatorID" id="creatorID"
+			value="${rezept.creator.getID()}"> <label
+			class="labelfortextarea">Zutaten:</label>
 		<table id="recipeIngredients">
 			<tr>
 				<th>Menge</th>
@@ -242,8 +243,7 @@
 			<input type="hidden" name="recipe" value="${rezept.id}" />
 			<button class="button" type="submit">Bewerten</button>
 		</form>
-	</c:if>
-	<br>
+	</c:if> <br>
 	<h2>Kommentare</h2>
 	<table id="commentsTable">
 		<tr>

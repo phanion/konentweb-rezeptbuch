@@ -4,9 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/main.css">
 <meta charset="UTF-8">
 <title>Kochrezepte - Registrierung</title>
+<script src="${pageContext.request.contextPath}/js/nav.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
 </head>
 <body>
 	<%@ include file="fragments/nav.jspf" %>

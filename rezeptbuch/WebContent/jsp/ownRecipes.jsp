@@ -6,9 +6,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="main.css">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <title>Rezeptbuch - Ihre Rezepte</title>
+<script src="${pageContext.request.contextPath}/js/nav.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
 </head>
 <body>
 	<%@ include file="fragments/nav.jspf"%>

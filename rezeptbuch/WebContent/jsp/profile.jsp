@@ -6,8 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="../main.css">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <c:choose>
 	<c:when test="${empty user}">
 		<c:redirect url="login.jsp" />
@@ -15,6 +14,8 @@
 </c:choose>
 <base href="${pageContext.request.requestURI}" />
 <title>Profil</title>
+<script src="${pageContext.request.contextPath}/js/nav.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
 </head>
 
 <body>

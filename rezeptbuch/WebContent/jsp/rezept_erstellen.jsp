@@ -7,8 +7,8 @@
 <html>
 
 <head>
-<link rel="stylesheet" type="text/css" href="../main.css">
 <meta charset="UTF-8">
+<title>Kochrezepte - Erstellen</title>
 <c:choose>
 	<c:when test="${empty user}">
 		<c:redirect url="login.jsp" />
@@ -67,7 +67,9 @@
 		div.appendChild(paragraph);
 	}
 </script>
-<title>Kochrezepte - Erstellen</title>
+
+<script src="${pageContext.request.contextPath}/js/nav.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
 </head>
 
 
