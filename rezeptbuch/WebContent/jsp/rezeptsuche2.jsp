@@ -12,32 +12,25 @@
 
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
 <base href="${pageContext.request.requestURI}" />
 <title>Rezeptsuche</title>
-<script src="../js/search.js"></script>
-<link rel="stylesheet" type="text/css" href="../main.css">
+<script src="${pageContext.request.contextPath}/js/nav.js"></script>
+<script src="${pageContext.request.contextPath}/js/search.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
 </head>
 
 <body>
-	<%@ include file="./fragments/nav.jspf" %>
+	<%@ include file="./fragments/nav.jspf"%>
 	<main>
 	<h1>Suche</h1>
-<!-- 	<form action="../newsearch" method="POST"> -->
-<!-- 		<input type="search" name="searchstring" class="search" placeholder="Suche"> -->
-<!-- 		<button type="submit" id="submitsearch" class="button">M</button> -->
-<!-- 	</form> --> 
-
 	<input type="hidden" id="searchstring-hidden"
-		value="${requestScope.searchstring}">
-	<input type="search"
+		value="${requestScope.searchstring}"> <input type="search"
 		id="searchstring-input" name="searchstring" placeholder="Suche"
-		onkeydown="return keyEnterSearch(event);" onfocus="this.value = '';"><button type="button" id="submitsearch" class="button-secondary button-input-search"
-		onclick="doSearch()">
-		Finden
-	</button>
+		onkeydown="return keyEnterSearch(event);" 
+		onfocus="this.value = '';"><button type="button" id="submitsearch"
+		class="button-secondary button-input-search">Finden</button>
 	<div id="treffer">
 		<p class="search-entry">Suchen Sie nach einem Begriff</p>
 	</div>

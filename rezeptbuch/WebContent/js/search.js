@@ -7,7 +7,7 @@ var init = function() {
 	doSearch();
 
 	document.getElementById("submitsearch").addEventListener("click",
-			doSearch());
+			doSearch);
 }
 
 var keyEnterSearch = function(event) {

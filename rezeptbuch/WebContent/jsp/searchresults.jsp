@@ -18,7 +18,6 @@
 
 <c:forEach var="tmap" items="${requestScope.treffer}">
 	<div class="search-entry clearfix">
-
 		<!-- Bei Klick zur Rezept-seite -->
 		<h2 class="recipe-title">
 			<a href="/rezeptbuch/LoadRecipeServlet?id=${tmap['recipeID']}">${tmap['recipeName']}</a>
@@ -33,13 +32,17 @@
 		</c:if>
 
 		<dl>
-			<dd>Autor</dd><dt>${tmap['authorFullName']}</dt>
-			<dd>Zubereitungsdauer</dd><dt>${tmap['prepDuration']}Minuten</dt>
-			<dd>Kochdauer</dd><dt>${tmap['cookDuration']}Minuten</dt>
-			<dd>Schwierigkeitsgrad</dd><dt>${tmap['difficulty']}/5</dt>
-			<dd>Portionen</dd><dt>${tmap['servings']}</dt>
+			<dd>Autor
+			<dt>${tmap['authorFullName']}
+			<dd>Zubereitungsdauer
+			<dt>${tmap['prepDuration']}Minuten
+			<dd>Kochdauer
+			<dt>${tmap['cookDuration']}Minuten
+			<dd>Schwierigkeitsgrad
+			<dt>${tmap['difficulty']}/5
+			<dd>Portionen
+			<dt>${tmap['servings']}
 		</dl>
-
 	</div>
 
 </c:forEach>
