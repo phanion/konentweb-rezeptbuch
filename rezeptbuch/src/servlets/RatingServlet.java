@@ -1,5 +1,5 @@
 /**
- * Autor: Lorenz
+ * @author Lorenz, michael
  */
 
 package servlets;
@@ -154,6 +154,14 @@ public class RatingServlet extends HttpServlet {
 
 	}
 
+	/**
+	 * Gibt die Durchschnittliche Bewertung zu einem Rezept zurück
+	 * 
+	 * @param recipeId
+	 *            Die ID eines Rezeptes
+	 * @return 0, wenn keine Bewertung gefunden wurde, eine Ganzzahl größer 0,
+	 *         wenn eine Durchschnittsbewertung ermittelt werden konnte
+	 */
 	public Integer getRating(Long recipeId) {
 
 		int rating = 0;
@@ -168,7 +176,7 @@ public class RatingServlet extends HttpServlet {
 				summe += (int) rs.getInt("rating");
 				anzahl++;
 			}
-			rating = (anzahl == 0) ? 0 : (Math.round((float)summe / (float)anzahl));
+			rating = (anzahl == 0) ? 0 : (Math.round((float) summe / (float) anzahl));
 
 		} catch (SQLException e) {
 			e.printStackTrace();
