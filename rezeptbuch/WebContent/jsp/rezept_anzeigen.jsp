@@ -1,280 +1,377 @@
-<!-- Autor Flo, Lorenz -->
+<!-- Autor Flo, Lorenz, Michael -->
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page errorPage="errorpage.jsp" language="java"
-	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib
+	prefix="c"
+	uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page
+	errorPage="errorpage.jsp"
+	language="java"
+	contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
-<jsp:useBean id="rezept" class="bean.RezeptBean" scope="session">
-</jsp:useBean>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<base href="${pageContext.request.requestURI}" />
 <title>Rezeptbuch - ${rezept.name}</title>
 
-<script>
-	"use strict";
-	document.addEventListener("DOMContentLoaded", init);
-	function init() {
-		document.getElementById("commentButton").addEventListener("click",
-				addComment);
-		document.getElementById("aboButton").addEventListener("click",
-				aboHandling);
-	}
-
-	function addComment() {
-		var id = document.getElementById("id").value;
-		var comment = document.getElementById("newComment").value;
-
-		var xmlhttp = new XMLHttpRequest();
-		xmlhttp.onreadystatechange = function() {
-			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-				var commentResponse = JSON.parse(xmlhttp.responseText);
-
-				var commentsTable = document.getElementById("commentsTable");
-				var nextRowPosition = commentsTable.rows.length;
-
-				var newTableRow = commentsTable.insertRow(nextRowPosition);
-				var newCommentAuthor = newTableRow.insertCell(0);
-				var newCommentComment = newTableRow.insertCell(1);
-				var newCommentDelete = newTableRow.insertCell(2);
-
-				newCommentComment.innerHTML = commentResponse.comment;
-				newCommentAuthor.innerHTML = commentResponse.author;
-				newCommentDelete.innerHTML = "<a href=\"/rezeptbuch/DeleteCommentServlet?id="
-						+ commentResponse.id
-						+ "&recipe="
-						+ commentResponse.recipe + "\">Löschen</a>";
-
-			}
-		}
-
-		xmlhttp.open("POST", "../AddCommentServlet", true);
-		xmlhttp.setRequestHeader("Content-Type",
-				"application/x-www-form-urlencoded");
-		xmlhttp.send("recipe=" + id + "&comment=" + comment);
-	}
-
-	function aboHandling() {
-		var recipe = document.getElementById("id").value;
-		var action = document.getElementById("aboAction").value;
-		var xmlhttp = new XMLHttpRequest();
-		xmlhttp.onreadystatechange = function() {
-			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-				if (action === "addAbo") {
-					document.getElementById("aboAction").value = "deleteAbo";
-					document.getElementById("aboButton").innerHTML = "Deabonieren";
-				} else {
-					document.getElementById("aboAction").value = "addAbo";
-					document.getElementById("aboButton").innerHTML = "Abonieren";
-				}
-			}
-		}
-		xmlhttp.open("POST", "../AboHandlingServlet", true);
-		xmlhttp.setRequestHeader("Content-Type",
-				"application/x-www-form-urlencoded");
-		xmlhttp.send("recipe=" + recipe + "&action=" + action);
-
-	}
-</script>
-
-<script src="../js/editRecipe.js"></script>
 <script src="${pageContext.request.contextPath}/js/nav.js"></script>
-<link rel="stylesheet"
+<script src="${pageContext.request.contextPath}/js/viewRecipe.js"></script>
+<script src="${pageContext.request.contextPath}/js/editRecipe.js"></script>
+
+<script src="${pageContext.request.contextPath}/js/rating.js"></script>
+
+<link
+	rel="stylesheet"
 	href="${pageContext.request.contextPath}/main.css">
+<base href="${pageContext.request.requestURI}">
 </head>
+
 <body>
 	<%@ include file="fragments/nav.jspf"%>
-	<main>
 
-	<h1>${rezept.name}</h1>
+	<main> <%-- Name des Rezeptes --%>
+	<div id="Einstellungen">
+		<h1>${rezept.name}</h1>
 
-	<c:if test="${not empty user}">
-		<c:if test="${user.getID() == rezept.getCreator().getID()}">
-			<button class="button" type="button" onclick="edit()">Rezept
-				bearbeiten</button>
+		<%-- Falls der Aufrufer der eingeloggte Ersteller des Rezeptes ist, kann er dieses bearbeiten--%>
+		<c:if test="${not empty user and user.id eq rezept.creator.id}">
+			<button
+				id="editRecipeButton"
+				class="button"
+				type="button">Rezept bearbeiten</button>
 		</c:if>
-	</c:if> <c:if test="${not empty message}">
-		<p>${message}</p>
-		<br>
-	</c:if>
+		<%-- Falls eine Message da ist, wird diese angezeigt (Noch nicht implementiert --%>
+		<c:if test="${not empty message}">
+			<p>${message}</p>
 
-	<h2>Details zum Rezept</h2>
+		</c:if>
+	</div>
 
-	<c:if test="${not empty rezept.getFilename()}">
-		<img src="../LoadImage?id=${rezept.id}&table=recipes" width="250"
-			height="200" alt="Ein Foto vom Rezept ${rezept.name}">
-	</c:if> <c:if test="${not empty user}">
-		<form>
-			<c:choose>
-				<c:when test="${aboStatus == false }">
-					<input type="hidden" id="aboAction" name="aboAction" value="addAbo" />
-					<button id="aboButton" name="aboButton" class="button"
-						type="button">Abonieren</button>
-				</c:when>
-				<c:otherwise>
-					<input type="hidden" id="aboAction" name="aboAction"
-						value="deleteAbo" />
-					<button id="aboButton" name="aboButton" class="button"
-						type="button">Deabonieren</button>
-				</c:otherwise>
-			</c:choose>
-		</form>
-	</c:if> <!-- Form für das ändern des Rezeptes -->
-	<form action="/rezeptbuch/EditRecipeServlet" method="post">
+	<div id="Details">
+		<h2>Details zum Rezept</h2>
 
+		<%-- Bild vom Rezept --%>
+		<c:if test="${not empty rezept.filename}">
+			<img
+				src="../LoadImage?id=${rezept.id}&table=recipes"
+				width="250"
+				height="200"
+				alt="Ein Foto vom Rezept ${rezept.name}">
+		</c:if>
+		<%-- Je nach Abonnement-Status kann das Rezept gemerkt werden resp. entmerkt werden --%>
+		<c:if test="${not empty user}">
 
+			<form>
+				<c:choose>
+					<c:when test="${aboStatus eq false }">
+						<input
+							type="hidden"
+							id="aboAction"
+							name="aboAction"
+							value="addAbo">
+						<button
+							id="aboButton"
+							name="aboButton"
+							class="button"
+							type="button">Merken</button>
+					</c:when>
+					<c:otherwise>
+						<input
+							type="hidden"
+							id="aboAction"
+							name="aboAction"
+							value="deleteAbo">
+						<button
+							id="aboButton"
+							name="aboButton"
+							class="button"
+							type="button">Nicht länger merken</button>
+					</c:otherwise>
+				</c:choose>
+			</form>
+		</c:if>
+		<!-- Form für das ändern des Rezeptes -->
+		<form
+			action="/rezeptbuch/EditRecipeServlet"
+			method="post">
 
-		<input type="hidden" name="id" id="id" value="${rezept.id}"> <input
-			type="hidden" name="creatorID" id="creatorID"
-			value="${rezept.creator.getID()}"> <label
-			class="labelfortextarea">Zutaten:</label>
-		<table id="recipeIngredients">
-			<tr>
-				<th>Menge</th>
-				<th>Einheit</th>
-				<th>Zutat</th>
-			</tr>
-			<c:forEach var="ingredient" items="${rezept.ingredients}">
+			<input
+				type="hidden"
+				name="id"
+				id="id"
+				value="${rezept.id}">
+			<input
+				type="hidden"
+				name="creatorID"
+				id="creatorID"
+				value="${rezept.creator.id}">
+			<label class="labelfortextarea">Zutaten:</label>
+			<table id="recipeIngredients">
 				<tr>
-					<td>${ingredient.quantity}</td>
-					<td>${ingredient.unit}</td>
-					<td>${ingredient.ingredient}</td>
+					<th>Menge
+					<th>Einheit
+					<th>Zutat
+				</tr>
+				<c:forEach
+					var="ingredient"
+					items="${rezept.ingredients}">
+					<tr>
+						<td>${ingredient.quantity}
+						<td>${ingredient.unit}
+						<td>${ingredient.ingredient}
+					</tr>
+				</c:forEach>
+			</table>
+
+			<div
+				id="ingredientContainer"
+				class="hidden-block">
+				<c:forEach
+					var="ingredient"
+					items="${rezept.ingredients}">
+
+					<input
+						type="number"
+						name="zutatenMenge"
+						class="zutatenMenge"
+						placeholder="Menge"
+						value="${ingredient.quantity}">
+					<select
+						name="zutatenEinheit"
+						class="zutatenEinheit"></select>
+					<input
+						type="text"
+						name="zutatenZutat"
+						class="zutatenZutat"
+						placeholder="Zutat"
+						value="${ingredient.ingredient}">
+					<!--  ein versteckter Input, um in Javascript die ausgewählte Einheit zu setzen -->
+					<input
+						type="hidden"
+						name="selectedValue"
+						class="selectedValue"
+						value="${ingredient.unit}">
+				</c:forEach>
+			</div>
+
+			<button
+				type="button"
+				class="button hidden-block"
+				id="addIngredientbutton"
+				name="addrow"
+				value="Zutat hinzufügen"></button>
+
+			<!-- Felder des Rezeptes, die später geändert werden sollen -->
+			<div id="editRecipe">
+
+				<label for="description">Beschreibung:</label>
+				<textarea
+					disabled
+					name="description"
+					id="description"
+					class="textarea-transitional"
+					required
+					maxlength="2500">${rezept.description}</textarea>
+
+
+				<label for="durationPreparation">Vorbereitungszeit:</label>
+				<input
+					disabled
+					type="number"
+					name="durationPreparation"
+					id="durationPreparation"
+					min="0"
+					max="500"
+					value="${rezept.durationPreparation}">
+				<br>
+				<label for="durationCooking">Kochzeit:</label>
+				<input
+					disabled
+					type="number"
+					name="durationCooking"
+					id="durationCooking"
+					min="0"
+					max="500"
+					value="${rezept.durationCooking}">
+				<br>
+				<label for="difficulty">Schwierigkeitsgrad:</label>
+				<input
+					disabled
+					type="number"
+					name="difficulty"
+					id="difficulty"
+					max="5"
+					min="0"
+					value="${rezept.difficulty}">
+				<br>
+				<label for="servings">Portionen:</label>
+				<input
+					disabled
+					type="number"
+					name="servings"
+					id="servings"
+					max="99"
+					min="0"
+					value="${rezept.servings}">
+
+			</div>
+
+			<!-- Buttons zum Speichern und Verwerfen -->
+			<div
+				id="editButtons"
+				class="hidden-block">
+
+				<button
+					name="save"
+					class="button"
+					type="submit">Speichern</button>
+				<button
+					type="button"
+					class="button"
+					id="refreshButton"
+					name="refresh"
+					value="Verwerfen"></button>
+			</div>
+
+		</form>
+	</div>
+	
+	<div id="Bewertungen">
+		<h2>Bewertung</h2>
+
+		<%-- rating with stars--%>
+		<%-- unicode-#: &#9733 - full star (black star)--%>
+		<%-- unicode-#: &#9734 - empty star (white star)--%>
+		<%-- tutorial: https://css-tricks.com/star-ratings/ --%>
+
+		<pre id="current-rating">Aktuelle Bewertung ${rezept.ratingSum / rezept.ratingCount}</pre>
+
+		<c:choose>
+			<c:when test="${not empty user }">
+				<form
+					id="rating-form"
+					name="rating-form"
+					action="/rezeptbuch/ratingservlet"
+					method="post"
+					autocomplete="off">
+					<input
+						type="hidden"
+						name="recipe"
+						value="${rezept.id}">
+					<fieldset
+						class="rating"
+						form="rating-form">
+						<input
+							class="star-radio"
+							type="radio"
+							id="star5"
+							name="rating"
+							value="5" />
+						<label
+							class="star-label"
+							for="star5"
+							title="rocks!">5 stars</label>
+						<input
+							class="star-radio"
+							type="radio"
+							id="star4"
+							name="rating"
+							value="4" />
+						<label
+							class="star-label"
+							for="star4"
+							title="pretty good">4 stars</label>
+						<input
+							class="star-radio"
+							type="radio"
+							id="star3"
+							name="rating"
+							value="3" />
+						<label
+							class="star-label"
+							for="star3"
+							title="meh">3 stars</label>
+						<input
+							class="star-radio"
+							type="radio"
+							id="star2"
+							name="rating"
+							value="2" />
+						<label
+							class="star-label"
+							for="star2"
+							title="kinda bad">2 stars</label>
+						<input
+							class="star-radio"
+							type="radio"
+							id="star1"
+							name="rating"
+							value="1" />
+						<label
+							class="star-label"
+							for="star1"
+							title="sucks big time">1 star</label>
+					</fieldset>
+				</form>
+
+				<div style="clear: both;"></div>
+			</c:when>
+			<c:otherwise>
+				<p>Melden Sie sich an, um zu bewerten!
+			</c:otherwise>
+		</c:choose>
+
+	</div>
+
+	<div id="Kommentare">
+		<h2>Kommentare</h2>
+		<table id="commentsTable">
+			<tr>
+				<th>Nutzer</th>
+				<th>Kommentar</th>
+			</tr>
+			<c:forEach
+				var="comment"
+				items="${rezept.comments}">
+				<tr>
+					<td>${comment.author.firstName}${comment.author.lastName}</td>
+					<td>${comment.comment}</td>
+					<c:if test="${not empty user}">
+						<c:if test="${user.id == comment.author.id}">
+							<td><a
+								href="/rezeptbuch/DeleteCommentServlet?id=${comment.id}&recipe=${rezept.id}">Löschen</a></td>
+						</c:if>
+					</c:if>
 				</tr>
 			</c:forEach>
 		</table>
 
+		<c:if test="${not empty user}">
+			<form>
+				<p>
+					<label
+						class="labelfortextarea"
+						for="comment">Kommentar abgeben:</label>
+					<textarea
+						name="newComment"
+						id="newComment"
+						placeholder="Kommentar verfassen..."
+						cols="50"
+						rows="7"
+						required
+						maxlength="2500"></textarea>
+				</p>
+				<button
+					id="commentButton"
+					class="button"
+					type="button">Kommentieren</button>
+			</form>
+		</c:if>
+	</div>
 
+	</main>
 
-		<div id="zutaten" style="display: none">
-			<c:forEach var="ingredient" items="${rezept.ingredients}">
-				<br>
-				<input type="number" name="zutatenMenge" class="zutatenMenge"
-					placeholder="Menge" value="${ingredient.quantity}">
-				<select name="zutatenEinheit" class="zutatenEinheit"></select>
-				<input type="text" name="zutatenZutat" class="zutatenZutat"
-					placeholder="Zutat" value="${ingredient.ingredient}">
-				<!--  ein versteckter Input, um in Javascript die ausgewählte Einheit zu setzen -->
-				<input type="hidden" name="selectedValue" class="selectedValue"
-					value="${ingredient.unit}">
-			</c:forEach>
-		</div>
-
-		<input type="button" class="button" id="addrow" name="addrow"
-			value="Zutat hinzufügen" onclick="add();" style="display: none" />
-
-		<!-- Felder des Rezeptes, die später geändert werden sollen -->
-		<div id="editRecipe">
-			<br> <label for="description">Beschreibung:</label>
-			<textarea disabled name="description" id="description"
-				class="textarea-transitional" required maxlength="2500">${rezept.description}</textarea>
-
-			<br> <label for="durationPreparation">Vorbereitungszeit:</label>
-			<input disabled type="number" name="durationPreparation"
-				id="durationPreparation" min="0" max="500"
-				value="${rezept.durationPreparation}"> <br> <label
-				for="durationCooking">Kochzeit:</label> <input disabled
-				type="number" name="durationCooking" id="durationCooking" min="0"
-				max="500" value="${rezept.durationCooking}"> <br> <label
-				for="difficulty">Schwierigkeitsgrad:</label> <input disabled
-				type="number" name="difficulty" id="difficulty" max="5" min="0"
-				value="${rezept.difficulty}"> <br> <label
-				for="servings">Portionen:</label> <input disabled type="number"
-				name="servings" id="servings" max="99" min="0"
-				value="${rezept.servings}">
-
-		</div>
-
-		<!-- Buttons zum Speichern und Verwerfen -->
-		<div id="editButtons" style="display: none">
-			<br>
-			<button name="save" class="button" type="submit">Speichern</button>
-			<input type="button" class="button" id="refresh" name="refresh"
-				onclick="refreshPage();" value="Verwerfen" />
-		</div>
-	</form>
-
-
-
-
-
-
-	<!-- Zur Programmierhilfe werden diese Felder bisher angezeigt --> <br>
-	<label for="ratingCount">Anzahl Bewertungen:</label> <input disabled
-		type="text" name="ratingCount" id="ratingCount"
-		value="${rezept.ratingCount}"> <br>
-	<label for="ratingSum">Summe Bewertungen:</label> <input disabled
-		type="text" name="ratingSum" id="ratingSum"
-		value="${rezept.ratingSum}"> <br>
-	<label for="creator">Ersteller:</label> <input disabled type="text"
-		name="creator" id="creator"
-		value="${rezept.creator.lastName}, ${rezept.creator.firstName}">
-
-
-
-	<br>
-	<br>
-	<h2>Bewertung</h2>
-	<c:choose>
-		<c:when test="${rezept.ratingCount == 0}">
-			<p>Es wurden noch keine Bewertungen abgegeben!</p>
-		</c:when>
-
-		<c:otherwise>
-			<p>Aktuelle Bewertung: ${rezept.ratingSum / rezept.ratingCount}</p>
-		</c:otherwise>
-	</c:choose> <c:if test="${not empty user}">
-		<form action="/rezeptbuch/RatingServlet" method="post">
-			<p>
-				<label for="rating">Bewertung abgeben:</label>
-				<c:choose>
-					<c:when test="${currentRating > 0}">
-						<input name="rating" id="rating" type="number" max="5" min="0"
-							required value="${currentRating}"></input>
-					</c:when>
-					<c:otherwise>
-						<input name="rating" id="rating" type="number" max="5" min="0"
-							required></input>
-					</c:otherwise>
-				</c:choose>
-			</p>
-			<input type="hidden" name="recipe" value="${rezept.id}" />
-			<button class="button" type="submit">Bewerten</button>
-		</form>
-	</c:if> <br>
-	<h2>Kommentare</h2>
-	<table id="commentsTable">
-		<tr>
-			<th>Nutzer</th>
-			<th>Kommentar</th>
-		</tr>
-		<c:forEach var="comment" items="${rezept.comments}">
-			<tr>
-				<td>${comment.author.firstName}${comment.author.lastName}</td>
-				<td>${comment.comment}</td>
-				<c:if test="${not empty user}">
-					<c:if test="${user.getID() == comment.author.getID()}">
-						<td><a
-							href="/rezeptbuch/DeleteCommentServlet?id=${comment.getId()}&recipe=${rezept.getId()}">Löschen</a></td>
-					</c:if>
-				</c:if>
-			</tr>
-		</c:forEach>
-	</table>
-
-	<c:if test="${not empty user}">
-		<form>
-			<p>
-				<label class="labelfortextarea" for="comment">Kommentar
-					abgeben:</label>
-				<textarea name="newComment" id="newComment"
-					placeholder="Kommentar verfassen..." cols="50" rows="7" required
-					maxlength="2500"></textarea>
-			</p>
-			<button id="commentButton" class="button" type="button">Kommentieren</button>
-		</form>
-	</c:if> </main>
 </body>
 </html>

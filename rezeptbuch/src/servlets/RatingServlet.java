@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +24,7 @@ import bean.User;
 /**
  * Servlet implementation class Rating
  */
-@WebServlet({"/Rating", "/RatingServlet"})
+@WebServlet({ "/Rating", "/RatingServlet", "/ratingservlet" })
 public class RatingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -46,7 +45,12 @@ public class RatingServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		System.out.println("Rezept ID: " + request.getParameter("recipe").toString());
+		System.out.println("Bewertung: " + request.getParameter("rating").toString());
+
 		final Long recipe = Long.parseLong(request.getParameter("recipe"));
+
 		final Integer rating = Integer.parseInt(request.getParameter("rating"));
 
 		HttpSession session = request.getSession();
@@ -54,16 +58,16 @@ public class RatingServlet extends HttpServlet {
 		User user = (User) session.getAttribute("user");
 
 		try {
-			setRating(recipe, user.getID(), rating);
+			setRating(recipe, user.getId(), rating);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 
 		}
-		
-		
-		response.sendRedirect("LoadRecipeServlet?id=" + recipe);
 
+		// Returns ave
+		response.getWriter().append(getRating(recipe).toString());
+		// response.sendRedirect("LoadRecipeServlet?id=" + recipe);
 
 	}
 
@@ -80,13 +84,18 @@ public class RatingServlet extends HttpServlet {
 	/**
 	 * Eine Bewertung wird von einem User zu einem Rezept hinzugefügt
 	 * <p>
-	 * Wenn das Rezept durch den Nutzer schon einmal bewertet wurde, wird die alte Bewertung aktualisiert.
-	 * Wenn es eine neue Bewertung durch den User ist, wird eine neue Bewertung erstellt.
+	 * Wenn das Rezept durch den Nutzer schon einmal bewertet wurde, wird die
+	 * alte Bewertung aktualisiert. Wenn es eine neue Bewertung durch den User
+	 * ist, wird eine neue Bewertung erstellt.
 	 * 
-	 * @param recipeID ID des zu bewertenden Rezeptes
-	 * @param userID ID des bewertenden Users
-	 * @param rating Wert der Bewertung, zwischen 0 und 5.
-	 * @throws SQLException bei einem Datenbankfehler
+	 * @param recipeID
+	 *            ID des zu bewertenden Rezeptes
+	 * @param userID
+	 *            ID des bewertenden Users
+	 * @param rating
+	 *            Wert der Bewertung, zwischen 0 und 5.
+	 * @throws SQLException
+	 *             bei einem Datenbankfehler
 	 */
 	public void setRating(Long recipeID, Long userID, Integer rating) throws SQLException {
 		final Connection con = ds.getConnection();
@@ -143,6 +152,29 @@ public class RatingServlet extends HttpServlet {
 		}
 		con.close();
 
+	}
+
+	public Integer getRating(Long recipeId) {
+
+		int rating = 0;
+		try (Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement("Select * from ratings where recipe = ?")) {
+			pstmt.setLong(1, recipeId);
+
+			int summe = 0, anzahl = 0;
+
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				summe += (int) rs.getInt("rating");
+				anzahl++;
+			}
+			rating = (anzahl == 0) ? 0 : (Math.round((float)summe / (float)anzahl));
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return new Integer(rating);
 	}
 
 }

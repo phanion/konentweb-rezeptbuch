@@ -1,0 +1,82 @@
+@CHARSET 'UTF-8';
+
+/* http://lea.verou.me/2011/08/accessible-star-rating-widget-with-pure-css/ */
+
+.star-radio,
+.star-label 
+{
+	min-width: 0;
+	padding: 0;
+	margin: 0;
+}
+
+.rating {
+    float:left;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+    
+}
+
+/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t 
+   follow these rules. Every browser that supports :checked also supports :not(), so
+   it doesn’t make the test unnecessarily selective */
+.rating:not(:checked) > input
+{
+    position: absolute;
+
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+}
+
+/* 
+	nur der Anfang der Labels mit den Sternchen 
+	soll angezeigt werden, der Rest abgeschnitten 
+ */
+.rating:not(:checked) > label
+{
+	font-size: xx-large;
+
+    float: right;
+    overflow: hidden;
+
+    width: 1em;
+    padding: 0 .1em;
+
+    cursor: pointer;
+    white-space: nowrap;
+
+    color: #cbcdd0;
+}
+
+
+.rating:not(:checked) > label:before {
+    content: '★ ';
+}
+
+.rating > input:checked ~ label
+{
+    color: #646b73;
+}
+
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label
+{
+    color: #ad8586;
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label
+{
+    color: #424b54;
+
+}
