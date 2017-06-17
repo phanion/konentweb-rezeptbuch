@@ -39,6 +39,7 @@
 		<c:if test="${not empty user and user.id eq rezept.creator.id}">
 			<button
 				id="editRecipeButton"
+				name = "editRecipeButton"
 				class="button"
 				type="button">Rezept bearbeiten</button>
 		</c:if>
@@ -159,9 +160,9 @@
 			<button
 				type="button"
 				class="button hidden-block"
-				id="addIngredientbutton"
+				id="addIngredientButton"
 				name="addrow"
-				value="Zutat hinzufügen"></button>
+				value="Zutat hinzufügen">Zutat hinzufügen</button>
 
 			<!-- Felder des Rezeptes, die später geändert werden sollen -->
 			<div id="editRecipe">
@@ -232,7 +233,7 @@
 					class="button"
 					id="refreshButton"
 					name="refresh"
-					value="Verwerfen"></button>
+					value="Verwerfen">Verwerfen</button>
 			</div>
 
 		</form>

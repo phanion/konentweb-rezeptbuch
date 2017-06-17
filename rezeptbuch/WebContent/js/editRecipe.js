@@ -5,16 +5,12 @@
 
 document.addEventListener('DOMContentLoaded', init);
 
-var init = function () {
-	editButton = document.getElementById('editRecipeButton');
-	editButton.addEventListener('click', edit);
+function init() {
+	document.getElementById('editRecipeButton').addEventListener('click', edit);
+
+	document.getElementById('addIngredientButton').addEventListener('click', add);
 	
-	addButton = document.getElementById('addIngredientbutton');
-	addButton.addEventListener('click', add);
-	
-	refreshButton = document.getElementById('refreshButton');
-	refreshButton.addEventListener('click', refreshPage);
-	 
+	document.getElementById('refreshButton').addEventListener('click', refreshPage);
 	
 }
 
@@ -47,7 +43,7 @@ function edit() {
 	// Die benötigten Felder zur Bearbeitung und Speicherung werden eingeblendet
 	document.getElementById("ingredientContainer").classList.remove('hidden-block');
 	document.getElementById("editButtons").classList.remove('hidden-block');
-	document.getElementById("addIngredientbutton").classList.remove('hidden-block');
+	document.getElementById("addIngredientButton").classList.remove('hidden-block');
 
 	
 	
@@ -112,7 +108,7 @@ function add() {
 	paragraph.appendChild(Einheit);
 	paragraph.appendChild(Zutat);
 
-	var div = document.getElementById("zutaten");
+	var div = document.getElementById("ingredientContainer");
 	div.appendChild(paragraph);
 }
 
