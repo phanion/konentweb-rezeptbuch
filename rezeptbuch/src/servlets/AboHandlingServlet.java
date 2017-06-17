@@ -90,7 +90,7 @@ public class AboHandlingServlet extends HttpServlet {
 
 		PreparedStatement ps = con.prepareStatement("INSERT INTO abos(recipe, user) values(?,?)");
 		ps.setLong(1, recipe.getId());
-		ps.setLong(2, user.getID());
+		ps.setLong(2, user.getId());
 
 		ps.executeUpdate();
 
@@ -104,7 +104,7 @@ public class AboHandlingServlet extends HttpServlet {
 		PreparedStatement ps = con.prepareStatement("DELETE FROM abos WHERE recipe=? AND user=?");
 
 		ps.setLong(1, recipe.getId());
-		ps.setLong(2, user.getID());
+		ps.setLong(2, user.getId());
 
 		ps.executeUpdate();
 

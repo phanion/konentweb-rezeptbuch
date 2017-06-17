@@ -57,7 +57,7 @@ public class EditProfileServlet extends HttpServlet {
 		String message = null;
 
 		User sessionUser = (User) session.getAttribute("user");
-		if (sessionUser.getID() != id) {
+		if (sessionUser.getId() != id) {
 			message = "Bitte melden Sie sich erneut an!";
 
 			request.setAttribute("message", message);
@@ -70,7 +70,7 @@ public class EditProfileServlet extends HttpServlet {
 
 			User user = new User();
 			user.setFirstName(firstName);
-			user.setID(id);
+			user.setId(id);
 			user.setLastName(lastName);
 			user.setMail(mail);
 
@@ -82,7 +82,7 @@ public class EditProfileServlet extends HttpServlet {
 			} else {
 				try {
 					updateUser(user);
-					message = "Deine persönlichen Daten wurden erfolgreich geändert!";
+					message = "Deine persï¿½nlichen Daten wurden erfolgreich geï¿½ndert!";
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -113,7 +113,7 @@ public class EditProfileServlet extends HttpServlet {
 		ps.setString(1, user.getMail());
 		ps.setString(2, user.getFirstName());
 		ps.setString(3, user.getLastName());
-		ps.setLong(4, user.getID());
+		ps.setLong(4, user.getId());
 
 		ps.executeUpdate();
 
@@ -122,10 +122,9 @@ public class EditProfileServlet extends HttpServlet {
 	}
 
 	public boolean userUnique(String mail) throws ServletException {
-		try {
-			final Connection con = ds.getConnection();
-
-			PreparedStatement ps = con.prepareStatement("select mail from users where mail=?;");
+		try (Connection con = ds.getConnection();
+				PreparedStatement ps = con.prepareStatement("select mail from users where mail=?;")) {
+			
 			ps.setString(1, mail);
 			ResultSet rs = ps.executeQuery();
 

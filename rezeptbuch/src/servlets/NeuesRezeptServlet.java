@@ -147,7 +147,7 @@ public class NeuesRezeptServlet extends HttpServlet {
 				generatedKeys);
 
 		ps.setString(1, rezept.getName());
-		ps.setLong(2, rezept.getCreator().getID());
+		ps.setLong(2, rezept.getCreator().getId());
 		ps.setString(3, rezept.getDescription());
 		ps.setInt(4, rezept.getDifficulty());
 		ps.setInt(5, rezept.getDurationCooking());

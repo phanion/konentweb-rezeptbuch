@@ -23,7 +23,6 @@ import bean.Ingredient;
 import bean.RezeptBean;
 import bean.User;
 
-
 /**
  * Servlet implementation class LoadRecipeServlet
  */
@@ -54,11 +53,11 @@ public class LoadRecipeServlet extends HttpServlet {
 
 		try {
 			RezeptBean recipe = loadRecipeFromDB(id);
-			
+
 			HttpSession session = request.getSession();
 			User sessionUser = (User) session.getAttribute("user");
-			
-			if(sessionUser != null){
+
+			if (sessionUser != null) {
 				request.setAttribute("aboStatus", loadAbo(recipe, sessionUser));
 				request.setAttribute("currentRating", loadRating(recipe, sessionUser));
 			}
@@ -99,9 +98,7 @@ public class LoadRecipeServlet extends HttpServlet {
 	public RezeptBean loadRecipeFromDB(Long id) throws SQLException, ServletException {
 		final Connection con = ds.getConnection();
 		PreparedStatement ps = con.prepareStatement("select recipes.*, users.firstName, users.lastName "
-													+ "from recipes "
-													+ "inner join users on users.id = recipes.creator "
-													+ "where recipes.id=?");
+				+ "from recipes " + "inner join users on users.id = recipes.creator " + "where recipes.id=?");
 
 		ps.setLong(1, id);
 		ResultSet rs = ps.executeQuery();
@@ -121,11 +118,10 @@ public class LoadRecipeServlet extends HttpServlet {
 			recipe.setFilename(rs.getString("recipes.filename"));
 			recipe.setCreated(rs.getTimestamp("created"));
 			recipe.setModified(rs.getTimestamp("modified"));
-			
-			
+
 			user.setFirstName(rs.getString("users.firstName"));
 			user.setLastName(rs.getString("users.lastName"));
-			user.setID(rs.getLong("recipes.creator"));
+			user.setId(rs.getLong("recipes.creator"));
 			recipe.setCreator(user);
 
 			recipe.setIngredients(loadIngredients(recipe.getId()));
@@ -160,7 +156,7 @@ public class LoadRecipeServlet extends HttpServlet {
 		if (rs.next()) {
 			user.setFirstName(rs.getString("firstName"));
 			user.setLastName(rs.getString("lastName"));
-			user.setID(id);
+			user.setId(id);
 			con.close();
 			return user;
 		}
@@ -222,31 +218,60 @@ public class LoadRecipeServlet extends HttpServlet {
 		return comments;
 
 	}
-	
-	public int loadRating(RezeptBean recipe, User user) throws SQLException{
-		final Connection con = ds.getConnection();
-		PreparedStatement ps = con.prepareStatement("SELECT * FROM ratings WHERE recipe=? AND evaluator=?");
-		ps.setLong(1, recipe.getId());
-		ps.setLong(2, user.getID());
-		ResultSet rs = ps.executeQuery();
-		
-		while(rs.next()){
-			return rs.getInt("rating");
+
+	/**
+	 * Schlägt in der Datenbank nach, ob ein User ein Rezept bewertet hat
+	 * 
+	 * @param recipe
+	 *            Ein Rezeptbean
+	 * @param user
+	 *            Ein User(bean)
+	 * @return den Wert der Bewertung, falls es einen passenden Eintrag gibt, 0,
+	 *         falls nicht bewertet wurde.
+	 * @throws SQLException
+	 *             bei einem Datenbankfehler
+	 */
+	public int loadRating(RezeptBean recipe, User user) throws SQLException {
+		try (Connection con = ds.getConnection();
+				PreparedStatement ps = con.prepareStatement("SELECT * FROM ratings WHERE recipe=? AND evaluator=?")) {
+
+			ps.setLong(1, recipe.getId());
+			ps.setLong(2, user.getId());
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				return rs.getInt("rating");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	/**
+	 * Schlägt in der Datenbank nach, ob ein User ein Rezept abonniert hat
+	 * 
+	 * @param recipe
+	 *            Ein Rezeptbean
+	 * @param user
+	 *            Ein User(bean)
+	 * @return true, falls es einen passenden Eintrag gibt, false, falls nicht
+	 * @throws SQLException
+	 *             bei einem Datenbankfehler
+	 */
+	public boolean loadAbo(RezeptBean recipe, User user) throws SQLException {
+		try (Connection con = ds.getConnection();
+				PreparedStatement ps = con.prepareStatement("SELECT * FROM abos WHERE recipe=? AND user=?")) {
+			ps.setLong(1, recipe.getId());
+			ps.setLong(2, user.getId());
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-	
-	public boolean loadAbo(RezeptBean recipe, User user) throws SQLException{
-		final Connection con = ds.getConnection();
-		PreparedStatement ps = con.prepareStatement("SELECT * FROM abos WHERE recipe=? AND user=?");
-		ps.setLong(1, recipe.getId());
-		ps.setLong(2, user.getID());
-		ResultSet rs = ps.executeQuery();
-		
-		while(rs.next()){
-			return true;
-		}
-		
 		return false;
 	}
 

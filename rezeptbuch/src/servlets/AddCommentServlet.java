@@ -69,7 +69,7 @@ public class AddCommentServlet extends HttpServlet {
 			
 			
 			PreparedStatement ps = con.prepareStatement("INSERT INTO comments(author,recipe,comment) values(?,?,?)",generatedKeys);
-			ps.setLong(1, comment.getAuthor().getID());
+			ps.setLong(1, comment.getAuthor().getId());
 			ps.setLong(2, comment.getRecipe().getId());
 			ps.setString(3, comment.getComment());
 

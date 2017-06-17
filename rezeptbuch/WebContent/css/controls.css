@@ -1,3 +1,5 @@
+@CHARSET "UTF-8";
+
 .button
 {
     color: #fff;
@@ -13,7 +15,7 @@
 
     display: inline-block;
 
-    min-width: 10em;
+    min-width: 8em;
     padding: 10px 25px;
 
     text-align: center;
@@ -76,7 +78,7 @@ input + .button-input-search
 
 .textarea-transitional:focus
 {
-    height: 8em;
+    height: 10em;
 }
 
 input

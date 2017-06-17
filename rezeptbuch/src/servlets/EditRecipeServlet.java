@@ -98,18 +98,18 @@ public class EditRecipeServlet extends HttpServlet {
 
 		User sessionUser = (User) session.getAttribute("user");
 
-		if (sessionUser.getID() == creatorID) {
+		if (sessionUser.getId() == creatorID) {
 			try {
 				updateRecipe(rezept);
 				replaceIngredients(rezept);
-				message = "Das Rezept wurde erfolgreich geändert!";
+				message = "Das Rezept wurde erfolgreich geï¿½ndert!";
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		else{
-			message = "Sie sind nicht berechtigt das Rezept zu ändern.";
+			message = "Sie sind nicht berechtigt das Rezept zu ï¿½ndern.";
 		}
 		request.setAttribute("message", message);
 

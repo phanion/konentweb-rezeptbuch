@@ -77,23 +77,24 @@ public class LoadOwnRecipesServlet extends HttpServlet {
 	public List<RezeptBean> loadRecipes(User user) throws SQLException{
 		List<RezeptBean> recipes = new ArrayList<RezeptBean>();
 		
-		final Connection con = ds.getConnection();
-		PreparedStatement ps = con.prepareStatement("SELECT * FROM recipes WHERE creator=?");
-		ps.setLong(1, user.getID());
-		ResultSet rs = ps.executeQuery();
-		
-		while(rs.next()){
-			RezeptBean recipe = new RezeptBean();
-			recipe.setId(rs.getLong("ID"));
-			recipe.setName(rs.getString("name"));
-			recipe.setRatingCount(rs.getInt("ratingCount"));
-			recipe.setRatingSum(rs.getInt("ratingSum"));
-			recipe.setFilename(rs.getString("filename"));
-			recipe.setCreated(rs.getTimestamp("created"));
-			recipe.setModified(rs.getTimestamp("modified"));
-			
-			recipes.add(recipe);
-			
+		try (Connection con = ds.getConnection();
+				PreparedStatement ps = con.prepareStatement("SELECT * FROM recipes WHERE creator=?")) {
+			ps.setLong(1, user.getId());
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				RezeptBean recipe = new RezeptBean();
+				recipe.setId(rs.getLong("ID"));
+				recipe.setName(rs.getString("name"));
+				recipe.setRatingCount(rs.getInt("ratingCount"));
+				recipe.setRatingSum(rs.getInt("ratingSum"));
+				recipe.setFilename(rs.getString("filename"));
+				recipe.setCreated(rs.getTimestamp("created"));
+				recipe.setModified(rs.getTimestamp("modified"));
+
+				recipes.add(recipe);
+
+			}
 		}
 		
 		return recipes;

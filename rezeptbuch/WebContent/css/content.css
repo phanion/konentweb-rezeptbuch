@@ -1,3 +1,5 @@
+@CHARSET "UTF-8";
+
 /* https://css-tricks.com/all-about-floats/ */
 .clearfix::after
 {
@@ -10,6 +12,11 @@
     content: '.';
 }
 
+.hidden-block
+{
+	display: none !important;
+}
+
 .labelfortextarea
 {
     display: block;
@@ -17,14 +24,12 @@
 
 .recipe-title
 {
-    margin-bottom: 10px;
-
     text-decoration: none;
 }
 
 .recipe-title:hover
 {
-    color: #9b6a6c;
+    color: #e2b4bd;
 }
 
 .search-entry
@@ -52,11 +57,6 @@
     padding-left: 5%;
 }
 
-body
-{
-    background: #e8e8e8;
-}
-
 dd
 {
     font-weight: bold;
@@ -80,17 +80,16 @@ dd
     width: 50%;
 }
 
-h1,
-h2,
-h3
-{
-    margin-bottom: 5px;
-}
+/* Abstände bei Überschriften */
+h1 { margin: 30px 0 10px; }
+h2 { margin: 20px 0 10px; }
+h3 { margin: 10px 0 5px; }
 
 input,
 textarea,
 select,
-button
+button,
+pre
 {
     font-size: 1em;
     
@@ -108,7 +107,7 @@ label
 {
     display: inline-block;
 
-    min-width: 10em;
+    min-width: 12em;
     padding: 5px 0;
 
     text-align: left;
@@ -116,12 +115,25 @@ label
 
 main
 {
-    padding: 20px 20%;
+    margin: 20px 20%;
+/*     padding: 20px; */
+/*     margin: 0 20%; */
+/*     background: whitesmoke; */
 }
 
 main p
 {
     margin: 5px 0;
+}
+
+pre
+{
+    font-family: 'Ubuntu Mono', monospace;
+
+    padding: 20px;
+
+    color: #fff;
+    background: #333;
 }
 
 table

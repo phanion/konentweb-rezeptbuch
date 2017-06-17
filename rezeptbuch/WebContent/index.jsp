@@ -1,5 +1,7 @@
 <!-- Autor: Lorenz -->
 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" errorPage="errorpage.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -7,13 +9,14 @@
 <meta charset="utf-8">
 <title>Kochrezepte - Homepage</title>
 <script src="${pageContext.request.contextPath}/js/nav.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/main.css">
 </head>
 <body>
-	<%@ include file="/jsp/fragments/nav.jspf" %>
+	<%@ include file="/jsp/fragments/nav.jspf"%>
 	<main>
 	<h1>Herzlich Willkommen.</h1>
-	<p>Hier können Sie Kochbücher speichern, teilen und lesen!</p>
+	<p>Hier kÃ¶nnen Sie KochbÃ¼cher speichern, teilen und lesen!</p>
 
 	<c:if test="${not empty message}">
 		<h2>${message}</h2>

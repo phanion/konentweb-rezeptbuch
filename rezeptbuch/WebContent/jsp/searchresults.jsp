@@ -7,7 +7,7 @@
   -->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" errorPage="errorpage.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!-- <!DOCTYPE html> -->
@@ -19,8 +19,8 @@
 <c:forEach var="tmap" items="${requestScope.treffer}">
 	<div class="search-entry clearfix">
 		<!-- Bei Klick zur Rezept-seite -->
-		<h2 class="recipe-title">
-			<a href="/rezeptbuch/LoadRecipeServlet?id=${tmap['recipeID']}">${tmap['recipeName']}</a>
+		<h2>
+			<a href="/rezeptbuch/LoadRecipeServlet?id=${tmap['recipeID']}" class="recipe-title">${tmap['recipeName']}</a>
 		</h2>
 
 		<c:if

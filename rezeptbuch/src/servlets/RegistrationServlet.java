@@ -70,7 +70,7 @@ public class RegistrationServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		if (!password.equals(password_retype)) {
-			message = "Die eingegebenen Passwörter stimmen nicht überein!";
+			message = "Die eingegebenen Passwï¿½rter stimmen nicht ï¿½berein!";
 		}
 
 		else {
@@ -95,7 +95,7 @@ public class RegistrationServlet extends HttpServlet {
 
 					if (createUser(user)) {
 						message = "Der User " + user.getFirstName() + " " + user.getLastName() + " wurde mit ID "
-								+ user.getID() + " erfolgreich angelegt!";
+								+ user.getId() + " erfolgreich angelegt!";
 						sendWelcomeEmail(user.getMail(), user.getFirstName() + " " + user.getLastName());
 
 					} else {
@@ -194,7 +194,7 @@ public class RegistrationServlet extends HttpServlet {
 
 			ResultSet rs = ps.getGeneratedKeys();
 			while (rs.next()) {
-				user.setID(rs.getLong(1));
+				user.setId(rs.getLong(1));
 			}
 			con.close();
 			return true;

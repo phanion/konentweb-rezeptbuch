@@ -15,7 +15,7 @@
 	<%@ include file="fragments/nav.jspf"%>
 	<main>
 	<h1>Ihre Rezepte</h1>
-	<br>
+	
 	<c:forEach items="${recipes}" var="recipe">
 		<div class="search-entry clearfix">
 
