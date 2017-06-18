@@ -154,6 +154,7 @@
 						name="selectedValue"
 						class="selectedValue"
 						value="${ingredient.unit}">
+					<br>
 				</c:forEach>
 			</div>
 
