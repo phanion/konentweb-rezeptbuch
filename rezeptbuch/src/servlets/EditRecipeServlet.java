@@ -8,9 +8,17 @@ package servlets;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 import javax.annotation.Resource;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,12 +41,14 @@ public class EditRecipeServlet extends HttpServlet {
 	@Resource(lookup = "jdbc/MyRezeptbuchPool")
 	private DataSource ds;
 
+	@Resource(lookup = "mail/MyMailSession")
+	private Session mailSession;
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public EditRecipeServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -51,6 +61,7 @@ public class EditRecipeServlet extends HttpServlet {
 
 		// Parameter von dem Request werden geholt
 		final Long recipeID = Long.parseLong(request.getParameter("id"));
+		final String name = request.getParameter("name");
 		final String[] ingredients = request.getParameterValues("zutatenZutat");
 		final String[] quantities = request.getParameterValues("zutatenMenge");
 		final String[] units = request.getParameterValues("zutatenEinheit");
@@ -71,6 +82,7 @@ public class EditRecipeServlet extends HttpServlet {
 		rezept.setDurationCooking(durationCooking);
 		rezept.setDurationPreparation(durationPreparation);
 		rezept.setServings(servings);
+		rezept.setName(name);
 
 		if (ingredients != null) {
 			for (int i = 0; i < ingredients.length; i++) {
@@ -78,21 +90,16 @@ public class EditRecipeServlet extends HttpServlet {
 			}
 		}
 
-		/* File-Behandlung
-		Part filepart = request.getPart("image");
-		rezept.setFilename(filepart.getSubmittedFileName());
-
-		// Bild in Bean speichern
-		try (ByteArrayOutputStream baos = new ByteArrayOutputStream(); InputStream in = filepart.getInputStream()) {
-			int i = 0;
-			while ((i = in.read()) != -1) {
-				baos.write(i);
-			}
-			rezept.setImage(baos.toByteArray());
-			baos.flush();
-		} catch (IOException ex) {
-			throw new ServletException(ex.getMessage());
-		}*/
+		/*
+		 * File-Behandlung Part filepart = request.getPart("image");
+		 * rezept.setFilename(filepart.getSubmittedFileName());
+		 * 
+		 * // Bild in Bean speichern try (ByteArrayOutputStream baos = new
+		 * ByteArrayOutputStream(); InputStream in = filepart.getInputStream())
+		 * { int i = 0; while ((i = in.read()) != -1) { baos.write(i); }
+		 * rezept.setImage(baos.toByteArray()); baos.flush(); } catch
+		 * (IOException ex) { throw new ServletException(ex.getMessage()); }
+		 */
 
 		request.setAttribute("rezept", rezept);
 
@@ -102,13 +109,12 @@ public class EditRecipeServlet extends HttpServlet {
 			try {
 				updateRecipe(rezept);
 				replaceIngredients(rezept);
+				sendAboMails(rezept);
 				message = "Das Rezept wurde erfolgreich geï¿½ndert!";
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		else{
+		} else {
 			message = "Sie sind nicht berechtigt das Rezept zu ï¿½ndern.";
 		}
 		request.setAttribute("message", message);
@@ -124,7 +130,7 @@ public class EditRecipeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		doGet(request, response);
 	}
 
@@ -140,7 +146,7 @@ public class EditRecipeServlet extends HttpServlet {
 		ps.setInt(4, recipe.getDurationPreparation());
 		ps.setInt(5, recipe.getServings());
 		ps.setLong(6, recipe.getId());
-		
+
 		ps.executeUpdate();
 
 		con.close();
@@ -155,7 +161,8 @@ public class EditRecipeServlet extends HttpServlet {
 		delete.executeUpdate();
 
 		for (int i = 0; i < recipe.getIngredients().size(); i++) {
-			PreparedStatement ps = con.prepareStatement("insert into ingredients(recipe, ingredient, unit, quantity) values(?,?,?,?)");
+			PreparedStatement ps = con
+					.prepareStatement("insert into ingredients(recipe, ingredient, unit, quantity) values(?,?,?,?)");
 
 			ps.setLong(1, recipe.getId());
 			ps.setString(2, recipe.getIngredients().get(i).getIngredient());
@@ -165,6 +172,44 @@ public class EditRecipeServlet extends HttpServlet {
 			ps.executeUpdate();
 		}
 		con.close();
+
+	}
+
+	/**
+	 * Autor: Lorenz 
+	 * 
+	 * Es werden die Abonnenten des Rezepts aus der Datenbank
+	 * geladen und per Mail über die Änderung informiert.
+	 * 
+	 * @throws SQLException
+	 */
+	public void sendAboMails(RezeptBean recipe) throws SQLException {
+		final Connection con = ds.getConnection();
+
+		PreparedStatement ps = con.prepareStatement(
+				"select users.firstName, users.lastName, users.mail, recipes.name from users inner join abos on users.id = abos.user inner join recipes on abos.recipe = recipes.id where abos.recipe = ?");
+		ps.setLong(1, recipe.getId());
+
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next()) {
+			MimeMessage message = new MimeMessage(mailSession);
+
+			try {
+				message.setFrom(new InternetAddress(mailSession.getProperty("mail.from")));
+				InternetAddress[] address = { new InternetAddress(rs.getString("mail")) };
+				message.setRecipients(Message.RecipientType.TO, address);
+				message.setSubject("Rezept wurde aktualisiert");
+				message.setSentDate(new Date());
+				message.setContent(
+						"Hallo " + rs.getString("firstName") + " " + rs.getString("lastName")
+								+ "<p>Das von Ihnen abonnierte Rezept " + rs.getString("name") + " wurde aktualisiert.",
+						"text/html; charset=utf-8");
+				Transport.send(message);
+			} catch (MessagingException ex) {
+				ex.printStackTrace();
+			}
+		}
 
 	}
 

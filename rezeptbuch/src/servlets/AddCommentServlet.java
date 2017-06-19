@@ -5,8 +5,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 import javax.annotation.Resource;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,6 +45,9 @@ public class AddCommentServlet extends HttpServlet {
 	@Resource(lookup = "jdbc/MyRezeptbuchPool")
 	private DataSource ds;
 
+	@Resource(lookup = "mail/MyMailSession")
+	private Session mailSession;
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -45,46 +55,45 @@ public class AddCommentServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		/**final User author = (User) session.getAttribute("user");
-		final Long recipe = Long.parseLong(request.getParameter("recipe"));
-		final String comment = request.getParameter("comment");**/
-		
+		/**
+		 * final User author = (User) session.getAttribute("user"); final Long
+		 * recipe = Long.parseLong(request.getParameter("recipe")); final String
+		 * comment = request.getParameter("comment");
+		 **/
+
 		final Comment comment = new Comment();
 		final RezeptBean recipe = new RezeptBean();
-		
-		
+
 		recipe.setId(Long.parseLong(request.getParameter("recipe")));
-		
+
 		comment.setAuthor((User) session.getAttribute("user"));
 		comment.setRecipe(recipe);
 		comment.setComment(request.getParameter("comment"));
-		
-		
 
 		try {
-			
-			
+
 			final Connection con = ds.getConnection();
 			String[] generatedKeys = new String[] { "id" };
-			
-			
-			PreparedStatement ps = con.prepareStatement("INSERT INTO comments(author,recipe,comment) values(?,?,?)",generatedKeys);
+
+			PreparedStatement ps = con.prepareStatement("INSERT INTO comments(author,recipe,comment) values(?,?,?)",
+					generatedKeys);
 			ps.setLong(1, comment.getAuthor().getId());
 			ps.setLong(2, comment.getRecipe().getId());
 			ps.setString(3, comment.getComment());
 
 			ps.executeUpdate();
-			
+
 			ResultSet rs = ps.getGeneratedKeys();
 			while (rs.next()) {
 				comment.setId(rs.getLong(1));
 			}
-			
+
 			con.close();
+
+			request.setAttribute("comment", comment);
 			
-			session.setAttribute("comment", comment);
-			
-			
+			sendAboMails(recipe, comment);
+
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/commentResponse.jsp");
 			dispatcher.forward(request, response);
 
@@ -92,7 +101,6 @@ public class AddCommentServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 
 	}
 
@@ -102,8 +110,46 @@ public class AddCommentServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		doGet(request, response);
+	}
+
+	/**
+	 * Autor: Lorenz Es wird eine Mail an die Abbonenten gesendet, wenn ein
+	 * Kommentar zum Rezept hinzugefügt wird. Der Autor des Kommentars soll
+	 * dabei keine Mail bekommen.
+	 * 
+	 * @throws SQLException
+	 */
+	public void sendAboMails(RezeptBean recipe, Comment comment) throws SQLException {
+		final Connection con = ds.getConnection();
+
+		PreparedStatement ps = con.prepareStatement(
+				"select users.id, users.firstName, users.lastName, users.mail, recipes.name from users inner join abos on users.id = abos.user inner join recipes on abos.recipe = recipes.id where abos.recipe = ?");
+		ps.setLong(1, recipe.getId());
+
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next()) {
+			if (comment.getAuthor().getId() != rs.getLong("id")) {
+				MimeMessage message = new MimeMessage(mailSession);
+
+				try {
+					message.setFrom(new InternetAddress(mailSession.getProperty("mail.from")));
+					InternetAddress[] address = { new InternetAddress(rs.getString("mail")) };
+					message.setRecipients(Message.RecipientType.TO, address);
+					message.setSubject("Rezept wurde kommentiert");
+					message.setSentDate(new Date());
+					message.setContent("Hallo " + rs.getString("firstName") + " " + rs.getString("lastName")
+							+ ",\n\rdas von dir abonnierte Rezept " + rs.getString("name") + " wurde kommentiert.",
+							"text/html; charset=utf-8");
+					Transport.send(message);
+				} catch (MessagingException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+
 	}
 
 }
