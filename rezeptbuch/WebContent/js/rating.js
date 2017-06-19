@@ -1,5 +1,6 @@
 /**
  * @author michael
+ * Refactoring: Lorenz
  */
 
 	document.addEventListener('DOMContentLoaded', function() {
@@ -30,10 +31,10 @@
 	            if (xhr.readyState == 4 && xhr.status == 200) {
 	            	var recipeRating = xhr.responseText;
 	            	if(recipeRating == 0) {
-	            		ratingResultBox.innerHTML = '<pre>Das Rezept wurde noch nicht bewertet</pre>';
+	            		ratingResultBox.innerHTML = 'Das Rezept wurde noch nicht bewertet';
 	            	}
 	            	else {
-	            		ratingResultBox.innerHTML = '<pre>Die aktuelle Rezeptbewertung ist: ' + recipeRating + '</pre>';
+	            		ratingResultBox.innerHTML = 'Die aktuelle Rezeptbewertung ist: ' + recipeRating;
 	            	}
 	            }	            
 	        }

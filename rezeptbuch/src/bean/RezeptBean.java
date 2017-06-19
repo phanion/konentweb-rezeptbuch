@@ -208,5 +208,18 @@ public class RezeptBean implements Serializable {
 		// https://stackoverflow.com/questions/1156468/how-to-format-a-java-sql-timestamp-for-displaying
 		return new SimpleDateFormat("dd.MM.yyyy").format(timestamp);
 	}
+	
+	
+	public Integer getRatingInteger(){
+		Integer sum = getRatingSum();
+		Integer count = getRatingCount();
+		return (count == 0) ? 0 : (Math.round((float) sum / (float) count));
+	}
+	
+	public Float getRatingFloat(){
+		Integer sum = getRatingSum();
+		Integer count = getRatingCount();
+		return ((count == 0) ? 0 : ((float) sum / (float) count));
+	}
 
 }

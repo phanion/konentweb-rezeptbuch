@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
+import bean.RezeptBean;
 import bean.User;
 
 /**
@@ -33,7 +34,6 @@ public class RatingServlet extends HttpServlet {
 	 */
 	public RatingServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Resource(lookup = "jdbc/MyRezeptbuchPool")
@@ -49,25 +49,34 @@ public class RatingServlet extends HttpServlet {
 		System.out.println("Rezept ID: " + request.getParameter("recipe").toString());
 		System.out.println("Bewertung: " + request.getParameter("rating").toString());
 
-		final Long recipe = Long.parseLong(request.getParameter("recipe"));
+		final Long id = Long.parseLong(request.getParameter("recipe"));
 
-		final Integer rating = Integer.parseInt(request.getParameter("rating"));
+		final Integer newRating = Integer.parseInt(request.getParameter("rating"));
 
 		HttpSession session = request.getSession();
-
+		
+		
+		
+		
+		
 		User user = (User) session.getAttribute("user");
 
 		try {
-			setRating(recipe, user.getId(), rating);
+			RezeptBean recipe = loadRecipe(id);
+			recipe.setId(Long.parseLong(request.getParameter("recipe")));
+			setRating(recipe.getId(), user.getId(), newRating);
+			
+			// Returns ave
+			response.getWriter().append(recipe.getRatingInteger().toString());
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 
 		}
 
-		// Returns ave
-		response.getWriter().append(getRating(recipe).toString());
-		// response.sendRedirect("LoadRecipeServlet?id=" + recipe);
+		
+		
 
 	}
 
@@ -153,36 +162,32 @@ public class RatingServlet extends HttpServlet {
 		con.close();
 
 	}
+	
+	public RezeptBean loadRecipe(Long id) throws SQLException {
+		Connection con = ds.getConnection();
 
-	/**
-	 * Gibt die Durchschnittliche Bewertung zu einem Rezept zurück
-	 * 
-	 * @param recipeId
-	 *            Die ID eines Rezeptes
-	 * @return 0, wenn keine Bewertung gefunden wurde, eine Ganzzahl größer 0,
-	 *         wenn eine Durchschnittsbewertung ermittelt werden konnte
-	 */
-	public Integer getRating(Long recipeId) {
+		PreparedStatement ps = con.prepareStatement("select * from recipes where id=?");
+		ps.setLong(1, id);
 
-		int rating = 0;
-		try (Connection con = ds.getConnection();
-				PreparedStatement pstmt = con.prepareStatement("Select * from ratings where recipe = ?")) {
-			pstmt.setLong(1, recipeId);
+		ResultSet rs = ps.executeQuery();
 
-			int summe = 0, anzahl = 0;
+		while (rs.next()) {
 
-			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
-				summe += (int) rs.getInt("rating");
-				anzahl++;
-			}
-			rating = (anzahl == 0) ? 0 : (Math.round((float) summe / (float) anzahl));
+			RezeptBean recipe = new RezeptBean();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
+			recipe.setId(rs.getLong("id"));
+			recipe.setRatingCount(rs.getInt("ratingCount"));
+			recipe.setRatingSum(rs.getInt("ratingSum"));
+			
+			con.close();
+			
+			return recipe;
 		}
-
-		return new Integer(rating);
+		con.close();
+		
+		return null;
 	}
+
+	
 
 }
