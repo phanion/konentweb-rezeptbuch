@@ -210,7 +210,7 @@ public class EditRecipeServlet extends HttpServlet {
 				ex.printStackTrace();
 			}
 		}
-
+		con.close();
 	}
 
 }

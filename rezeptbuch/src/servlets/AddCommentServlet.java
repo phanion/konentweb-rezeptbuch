@@ -141,7 +141,7 @@ public class AddCommentServlet extends HttpServlet {
 					message.setSubject("Rezept wurde kommentiert");
 					message.setSentDate(new Date());
 					message.setContent("Hallo " + rs.getString("firstName") + " " + rs.getString("lastName")
-							+ ",\n\rdas von dir abonnierte Rezept " + rs.getString("name") + " wurde kommentiert.",
+							+ ",<p>ndas von dir abonnierte Rezept " + rs.getString("name") + " wurde kommentiert.",
 							"text/html; charset=utf-8");
 					Transport.send(message);
 				} catch (MessagingException ex) {
@@ -149,7 +149,7 @@ public class AddCommentServlet extends HttpServlet {
 				}
 			}
 		}
-
+		con.close();
 	}
 
 }

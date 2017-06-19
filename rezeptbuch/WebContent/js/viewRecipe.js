@@ -12,6 +12,7 @@ function init() {
 	document.getElementById('aboButton').addEventListener('click', aboHandling);
 }
 
+//Die sichtbare Ausführung ist wegen dem Versand von Mails leicht verzögert.
 function addComment() {
 	var id = document.getElementById('id').value;
 	var comment = document.getElementById('newComment').value;
@@ -36,6 +37,8 @@ function addComment() {
 					+ '&recipe='
 					+ commentResponse.recipe
 					+ '\'>Löschen</a>';
+			
+			document.getElementById('commentForm').reset();
 
 		}
 	}
@@ -44,6 +47,8 @@ function addComment() {
 	xmlhttp.setRequestHeader('Content-Type',
 			'application/x-www-form-urlencoded');
 	xmlhttp.send('recipe=' + id + '&comment=' + comment);
+	
+	
 }
 
 function aboHandling() {

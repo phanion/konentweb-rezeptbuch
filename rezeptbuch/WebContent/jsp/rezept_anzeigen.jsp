@@ -351,7 +351,7 @@
 		</table>
 
 		<c:if test="${not empty user}">
-			<form>
+			<form id="commentForm">
 				<p>
 					<label
 						class="labelfortextarea"
