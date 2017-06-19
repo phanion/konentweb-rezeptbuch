@@ -86,7 +86,7 @@ public class EditProfileServlet extends HttpServlet {
 				try {
 					updateUser(user);
 					session.setAttribute("user", user);
-					message = "Deine persönlichen Daten wurden erfolgreich geändert!";
+					message = "Deine persÃ¶nlichen Daten wurden erfolgreich geÃ¤ndert!";
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
