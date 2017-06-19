@@ -51,8 +51,8 @@ public class EditProfileServlet extends HttpServlet {
 
 		final Long id = Long.parseLong(request.getParameter("id"));
 		final String mail = request.getParameter("mail").toLowerCase();
-		final String lastName = request.getParameter("lastName");
-		final String firstName = request.getParameter("firstName");
+		final String lastName = request.getParameter("nachname");
+		final String firstName = request.getParameter("vorname");
 
 		String message = null;
 
@@ -61,6 +61,7 @@ public class EditProfileServlet extends HttpServlet {
 			message = "Bitte melden Sie sich erneut an!";
 
 			request.setAttribute("message", message);
+			
 			RequestDispatcher disp = request.getRequestDispatcher("/jsp/login.jsp");
 			disp.forward(request, response);
 
@@ -74,7 +75,7 @@ public class EditProfileServlet extends HttpServlet {
 			user.setLastName(lastName);
 			user.setMail(mail);
 
-			if (!userUnique(user.getMail())) {
+			if (!userUnique(user.getMail(), user.getId())) {
 				message = "Es existierte bereits ein User unter dieser Mailadresse";
 
 				request.setAttribute("message", message);
@@ -82,7 +83,8 @@ public class EditProfileServlet extends HttpServlet {
 			} else {
 				try {
 					updateUser(user);
-					message = "Deine persï¿½nlichen Daten wurden erfolgreich geï¿½ndert!";
+					session.setAttribute("user", user);
+					message = "Deine persönlichen Daten wurden erfolgreich geändert!";
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -108,7 +110,7 @@ public class EditProfileServlet extends HttpServlet {
 	public void updateUser(User user) throws SQLException {
 		Connection con = ds.getConnection();
 
-		PreparedStatement ps = con.prepareStatement("update users SET mail=?, firstName=?, lastName=? WHERE id=?");
+		PreparedStatement ps = con.prepareStatement("update rezeptbuch.users SET mail=?, firstName=?, lastName=? WHERE id=?");
 
 		ps.setString(1, user.getMail());
 		ps.setString(2, user.getFirstName());
@@ -121,17 +123,17 @@ public class EditProfileServlet extends HttpServlet {
 
 	}
 
-	public boolean userUnique(String mail) throws ServletException {
+	public boolean userUnique(String mail, Long id) throws ServletException {
 		try (Connection con = ds.getConnection();
-				PreparedStatement ps = con.prepareStatement("select mail from users where mail=?;")) {
+				PreparedStatement ps = con.prepareStatement("select mail, id from rezeptbuch.users where mail=?;")) {
 			
 			ps.setString(1, mail);
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				if (rs.getString(1).equals(mail)) {
+				if (rs.getString(1).toLowerCase().equals(mail.toLowerCase())
+						&& (rs.getLong(2) != id)) {
 					return false;
-
 				}
 				return true;
 			}

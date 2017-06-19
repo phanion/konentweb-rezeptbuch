@@ -132,7 +132,7 @@
 				<c:forEach
 					var="ingredient"
 					items="${rezept.ingredients}">
-
+					<div class="newLine">
 					<input
 						type="number"
 						name="zutatenMenge"
@@ -154,7 +154,7 @@
 						name="selectedValue"
 						class="selectedValue"
 						value="${ingredient.unit}">
-					<br>
+					</div>
 				</c:forEach>
 			</div>
 
