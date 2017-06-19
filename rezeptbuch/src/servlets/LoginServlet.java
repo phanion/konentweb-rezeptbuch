@@ -61,7 +61,7 @@ public class LoginServlet extends HttpServlet {
 			if (rs.next()) {
 				if (rs.getString("mail").equals(mail) && rs.getString("password").equals(password)) {
 					User user = new User(rs.getLong("ID"), rs.getString("mail"), rs.getString("lastName"),
-							rs.getString("firstName"), rs.getString("password"));
+							rs.getString("firstName"), rs.getString("password"), rs.getString("description"));
 
 					session.setAttribute("user", user);
 

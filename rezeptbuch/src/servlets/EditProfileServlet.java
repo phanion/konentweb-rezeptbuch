@@ -53,6 +53,7 @@ public class EditProfileServlet extends HttpServlet {
 		final String mail = request.getParameter("mail").toLowerCase();
 		final String lastName = request.getParameter("nachname");
 		final String firstName = request.getParameter("vorname");
+		final String description = request.getParameter("beschreibung");
 
 		String message = null;
 
@@ -74,6 +75,7 @@ public class EditProfileServlet extends HttpServlet {
 			user.setId(id);
 			user.setLastName(lastName);
 			user.setMail(mail);
+			user.setDescription(description);
 
 			if (!userUnique(user.getMail(), user.getId())) {
 				message = "Es existierte bereits ein User unter dieser Mailadresse";
@@ -110,12 +112,14 @@ public class EditProfileServlet extends HttpServlet {
 	public void updateUser(User user) throws SQLException {
 		Connection con = ds.getConnection();
 
-		PreparedStatement ps = con.prepareStatement("update rezeptbuch.users SET mail=?, firstName=?, lastName=? WHERE id=?");
+		PreparedStatement ps = con.prepareStatement("update rezeptbuch.users SET mail=?, firstName=?, lastName=?, description=? WHERE id=?");
 
 		ps.setString(1, user.getMail());
 		ps.setString(2, user.getFirstName());
 		ps.setString(3, user.getLastName());
-		ps.setLong(4, user.getId());
+		ps.setString(4, user.getDescription());
+		ps.setLong(5, user.getId());
+		
 
 		ps.executeUpdate();
 

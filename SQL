@@ -5,7 +5,8 @@ CREATE TABLE users (
     mail varchar(255) unique,
     lastName TINYTEXT,
     firstName TINYTEXT,
-    password TINYTEXT
+    password TINYTEXT,
+    description TEXT
 );
 create table recipes(
     ID BIGINT NOT NULL auto_increment,

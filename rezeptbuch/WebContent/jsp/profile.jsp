@@ -87,7 +87,7 @@
 				class="textarea-transitional"
 				placeholder="Ihre Profilbeschreibung" 
 				disabled>
-				${'Profilbeschreibung: Lorem ipsum dolor sit amet.'}
+				${user.getDescription()}
 			</textarea>
 		</p>
 		
