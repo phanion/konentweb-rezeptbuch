@@ -17,13 +17,13 @@
 <title>Rezeptbuch - ${rezept.name}</title>
 
 <script src="${pageContext.request.contextPath}/js/nav.js"></script>
-<script src="${pageContext.request.contextPath}/js/viewRecipe.js"></script>
-<script src="${pageContext.request.contextPath}/js/editRecipe.js"></script>
+<c:if test="${not empty user}">
+	<script src="${pageContext.request.contextPath}/js/viewRecipe.js"></script>
+	<script src="${pageContext.request.contextPath}/js/editRecipe.js"></script>
 
-<script src="${pageContext.request.contextPath}/js/rating.js"></script>
-
-<link
-	rel="stylesheet"
+	<script src="${pageContext.request.contextPath}/js/rating.js"></script>
+</c:if>
+<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/main.css">
 <base href="${pageContext.request.requestURI}">
 </head>
