@@ -35,9 +35,9 @@
 			<dt>Autor</dt>
 			<dd>${tmap['authorFullName']}</dd>
 			<dt>Zubereitungsdauer</dt>
-			<dd>${tmap['prepDuration']}Minuten</dd>
+			<dd>${tmap['prepDuration']} Minuten</dd>
 			<dt>Kochdauer</dt>
-			<dd>${tmap['cookDuration']}Minuten</dd>
+			<dd>${tmap['cookDuration']} Minuten</dd>
 			<dt>Schwierigkeitsgrad</dt>
 			<dd>${tmap['difficulty']}/5</dd>
 			<dt>Portionen</dt>
