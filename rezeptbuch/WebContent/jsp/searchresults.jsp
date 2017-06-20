@@ -1,5 +1,6 @@
 <!--
   - Author(s): Michael
+  - Refactoring: Lorenz
   - Date: 2017-05-06
   - Copyright Notice:
   - @(#)
