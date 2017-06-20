@@ -17,16 +17,16 @@
 					height="200" alt="Ein Foto vom Rezept ${recipe.name}"></a>
 			</c:if>
 			<dl>
-			<dd>Ersteller</dd>
-			<dt>${recipe.getCreator().getFirstName()} ${recipe.getCreator().getLastName()}</dt>
-				<dd>Bewertung</dd>
-				<dt>
+			<dt>Ersteller</dt>
+			<dd>${recipe.getCreator().getFirstName()} ${recipe.getCreator().getLastName()}</dd>
+				<dt>Bewertung</dt>
+				<dd>
 					<c:choose>
 						<c:when test="${recipe.ratingCount == 0}">-</c:when>
 						<c:otherwise>${recipe.getRatingInteger()}</c:otherwise>
 					</c:choose>
-				</dt>
-				<dd>Erstellt am:</dd><dt>${recipe.timestampToDate(recipe.getCreated()) }</dt>
+				</dd>
+				<dt>Erstellt am:</dt><dd>${recipe.timestampToDate(recipe.getCreated()) }</dd>
 				
 
 

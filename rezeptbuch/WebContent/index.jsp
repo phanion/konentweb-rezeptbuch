@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Kochrezepte - Homepage</title>
+<title>Rezeptbuch - Startseite</title>
 <script src="${pageContext.request.contextPath}/js/nav.js"></script>
 <script src="${pageContext.request.contextPath}/js/index.js"></script>
 <link rel="stylesheet"
