@@ -9,6 +9,7 @@
 <meta charset="utf-8">
 <title>Kochrezepte - Homepage</title>
 <script src="${pageContext.request.contextPath}/js/nav.js"></script>
+<script src="${pageContext.request.contextPath}/js/index.js"></script>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/main.css">
 </head>
@@ -20,7 +21,9 @@
 
 	<c:if test="${not empty message}">
 		<h2>${message}</h2>
-	</c:if> </main>
+	</c:if>
+	<div id="recipes"></div>
+	 </main>
 
 </body>
 </html>
