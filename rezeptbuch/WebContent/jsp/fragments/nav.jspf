@@ -1,6 +1,4 @@
-<!-- Refactoring: Lorenz -->
-
-<%-- <script src="${pageContext.request.contextPath}/js/nav.js"></script> --%>
+<noscript>Sehr geehrter Nutzer: Bitte aktivieren Sie JavaScript, um diese Webseite nutzen zu können.</noscript>
 <nav>
 	<div class="clearfix">
 		<ul id="navlist-left">
@@ -21,7 +19,7 @@
 							onclick="window.location.href='/rezeptbuch/jsp/profile.jsp'"></button></li>
 				</c:when>
 				<c:otherwise>
-				<!-- evtl noch verschönern, ist dafür da damit die Breite der UL gleich ist egal ob man eingeloggt ist oder nicht -->
+				<!-- Evtl. noch verschönern: (=> Inline CSS), ist dafür da damit die Höhe der Liste gleich ist egal ob man eingeloggt ist oder nicht -->
 					<li><a href="#" style="visibility: hidden;">.</a></li>
 					<li class="nav-but"><button type="button" class="button-nav" id="profile-b"
 							onclick="window.location.href='/rezeptbuch/jsp/login.jsp'"></button></li>
@@ -32,11 +30,8 @@
 					id="search-b"></button></li>
 		</ul>
 	</div>
-	<!-- 	<div style="clear: both;"></div> -->
-
 
 <div id="profile-container" class="hide nav-container clearfix">
-	<!--  style="text-align: right;"-->
 	<div>
 	<c:choose>
 		<c:when test="${not empty user}">
