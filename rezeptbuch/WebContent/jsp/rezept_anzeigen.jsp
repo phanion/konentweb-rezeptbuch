@@ -355,7 +355,7 @@
 				<p>
 					<label
 						class="labelfortextarea"
-						for="comment">Kommentar abgeben:</label>
+						for="newComment">Kommentar abgeben:</label>
 					<textarea
 						name="newComment"
 						id="newComment"

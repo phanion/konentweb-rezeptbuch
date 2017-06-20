@@ -27,21 +27,21 @@
 			test="${not(tmap['filename'] eq null or fn:length(tmap['filename']) eq 0)}">
 			<img alt="Ein Bild von ${tmap['recipename']}" class="search-img"
 				src="../LoadImage?id=${tmap['recipeID']}&table=recipes"
-				width="200px" height="180px">
+				width="200" height="180">
 			<!-- 			<div style="clear: both;"></div> -->
 		</c:if>
 
 		<dl>
-			<dd>Autor
-			<dt>${tmap['authorFullName']}
-			<dd>Zubereitungsdauer
-			<dt>${tmap['prepDuration']}Minuten
-			<dd>Kochdauer
-			<dt>${tmap['cookDuration']}Minuten
-			<dd>Schwierigkeitsgrad
-			<dt>${tmap['difficulty']}/5
-			<dd>Portionen
-			<dt>${tmap['servings']}
+			<dt>Autor</dt>
+			<dd>${tmap['authorFullName']}</dd>
+			<dt>Zubereitungsdauer</dt>
+			<dd>${tmap['prepDuration']}Minuten</dd>
+			<dt>Kochdauer</dt>
+			<dd>${tmap['cookDuration']}Minuten</dd>
+			<dt>Schwierigkeitsgrad</dt>
+			<dd>${tmap['difficulty']}/5</dd>
+			<dt>Portionen</dt>
+			<dd>${tmap['servings']}</dd>
 		</dl>
 	</div>
 
