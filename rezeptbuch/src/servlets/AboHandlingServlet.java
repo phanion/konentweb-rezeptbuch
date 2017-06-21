@@ -34,7 +34,6 @@ public class AboHandlingServlet extends HttpServlet {
 	 */
 	public AboHandlingServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Resource(lookup = "jdbc/MyRezeptbuchPool")
@@ -58,7 +57,6 @@ public class AboHandlingServlet extends HttpServlet {
 			try {
 				addAbo(user, recipe);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				response.getWriter().append((CharSequence) e);
 			}
@@ -67,7 +65,6 @@ public class AboHandlingServlet extends HttpServlet {
 				try {
 					deleteAbo(user, recipe);
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 					response.getWriter().append((CharSequence) e);
 				}

@@ -57,7 +57,7 @@ public class LoginServlet extends HttpServlet {
 			PreparedStatement ps = con.prepareStatement("select * from users where mail=?");
 			ps.setString(1, mail);
 			ResultSet rs = ps.executeQuery();
-			
+			con.close();
 			if (rs.next()) {
 				if (rs.getString("mail").equals(mail) && rs.getString("password").equals(password)) {
 					User user = new User(rs.getLong("ID"), rs.getString("mail"), rs.getString("lastName"),
@@ -67,7 +67,8 @@ public class LoginServlet extends HttpServlet {
 
 					message = "Der Nutzer " + user.getFirstName() + " " + user.getLastName()
 							+ " wurde erfolgreich eingeloggt!";
-
+					
+					
 					RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
 					disp.forward(request, response);
 				} else
@@ -75,7 +76,7 @@ public class LoginServlet extends HttpServlet {
 
 			} else
 				message = "Unter der von Ihnen angegebenen Mail-Adresse existiert kein Nutzer. Bitte registrieren Sie sich zuerst.";
-			con.close();
+			
 
 			request.setAttribute("message", message);
 			RequestDispatcher disp = request.getRequestDispatcher("/jsp/login.jsp");

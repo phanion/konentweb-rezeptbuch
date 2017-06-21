@@ -33,7 +33,15 @@
 
 	<main> <%-- Name des Rezeptes --%>
 	<div id="Einstellungen">
-		<h1>${rezept.name}</h1>
+			<h1>
+				<input
+					disabled
+					type="text"
+					name="recipeName"
+					id="recipeName"
+					value="${rezept.name}"
+					form="editForm">
+			</h1>
 
 		<%-- Falls der Aufrufer der eingeloggte Ersteller des Rezeptes ist, kann er dieses bearbeiten--%>
 		<c:if test="${not empty user and user.id eq rezept.creator.id}">
@@ -93,11 +101,12 @@
 				</c:choose>
 			</form>
 		</c:if>
-		<!-- Form für das ändern des Rezeptes -->
+		<!-- Form für das ndern des Rezeptes -->
 		<form
+			id="editForm"
 			action="/rezeptbuch/EditRecipeServlet"
 			method="post">
-
+			
 			<input
 				type="hidden"
 				name="id"
@@ -164,6 +173,13 @@
 				id="addIngredientButton"
 				name="addrow"
 				value="Zutat hinzufügen">Zutat hinzufügen</button>
+			<button
+				type="button"
+				class="button hidden-block"
+				id="deleteIngredientButton"
+				name="deleterow"
+				value="Zutat entfernen">Zutat entfernen</button>
+				
 
 			<!-- Felder des Rezeptes, die später geändert werden sollen -->
 			<div id="editRecipe">
@@ -235,6 +251,11 @@
 					id="refreshButton"
 					name="refresh"
 					value="Verwerfen">Verwerfen</button>
+				<button 
+					type="button" 
+					class="button" 
+					id="deleteButton" 
+					name="deleteButton">Rezept löschen</button>
 			</div>
 
 		</form>
@@ -248,7 +269,7 @@
 		<%-- unicode-#: &#9734 - empty star (white star)--%>
 		<%-- tutorial: https://css-tricks.com/star-ratings/ --%>
 
-		<pre id="current-rating">Aktuelle Bewertung ${rezept.ratingSum / rezept.ratingCount}</pre>
+		<pre id="current-rating">Aktuelle Bewertung ${rezept.calculateRatingInt()}</pre>
 
 		<c:choose>
 			<c:when test="${not empty user }">

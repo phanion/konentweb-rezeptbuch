@@ -61,7 +61,7 @@ public class EditRecipeServlet extends HttpServlet {
 
 		// Parameter von dem Request werden geholt
 		final Long recipeID = Long.parseLong(request.getParameter("id"));
-		final String name = request.getParameter("name");
+		final String recipeName = request.getParameter("recipeName");
 		final String[] ingredients = request.getParameterValues("zutatenZutat");
 		final String[] quantities = request.getParameterValues("zutatenMenge");
 		final String[] units = request.getParameterValues("zutatenEinheit");
@@ -82,7 +82,7 @@ public class EditRecipeServlet extends HttpServlet {
 		rezept.setDurationCooking(durationCooking);
 		rezept.setDurationPreparation(durationPreparation);
 		rezept.setServings(servings);
-		rezept.setName(name);
+		rezept.setName(recipeName);
 
 		if (ingredients != null) {
 			for (int i = 0; i < ingredients.length; i++) {
@@ -110,12 +110,12 @@ public class EditRecipeServlet extends HttpServlet {
 				updateRecipe(rezept);
 				replaceIngredients(rezept);
 				sendAboMails(rezept);
-				message = "Das Rezept wurde erfolgreich geÃ¤ndert!";
+				message = "Das Rezept wurde erfolgreich geändert!";
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		} else {
-			message = "Sie sind nicht berechtigt das Rezept zu ï¿½ndern.";
+			message = "Sie sind nicht berechtigt das Rezept zu ändern.";
 		}
 		request.setAttribute("message", message);
 
@@ -138,14 +138,16 @@ public class EditRecipeServlet extends HttpServlet {
 		final Connection con = ds.getConnection();
 
 		PreparedStatement ps = con.prepareStatement(
-				"UPDATE recipes SET description=?, difficulty=?, durationCooking=?, durationPreparation=?, servings=? where id=?");
+				"UPDATE recipes SET description=?, difficulty=?, durationCooking=?, durationPreparation=?, servings=?, name=? where id=?");
 
 		ps.setString(1, recipe.getDescription());
 		ps.setInt(2, recipe.getDifficulty());
 		ps.setInt(3, recipe.getDurationCooking());
 		ps.setInt(4, recipe.getDurationPreparation());
 		ps.setInt(5, recipe.getServings());
-		ps.setLong(6, recipe.getId());
+		ps.setString(6, recipe.getName());
+		
+		ps.setLong(7, recipe.getId());
 
 		ps.executeUpdate();
 
@@ -179,7 +181,7 @@ public class EditRecipeServlet extends HttpServlet {
 	 * Autor: Lorenz 
 	 * 
 	 * Es werden die Abonnenten des Rezepts aus der Datenbank
-	 * geladen und per Mail ï¿½ber die ï¿½nderung informiert.
+	 * geladen und per Mail über die Änderung informiert.
 	 * 
 	 * @throws SQLException
 	 */

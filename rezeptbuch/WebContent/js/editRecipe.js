@@ -1,17 +1,28 @@
 /**
- * @author: Flo
+ * @author: Flo, Lorenz
  */
 'use strict';
 
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {
-	document.getElementById('editRecipeButton').addEventListener('click', edit);
-
-	document.getElementById('addIngredientButton').addEventListener('click', add);
+	if (document.getElementById('editRecipeButton') != null) {
+		document.getElementById('editRecipeButton').addEventListener('click', edit);
+	}
 	
+	if (document.getElementById('addIngredientButton') != null) {
+	document.getElementById('addIngredientButton').addEventListener('click', add);
+	}
+	
+	if (document.getElementById('deleteIngredientButton') != null) {
+		document.getElementById('deleteIngredientButton').addEventListener('click', deleteRow);
+		}
+	
+	if (document.getElementById('refreshButton') != null) {
 	document.getElementById('refreshButton').addEventListener('click', refreshPage);
 	
+	document.getElementById('deleteButton').addEventListener('click', deleteRecipe);
+	}
 }
 
 function edit() {
@@ -39,11 +50,22 @@ function edit() {
 		elements[i].value = selected[i].value;
 
 	}
+	
+	document.getElementById("recipeName").disabled = false;
+	
 
-	// Die benötigten Felder zur Bearbeitung und Speicherung werden eingeblendet
-	document.getElementById("ingredientContainer").classList.remove('hidden-block');
+		// Die benötigten Felder zur Bearbeitung und Speicherung werden
+		// eingeblendet
+	document.getElementById("ingredientContainer").classList
+			.remove('hidden-block');
 	document.getElementById("editButtons").classList.remove('hidden-block');
-	document.getElementById("addIngredientButton").classList.remove('hidden-block');
+	document.getElementById("addIngredientButton").classList
+			.remove('hidden-block');
+	
+	if (document.getElementById("deleteIngredientButton") != null) {
+		document.getElementById("deleteIngredientButton").classList
+				.remove('hidden-block');
+	}
 
 	
 	
@@ -52,7 +74,7 @@ function edit() {
 
 	// Kochzeit, Vorbereitungszeit, Schwierigkeit und Portionen editierbart
 	// setzen
-	var attributes = document.getElementById("editRecipe")
+	var attributes = document.getElementById("editRecipe");
 	var inputs = attributes.getElementsByTagName("input");
 
 	for (var i = 0; i < inputs.length; i++) {
@@ -60,14 +82,22 @@ function edit() {
 			inputs[i].disabled = false;
 		}
 	}
+	
 
+
+	document.getElementById("recipeName").removeAttribute("disabled");
+	
 	// Beschreibung editierbar setzen
 	document.getElementsByTagName("textarea")[0].disabled = false;
 }
 
 function add() {
 	// http://stackoverflow.com/questions/34127450/dynamically-add-forminput-textbox-in-jsp
-	var paragraph = document.createElement("P");
+	var divNewLine = document.createElement("div");
+	
+	// Div erhält die selbe Klasse wie die bereits erstellten Zutaten-Reihen, um später auf alle zugreifen zu können
+	divNewLine.setAttribute("class", "newLine");
+	
 	var Menge = document.createElement("input");
 	Menge.setAttribute("type", "number");
 	Menge.setAttribute("name", "zutatenMenge");
@@ -104,14 +134,42 @@ function add() {
 	Zutat.setAttribute("class", "zutatenZutat")
 	Zutat.setAttribute("placeholder", "Zutat");
 	Zutat.setAttribute("required", "");
-	paragraph.appendChild(Menge);
-	paragraph.appendChild(Einheit);
-	paragraph.appendChild(Zutat);
-
+	divNewLine.appendChild(Menge);
+	divNewLine.appendChild(Einheit);
+	divNewLine.appendChild(Zutat);
+	
 	var div = document.getElementById("ingredientContainer");
-	div.appendChild(paragraph);
+	div.appendChild(divNewLine);
 }
 
 function refreshPage() {
 	location.reload(true);
+}
+
+function deleteRow() {
+	var ingr = document.getElementsByClassName("newLine");
+	// outerHTML ersetzt das komplette Elemente mit Tags (nicht nur innerhalb der Tags wie bei innerhtml)
+	ingr[ingr.length - 1].outerHTML = "";
+}
+
+
+//Ruft das Servlet zum Löschen von Rezepten auf. Es erscheint vor dem finalen Aufruf des Servlets noch ein Bestätigungsfenster.
+function deleteRecipe() {
+	var id = document.getElementById('id').value;
+
+	confirm = window
+			.confirm("Sind Sie sicher, dass Sie dieses Rezept löschen möchten?");
+
+	if (confirm === true) {
+
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+				window.location.replace("/rezeptbuch");
+			}
+		}
+		xmlhttp.open('GET', '../DeleteRecipeServlet?recipe=' + id, true);
+		xmlhttp.send();
+	}
+
 }

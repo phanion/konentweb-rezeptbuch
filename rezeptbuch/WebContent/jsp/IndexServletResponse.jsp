@@ -11,11 +11,13 @@
 	prefix="c"
 	uri="http://java.sun.com/jsp/jstl/core"%>
 
+
+
+<h1>Die neuesten Rezepte</h1>
 <c:forEach
 	items="${recipeList}"
 	var="recipe">
 	<div class="search-entry clearfix">
-
 		<h2>
 			<a href="/rezeptbuch/LoadRecipeServlet?id=${recipe.id}">${recipe.name}</a>
 		</h2>
@@ -28,6 +30,7 @@
 		</c:if>
 		<dl>
 			<dt>Ersteller</dt>
+
 			<dd>${recipe.getCreator().getFirstName()}
 				${recipe.getCreator().getLastName()}</dd>
 			<dt>Bewertung</dt>
@@ -38,8 +41,7 @@
 				</c:choose>
 			</dd>
 			<dt>Erstellt am:</dt>
-			<dd>${recipe.timestampToDate(recipe.getCreated()) }</dd>
-
+			<dd>${recipe.timestampToDate(recipe.created) }</dd>
 		</dl>
 	</div>
 </c:forEach>
