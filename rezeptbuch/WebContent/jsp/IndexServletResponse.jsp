@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<h1>Die neuesten Rezepte</h1>
 	<c:forEach items="${recipeList}" var="recipe">
 		<div class="search-entry clearfix">
 
@@ -23,7 +24,7 @@
 				<dd>
 					<c:choose>
 						<c:when test="${recipe.ratingCount == 0}">-</c:when>
-						<c:otherwise>${recipe.getRatingInteger()}</c:otherwise>
+						<c:otherwise>${recipe.calculateRatingInt()}</c:otherwise>
 					</c:choose>
 				</dd>
 				<dt>Erstellt am:</dt><dd>${recipe.timestampToDate(recipe.getCreated()) }</dd>

@@ -26,9 +26,9 @@
 
 		<c:if
 			test="${not(tmap['filename'] eq null or fn:length(tmap['filename']) eq 0)}">
-			<img alt="Ein Bild von ${tmap['recipename']}" class="search-img"
+			<a href="/rezeptbuch/LoadRecipeServlet?id=${tmap['recipeID']}"><img alt="Ein Bild von ${tmap['recipename']}" class="search-img"
 				src="../LoadImage?id=${tmap['recipeID']}&table=recipes"
-				width="200" height="180">
+				width="200" height="180"></a>
 			<!-- 			<div style="clear: both;"></div> -->
 		</c:if>
 

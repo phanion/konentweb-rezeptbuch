@@ -32,11 +32,11 @@
 		</p>
 		<p>
 			<label>Passwort</label><input name="password" type="password"
-				size="30" maxlength="30" required>
+				size="30" maxlength="30" minlength="6" required>
 		</p>
 		<p>
 			<label>Passwort wiederholen</label><input name="password_retype"
-				type="password" size="30" maxlength="30" required>
+				type="password" size="30" maxlength="30" minlength="6" required>
 		</p>
 		<button type="submit" class="button">Registrieren</button>
 		<a href="login.jsp" class="button-secondary">Bereits ein Account?</a>

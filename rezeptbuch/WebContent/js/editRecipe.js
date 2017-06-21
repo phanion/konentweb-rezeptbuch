@@ -1,5 +1,5 @@
 /**
- * @author: Flo
+ * @author: Flo, Lorenz
  */
 'use strict';
 
@@ -11,6 +11,8 @@ function init() {
 	document.getElementById('addIngredientButton').addEventListener('click', add);
 	
 	document.getElementById('refreshButton').addEventListener('click', refreshPage);
+	
+	document.getElementById('deleteButton').addEventListener('click', deleteRecipe);
 	
 }
 
@@ -114,4 +116,26 @@ function add() {
 
 function refreshPage() {
 	location.reload(true);
+}
+
+
+//Ruft das Servlet zum Löschen von Rezepten auf. Es erscheint vor dem finalen Aufruf des Servlets noch ein Bestätigungsfenster.
+function deleteRecipe() {
+	var id = document.getElementById('id').value;
+
+	confirm = window
+			.confirm("Sind Sie sicher, dass Sie dieses Rezept löschen möchten?");
+
+	if (confirm === true) {
+
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+				window.location.replace("/rezeptbuch");
+			}
+		}
+		xmlhttp.open('GET', '../DeleteRecipeServlet?recipe=' + id, true);
+		xmlhttp.send();
+	}
+
 }
