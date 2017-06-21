@@ -262,7 +262,7 @@
 		<%-- unicode-#: &#9734 - empty star (white star)--%>
 		<%-- tutorial: https://css-tricks.com/star-ratings/ --%>
 
-		<pre id="current-rating">Aktuelle Bewertung ${rezept.ratingSum / rezept.ratingCount}</pre>
+		<pre id="current-rating">Aktuelle Bewertung ${rezept.calculateRatingInt()}</pre>
 
 		<c:choose>
 			<c:when test="${not empty user }">

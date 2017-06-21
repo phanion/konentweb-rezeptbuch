@@ -265,7 +265,7 @@ public class LoadRecipeServlet extends HttpServlet {
 			ps.setLong(1, recipe.getId());
 			ps.setLong(2, user.getId());
 			ResultSet rs = ps.executeQuery();
-
+			con.close();
 			while (rs.next()) {
 				return true;
 			}

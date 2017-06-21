@@ -95,6 +95,7 @@ public class LoadOwnRecipesServlet extends HttpServlet {
 				recipes.add(recipe);
 
 			}
+			con.close();
 		}
 		
 		return recipes;

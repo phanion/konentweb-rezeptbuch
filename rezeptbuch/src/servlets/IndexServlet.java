@@ -101,7 +101,7 @@ public class IndexServlet extends HttpServlet {
 			
 			recipeList.add(recipe);
 		}
-		
+		con.close();
 	
 		return recipeList;
 		
