@@ -10,6 +10,7 @@ function init() {
 	document.getElementById('commentButton').addEventListener('click',
 			addComment);
 	document.getElementById('aboButton').addEventListener('click', aboHandling);
+	
 }
 
 //Die sichtbare Ausführung ist wegen dem Versand von Mails leicht verzögert.

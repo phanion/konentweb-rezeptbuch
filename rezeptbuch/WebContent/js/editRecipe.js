@@ -1,5 +1,5 @@
 /**
- * @author: Flo
+ * @author: Flo, Lorenz
  */
 'use strict';
 
@@ -20,6 +20,8 @@ function init() {
 	
 	if (document.getElementById('refreshButton') != null) {
 	document.getElementById('refreshButton').addEventListener('click', refreshPage);
+	
+	document.getElementById('deleteButton').addEventListener('click', deleteRecipe);
 	}
 }
 
@@ -51,11 +53,19 @@ function edit() {
 	
 	document.getElementById("recipeName").disabled = false;
 	
-	// Die benötigten Felder zur Bearbeitung und Speicherung werden eingeblendet
-	document.getElementById("ingredientContainer").classList.remove('hidden-block');
+
+		// Die benötigten Felder zur Bearbeitung und Speicherung werden
+		// eingeblendet
+	document.getElementById("ingredientContainer").classList
+			.remove('hidden-block');
 	document.getElementById("editButtons").classList.remove('hidden-block');
-	document.getElementById("addIngredientButton").classList.remove('hidden-block');
-	document.getElementById("deleteIngredientButton").classList.remove('hidden-block');
+	document.getElementById("addIngredientButton").classList
+			.remove('hidden-block');
+	
+	if (document.getElementById("deleteIngredientButton") != null) {
+		document.getElementById("deleteIngredientButton").classList
+				.remove('hidden-block');
+	}
 
 	
 	
@@ -72,6 +82,8 @@ function edit() {
 			inputs[i].disabled = false;
 		}
 	}
+	
+
 
 	document.getElementById("recipeName").removeAttribute("disabled");
 	
