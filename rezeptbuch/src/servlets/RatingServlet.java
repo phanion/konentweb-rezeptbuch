@@ -46,38 +46,25 @@ public class RatingServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		System.out.println("Rezept ID: " + request.getParameter("recipe").toString());
-		System.out.println("Bewertung: " + request.getParameter("rating").toString());
-
-		final Long id = Long.parseLong(request.getParameter("recipe"));
-
+		final Long recipeId = Long.parseLong(request.getParameter("recipe"));
 		final Integer newRating = Integer.parseInt(request.getParameter("rating"));
 
 		HttpSession session = request.getSession();
-		
-		
-		
-		
-		
+
 		User user = (User) session.getAttribute("user");
 
 		try {
-			RezeptBean recipe = loadRecipe(id);
+			// Erst Rating setzen, dann bewertetes Rezept laden
+			setRating(recipeId, user.getId(), newRating);
+			RezeptBean recipe = loadRecipe(recipeId);
 			recipe.setId(Long.parseLong(request.getParameter("recipe")));
-			setRating(recipe.getId(), user.getId(), newRating);
-			
+
 			// Returns ave
-			response.getWriter().append(recipe.getRatingInteger().toString());
-			
+			response.getWriter().append(recipe.calculateRatingInt().toString());
+
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
-
 		}
-
-		
-		
-
 	}
 
 	/**
@@ -162,7 +149,7 @@ public class RatingServlet extends HttpServlet {
 		con.close();
 
 	}
-	
+
 	public RezeptBean loadRecipe(Long id) throws SQLException {
 		Connection con = ds.getConnection();
 
@@ -178,16 +165,14 @@ public class RatingServlet extends HttpServlet {
 			recipe.setId(rs.getLong("id"));
 			recipe.setRatingCount(rs.getInt("ratingCount"));
 			recipe.setRatingSum(rs.getInt("ratingSum"));
-			
+
 			con.close();
-			
+
 			return recipe;
 		}
 		con.close();
-		
+
 		return null;
 	}
-
-	
 
 }

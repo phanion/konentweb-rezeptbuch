@@ -1,4 +1,7 @@
-<!-- Autor: Florien, Lorenz -->
+<!-- 
+	Autor: Florien, Lorenz
+	Refactoring: Michael
+-->
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page errorPage="errorpage.jsp" language="java"
@@ -14,62 +17,12 @@
 		<c:redirect url="login.jsp" />
 	</c:when>
 </c:choose>
-<script type="text/javascript">
-	function add() {
-		//http://stackoverflow.com/questions/34127450/dynamically-add-forminput-textbox-in-jsp
-		var paragraph = document.createElement("P")
-		var Menge = document.createElement("input");
-		Menge.setAttribute("type", "number");
-		Menge.setAttribute("name", "zutatenMenge");
-		Menge.setAttribute("id", "zutatenMenge");
-		Menge.setAttribute("placeholder", "Menge");
-		Menge.setAttribute("required", "");
 
-		var Einheit = document.createElement("select");
-
-		Einheit.setAttribute("name", "zutatenEinheit");
-		Einheit.setAttribute("id", "zutatenEinheit");
-		Einheit.setAttribute("placeholder", "Einheit");
-		Einheit.setAttribute("required", "");
-		Einheit.setAttribute("size", "1");
-
-		var einheiten = [ "Stück", "Liter", "Milliliter", "Teelöffel",
-			"Esslöffel", "Tasse", "Gramm", "Kilogramm", "Prise",
-			"sonstiges" ];
-		
-		
-	var options = [];
-
-	for
-	(var i in einheiten)
-	{
-		options.push(document.createElement("option"));
-		options[i].setAttribute("name",einheiten[i]);
-		options[i].setAttribute("value",einheiten[i]);
-		options[i].text = einheiten[i];
-		Einheit.appendChild(options[i]);
-		
-	}
-	
-
-		var Zutat = document.createElement("input");
-
-		Zutat.setAttribute("type", "text");
-		Zutat.setAttribute("name", "zutatenZutat");
-		Zutat.setAttribute("id", "zutatenZutat")
-		Zutat.setAttribute("placeholder", "Zutat");
-		Zutat.setAttribute("required", "");
-		paragraph.appendChild(Menge);
-		paragraph.appendChild(Einheit);
-		paragraph.appendChild(Zutat);
-
-		var div = document.getElementById("zutaten");
-		div.appendChild(paragraph);
-	}
-</script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
 
 <script src="${pageContext.request.contextPath}/js/nav.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/main.css">
+<script src="${pageContext.request.contextPath}/js/createRecipe.js"></script>
+<base href="${pageContext.request.requestURI}">
 </head>
 
 
@@ -90,8 +43,10 @@
 
 		<div id="zutaten"></div>
 		<p>
-			<button type="button" class="button"
-				onclick="add();">Zutat hinzufügen</button>
+			<button
+				type="button"
+				class="button"
+				id="addIngredientButton">Zutat hinzufügen</button>
 		</p>
 		<p>
 			<label class="labelfortextarea" for="description">Beschreibung:</label>

@@ -58,7 +58,7 @@ public class EditProfileServlet extends HttpServlet {
 		String message = null;
 
 		User sessionUser = (User) session.getAttribute("user");
-		if (sessionUser.getId() != id) {
+		if (sessionUser == null || sessionUser.getId() != id) {
 			message = "Bitte melden Sie sich erneut an!";
 
 			request.setAttribute("message", message);

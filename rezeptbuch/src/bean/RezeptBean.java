@@ -210,13 +210,13 @@ public class RezeptBean implements Serializable {
 	}
 	
 	
-	public Integer getRatingInteger(){
+	public Integer calculateRatingInt(){
 		Integer sum = getRatingSum();
 		Integer count = getRatingCount();
 		return (count == 0) ? 0 : (Math.round((float) sum / (float) count));
 	}
 	
-	public Float getRatingFloat(){
+	public Float calculateRatingFloat(){
 		Integer sum = getRatingSum();
 		Integer count = getRatingCount();
 		return ((count == 0) ? 0 : ((float) sum / (float) count));

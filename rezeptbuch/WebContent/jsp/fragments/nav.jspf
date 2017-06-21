@@ -1,61 +1,112 @@
-<noscript>Sehr geehrter Nutzer: Bitte aktivieren Sie JavaScript, um diese Webseite nutzen zu können.</noscript>
+<noscript>
+	<p>
+		Sehr geehrter Nutzer:<br> Bitte aktivieren Sie <strong>JavaScript</strong>,
+		um diese Webseite nutzen zu können.
+	</p>
+</noscript>
 <nav>
 	<div class="clearfix">
 		<ul id="navlist-left">
-			<li><a href="/rezeptbuch/index.jsp">Startseite</a></li>
+			<li>
+				<a href="/rezeptbuch/index.jsp">Startseite</a>
+			</li>
 			<c:if test="${not empty user}">
-				<li><a href="/rezeptbuch/jsp/rezept_erstellen.jsp">Rezept
-						erstellen</a></li>
+				<li>
+					<a href="/rezeptbuch/jsp/rezept_erstellen.jsp">Rezept erstellen</a>
+				</li>
 			</c:if>
 		</ul>
 
 		<ul id="navlist-right">
 			<c:choose>
 				<c:when test="${not empty user}">
-					<li class="nav-but"><a id="username-label"
-						href="${pageContext.request.contextPath}/jsp/profile.jsp">${user.firstName}
-							${user.lastName}</a></li>
-					<li class="nav-but"><button type="button" class="button-nav" id="profile-b"
-							onclick="window.location.href='/rezeptbuch/jsp/profile.jsp'"></button></li>
+					<li class="nav-but">
+						<a
+							id="username-label"
+							href="${pageContext.request.contextPath}/jsp/profile.jsp">${user.firstName}
+							${user.lastName}</a>
+					</li>
+					<li class="nav-but">
+						<button
+							type="button"
+							class="button-nav"
+							id="profile-b"
+							onclick="window.location.href='/rezeptbuch/jsp/profile.jsp'"></button>
+					</li>
 				</c:when>
 				<c:otherwise>
-				<!-- Evtl. noch verschönern: (=> Inline CSS), ist dafür da damit die Höhe der Liste gleich ist egal ob man eingeloggt ist oder nicht -->
-					<li><a href="#" style="visibility: hidden;">.</a></li>
-					<li class="nav-but"><button type="button" class="button-nav" id="profile-b"
-							onclick="window.location.href='/rezeptbuch/jsp/login.jsp'"></button></li>
+					<!-- Evtl. noch verschönern: Unsichtbares Hilfselement, damit die Höhe der Liste gleich ist egal ob man eingeloggt ist oder nicht -->
+					<li>
+						<a
+							href="#"
+							style="visibility: hidden;">.</a>
+					</li>
+					<li class="nav-but">
+						<button
+							type="button"
+							class="button-nav"
+							id="profile-b"
+							onclick="window.location.href='/rezeptbuch/jsp/login.jsp'"></button>
+					</li>
 				</c:otherwise>
 			</c:choose>
 
-			<li class="nav-but"><button type="button" class="button-nav"
-					id="search-b"></button></li>
+			<li class="nav-but">
+				<button
+					type="button"
+					class="button-nav"
+					id="search-b"></button>
+			</li>
 		</ul>
 	</div>
 
-<div id="profile-container" class="hide nav-container clearfix">
-	<div>
-	<c:choose>
-		<c:when test="${not empty user}">
-			<button type="button" class="button"
-				onclick="window.location.href='/rezeptbuch/LoadOwnRecipesServlet'">Eigene
-				Rezepte</button>
-			<button type="button" class="button-secondary"
-				onclick="window.location.href='/rezeptbuch/logoutservlet'">Logout</button>
+	<div
+		id="profile-container"
+		class="hide nav-container clearfix">
+		<div>
+			<c:choose>
+				<c:when test="${not empty user}">
+					<button
+						type="button"
+						class="button"
+						onclick="window.location.href='/rezeptbuch/LoadOwnRecipesServlet'">Eigene
+						Rezepte</button>
+					<button
+						type="button"
+						class="button-secondary"
+						onclick="window.location.href='/rezeptbuch/logoutservlet'">Logout</button>
 
-		</c:when>
-		<c:otherwise>
-			<button type="button" class="button"
-				onclick="window.location.href='/rezeptbuch/jsp/login.jsp'">Login</button>
-			<button type="button" class="button-secondary"
-				onclick="window.location.href='/rezeptbuch/jsp/registration.jsp'">Registrieren</button>
-		</c:otherwise>
-	</c:choose>
+				</c:when>
+				<c:otherwise>
+					<button
+						type="button"
+						class="button"
+						onclick="window.location.href='/rezeptbuch/jsp/login.jsp'">Login</button>
+					<button
+						type="button"
+						class="button-secondary"
+						onclick="window.location.href='/rezeptbuch/jsp/registration.jsp'">Registrieren</button>
+				</c:otherwise>
+			</c:choose>
+		</div>
 	</div>
-</div>
-<div id="search-container" class="hide nav-container clearfix">
-	<form action="/rezeptbuch/newsearch" method="get">
-		<input type="search" name="searchstring" id="searchinput"
-			class="search-bar" placeholder="Suche" onfocus="this.value = '';"><button type="submit" id="searchbutton" class="button button-input-search">Finden</button>
-	</form>
-</div>
+	<div
+		id="search-container"
+		class="hide nav-container clearfix">
+		<form
+			action="/rezeptbuch/newsearch"
+			method="get">
+			<input
+				type="search"
+				name="searchstring"
+				id="searchinput"
+				class="search-bar"
+				placeholder="Suche"
+				onfocus="this.value = '';"><button
+				type="submit"
+				id="searchbutton"
+				class="button button-input-search">Finden</button>
+		</form>
+	</div>
 </nav>
 

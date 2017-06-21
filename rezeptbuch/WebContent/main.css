@@ -57,7 +57,8 @@
 /* 	border: 1px solid red; */
 }
 
-*:DISABLED
+*:DISABLED, 
+textarea[readonly]
 {
     color: #747474;
     background-color: #d1d1d1;
