@@ -71,15 +71,10 @@ input + .button-input-search
 {
     /* 	min-width: 600px; */
     width: 100%;
-    height: 3em;
 
-    transition: height .5s ease-in-out;
 }
 
-.textarea-transitional:focus
-{
-    height: 10em;
-}
+
 
 input
 {

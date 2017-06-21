@@ -1,7 +1,3 @@
-/**
- * @author Lorenz
- */
-
 package servlets;
 
 import java.io.IOException;
@@ -19,33 +15,29 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import bean.RezeptBean;
 import bean.User;
 
 /**
- * Servlet implementation class LoadOwnRecipesServlet
+ * Servlet implementation class SavedRecipeServlet
  */
-@WebServlet({ "/LoadOwnRecipesServlet", "/ownrecipes" })
-public class LoadOwnRecipesServlet extends HttpServlet {
+@WebServlet({ "/SavedRecipeServlet", "/savedrecipes" })
+public class SavedRecipeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
-    @Resource(lookup = "jdbc/MyRezeptbuchPool")
+	@Resource(lookup = "jdbc/MyRezeptbuchPool")
 	private DataSource ds;
-    
-    
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoadOwnRecipesServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-    
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public SavedRecipeServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -54,39 +46,51 @@ public class LoadOwnRecipesServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		User u = (User) request.getSession().getAttribute("user");
-
+		
 		try {
-			List<RezeptBean> recipes = loadRecipes(u);
-			request.setAttribute("recipes", recipes);
+			List<RezeptBean> rList = getSavedRecipes(u);
+			request.setAttribute("recipes", rList);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		request.setAttribute("noentrymessage", "Sie noch keine Rezepte erstellt!");
+		request.setAttribute("noentrymessage", "Sie haben sich noch keine Rezepte gemerkt!");
 		
 		RequestDispatcher disp = request.getRequestDispatcher("/jsp/showrecipes.jsp");
 		disp.forward(request, response);
+
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-	
-	public List<RezeptBean> loadRecipes(User user) throws SQLException{
+
+	/**
+	 * Gibt alle Rezepte in einer Liste zurück, die ein spezifizierter User gemerkt hat
+	 * 
+	 * @param user Ein User
+	 * @return Liste von RezeptBeans
+	 * @throws SQLException bei einem Datenbankfehler
+	 */
+	public List<RezeptBean> getSavedRecipes(User user) throws SQLException {
 		List<RezeptBean> recipes = new ArrayList<RezeptBean>();
-		
+
 		try (Connection con = ds.getConnection();
-				PreparedStatement ps = con.prepareStatement("SELECT * FROM recipes WHERE creator=?")) {
-			ps.setLong(1, user.getId());
-			ResultSet rs = ps.executeQuery();
+				PreparedStatement pStatement = con.prepareStatement(
+						"select r.* from rezeptbuch.recipes r join rezeptbuch.abos a on (r.id = a.recipe) where a.user = ?");
+				) {
+			pStatement.setLong(1, user.getId());
+			ResultSet rs = pStatement.executeQuery();
 
 			while (rs.next()) {
 				RezeptBean recipe = new RezeptBean();
+
 				recipe.setId(rs.getLong("ID"));
 				recipe.setName(rs.getString("name"));
 				recipe.setRatingCount(rs.getInt("ratingCount"));
@@ -96,12 +100,11 @@ public class LoadOwnRecipesServlet extends HttpServlet {
 				recipe.setModified(rs.getTimestamp("modified"));
 
 				recipes.add(recipe);
-
 			}
-			con.close();
+		} catch (SQLException sql) {
+			sql.printStackTrace();
 		}
-		
+
 		return recipes;
 	}
-
 }

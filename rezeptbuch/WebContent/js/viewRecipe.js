@@ -10,6 +10,11 @@ function init() {
 	document.getElementById('commentButton').addEventListener('click',
 			addComment);
 	document.getElementById('aboButton').addEventListener('click', aboHandling);
+	
+	resizeTextareas();
+	document.getElementById('description').addEventListener('input', resizeTextareas);
+	document.getElementById('newComment').addEventListener('input', resizeTextareas);
+	
 }
 
 //Die sichtbare Ausführung ist wegen dem Versand von Mails leicht verzögert.
@@ -71,4 +76,19 @@ function aboHandling() {
 			'application/x-www-form-urlencoded');
 	xmlhttp.send('recipe=' + recipe + '&action=' + action);
 
+}
+
+function resizeTextareas(){
+	var textareas = document.getElementsByTagName("textarea");
+	
+	for(var i = 0; i < textareas.length; i++){
+		var rowsCount = textareas[i].value.split(/\n|\r/).length;
+		textareas[i].setAttribute("rows", rowsCount);
+		
+		//https://stackoverflow.com/questions/4814398/how-can-i-check-if-a-scrollbar-is-visible
+		while(textareas[i].scrollHeight > textareas[i].clientHeight){
+			rowsCount = rowsCount + 1;
+			textareas[i].setAttribute("rows", rowsCount);
+		}
+	}
 }

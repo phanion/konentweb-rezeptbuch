@@ -1,7 +1,3 @@
-<!-- Autor: Lorenz, Anpassung für AJAX: Michael-->
-<!-- kann eigentlich gelöscht werden, da über generische showrecipes.jsp ersetzt
-	 Nur bei Aufruf, sollte noch eine passende 'noentrymessage' als attribut mitgegeben werden -->
-
 <%@ page
 	errorPage="errorpage.jsp"
 	language="java"
@@ -10,17 +6,21 @@
 <%@ taglib
 	prefix="c"
 	uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- <!DOCTYPE html> -->
+<%-- <base href="${pageContext.request.requestURI}"> --%>
+
 <c:choose>
 	<c:when test="${not empty recipes}">
 		<c:forEach
 			items="${recipes}"
 			var="recipe">
 			<div class="search-entry clearfix">
-
+			
 				<h2>
-					<a href="/rezeptbuch/LoadRecipeServlet?id=${recipe.id}">${recipe.name}</a>
+					<a
+						class="recipe-title"
+						href="/rezeptbuch/LoadRecipeServlet?id=${recipe.id}">${recipe.name}</a>
 				</h2>
+
 				<c:if test="${not empty recipe.filename}">
 					<a href="/rezeptbuch/LoadRecipeServlet?id=${recipe.id}"><img
 						src="../LoadImage?id=${recipe.id}&table=recipes"
@@ -34,18 +34,18 @@
 					<dd>
 						<c:choose>
 							<c:when test="${recipe.ratingCount == 0}">-</c:when>
-							<c:otherwise>${recipe.ratingSum / recipe.ratingCount}</c:otherwise>
+							<c:otherwise>${recipe.calculateRatingFloat()}</c:otherwise>
 						</c:choose>
 					</dd>
 					<dt>Erstellt am:</dt>
-					<dd>${recipe.timestampToDate(recipe.created)}</dd>
+					<dd>${recipe.timestampToDate(recipe.created) }</dd>
 					<dt>Letzte Änderung:</dt>
-					<dd>${recipe.timestampToDate(recipe.modified)}</dd>
+					<dd>${recipe.timestampToDate(recipe.modified) }</dd>
 				</dl>
 			</div>
 		</c:forEach>
 	</c:when>
 	<c:otherwise>
-		<div class="sorry search-entry">Noch keine eigenen Rezepte </div>
+		<div class="sorry search-entry">${noentrymessage}</div>
 	</c:otherwise>
 </c:choose>

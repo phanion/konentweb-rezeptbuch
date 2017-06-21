@@ -25,7 +25,7 @@ import bean.User;
 /**
  * Servlet implementation class EditProfileServlet
  */
-@WebServlet("/EditProfileServlet")
+@WebServlet({ "/EditProfileServlet", "/profiledata" })
 public class EditProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -46,6 +46,21 @@ public class EditProfileServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		User u = (User) session.getAttribute("user");
+
+		request.setAttribute("user", u);
+
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/profiledata.jsp");
+		rd.forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 
@@ -62,7 +77,7 @@ public class EditProfileServlet extends HttpServlet {
 			message = "Bitte melden Sie sich erneut an!";
 
 			request.setAttribute("message", message);
-			
+
 			RequestDispatcher disp = request.getRequestDispatcher("/jsp/login.jsp");
 			disp.forward(request, response);
 
@@ -99,27 +114,17 @@ public class EditProfileServlet extends HttpServlet {
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 	public void updateUser(User user) throws SQLException {
 		Connection con = ds.getConnection();
 
-		PreparedStatement ps = con.prepareStatement("update rezeptbuch.users SET mail=?, firstName=?, lastName=?, description=? WHERE id=?");
+		PreparedStatement ps = con.prepareStatement(
+				"update rezeptbuch.users SET mail=?, firstName=?, lastName=?, description=? WHERE id=?");
 
 		ps.setString(1, user.getMail());
 		ps.setString(2, user.getFirstName());
 		ps.setString(3, user.getLastName());
 		ps.setString(4, user.getDescription());
 		ps.setLong(5, user.getId());
-		
 
 		ps.executeUpdate();
 
@@ -130,13 +135,12 @@ public class EditProfileServlet extends HttpServlet {
 	public boolean userUnique(String mail, Long id) throws ServletException {
 		try (Connection con = ds.getConnection();
 				PreparedStatement ps = con.prepareStatement("select mail, id from rezeptbuch.users where mail=?;")) {
-			
+
 			ps.setString(1, mail);
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				if (rs.getString(1).toLowerCase().equals(mail.toLowerCase())
-						&& (rs.getLong(2) != id)) {
+				if (rs.getString(1).toLowerCase().equals(mail.toLowerCase()) && (rs.getLong(2) != id)) {
 					return false;
 				}
 				return true;

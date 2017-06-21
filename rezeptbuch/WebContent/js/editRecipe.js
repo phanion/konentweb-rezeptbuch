@@ -1,5 +1,5 @@
 /**
- * @author: Flo
+ * @author: Flo, Lorenz
  */
 'use strict';
 
@@ -16,10 +16,12 @@ function init() {
 	
 	if (document.getElementById('refreshButton') != null) {
 	document.getElementById('refreshButton').addEventListener('click', refreshPage);
+	
+	document.getElementById('deleteButton').addEventListener('click', deleteRecipe);
 	}
 	
-	if (document.getElementsByName("deleteButton") != null) {
-		var elements = document.getElementsByName("deleteButton");
+	if (document.getElementsByName("deleteIng") != null) {
+		var elements = document.getElementsByName("deleteIng");
 	
 		for (var i = 0; i < elements.length; i++) {
 			elements[i].addEventListener('click', del)		
@@ -79,7 +81,7 @@ function edit() {
 	document.getElementById("recipeName").removeAttribute("disabled");
 	
 	// Beschreibung editierbar setzen
-	document.getElementsByTagName("textarea")[0].disabled = false;
+	document.getElementsByTagName("textarea")[0].removeAttribute("readonly");
 }
 
 function add() {
@@ -129,8 +131,8 @@ function add() {
 	var Button = document.createElement("button");
 	
 	Button.setAttribute("type", "button");
-	Button.setAttribute("name", "deleteButton");
-	Button.setAttribute("class", "deleteButton button");
+	Button.setAttribute("name", "deleteIng");
+	Button.setAttribute("class", "deleteIng button");
 	Button.innerHTML = "X";
 	
 	Button.addEventListener('click', del);
