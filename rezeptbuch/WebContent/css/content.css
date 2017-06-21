@@ -51,7 +51,8 @@
     object-fit: cover;
 }
 
-.search-img ~ dl
+.search-img ~ dl,
+a ~ dl
 {
     width: 70%;
     padding-left: 5%;

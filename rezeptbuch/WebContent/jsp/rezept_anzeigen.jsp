@@ -170,7 +170,7 @@
 
 				<label for="description">Beschreibung:</label>
 				<textarea
-					disabled
+					readonly
 					name="description"
 					id="description"
 					class="textarea-transitional"
