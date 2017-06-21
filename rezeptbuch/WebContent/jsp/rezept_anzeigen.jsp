@@ -251,6 +251,11 @@
 					id="refreshButton"
 					name="refresh"
 					value="Verwerfen">Verwerfen</button>
+				<button 
+					type="button" 
+					class="button" 
+					id="deleteButton" 
+					name="deleteButton">Rezept löschen</button>
 			</div>
 
 		</form>
