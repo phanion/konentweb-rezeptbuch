@@ -163,6 +163,11 @@
 						name="selectedValue"
 						class="selectedValue"
 						value="${ingredient.unit}">
+					<button
+						type="button"
+						class="button deleteButton"
+						name="deleteButton"
+						value="Zutat entfernen">X</button>
 					</div>
 				</c:forEach>
 			</div>
@@ -173,12 +178,6 @@
 				id="addIngredientButton"
 				name="addrow"
 				value="Zutat hinzufügen">Zutat hinzufügen</button>
-			<button
-				type="button"
-				class="button hidden-block"
-				id="deleteIngredientButton"
-				name="deleterow"
-				value="Zutat entfernen">Zutat entfernen</button>
 				
 
 			<!-- Felder des Rezeptes, die später geändert werden sollen -->

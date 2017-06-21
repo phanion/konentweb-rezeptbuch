@@ -14,12 +14,16 @@ function init() {
 	document.getElementById('addIngredientButton').addEventListener('click', add);
 	}
 	
-	if (document.getElementById('deleteIngredientButton') != null) {
-		document.getElementById('deleteIngredientButton').addEventListener('click', deleteRow);
-		}
-	
 	if (document.getElementById('refreshButton') != null) {
 	document.getElementById('refreshButton').addEventListener('click', refreshPage);
+	}
+	
+	if (document.getElementsByName("deleteButton") != null) {
+		var elements = document.getElementsByName("deleteButton");
+	
+		for (var i = 0; i < elements.length; i++) {
+			elements[i].addEventListener('click', del)		
+			}
 	}
 }
 
@@ -55,7 +59,6 @@ function edit() {
 	document.getElementById("ingredientContainer").classList.remove('hidden-block');
 	document.getElementById("editButtons").classList.remove('hidden-block');
 	document.getElementById("addIngredientButton").classList.remove('hidden-block');
-	document.getElementById("deleteIngredientButton").classList.remove('hidden-block');
 
 	
 	
@@ -119,12 +122,23 @@ function add() {
 
 	Zutat.setAttribute("type", "text");
 	Zutat.setAttribute("name", "zutatenZutat");
-	Zutat.setAttribute("class", "zutatenZutat")
+	Zutat.setAttribute("class", "zutatenZutat");
 	Zutat.setAttribute("placeholder", "Zutat");
 	Zutat.setAttribute("required", "");
+	
+	var Button = document.createElement("button");
+	
+	Button.setAttribute("type", "button");
+	Button.setAttribute("name", "deleteButton");
+	Button.setAttribute("class", "deleteButton button");
+	Button.innerHTML = "X";
+	
+	Button.addEventListener('click', del);
+	
 	divNewLine.appendChild(Menge);
 	divNewLine.appendChild(Einheit);
 	divNewLine.appendChild(Zutat);
+	divNewLine.appendChild(Button);
 	
 	var div = document.getElementById("ingredientContainer");
 	div.appendChild(divNewLine);
@@ -134,12 +148,9 @@ function refreshPage() {
 	location.reload(true);
 }
 
-function deleteRow() {
-	var ingr = document.getElementsByClassName("newLine");
-	// outerHTML ersetzt das komplette Elemente mit Tags (nicht nur innerhalb der Tags wie bei innerhtml)
-	ingr[ingr.length - 1].outerHTML = "";
+function del() {
+	this.parentNode.outerHTML = "";
 }
-
 
 //Ruft das Servlet zum Löschen von Rezepten auf. Es erscheint vor dem finalen Aufruf des Servlets noch ein Bestätigungsfenster.
 function deleteRecipe() {
