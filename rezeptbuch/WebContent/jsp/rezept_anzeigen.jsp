@@ -173,6 +173,13 @@
 				id="addIngredientButton"
 				name="addrow"
 				value="Zutat hinzufügen">Zutat hinzufügen</button>
+			<button
+				type="button"
+				class="button hidden-block"
+				id="deleteIngredientButton"
+				name="deleterow"
+				value="Zutat entfernen">Zutat entfernen</button>
+				
 
 			<!-- Felder des Rezeptes, die später geändert werden sollen -->
 			<div id="editRecipe">

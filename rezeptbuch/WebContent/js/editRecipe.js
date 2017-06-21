@@ -14,6 +14,10 @@ function init() {
 	document.getElementById('addIngredientButton').addEventListener('click', add);
 	}
 	
+	if (document.getElementById('deleteIngredientButton') != null) {
+		document.getElementById('deleteIngredientButton').addEventListener('click', deleteRow);
+		}
+	
 	if (document.getElementById('refreshButton') != null) {
 	document.getElementById('refreshButton').addEventListener('click', refreshPage);
 	}
@@ -51,6 +55,7 @@ function edit() {
 	document.getElementById("ingredientContainer").classList.remove('hidden-block');
 	document.getElementById("editButtons").classList.remove('hidden-block');
 	document.getElementById("addIngredientButton").classList.remove('hidden-block');
+	document.getElementById("deleteIngredientButton").classList.remove('hidden-block');
 
 	
 	
@@ -76,7 +81,11 @@ function edit() {
 
 function add() {
 	// http://stackoverflow.com/questions/34127450/dynamically-add-forminput-textbox-in-jsp
-	var paragraph = document.createElement("P");
+	var divNewLine = document.createElement("div");
+	
+	// Div erhält die selbe Klasse wie die bereits erstellten Zutaten-Reihen, um später auf alle zugreifen zu können
+	divNewLine.setAttribute("class", "newLine");
+	
 	var Menge = document.createElement("input");
 	Menge.setAttribute("type", "number");
 	Menge.setAttribute("name", "zutatenMenge");
@@ -113,14 +122,20 @@ function add() {
 	Zutat.setAttribute("class", "zutatenZutat")
 	Zutat.setAttribute("placeholder", "Zutat");
 	Zutat.setAttribute("required", "");
-	paragraph.appendChild(Menge);
-	paragraph.appendChild(Einheit);
-	paragraph.appendChild(Zutat);
-
+	divNewLine.appendChild(Menge);
+	divNewLine.appendChild(Einheit);
+	divNewLine.appendChild(Zutat);
+	
 	var div = document.getElementById("ingredientContainer");
-	div.appendChild(paragraph);
+	div.appendChild(divNewLine);
 }
 
 function refreshPage() {
 	location.reload(true);
+}
+
+function deleteRow() {
+	var ingr = document.getElementsByClassName("newLine");
+	// outerHTML ersetzt das komplette Elemente mit Tags (nicht nur innerhalb der Tags wie bei innerhtml)
+	ingr[ingr.length - 1].outerHTML = "";
 }
