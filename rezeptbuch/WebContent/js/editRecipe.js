@@ -5,6 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', init);
 
+
 function init() {
 	if (document.getElementById('editRecipeButton') != null) {
 		document.getElementById('editRecipeButton').addEventListener('click', edit);
@@ -23,6 +24,8 @@ function init() {
 	
 	document.getElementById('deleteButton').addEventListener('click', deleteRecipe);
 	}
+	
+
 }
 
 function edit() {
@@ -88,7 +91,7 @@ function edit() {
 	document.getElementById("recipeName").removeAttribute("disabled");
 	
 	// Beschreibung editierbar setzen
-	document.getElementsByTagName("textarea")[0].disabled = false;
+	document.getElementsByTagName("textarea")[0].removeAttribute("readonly");
 }
 
 function add() {
@@ -173,3 +176,4 @@ function deleteRecipe() {
 	}
 
 }
+
