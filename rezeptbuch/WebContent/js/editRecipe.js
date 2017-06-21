@@ -6,14 +6,17 @@
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {
-	document.getElementById('editRecipeButton').addEventListener('click', edit);
-
+	if (document.getElementById('editRecipeButton') != null) {
+		document.getElementById('editRecipeButton').addEventListener('click', edit);
+	}
+	
+	if (document.getElementById('addIngredientButton') != null) {
 	document.getElementById('addIngredientButton').addEventListener('click', add);
+	}
 	
+	if (document.getElementById('refreshButton') != null) {
 	document.getElementById('refreshButton').addEventListener('click', refreshPage);
-	
-	document.getElementById('deleteButton').addEventListener('click', deleteRecipe);
-	
+	}
 }
 
 function edit() {
@@ -41,7 +44,9 @@ function edit() {
 		elements[i].value = selected[i].value;
 
 	}
-
+	
+	document.getElementById("recipeName").disabled = false;
+	
 	// Die benötigten Felder zur Bearbeitung und Speicherung werden eingeblendet
 	document.getElementById("ingredientContainer").classList.remove('hidden-block');
 	document.getElementById("editButtons").classList.remove('hidden-block');
@@ -54,7 +59,7 @@ function edit() {
 
 	// Kochzeit, Vorbereitungszeit, Schwierigkeit und Portionen editierbart
 	// setzen
-	var attributes = document.getElementById("editRecipe")
+	var attributes = document.getElementById("editRecipe");
 	var inputs = attributes.getElementsByTagName("input");
 
 	for (var i = 0; i < inputs.length; i++) {
@@ -63,6 +68,8 @@ function edit() {
 		}
 	}
 
+	document.getElementById("recipeName").removeAttribute("disabled");
+	
 	// Beschreibung editierbar setzen
 	document.getElementsByTagName("textarea")[0].disabled = false;
 }

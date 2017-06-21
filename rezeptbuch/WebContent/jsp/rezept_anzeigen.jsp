@@ -33,7 +33,15 @@
 
 	<main> <%-- Name des Rezeptes --%>
 	<div id="Einstellungen">
-		<h1>${rezept.name}</h1>
+			<h1>
+				<input
+					disabled
+					type="text"
+					name="recipeName"
+					id="recipeName"
+					value="${rezept.name}"
+					form="editForm">
+			</h1>
 
 		<%-- Falls der Aufrufer der eingeloggte Ersteller des Rezeptes ist, kann er dieses bearbeiten--%>
 		<c:if test="${not empty user and user.id eq rezept.creator.id}">
@@ -93,11 +101,12 @@
 				</c:choose>
 			</form>
 		</c:if>
-		<!-- Form für das ändern des Rezeptes -->
+		<!-- Form für das ndern des Rezeptes -->
 		<form
+			id="editForm"
 			action="/rezeptbuch/EditRecipeServlet"
 			method="post">
-
+			
 			<input
 				type="hidden"
 				name="id"
