@@ -104,6 +104,7 @@ textarea
     padding: 5px;
 }
 
+
 label
 {
     display: inline-block;
@@ -112,6 +113,7 @@ label
     padding: 5px 0;
 
     text-align: left;
+    
 }
 
 main
@@ -155,3 +157,33 @@ td
 {
     padding: 8px;
 }
+
+th{
+	background : #d1d1d1;
+}
+
+#editRecipeButton{
+	float: right;
+
+}
+
+#recipeName{
+	float: left;
+	font-size: 1.8em;
+	font-weight: bold;
+	
+}
+
+
+
+#details{
+	float: right;
+}
+
+.headline{
+	font-size: 1.5em;
+	font-weight: bold;
+	margin: 20px 0 10px;
+}
+
+

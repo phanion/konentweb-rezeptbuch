@@ -61,7 +61,7 @@
 textarea[readonly]
 {
     color: #747474;
-    background-color: #d1d1d1;
+    background-color: transparent;
 }
 
 html,

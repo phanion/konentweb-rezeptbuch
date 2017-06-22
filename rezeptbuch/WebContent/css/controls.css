@@ -92,6 +92,8 @@ input + .button-input-search
 	border-bottom-left-radius: 0;
 }
 
+
+
 button[name="deleteAbo"] {
 	float: right;
 }
