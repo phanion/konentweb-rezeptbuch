@@ -24,14 +24,14 @@
 		var Menge = document.createElement("input");
 		Menge.setAttribute("type", "number");
 		Menge.setAttribute("name", "zutatenMenge");
-		Menge.setAttribute("id", "zutatenMenge");
+		Menge.setAttribute("class", "zutatenMenge");
 		Menge.setAttribute("placeholder", "Menge");
 		Menge.setAttribute("required", "");
 
 		var Einheit = document.createElement("select");
 
 		Einheit.setAttribute("name", "zutatenEinheit");
-		Einheit.setAttribute("id", "zutatenEinheit");
+		Einheit.setAttribute("class", "zutatenEinheit");
 		Einheit.setAttribute("placeholder", "Einheit");
 		Einheit.setAttribute("required", "");
 		Einheit.setAttribute("size", "1");
@@ -59,7 +59,7 @@
 
 		Zutat.setAttribute("type", "text");
 		Zutat.setAttribute("name", "zutatenZutat");
-		Zutat.setAttribute("id", "zutatenZutat")
+		Zutat.setAttribute("class", "zutatenZutat")
 		Zutat.setAttribute("placeholder", "Zutat");
 		Zutat.setAttribute("required", "");
 
