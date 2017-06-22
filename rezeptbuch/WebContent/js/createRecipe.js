@@ -13,6 +13,12 @@
 	
 
 	function add() {
+		
+		var divNewLine = document.createElement("div");
+		
+		// Div erhält die Klasse "NewLine" um später auf alle zugreifen zu können
+		divNewLine.setAttribute("class", "newLine");
+		
 		//http://stackoverflow.com/questions/34127450/dynamically-add-forminput-textbox-in-jsp
 		var paragraph = document.createElement("P")
 		var Menge = document.createElement("input");
@@ -56,12 +62,27 @@
 		Zutat.setAttribute("id", "zutatenZutat")
 		Zutat.setAttribute("placeholder", "Zutat");
 		Zutat.setAttribute("required", "");
-		paragraph.appendChild(Menge);
-		paragraph.appendChild(Einheit);
-		paragraph.appendChild(Zutat);
 
+		var Button = document.createElement("button");
+		
+		Button.setAttribute("type", "button");
+		Button.setAttribute("name", "deleteIng");
+		Button.setAttribute("class", "deleteIng button");
+		Button.innerHTML = "X";
+		
+		Button.addEventListener('click', del);
+		
+		divNewLine.appendChild(Menge);
+		divNewLine.appendChild(Einheit);
+		divNewLine.appendChild(Zutat);
+		divNewLine.appendChild(Button);
+		
 		var div = document.getElementById("zutaten");
-		div.appendChild(paragraph);
+		div.appendChild(divNewLine);
+	}
+	
+	function del() {
+		this.parentNode.outerHTML = "";
 	}
 	
 	function resizeTextareas(){
