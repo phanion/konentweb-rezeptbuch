@@ -10,26 +10,24 @@
 
 <c:choose>
 	<c:when test="${not empty recipes}">
-		<c:forEach
-			items="${recipes}"
-			var="recipe">
+		<c:forEach items="${recipes}" var="recipe">
 			<div class="search-entry clearfix">
-			
+
 				<h2>
-					<a
-						class="recipe-title"
+					<a class="recipe-title"
 						href="/rezeptbuch/LoadRecipeServlet?id=${recipe.id}">${recipe.name}</a>
 				</h2>
 
 				<c:if test="${not empty recipe.filename}">
 					<a href="/rezeptbuch/LoadRecipeServlet?id=${recipe.id}"><img
-						src="../LoadImage?id=${recipe.id}&table=recipes"
-						width="250"
-						height="200"
-						class="search-img"
+						src="../LoadImage?id=${recipe.id}&table=recipes" width="250"
+						height="200" class="search-img"
 						alt="Ein Foto vom Rezept ${recipe.name}"></a>
 				</c:if>
 				<dl>
+				<dt>Autor</dt>
+					<dd>${recipe.getCreator().getFirstName()}
+						${recipe.getCreator().getLastName()}</dd>
 					<dt>Bewertung</dt>
 					<dd>
 						<c:choose>
@@ -39,9 +37,9 @@
 					</dd>
 					<dt>Erstellt am:</dt>
 					<dd>${recipe.timestampToDate(recipe.created) }</dd>
-					<dt>Letzte Änderung:</dt>
-					<dd>${recipe.timestampToDate(recipe.modified) }</dd>
 				</dl>
+				<button name="deleteAbo" class="button" type="button">Deabonnieren</button>
+				<input type="hidden" name="id" value="${recipe.getId()}"/>
 			</div>
 		</c:forEach>
 	</c:when>

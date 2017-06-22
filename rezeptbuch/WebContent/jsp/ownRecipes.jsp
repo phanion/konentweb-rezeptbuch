@@ -1,6 +1,4 @@
 <!-- Autor: Lorenz, Anpassung für AJAX: Michael-->
-<!-- kann eigentlich gelöscht werden, da über generische showrecipes.jsp ersetzt
-	 Nur bei Aufruf, sollte noch eine passende 'noentrymessage' als attribut mitgegeben werden -->
 
 <%@ page
 	errorPage="errorpage.jsp"

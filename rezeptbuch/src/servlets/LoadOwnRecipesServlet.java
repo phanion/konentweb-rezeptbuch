@@ -53,19 +53,19 @@ public class LoadOwnRecipesServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		User u = (User) request.getSession().getAttribute("user");
+		User user = (User) request.getSession().getAttribute("user");
 
 		try {
-			List<RezeptBean> recipes = loadRecipes(u);
+			List<RezeptBean> recipes = loadRecipes(user);
 			request.setAttribute("recipes", recipes);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		request.setAttribute("noentrymessage", "Sie noch keine Rezepte erstellt!");
+		request.setAttribute("noentrymessage", "Sie haben noch keine Rezepte erstellt!");
 		
-		RequestDispatcher disp = request.getRequestDispatcher("/jsp/showrecipes.jsp");
+		RequestDispatcher disp = request.getRequestDispatcher("/jsp/ownRecipes.jsp");
 		disp.forward(request, response);
 	}
 

@@ -42,17 +42,14 @@
 		<button
 			id="profileDataButton"
 			type="button"
-			style="flex: 1; border-top-right-radius: 0; border-bottom-right-radius: 0;"
 			class="button">Deine Profildaten</button>
 		<button
 			id="ownRecipesButton"
 			type="button"
-			style="flex: 1; border-radius: 0"
 			class="button-secondary">Eigene Rezepte</button>
 		<button
 			id="savedRecipesButton"
 			type="button"
-			style="flex: 1; border-top-left-radius: 0; border-bottom-left-radius: 0;"
 			class="button-secondary">Gemerkte Rezepte</button>
 	</div>
 

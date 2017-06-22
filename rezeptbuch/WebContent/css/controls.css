@@ -74,7 +74,27 @@ input + .button-input-search
 
 }
 
+#button-bar > button{
+	flex: 1;
+}
 
+#profileDataButton{
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+#ownRecipesButton {
+	border-radius: 0;
+}
+
+#savedRecipesButton {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+button[name="deleteAbo"] {
+	float: right;
+}
 
 input
 {

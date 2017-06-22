@@ -1,5 +1,5 @@
 /**
- * @author: Flo + Michael
+ * @author: Flo + Michael, Lorenz
  */
 'use strict';
 
@@ -25,6 +25,11 @@ function init() {
 
 	var savedRecipesButton = document.getElementById('savedRecipesButton');
 	savedRecipesButton.addEventListener('click', getSaved);
+	
+
+	
+
+	
 
 }
 
@@ -43,6 +48,7 @@ var getSaved = function() {
 			contentDiv.innerHTML = xhr.responseText;
 			
 			manageColors(savedRecipesButton);
+			addEventListenersAbos();
 		}
 	};
 
@@ -127,4 +133,31 @@ function manageColors(callingButton) {
 			b.classList.add('button-secondary');
 		}
 	}
+}
+
+function deleteAbo(){
+	var parent = this.parentElement;
+	
+	//https://www.w3schools.com/jsref/prop_element_nextelementsibling.asp
+	var recipe = this.nextElementSibling.value;
+	var action = 'deleteAbo';
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			parent.outerHTML = "";
+		}
+	}
+	xmlhttp.open('POST', '../AboHandlingServlet', true);
+	xmlhttp.setRequestHeader('Content-Type',
+			'application/x-www-form-urlencoded');
+	xmlhttp.send('recipe=' + recipe + '&action=' + action);
+	
+}
+
+function addEventListenersAbos(){
+	var elements = document.getElementsByName('deleteAbo');
+	
+	for (var i = 0; i < elements.length; i++) {
+		elements[i].addEventListener('click', deleteAbo)		
+		}
 }

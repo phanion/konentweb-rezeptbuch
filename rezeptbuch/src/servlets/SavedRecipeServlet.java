@@ -1,3 +1,7 @@
+/**
+ * Überarbeitung: Lorenz
+ */
+
 package servlets;
 
 import java.io.IOException;
@@ -83,21 +87,27 @@ public class SavedRecipeServlet extends HttpServlet {
 
 		try (Connection con = ds.getConnection();
 				PreparedStatement pStatement = con.prepareStatement(
-						"select r.* from rezeptbuch.recipes r join rezeptbuch.abos a on (r.id = a.recipe) where a.user = ?");
+						"select recipes.*, users.id, users.firstName, users.lastName from recipes inner join abos on abos.recipe = recipes.id inner join users on recipes.creator = users.id where abos.user=?");
 				) {
 			pStatement.setLong(1, user.getId());
 			ResultSet rs = pStatement.executeQuery();
 
 			while (rs.next()) {
 				RezeptBean recipe = new RezeptBean();
-
-				recipe.setId(rs.getLong("ID"));
-				recipe.setName(rs.getString("name"));
-				recipe.setRatingCount(rs.getInt("ratingCount"));
-				recipe.setRatingSum(rs.getInt("ratingSum"));
-				recipe.setFilename(rs.getString("filename"));
-				recipe.setCreated(rs.getTimestamp("created"));
-				recipe.setModified(rs.getTimestamp("modified"));
+				User creator = new User();
+				
+				recipe.setId(rs.getLong("recipes.ID"));
+				recipe.setName(rs.getString("recipes.name"));
+				recipe.setRatingCount(rs.getInt("recipes.ratingCount"));
+				recipe.setRatingSum(rs.getInt("recipes.ratingSum"));
+				recipe.setFilename(rs.getString("recipes.filename"));
+				recipe.setCreated(rs.getTimestamp("recipes.created"));
+				recipe.setModified(rs.getTimestamp("recipes.modified"));
+				
+				recipe.setCreator(creator);
+				recipe.getCreator().setId(rs.getLong("users.id"));
+				recipe.getCreator().setFirstName(rs.getString("users.firstName"));
+				recipe.getCreator().setLastName(rs.getString("users.lastName"));
 
 				recipes.add(recipe);
 			}
