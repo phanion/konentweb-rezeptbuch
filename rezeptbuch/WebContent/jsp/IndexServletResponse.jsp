@@ -12,8 +12,7 @@
 	uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-
-<h1>Die neuesten Rezepte</h1>
+<h2>Die neuesten Rezepte</h2>
 <c:forEach
 	items="${recipeList}"
 	var="recipe">
