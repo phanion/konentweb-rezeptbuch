@@ -94,6 +94,7 @@ var getProfileData = function() {
 					refreshPage);
 
 			manageColors(profileDataButton);
+			resizeTextareas();
 		}
 	};
 
@@ -114,7 +115,8 @@ function edit() {
 	}
 
 	// Beschreibung editierbar setzen
-	document.getElementsByTagName('textarea')[0].disabled = false;
+	document.getElementsByTagName('textarea')[0].removeAttribute("readonly");
+	document.getElementById('beschreibung').addEventListener('input', resizeTextareas);
 }
 
 function refreshPage() {
@@ -160,4 +162,19 @@ function addEventListenersAbos(){
 	for (var i = 0; i < elements.length; i++) {
 		elements[i].addEventListener('click', deleteAbo)		
 		}
+}
+
+function resizeTextareas(){
+	var textareas = document.getElementsByTagName("textarea");
+	
+	for(var i = 0; i < textareas.length; i++){
+		var rowsCount = textareas[i].value.split(/\n|\r/).length;
+		textareas[i].setAttribute("rows", rowsCount);
+		
+		//https://stackoverflow.com/questions/4814398/how-can-i-check-if-a-scrollbar-is-visible
+		while(textareas[i].scrollHeight > textareas[i].clientHeight){
+			rowsCount = rowsCount + 1;
+			textareas[i].setAttribute("rows", rowsCount);
+		}
+	}
 }
