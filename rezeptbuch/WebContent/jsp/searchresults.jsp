@@ -28,7 +28,7 @@
 			test="${not(tmap['filename'] eq null or fn:length(tmap['filename']) eq 0)}">
 			<a href="/rezeptbuch/LoadRecipeServlet?id=${tmap['recipeID']}"><img
 				alt="Ein Bild von ${tmap['recipename']}"
-				class="search-img"
+				class="preview-img"
 				src="../LoadImage?id=${tmap['recipeID']}&table=recipes"
 				width="200"
 				height="180"></a>

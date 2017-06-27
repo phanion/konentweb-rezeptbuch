@@ -26,6 +26,7 @@
 				src="LoadImage?id=${recipe.id}&table=recipes"
 				width="250"
 				height="200"
+				class="preview-img"
 				alt="Ein Foto vom Rezept ${recipe.name}"></a>
 		</c:if>
 		<dl>

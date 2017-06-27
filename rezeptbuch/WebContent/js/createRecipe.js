@@ -17,7 +17,7 @@
 		var divNewLine = document.createElement("div");
 		
 		// Div erhält die Klasse "NewLine" um später auf alle zugreifen zu können
-		divNewLine.setAttribute("class", "newLine");
+		divNewLine.setAttribute("class", "newLine clearfix");
 		
 		//http://stackoverflow.com/questions/34127450/dynamically-add-forminput-textbox-in-jsp
 		var paragraph = document.createElement("P")
@@ -27,6 +27,7 @@
 		Menge.setAttribute("class", "zutatenMenge");
 		Menge.setAttribute("placeholder", "Menge");
 		Menge.setAttribute("required", "");
+		Menge.setAttribute("min", "1");
 
 		var Einheit = document.createElement("select");
 
@@ -37,7 +38,7 @@
 		Einheit.setAttribute("size", "1");
 
 		var einheiten = [ "Stück", "Liter", "Milliliter", "Teelöffel",
-			"Esslöffel", "Tasse", "Gramm", "Kilogramm", "Prise",
+			"Esslöffel", "Tasse", "Gramm", "Centiliter", "Kilogramm", "Prise",
 			"sonstiges" ];
 		
 		

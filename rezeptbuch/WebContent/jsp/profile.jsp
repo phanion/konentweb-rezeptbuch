@@ -53,11 +53,12 @@
 			class="button-secondary">Gemerkte Rezepte</button>
 	</div>
 
+	
+
+	<div id="contentDiv">
 	<c:if test="${not empty message}">
 		<h2>${message}</h2>
 	</c:if>
-
-	<div id="contentDiv">
 		<form
 			action="/rezeptbuch/EditProfileServlet"
 			method="post">

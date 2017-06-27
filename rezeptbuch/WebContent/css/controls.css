@@ -129,3 +129,7 @@ input[type='search']:focus
     color: #424b54;
     background-color: #fff;
 }
+
+button[name="deltetIng"]{
+	padding: 5px;
+}

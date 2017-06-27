@@ -41,7 +41,7 @@
     background: #fff;
 }
 
-.search-img
+.preview-img
 {
     float: left;
 
@@ -51,7 +51,7 @@
     object-fit: cover;
 }
 
-.search-img ~ dl,
+.preview-img ~ dl,
 a ~ dl
 {
     width: 70%;
@@ -154,4 +154,27 @@ th,
 td
 {
     padding: 8px;
+}
+
+.newLine > * {
+	float: left;
+}
+
+.zutatenZutat{
+	margin-left: 5px;
+}
+
+.zutatenEinheit{
+	margin: 10px 5px 10px 5px;
+	padding: 4px;
+}
+
+input[type="number"]{
+	width: 3em;
+}
+
+.rec-img {
+    width: 100%;
+    height: auto;
+    margin: 10px 0 30px;
 }

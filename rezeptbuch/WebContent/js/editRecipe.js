@@ -33,7 +33,7 @@ function edit() {
 	var elements = document.getElementsByName("zutatenEinheit");
 	var menge = document.getElementsByName("zutatenMenge");
 	var einheiten = [ "Stück", "Liter", "Milliliter", "Teelöffel", "Esslöffel",
-			"Tasse", "Gramm", "Kilogramm", "Prise", "sonstiges" ];
+			"Tasse", "Gramm", "Kilogramm", "Centiliter", "Prise", "sonstiges" ];
 	var selected = document.getElementsByClassName("selectedValue");
 
 	/*
@@ -89,7 +89,7 @@ function add() {
 	var divNewLine = document.createElement("div");
 	
 	// Div erhält die selbe Klasse wie die bereits erstellten Zutaten-Reihen, um später auf alle zugreifen zu können
-	divNewLine.setAttribute("class", "newLine");
+	divNewLine.setAttribute("class", "newLine clearfix");
 	
 	var Menge = document.createElement("input");
 	Menge.setAttribute("type", "number");
@@ -97,6 +97,7 @@ function add() {
 	Menge.setAttribute("class", "zutatenMenge");
 	Menge.setAttribute("placeholder", "Menge");
 	Menge.setAttribute("required", "");
+	Menge.setAttribute("min", "1");
 
 	var Einheit = document.createElement("select");
 
@@ -107,7 +108,7 @@ function add() {
 	Einheit.setAttribute("size", "1");
 
 	var einheiten = [ "Stück", "Liter", "Milliliter", "Teelöffel", "Esslöffel",
-			"Tasse", "Gramm", "Kilogramm", "Prise", "sonstiges" ];
+			"Tasse", "Gramm", "Kilogramm", "Centiliter", "Prise", "sonstiges" ];
 
 	var options = [];
 
