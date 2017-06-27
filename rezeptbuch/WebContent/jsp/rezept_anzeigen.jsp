@@ -1,8 +1,13 @@
 <!-- Autor Flo, Lorenz, Michael -->
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page errorPage="errorpage.jsp" language="java"
-	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib
+	prefix="c"
+	uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page
+	errorPage="errorpage.jsp"
+	language="java"
+	contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 
 <!DOCTYPE html>
@@ -110,6 +115,114 @@
 							value="${ingredient.unit}">
 						<button type="button" class="button deleteIng" name="deleteIng"
 							value="Zutat entfernen">X</button>
+			<div
+				id="ingredientContainer"
+				class="hidden-block">
+				<c:forEach
+					var="ingredient"
+					items="${rezept.ingredients}">
+					<div class="newLine">
+					<input
+						type="number"
+						name="zutatenMenge"
+						class="zutatenMenge"
+						placeholder="Menge"
+						required
+						value="${ingredient.quantity}">
+					<select
+						name="zutatenEinheit"
+						class="zutatenEinheit"></select>
+					<input
+						type="text"
+						name="zutatenZutat"
+						class="zutatenZutat"
+						placeholder="Zutat"
+						required
+						value="${ingredient.ingredient}">
+					<!--  ein versteckter Input, um in Javascript die ausgewählte Einheit zu setzen -->
+					<input
+						type="hidden"
+						name="selectedValue"
+						class="selectedValue"
+						required
+						value="${ingredient.unit}">
+					<button
+						type="button"
+						class="button deleteIng"
+						name="deleteIng"
+						value="Zutat entfernen">X</button>
+			<div
+				id="ingredientContainer"
+				class="hidden-block">
+				<c:forEach
+					var="ingredient"
+					items="${rezept.ingredients}">
+					<div class="newLine">
+					<input
+						type="number"
+						name="zutatenMenge"
+						class="zutatenMenge"
+						placeholder="Menge"
+						required
+						value="${ingredient.quantity}">
+					<select
+						name="zutatenEinheit"
+						class="zutatenEinheit"></select>
+					<input
+						type="text"
+						name="zutatenZutat"
+						class="zutatenZutat"
+						placeholder="Zutat"
+						required
+						value="${ingredient.ingredient}">
+					<!--  ein versteckter Input, um in Javascript die ausgewählte Einheit zu setzen -->
+					<input
+						type="hidden"
+						name="selectedValue"
+						class="selectedValue"
+						required
+						value="${ingredient.unit}">
+					<button
+						type="button"
+						class="button deleteIng"
+						name="deleteIng"
+						value="Zutat entfernen">X</button>
+			<div
+				id="ingredientContainer"
+				class="hidden-block">
+				<c:forEach
+					var="ingredient"
+					items="${rezept.ingredients}">
+					<div class="newLine">
+					<input
+						type="number"
+						name="zutatenMenge"
+						class="zutatenMenge"
+						placeholder="Menge"
+						required
+						value="${ingredient.quantity}">
+					<select
+						name="zutatenEinheit"
+						class="zutatenEinheit"></select>
+					<input
+						type="text"
+						name="zutatenZutat"
+						class="zutatenZutat"
+						placeholder="Zutat"
+						required
+						value="${ingredient.ingredient}">
+					<!--  ein versteckter Input, um in Javascript die ausgewählte Einheit zu setzen -->
+					<input
+						type="hidden"
+						name="selectedValue"
+						class="selectedValue"
+						required
+						value="${ingredient.unit}">
+					<button
+						type="button"
+						class="button deleteIng"
+						name="deleteIng"
+						value="Zutat entfernen">X</button>
 					</div>
 				</c:forEach>
 			</div>
