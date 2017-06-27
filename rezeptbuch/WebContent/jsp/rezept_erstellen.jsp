@@ -77,10 +77,11 @@
 				id="servings" placeholder="Hier die Schwierigkeit angeben"
 				type="number" max="99" min="0" value="0" />
 		</p>
-		<p>
+		<div>
 			<label for="image" class="file-upload-label">Bild auswählen ...</label> <input type="file"
 				name="image" id="image" accept="image/*">
-		</p>
+			<span id="imagefilename"></span>
+		</div>
 		<p>
 			<!--  Input Type Submit soll laut Skript nicht verwendet werden (02_HTML -> Seite 54) -->
 			<button name="absenden" class="button" type="submit">Absenden</button>
