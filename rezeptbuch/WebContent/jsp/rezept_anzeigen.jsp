@@ -147,6 +147,7 @@
 						name="zutatenMenge"
 						class="zutatenMenge"
 						placeholder="Menge"
+						required
 						value="${ingredient.quantity}">
 					<select
 						name="zutatenEinheit"
@@ -156,12 +157,14 @@
 						name="zutatenZutat"
 						class="zutatenZutat"
 						placeholder="Zutat"
+						required
 						value="${ingredient.ingredient}">
 					<!--  ein versteckter Input, um in Javascript die ausgewählte Einheit zu setzen -->
 					<input
 						type="hidden"
 						name="selectedValue"
 						class="selectedValue"
+						required
 						value="${ingredient.unit}">
 					<button
 						type="button"
