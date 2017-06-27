@@ -101,99 +101,14 @@
 				</c:forEach>
 			</table>
 
-			<div id="ingredientContainer" class="hidden-block">
-				<c:forEach var="ingredient" items="${rezept.ingredients}">
+
+			<div
+				id="ingredientContainer"
+				class="hidden-block">
+				<c:forEach
+					var="ingredient"
+					items="${rezept.ingredients}">
 					<div class="newLine clearfix">
-						<input type="number" name="zutatenMenge" class="zutatenMenge"
-							placeholder="Menge" value="${ingredient.quantity}">
-						<select
-							name="zutatenEinheit" class="zutatenEinheit"></select> <input
-							type="text" name="zutatenZutat" class="zutatenZutat"
-							placeholder="Zutat" value="${ingredient.ingredient}">
-						<!--  ein versteckter Input, um in Javascript die ausgewählte Einheit zu setzen -->
-						<input type="hidden" name="selectedValue" class="selectedValue"
-							value="${ingredient.unit}">
-						<button type="button" class="button deleteIng" name="deleteIng"
-							value="Zutat entfernen">X</button>
-			<div
-				id="ingredientContainer"
-				class="hidden-block">
-				<c:forEach
-					var="ingredient"
-					items="${rezept.ingredients}">
-					<div class="newLine">
-					<input
-						type="number"
-						name="zutatenMenge"
-						class="zutatenMenge"
-						placeholder="Menge"
-						required
-						value="${ingredient.quantity}">
-					<select
-						name="zutatenEinheit"
-						class="zutatenEinheit"></select>
-					<input
-						type="text"
-						name="zutatenZutat"
-						class="zutatenZutat"
-						placeholder="Zutat"
-						required
-						value="${ingredient.ingredient}">
-					<!--  ein versteckter Input, um in Javascript die ausgewählte Einheit zu setzen -->
-					<input
-						type="hidden"
-						name="selectedValue"
-						class="selectedValue"
-						required
-						value="${ingredient.unit}">
-					<button
-						type="button"
-						class="button deleteIng"
-						name="deleteIng"
-						value="Zutat entfernen">X</button>
-			<div
-				id="ingredientContainer"
-				class="hidden-block">
-				<c:forEach
-					var="ingredient"
-					items="${rezept.ingredients}">
-					<div class="newLine">
-					<input
-						type="number"
-						name="zutatenMenge"
-						class="zutatenMenge"
-						placeholder="Menge"
-						required
-						value="${ingredient.quantity}">
-					<select
-						name="zutatenEinheit"
-						class="zutatenEinheit"></select>
-					<input
-						type="text"
-						name="zutatenZutat"
-						class="zutatenZutat"
-						placeholder="Zutat"
-						required
-						value="${ingredient.ingredient}">
-					<!--  ein versteckter Input, um in Javascript die ausgewählte Einheit zu setzen -->
-					<input
-						type="hidden"
-						name="selectedValue"
-						class="selectedValue"
-						required
-						value="${ingredient.unit}">
-					<button
-						type="button"
-						class="button deleteIng"
-						name="deleteIng"
-						value="Zutat entfernen">X</button>
-			<div
-				id="ingredientContainer"
-				class="hidden-block">
-				<c:forEach
-					var="ingredient"
-					items="${rezept.ingredients}">
-					<div class="newLine">
 					<input
 						type="number"
 						name="zutatenMenge"
