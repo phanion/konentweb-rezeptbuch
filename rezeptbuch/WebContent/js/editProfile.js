@@ -115,7 +115,7 @@ function edit() {
 	}
 
 	// Beschreibung editierbar setzen
-	document.getElementsByTagName('textarea')[0].removeAttribute("readonly");
+	document.getElementsByTagName('textarea')[0].removeAttribute("disabled");
 	document.getElementById('beschreibung').addEventListener('input', resizeTextareas);
 }
 

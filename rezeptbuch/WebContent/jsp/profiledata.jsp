@@ -57,7 +57,7 @@
 			id="beschreibung"
 			class="textarea-transitional"
 			placeholder="Ihre Profilbeschreibung"
-			readonly>${user.description}</textarea>
+			disabled>${user.description}</textarea>
 	</p>
 
 	<button

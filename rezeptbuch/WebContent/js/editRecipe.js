@@ -81,7 +81,7 @@ function edit() {
 	document.getElementById("recipeName").removeAttribute("disabled");
 	
 	// Beschreibung editierbar setzen
-	document.getElementsByTagName("textarea")[0].removeAttribute("readonly");
+	document.getElementsByTagName("textarea")[0].removeAttribute("disabled");
 }
 
 function add() {

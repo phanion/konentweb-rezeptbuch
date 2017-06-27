@@ -131,7 +131,6 @@
 						type="hidden"
 						name="selectedValue"
 						class="selectedValue"
-						required
 						value="${ingredient.unit}">
 					<button
 						type="button"
@@ -151,7 +150,7 @@
 			<div id="editRecipe">
 
 				<label for="description">Beschreibung:</label>
-				<textarea readonly name="description" id="description"
+				<textarea disabled name="description" id="description"
 					class="textarea-transitional" required maxlength="2500">${rezept.description}</textarea>
 
 
@@ -252,8 +251,8 @@
 					<label class="labelfortextarea" for="newComment">Kommentar
 						abgeben:</label>
 					<textarea name="newComment" id="newComment"
-						placeholder="Kommentar verfassen..." cols="50" rows="7" required
-						maxlength="2500"></textarea>
+						placeholder="Kommentar verfassen..."  
+						maxlength="2500" required></textarea>
 				</p>
 				<button id="commentButton" class="button" type="button">Kommentieren</button>
 			</form>
