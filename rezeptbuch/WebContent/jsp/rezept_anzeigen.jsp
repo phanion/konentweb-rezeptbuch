@@ -226,25 +226,19 @@
 
 	<div id="Kommentare">
 		<h2>Kommentare</h2>
-		<table id="commentsTable">
-			<tr>
-				<th>Nutzer</th>
-				<th>Kommentar</th>
-			</tr>
+		<div id="comments">
 			<c:forEach var="comment" items="${rezept.comments}">
-				<tr>
-					<td>${comment.author.firstName} ${comment.author.lastName}</td>
-					<td>${comment.comment}</td>
+				<div class="commentBox">
+					<h4>${comment.author.firstName} ${comment.author.lastName}:</h4>
+					<div class="commentContent">${comment.comment}</div>
 					<c:if test="${not empty user}">
 						<c:if test="${user.id == comment.author.id}">
-							<td><a
-								href="/rezeptbuch/DeleteCommentServlet?id=${comment.id}&recipe=${rezept.id}">Löschen</a></td>
+							<a href="/rezeptbuch/DeleteCommentServlet?id=${comment.id}&recipe=${rezept.id}">Löschen</a>
 						</c:if>
 					</c:if>
-				</tr>
+				</div>
 			</c:forEach>
-		</table>
-
+		</div>
 		<c:if test="${not empty user}">
 			<form id="commentForm">
 				<p>
