@@ -60,7 +60,7 @@ public class RatingServlet extends HttpServlet {
 			recipe.setId(Long.parseLong(request.getParameter("recipe")));
 
 			// Returns ave
-			response.getWriter().append(recipe.calculateRatingInt().toString());
+			response.getWriter().append(recipe.calculateRatingFloat().toString());
 
 		} catch (SQLException e) {
 			e.printStackTrace();

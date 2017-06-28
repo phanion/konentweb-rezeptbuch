@@ -8,6 +8,7 @@
 	    var ratingForm = document.getElementById('rating-form');
 	    var ratingFormRadios = document.forms['rating-form'].elements['rating'];
 	    var ratingResultBox = document.getElementById('current-rating');
+	    var ratingCalculated = document.getElementById('rating-label');
 
 
 	    // Listener für Radiobuttons (Sternchen-Bewertung)
@@ -34,7 +35,8 @@
 	            		ratingResultBox.innerHTML = 'Das Rezept wurde noch nicht bewertet';
 	            	}
 	            	else {
-	            		ratingResultBox.innerHTML = 'Die aktuelle Rezeptbewertung ist: ' + recipeRating;
+	            		ratingCalculated.innerHTML = recipeRating;
+	            		
 	            	}
 	            }	            
 	        }

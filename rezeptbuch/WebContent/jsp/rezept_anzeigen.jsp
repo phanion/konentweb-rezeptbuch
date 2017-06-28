@@ -214,8 +214,8 @@
 		<%-- unicode-#: &#9734 - empty star (white star)--%>
 		<%-- tutorial: https://css-tricks.com/star-ratings/ --%>
 
-		<pre id="current-rating">Aktuelle Bewertung ${rezept.calculateRatingInt()}</pre>
-
+		<div id="current-rating"></div>
+		
 		<c:choose>
 			<c:when test="${not empty user }">
 				<form id="rating-form" name="rating-form"
@@ -236,7 +236,9 @@
 							value="1" /> <label class="star-label" for="star1"
 							title="sucks big time">1 star</label>
 					</fieldset>
+				<label id="rating-label" for="rating-form">${rezept.calculateRatingFloat()}</label>
 				</form>
+				
 
 				<div style="clear: both;"></div>
 			</c:when>
