@@ -46,7 +46,7 @@
     overflow: hidden;
 
     width: 1em;
-    padding: 0 .1em;
+    padding: 0 .15em;
 
     cursor: pointer;
     white-space: nowrap;
@@ -56,7 +56,7 @@
 
 
 .rating:not(:checked) > label:before {
-    content: '★ ';
+    content: '\2605'; /* ★ */
 }
 
 .rating > input:checked ~ label

@@ -11,10 +11,12 @@ function init() {
 			addComment);
 	document.getElementById('aboButton').addEventListener('click', aboHandling);
 	
-	resizeTextareas();
-	document.getElementById('description').addEventListener('input', resizeTextareas);
-	document.getElementById('newComment').addEventListener('input', resizeTextareas);
 	
+	manageTextareas();
+//	resizeTextareas();
+//	document.getElementById('description').addEventListener('input', resizeTextareas);
+//	document.getElementById('newComment').addEventListener('input', resizeTextareas);
+
 }
 
 //Die sichtbare Ausführung ist wegen dem Versand von Mails leicht verzögert.
@@ -78,17 +80,46 @@ function aboHandling() {
 
 }
 
-function resizeTextareas(){
-	var textareas = document.getElementsByTagName("textarea");
+//function resizeTextareas(){
+//	var textareas = document.getElementsByTagName("textarea");
+//	
+//	for(var i = 0; i < textareas.length; i++){
+//		var rowsCount = textareas[i].value.split(/\n|\r/).length;
+//		textareas[i].setAttribute("rows", rowsCount);
+//		
+//		// https://stackoverflow.com/questions/4814398/how-can-i-check-if-a-scrollbar-is-visible
+//		while(textareas[i].scrollHeight > textareas[i].clientHeight){
+//			rowsCount = rowsCount + 1;
+//			textareas[i].setAttribute("rows", rowsCount);
+//		}
+//	}
+//}
+
+
+/*
+ * Angelehnt an:
+ * https://stackoverflow.com/questions/2803880/is-there-a-way-to-get-a-textarea-to-stretch-to-fit-its-content-without-using-php
+ * Wir haben keine reine CSS Lösung dafür gefunden, daher hier Verwendung von
+ * JavaScript für Darstellung
+ */
+var manageTextareas = function() {
+	var textareas = document.getElementsByTagName('textarea');
 	
-	for(var i = 0; i < textareas.length; i++){
-		var rowsCount = textareas[i].value.split(/\n|\r/).length;
-		textareas[i].setAttribute("rows", rowsCount);
+	for(let ta of textareas) {
+		ta.addEventListener('change',  sizeTextarea);
+		ta.addEventListener('keydown',  sizeTextarea);
+		ta.addEventListener('keyup',  sizeTextarea);
+		ta.addEventListener('paste',  sizeTextarea);
+		ta.addEventListener('cut',  sizeTextarea);
 		
-		//https://stackoverflow.com/questions/4814398/how-can-i-check-if-a-scrollbar-is-visible
-		while(textareas[i].scrollHeight > textareas[i].clientHeight){
-			rowsCount = rowsCount + 1;
-			textareas[i].setAttribute("rows", rowsCount);
-		}
+		// Einmal anfangs auslösen --> TA wird gesizet.
+		var event = new Event('change');
+		ta.dispatchEvent(event);
 	}
+}
+
+var sizeTextarea = function() {
+	this.style.height = 1;
+	this.style.height = this.scrollHeight+'px';
+	
 }

@@ -18,7 +18,7 @@
 		name="id"
 		class="id"
 		value="${user.id}">
-	<p>
+	
 		<label for="vorname">Vorname</label>
 		<input
 			type="text"
@@ -27,8 +27,8 @@
 			placeholder="Ihr Vorname"
 			disabled
 			value="${user.firstName}">
-	</p>
-	<p>
+	
+	
 		<label for="nachname">Nachname</label>
 		<input
 			type="text"
@@ -37,8 +37,8 @@
 			placeholder="Ihr Nachname"
 			disabled
 			value="${user.lastName}">
-	</p>
-	<p>
+	
+	
 		<label for="mail">E-Mail</label>
 		<input
 			type="text"
@@ -47,8 +47,8 @@
 			placeholder="Ihre E-Mail"
 			disabled
 			value="${user.mail}">
-	</p>
-	<p>
+	
+	
 		<label
 			class="labelfortextarea"
 			for="beschreibung">Profilbeschreibung</label>
@@ -57,8 +57,8 @@
 			id="beschreibung"
 			class="textarea-transitional"
 			placeholder="Ihre Profilbeschreibung"
-			readonly>${user.description}</textarea>
-	</p>
+			disabled>${user.description}</textarea>
+	
 
 	<button
 		type="button"

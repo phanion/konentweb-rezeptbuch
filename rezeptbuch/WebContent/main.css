@@ -9,7 +9,7 @@
 
 
 /* Google Font importieren: https://fonts.google.com */
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
 @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono);
 
 /* 
@@ -33,7 +33,7 @@
 
 
 /*
-	Die Seite läuft wie gewünscht bei einer Bildschirmbreite von [TODO: Aktualisieren],
+	Die Seite läuft wie gewünscht bei einer Bildschirmbreite von >= 1080px,
  	sonst kommt es aufgrund der Minimalbreite von Buttons zu einem Umbruch in den Suchleisten 
  */
 
@@ -54,19 +54,24 @@
 
     color: #424b54;
     border: 0;
-/* 	border: 1px solid red; */
 }
 
-*:DISABLED, 
-textarea[readonly]
+*:disabled
 {
     color: #747474;
-    background-color: #d1d1d1;
+    background: #d1d1d1;
+}
+
+form *:disabled,
+input[form]:disabled 
+{
+	color: #424b54;
+	background: #e8e8e8;
 }
 
 html,
 body
 {
-	/* Default-Background: Wichtig falls jemand merkwürdige User Agent Stylesheets verwendet */
+	/* Default-Background: Wichtig falls jemand merkwürdige User Agent Stylesheets bzw. Browser-Einstellungen verwendet */
     background: #e8e8e8;
 }

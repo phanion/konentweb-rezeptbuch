@@ -17,10 +17,10 @@
 <title>Rezeptbuch - ${rezept.name}</title>
 
 <script src="${pageContext.request.contextPath}/js/nav.js"></script>
+<script src="${pageContext.request.contextPath}/js/textarea.js"></script>
 <c:if test="${not empty user}">
 	<script src="${pageContext.request.contextPath}/js/viewRecipe.js"></script>
 	<script src="${pageContext.request.contextPath}/js/editRecipe.js"></script>
-
 	<script src="${pageContext.request.contextPath}/js/rating.js"></script>
 </c:if>
 <link rel="stylesheet"
@@ -151,22 +151,45 @@
 			<div id="editRecipe">
 
 				<label for="description">Beschreibung:</label>
-				<textarea readonly name="description" id="description"
+				<textarea disabled name="description" id="description"
 					class="textarea-transitional" required maxlength="2500">${rezept.description}</textarea>
 
 
-				<label for="durationPreparation">Vorbereitungszeit:</label> <input
-					disabled type="number" name="durationPreparation"
-					id="durationPreparation" min="0" max="500"
-					value="${rezept.durationPreparation}"> <br> <label
-					for="durationCooking">Kochzeit:</label> <input disabled
-					type="number" name="durationCooking" id="durationCooking" min="0"
-					max="500" value="${rezept.durationCooking}"> <br> <label
-					for="difficulty">Schwierigkeitsgrad:</label> <input disabled
-					type="number" name="difficulty" id="difficulty" max="5" min="0"
-					value="${rezept.difficulty}"> <br> <label
-					for="servings">Portionen:</label> <input disabled type="number"
-					name="servings" id="servings" max="99" min="0"
+				<label for="durationPreparation">Vorbereitungszeit:</label>
+				<input
+					disabled
+					type="number"
+					name="durationPreparation"
+					id="durationPreparation"
+					min="0"
+					max="500"
+					value="${rezept.durationPreparation}">
+				<label for="durationCooking">Kochzeit:</label>
+				<input
+					disabled
+					type="number"
+					name="durationCooking"
+					id="durationCooking"
+					min="0"
+					max="500"
+					value="${rezept.durationCooking}">
+				<label for="difficulty">Schwierigkeitsgrad:</label>
+				<input
+					disabled
+					type="number"
+					name="difficulty"
+					id="difficulty"
+					max="5"
+					min="0"
+					value="${rezept.difficulty}">
+				<label for="servings">Portionen:</label>
+				<input
+					disabled
+					type="number"
+					name="servings"
+					id="servings"
+					max="99"
+					min="0"
 					value="${rezept.servings}">
 
 			</div>
@@ -177,7 +200,7 @@
 				<button name="save" class="button" type="submit">Speichern</button>
 				<button type="button" class="button" id="refreshButton"
 					name="refresh" value="Verwerfen">Verwerfen</button>
-				<button type="button" class="button" id="deleteButton"
+				<button type="button" class="button-secondary" id="deleteButton"
 					name="deleteButton">Rezept löschen</button>
 			</div>
 
@@ -239,7 +262,8 @@
 					<c:if test="${not empty user}">
 						<c:if test="${user.id == comment.author.id}">
 							<td><a
-								href="/rezeptbuch/DeleteCommentServlet?id=${comment.id}&recipe=${rezept.id}">Löschen</a></td>
+								class="button-del"
+								href="/rezeptbuch/DeleteCommentServlet?id=${comment.id}&recipe=${rezept.id}"></a></td>
 						</c:if>
 					</c:if>
 				</tr>

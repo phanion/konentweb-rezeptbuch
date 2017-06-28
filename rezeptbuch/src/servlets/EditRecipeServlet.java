@@ -110,12 +110,12 @@ public class EditRecipeServlet extends HttpServlet {
 				updateRecipe(rezept);
 				replaceIngredients(rezept);
 				sendAboMails(rezept);
-				message = "Das Rezept wurde erfolgreich geändert!";
+				message = "Das Rezept wurde erfolgreich geÃ¤ndert!";
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		} else {
-			message = "Sie sind nicht berechtigt das Rezept zu ändern.";
+			message = "Sie sind nicht berechtigt das Rezept zu Ã¤ndern.";
 		}
 		request.setAttribute("message", message);
 
@@ -181,7 +181,7 @@ public class EditRecipeServlet extends HttpServlet {
 	 * Autor: Lorenz 
 	 * 
 	 * Es werden die Abonnenten des Rezepts aus der Datenbank
-	 * geladen und per Mail über die Änderung informiert.
+	 * geladen und per Mail ï¿½ber die ï¿½nderung informiert.
 	 * 
 	 * @throws SQLException
 	 */

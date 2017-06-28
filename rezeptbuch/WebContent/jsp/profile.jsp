@@ -53,12 +53,11 @@
 			class="button-secondary">Gemerkte Rezepte</button>
 	</div>
 
-	
 
 	<div id="contentDiv">
-	<c:if test="${not empty message}">
-		<h2>${message}</h2>
-	</c:if>
+		<c:if test="${not empty message}">
+			<h2>${message}</h2>
+		</c:if>
 		<form
 			action="/rezeptbuch/EditProfileServlet"
 			method="post">
@@ -67,47 +66,47 @@
 				name="id"
 				class="id"
 				value="${user.id}">
-			<p>
-				<label for="vorname">Vorname</label>
-				<input
-					type="text"
-					name="vorname"
-					id="vorname"
-					placeholder="Ihr Vorname"
-					disabled
-					value="${user.firstName}">
-			</p>
-			<p>
-				<label for="nachname">Nachname</label>
-				<input
-					type="text"
-					name="nachname"
-					id="nachname"
-					placeholder="Ihr Nachname"
-					disabled
-					value="${user.lastName}">
-			</p>
-			<p>
-				<label for="mail">E-Mail</label>
-				<input
-					type="text"
-					name="mail"
-					id="mail"
-					placeholder="Ihre E-Mail"
-					disabled
-					value="${user.mail}">
-			</p>
-			<p>
-				<label
-					class="labelfortextarea"
-					for="beschreibung">Profilbeschreibung</label>
-				<textarea
-					name="beschreibung"
-					id="beschreibung"
-					class="textarea-transitional"
-					placeholder="Ihre Profilbeschreibung"
-					readonly>${user.description}</textarea>
-			</p>
+
+			<label for="vorname">Vorname</label>
+			<input
+				type="text"
+				name="vorname"
+				id="vorname"
+				placeholder="Ihr Vorname"
+				disabled
+				value="${user.firstName}">
+
+
+			<label for="nachname">Nachname</label>
+			<input
+				type="text"
+				name="nachname"
+				id="nachname"
+				placeholder="Ihr Nachname"
+				disabled
+				value="${user.lastName}">
+
+
+			<label for="mail">E-Mail</label>
+			<input
+				type="text"
+				name="mail"
+				id="mail"
+				placeholder="Ihre E-Mail"
+				disabled
+				value="${user.mail}">
+
+
+			<label
+				class="labelfortextarea"
+				for="beschreibung">Profilbeschreibung</label>
+			<textarea
+				name="beschreibung"
+				id="beschreibung"
+				class="textarea-transitional"
+				placeholder="Ihre Profilbeschreibung"
+				disabled>${user.description}</textarea>
+
 
 			<button
 				type="button"

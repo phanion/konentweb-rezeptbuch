@@ -8,14 +8,14 @@
 
 .button,
 .button-secondary,
-.button-disabled,
-.file-upload-label
+.button-disabled
 {
     font-size: 100%;
-
+	font-weight: normal;
+	
     display: inline-block;
 
-    min-width: 8em;
+/*     min-width: 8em; */
     padding: 10px 25px;
 
     text-align: center;
@@ -43,15 +43,13 @@ input + .button-input-search
 }
 
 
-.button-secondary,
-.file-upload-label
+.button-secondary
 {
     color: #fff;
     background-color: #93a8ac;
 }
 
-.button-secondary:hover,
-.file-upload-label:hover
+.button-secondary:hover
 {
     cursor: pointer;
 
@@ -66,6 +64,19 @@ input + .button-input-search
     background-color: #b9949b;
 }
 
+
+.button-del
+{
+	background: transparent url(../icons/trash_black.png) center center / 25px 25px no-repeat;
+	width: 1em;
+	height: 1.5em;
+	margin: 0;
+	display: inline-block;
+}
+.button-del:hover
+{
+	cursor: pointer;
+}
 
 .textarea-transitional
 {
@@ -98,7 +109,7 @@ button[name="deleteAbo"] {
 
 input
 {
-    margin: 10px 5px 10px 0;
+    margin: 10px 0;
     /* links 0, falls es das erste Element der Zeile ist */
 }
 

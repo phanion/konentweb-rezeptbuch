@@ -7,9 +7,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	// Der Zutaten-Hinzufüge-Button soll auf Klicks hören
 	document.getElementById('addIngredientButton').addEventListener('click',
 			add);
-	resizeTextareas();
-	document.getElementById('description').addEventListener('input',
-			resizeTextareas);
+	
+	manageTextareas();
+//	resizeTextareas();
+//	document.getElementById('description').addEventListener('input',
+//			resizeTextareas);
 	
 	// Text für Filenamen bei File-Änderung aktualisieren
 	var fileinput = document.getElementById('image');
@@ -23,7 +25,7 @@ function add() {
 	// Div erhält die Klasse "NewLine" um später auf alle zugreifen zu können
 	divNewLine.setAttribute("class", "newLine clearfix");
 
-	//http://stackoverflow.com/questions/34127450/dynamically-add-forminput-textbox-in-jsp
+	// http://stackoverflow.com/questions/34127450/dynamically-add-forminput-textbox-in-jsp
 	var paragraph = document.createElement("P")
 	var Menge = document.createElement("input");
 	Menge.setAttribute("type", "number");
@@ -67,8 +69,8 @@ function add() {
 
 	Button.setAttribute("type", "button");
 	Button.setAttribute("name", "deleteIng");
-	Button.setAttribute("class", "deleteIng button");
-	Button.innerHTML = "X";
+	Button.setAttribute("class", "deleteIng button-del");
+	Button.innerHTML = "";
 
 	Button.addEventListener('click', del);
 
@@ -85,22 +87,56 @@ function del() {
 	this.parentNode.outerHTML = "";
 }
 
-function resizeTextareas() {
-	var textareas = document.getElementsByTagName("textarea");
+// function resizeTextareas() {
+// var textareas = document.getElementsByTagName("textarea");
+//
+// for (var i = 0; i < textareas.length; i++) {
+// var rowsCount = textareas[i].value.split(/\n|\r/).length;
+// textareas[i].setAttribute("rows", rowsCount);
+//
+// //https://stackoverflow.com/questions/4814398/how-can-i-check-if-a-scrollbar-is-visible
+// while (textareas[i].scrollHeight > textareas[i].clientHeight) {
+// rowsCount = rowsCount + 1;
+// textareas[i].setAttribute("rows", rowsCount);
+// }
+// }
+// }
 
-	for (var i = 0; i < textareas.length; i++) {
-		var rowsCount = textareas[i].value.split(/\n|\r/).length;
-		textareas[i].setAttribute("rows", rowsCount);
 
-		//https://stackoverflow.com/questions/4814398/how-can-i-check-if-a-scrollbar-is-visible
-		while (textareas[i].scrollHeight > textareas[i].clientHeight) {
-			rowsCount = rowsCount + 1;
-			textareas[i].setAttribute("rows", rowsCount);
-		}
+/*
+ * Angelehnt an:
+ * https://stackoverflow.com/questions/2803880/is-there-a-way-to-get-a-textarea-to-stretch-to-fit-its-content-without-using-php
+ * Wir haben keine reine CSS Lösung dafür gefunden, daher hier Verwendung von
+ * JavaScript für Darstellung
+ */
+var manageTextareas = function() {
+	var textareas = document.getElementsByTagName('textarea');
+	
+	for(let ta of textareas) {
+		ta.addEventListener('change',  sizeTextarea);
+		ta.addEventListener('keydown',  sizeTextarea);
+		ta.addEventListener('keyup',  sizeTextarea);
+		ta.addEventListener('paste',  sizeTextarea);
+		ta.addEventListener('cut',  sizeTextarea);
+		
+		// Einmal anfangs auslösen --> TA wird gesizet.
+		var event = new Event('change');
+		ta.dispatchEvent(event);
 	}
 }
+
+var sizeTextarea = function() {
+	this.style.height = 1;
+	this.style.height = this.scrollHeight+'px';
+	
+}
+
+/*
+ * Funktion liest Wert aus File-Input-Feld --> schreibt diesen in ein Span
+ * hinter dem entsprechenden Label/Button
+ */
 var updateFileName = function() {
-//	var fileinput = document.getElementById('image');
+// var fileinput = document.getElementById('image');
 	var fileinput = document.getElementById('image');
 	var fileinputname = document.getElementById('imagefilename');
 	if (fileinput.value == undefined) {

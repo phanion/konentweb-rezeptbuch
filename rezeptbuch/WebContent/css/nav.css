@@ -172,12 +172,24 @@ nav ul
     list-style-type: none;
 }
 
-nav
-{
+nav {
+	position: relative;
+	height: 70px;
+}
+
+nav form {
+	display: block;
+}
+
+#nav-content {
+	position: fixed;
+	top: 0;
+	
+	width: 100%;
+	
     padding: 0 20%;
 
     background-color: #757c82;
-    
     	
     	
     	display: flex;

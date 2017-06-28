@@ -12,6 +12,15 @@
     content: '.';
 }
 
+/* experimentell */
+form,
+#editRecipe
+{
+	display: flex;
+	flex-flow: row wrap;
+}
+
+
 .hidden-block
 {
 	display: none !important;
@@ -19,7 +28,9 @@
 
 .labelfortextarea
 {
-    display: block;
+    display: inline-block;
+    width: 100%;
+    margin: 10px 0;
 }
 
 .recipe-title
@@ -86,6 +97,10 @@ h1 { margin: 30px 0 10px; }
 h2 { margin: 20px 0 10px; }
 h3 { margin: 10px 0 5px; }
 
+h1, h2, h3, h4, h5, h6 {
+	width: 100%;
+}
+
 input,
 textarea,
 select,
@@ -100,18 +115,34 @@ pre
 input:not([type='button']),
 textarea
 {
-    min-width: 5em;
-    padding: 5px;
+	min-width: 12em;
+}
+
+form button,
+form label
+{
+	margin: 15px 0;
+}
+
+form button + button {
+	margin-left: 10px;
 }
 
 label
 {
     display: inline-block;
-
+	
+	font-weight: bold;
     min-width: 12em;
-    padding: 5px 0;
+/*     padding: 5px 0; */
 
     text-align: left;
+}
+
+form > label,
+form > div > label,
+form label + input {
+	width: 50%;
 }
 
 main
@@ -156,22 +187,51 @@ td
     padding: 8px;
 }
 
-.newLine > * {
-	float: left;
+th a,
+td a
+{
+	vertical-align: middle;
 }
 
-.zutatenZutat{
-	margin-left: 5px;
+.newLine 
+{
+	margin: 15px 0;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+}
+.newLine > *:not(button) {
+	width: 30%
 }
 
-.zutatenEinheit{
-	margin: 10px 5px 10px 5px;
-	padding: 4px;
+.newLine > input,
+.newLine > select
+{
+	padding: 0;
+	margin: 0;
 }
 
-input[type="number"]{
-	width: 3em;
+(.newLine *) ~ (.newLine *):not(button)
+{
+	border-left: #789 1px solid;
 }
+
+#zutaten {
+	width: 100%;
+}
+
+/* .zutatenZutat{ */
+/* 	margin-left: 5px; */
+/* } */
+
+/* .zutatenEinheit{ */
+/* 	margin: 10px 5px 10px 5px; */
+/* 	padding: 4px; */
+/* } */
+
+/*  input[type="number"]{ */
+/* 	width: 3em; */
+/* } */
 
 .rec-img {
     width: 100%;

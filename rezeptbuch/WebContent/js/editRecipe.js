@@ -81,7 +81,7 @@ function edit() {
 	document.getElementById("recipeName").removeAttribute("disabled");
 	
 	// Beschreibung editierbar setzen
-	document.getElementsByTagName("textarea")[0].removeAttribute("readonly");
+	document.getElementsByTagName("textarea")[0].removeAttribute("disabled");
 }
 
 function add() {
@@ -133,8 +133,8 @@ function add() {
 	
 	Button.setAttribute("type", "button");
 	Button.setAttribute("name", "deleteIng");
-	Button.setAttribute("class", "deleteIng button");
-	Button.innerHTML = "X";
+	Button.setAttribute("class", "deleteIng button-del");
+	Button.innerHTML = "";
 	
 	Button.addEventListener('click', del);
 	
