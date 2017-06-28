@@ -114,6 +114,7 @@ function edit() {
 	document.getElementsByTagName('textarea')[0].disabled = false;
 // document.getElementById('beschreibung').addEventListener('input',
 // resizeTextareas);
+
 }
 
 function refreshPage() {

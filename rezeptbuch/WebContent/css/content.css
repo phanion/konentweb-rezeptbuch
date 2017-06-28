@@ -238,3 +238,41 @@ td a
     height: auto;
     margin: 10px 0 30px;
 }
+
+/* Kommentarbox Idee: https://codepen.io/mm241/pen/Choyx */
+.commentBox:before
+{
+    border-color: #bbb rgba(0, 0, 0, 0);
+    border-style: solid;
+    border-width: 8px 8px 0;
+    bottom: -8px;
+    content: "";
+    display: block;
+    left: 20px;
+    position: absolute;
+    width: 0;
+}
+.commentBox:after {
+    border-color: #FFFFFF rgba(0, 0, 0, 0);
+    border-style: solid;
+    border-width: 6px 6px 0;
+    bottom: -6px;
+    content: "";
+    display: block;
+    left: 22px;
+    position: absolute;
+    width: 0;
+}
+.commentBox {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    padding: 10px 10px;
+    position: relative;
+    margin-bottom: 10px;
+    display: table;
+}
+
+.commentContent {
+	word-break: break-all;
+}

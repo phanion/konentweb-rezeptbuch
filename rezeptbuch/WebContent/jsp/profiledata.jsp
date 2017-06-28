@@ -58,8 +58,6 @@
 			class="textarea-transitional"
 			placeholder="Ihre Profilbeschreibung"
 			disabled>${user.description}</textarea>
-	
-
 	<button
 		type="button"
 		class="button"

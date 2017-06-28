@@ -66,7 +66,6 @@
 				name="id"
 				class="id"
 				value="${user.id}">
-
 			<label for="vorname">Vorname</label>
 			<input
 				type="text"
@@ -106,8 +105,6 @@
 				class="textarea-transitional"
 				placeholder="Ihre Profilbeschreibung"
 				disabled>${user.description}</textarea>
-
-
 			<button
 				type="button"
 				class="button"

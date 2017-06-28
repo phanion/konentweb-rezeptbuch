@@ -19,43 +19,60 @@ function init() {
 
 }
 
-//Die sichtbare Ausführung ist wegen dem Versand von Mails leicht verzögert.
+// Die sichtbare Ausführung ist wegen dem Versand von Mails leicht verzögert.
 function addComment() {
 	var id = document.getElementById('id').value;
 	var comment = document.getElementById('newComment').value;
 
-	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.onreadystatechange = function() {
-		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			var commentResponse = JSON.parse(xmlhttp.responseText);
-
-			var commentsTable = document.getElementById('commentsTable');
-			var nextRowPosition = commentsTable.rows.length;
-
-			var newTableRow = commentsTable.insertRow(nextRowPosition);
-			var newCommentAuthor = newTableRow.insertCell(0);
-			var newCommentComment = newTableRow.insertCell(1);
-			var newCommentDelete = newTableRow.insertCell(2);
-
-			newCommentComment.innerHTML = commentResponse.comment;
-			newCommentAuthor.innerHTML = commentResponse.author;
-			newCommentDelete.innerHTML = '<a href=\'/rezeptbuch/DeleteCommentServlet?id='
-					+ commentResponse.id
-					+ '&recipe='
-					+ commentResponse.recipe
-					+ '\'>Löschen</a>';
+	if (comment != "") {
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+				var commentResponse = JSON.parse(xmlhttp.responseText);
+				
+				// Ein komplett neuer Kommentar wird in Javascript erzeugt
+				var newComm = document.createElement("div");
+				newComm.setAttribute("class", "commentBox");
+				
+				var commentator = document.createElement("h4");
+				commentator.innerHTML = commentResponse.author + ":";
+				
+				var commText = document.createElement("div");
+				commText.setAttribute("class", "commentContent");
+				commText.innerHTML = commentResponse.comment;
+				
+				var deleteComm = document.createElement("a");
+				
+				deleteComm.setAttribute('href','/rezeptbuch/DeleteCommentServlet?id='
+						+ commentResponse.id
+						+ '&recipe='
+						+ commentResponse.recipe);
+						
+				deleteComm.innerHTML = "Löschen";
+				
+				var div = document.getElementById('comments');
+				
+				newComm.appendChild(commentator);
+				newComm.appendChild(commText);
+				newComm.appendChild(deleteComm);
 			
-			document.getElementById('commentForm').reset();
+				div.appendChild(newComm);
 
+				document.getElementById('commentForm').reset();
+
+			}
 		}
-	}
 
-	xmlhttp.open('POST', '../AddCommentServlet', true);
-	xmlhttp.setRequestHeader('Content-Type',
-			'application/x-www-form-urlencoded');
-	xmlhttp.send('recipe=' + id + '&comment=' + comment);
-	
-	
+		xmlhttp.open('POST', '../AddCommentServlet', true);
+		xmlhttp.setRequestHeader('Content-Type',
+				'application/x-www-form-urlencoded');
+		xmlhttp.send('recipe=' + id + '&comment=' + comment);
+
+	}
+	else{
+		window.alert("Bitte geben Sie ihren Kommentar in das Feld ein.");
+		
+	}
 }
 
 function aboHandling() {
