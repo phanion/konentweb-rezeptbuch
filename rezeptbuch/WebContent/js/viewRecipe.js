@@ -24,7 +24,7 @@ function addComment() {
 	var id = document.getElementById('id').value;
 	var comment = document.getElementById('newComment').value;
 
-	if (comment != "") {
+	if (comment != "" && comment != null && comment != undefined) {
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function() {
 			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -47,8 +47,10 @@ function addComment() {
 						+ commentResponse.id
 						+ '&recipe='
 						+ commentResponse.recipe);
-						
-				deleteComm.innerHTML = "Löschen";
+				
+				deleteComm.classList.add('button-del');
+				deleteComm.classList.add('clearfix');
+				deleteComm.innerHTML = '';
 				
 				var div = document.getElementById('comments');
 				

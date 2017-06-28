@@ -181,21 +181,21 @@ nav form {
 	display: block;
 }
 
-#nav-content {
-	position: fixed;
-	top: 0;
-	
-	width: 100%;
-	
-    padding: 0 20%;
+#nav-content
+{
+    position: fixed;
+    z-index: 1;
+    top: 0;
 
-    background-color: #757c82;
-    	
-    	
-    	display: flex;
+    display: flex;
     flex-direction: column;
 
+    width: 100%;
+    padding: 0 20%;
+
     text-align: center;
+
+    background-color: #757c82;
 
     justify-content: center;
 }

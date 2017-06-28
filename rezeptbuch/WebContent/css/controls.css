@@ -78,6 +78,11 @@ input + .button-input-search
 	cursor: pointer;
 }
 
+.commentBox > .button-del
+{
+	float: right;
+}
+
 .textarea-transitional
 {
     /* 	min-width: 600px; */
