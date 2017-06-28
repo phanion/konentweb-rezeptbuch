@@ -211,6 +211,12 @@ td a
 	margin: 0;
 }
 
+form div,
+form p
+{
+	width: 100%;
+}
+
 #zutaten {
 	width: 100%;
 }
@@ -266,6 +272,7 @@ td a
     position: relative;
     margin-bottom: 10px;
     display: table;
+    min-width: 60%;
 }
 
 .commentContent {
