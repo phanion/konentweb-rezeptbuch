@@ -143,6 +143,7 @@ var updateFileName = function() {
 		fileinputname.innerHTML = "";
 	}
 	else {
-		fileinputname.innerHTML = fileinput.value;
+		var pathelements = fileinput.value.split("\\");		
+		fileinputname.innerHTML = pathelements[pathelements.length - 1];
 	}
 }

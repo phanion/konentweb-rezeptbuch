@@ -278,3 +278,12 @@ form p
 .commentContent {
 	word-break: break-all;
 }
+
+#rating-label {
+	min-width: auto;
+    width: auto;
+    border: 1px solid #bbb;
+    border-radius: 50%;
+    padding: 5px 10px;
+    margin: 10px 10px;
+}
