@@ -35,7 +35,7 @@ function addComment() {
 				newComm.setAttribute("class", "commentBox");
 				
 				var commentator = document.createElement("h4");
-				commentator.innerHTML = commentResponse.author + ":";
+				commentator.innerHTML = commentResponse.author;
 				
 				var commText = document.createElement("div");
 				commText.setAttribute("class", "commentContent");

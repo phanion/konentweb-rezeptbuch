@@ -85,7 +85,7 @@
 			<input type="hidden" name="id" id="id" value="${rezept.id}">
 			<input type="hidden" name="creatorID" id="creatorID"
 				value="${rezept.creator.id}"> <label
-				class="labelfortextarea">Zutaten:</label>
+				class="labelfortextarea">Zutaten</label>
 			<table id="recipeIngredients">
 				<tr>
 					<th>Menge
@@ -149,12 +149,12 @@
 			<!-- Felder des Rezeptes, die später geändert werden sollen -->
 			<div id="editRecipe">
 
-				<label for="description">Beschreibung:</label>
+				<label for="description">Beschreibung</label>
 				<textarea disabled name="description" id="description"
 					class="textarea-transitional" required maxlength="2500">${rezept.description}</textarea>
 
 
-				<label for="durationPreparation">Vorbereitungszeit:</label>
+				<label for="durationPreparation">Vorbereitungszeit</label>
 				<input
 					disabled
 					type="number"
@@ -163,7 +163,7 @@
 					min="0"
 					max="500"
 					value="${rezept.durationPreparation}">
-				<label for="durationCooking">Kochzeit:</label>
+				<label for="durationCooking">Kochzeit</label>
 				<input
 					disabled
 					type="number"
@@ -172,7 +172,7 @@
 					min="0"
 					max="500"
 					value="${rezept.durationCooking}">
-				<label for="difficulty">Schwierigkeitsgrad:</label>
+				<label for="difficulty">Schwierigkeitsgrad</label>
 				<input
 					disabled
 					type="number"
@@ -181,7 +181,7 @@
 					max="5"
 					min="0"
 					value="${rezept.difficulty}">
-				<label for="servings">Portionen:</label>
+				<label for="servings">Portionen</label>
 				<input
 					disabled
 					type="number"
@@ -252,7 +252,7 @@
 		<div id="comments">
 			<c:forEach var="comment" items="${rezept.comments}">
 				<div class="commentBox">
-					<h4>${comment.author.firstName} ${comment.author.lastName}:</h4>
+					<h4>${comment.author.firstName} ${comment.author.lastName}</h4>
 					<div class="commentContent">${comment.comment}</div>
 					<c:if test="${not empty user}">
 						<c:if test="${user.id == comment.author.id}">
@@ -268,8 +268,8 @@
 		<c:if test="${not empty user}">
 			<form id="commentForm">
 				<p>
-					<label class="labelfortextarea" for="newComment">Kommentar
-						abgeben:</label>
+					<label class="labelfortextarea" for="newComment">Verfassen sie einen neuen Kommentar
+						</label>
 					<textarea name="newComment" id="newComment"
 						placeholder="Kommentar verfassen..."  
 						maxlength="2500" required></textarea>

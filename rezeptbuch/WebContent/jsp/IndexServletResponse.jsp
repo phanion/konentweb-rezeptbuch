@@ -40,7 +40,7 @@
 					<c:otherwise>${recipe.calculateRatingInt()}</c:otherwise>
 				</c:choose>
 			</dd>
-			<dt>Erstellt am:</dt>
+			<dt>Erstellungsdatum</dt>
 			<dd>${recipe.timestampToDate(recipe.created) }</dd>
 		</dl>
 	</div>

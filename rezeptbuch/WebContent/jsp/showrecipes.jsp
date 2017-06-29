@@ -35,7 +35,7 @@
 							<c:otherwise>${recipe.calculateRatingFloat()}</c:otherwise>
 						</c:choose>
 					</dd>
-					<dt>Erstellt am:</dt>
+					<dt>Erstellt am</dt>
 					<dd>${recipe.timestampToDate(recipe.created) }</dd>
 				</dl>
 				<button name="deleteAbo" class="button" type="button">Deabonnieren</button>
