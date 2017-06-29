@@ -31,8 +31,8 @@
 		<dl>
 			<dt>Ersteller</dt>
 
-			<dd>${recipe.creator.firstname}
-				${recipe.creator.firstName}</dd>
+			<dd>${recipe.creator.firstName}
+				${recipe.creator.lastName}</dd>
 			<dt>Bewertung</dt>
 			<dd>
 				<c:choose>
