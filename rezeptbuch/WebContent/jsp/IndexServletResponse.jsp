@@ -31,13 +31,13 @@
 		<dl>
 			<dt>Ersteller</dt>
 
-			<dd>${recipe.getCreator().getFirstName()}
-				${recipe.getCreator().getLastName()}</dd>
+			<dd>${recipe.creator.firstname}
+				${recipe.creator.firstName}</dd>
 			<dt>Bewertung</dt>
 			<dd>
 				<c:choose>
 					<c:when test="${recipe.ratingCount == 0}">-</c:when>
-					<c:otherwise>${recipe.calculateRatingInt()}</c:otherwise>
+					<c:otherwise>${recipe.calculateRatingFloat()}</c:otherwise>
 				</c:choose>
 			</dd>
 			<dt>Erstellungsdatum</dt>
