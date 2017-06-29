@@ -72,7 +72,7 @@ public class LoginServlet extends HttpServlet {
 					RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
 					disp.forward(request, response);
 				} else
-					message = "Die Mail-Adresse und das Passwort stimmen nicht überein.";
+					message = "Die Mail-Adresse und das Passwort stimmen nicht Ã¼berein.";
 
 			} else
 				message = "Unter der von Ihnen angegebenen Mail-Adresse existiert kein Nutzer. Bitte registrieren Sie sich zuerst.";
