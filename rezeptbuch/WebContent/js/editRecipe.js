@@ -80,8 +80,10 @@ function edit() {
 
 	document.getElementById("recipeName").removeAttribute("disabled");
 	
-	// Beschreibung editierbar setzen
-	document.getElementsByTagName("textarea")[0].removeAttribute("disabled");
+	// Titel & Beschreibung editierbar setzen
+	for(let ta of document.getElementsByTagName('textarea')) {
+		ta.disabled = false;
+	}
 }
 
 function add() {

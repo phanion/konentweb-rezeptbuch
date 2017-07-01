@@ -26,6 +26,7 @@
 	rel="stylesheet"
 	href="${pageContext.request.contextPath}/main.css">
 <script src="${pageContext.request.contextPath}/js/nav.js"></script>
+<script src="${pageContext.request.contextPath}/js/textarea.js"></script>
 <script src="${pageContext.request.contextPath}/js/createRecipe.js"></script>
 <base href="${pageContext.request.requestURI}">
 </head>
@@ -45,6 +46,7 @@
 			id="name"
 			size="30"
 			maxlength="40"
+			placeholder="Titel Ihres Rezeptes"
 			required>
 		<h3>Zutaten</h3>
 		<div id="zutaten"></div>
@@ -58,7 +60,7 @@
 		<textarea
 			name="description"
 			id="description"
-			placeholder="Hier die Beschreibung eingeben..."
+			placeholder="Eine Beschreibung Ihres Rezeptes"
 			class="textarea-transitional"
 			required
 			maxlength="2500"></textarea>

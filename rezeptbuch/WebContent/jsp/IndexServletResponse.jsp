@@ -37,7 +37,7 @@
 			<dd>
 				<c:choose>
 					<c:when test="${recipe.ratingCount == 0}">-</c:when>
-					<c:otherwise>${recipe.calculateRatingFloat()}</c:otherwise>
+					<c:otherwise>${recipe.calculateRatingFloat()}/5</c:otherwise>
 				</c:choose>
 			</dd>
 			<dt>Erstellungsdatum</dt>

@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', manageTextareas);
 
 
 /*
- * Angelehnt an:
+ * Angelehnt an Lösung von NicB:
  * https://stackoverflow.com/questions/2803880/is-there-a-way-to-get-a-textarea-to-stretch-to-fit-its-content-without-using-php
  * 
  * Wir haben keine reine CSS Lösung dafür gefunden, daher hier Verwendung von
@@ -27,6 +27,11 @@ var manageTextareas = function() {
 }
 
 var sizeTextarea = function() {
-	this.style.height = 1;
-	this.style.height = this.scrollHeight+'px';
+	var dis = (this.disabled == true);
+	this.disabled = false;
+	
+	this.style.height = 1 + 'px';
+	this.style.height = (this.scrollHeight)+'px';
+	
+	this.disabled = dis;
 }

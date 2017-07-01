@@ -23,6 +23,7 @@
 <base href="${pageContext.request.requestURI}" />
 
 <script src="${pageContext.request.contextPath}/js/nav.js"></script>
+<script src="${pageContext.request.contextPath}/js/textarea.js"></script>
 <script src="${pageContext.request.contextPath}/js/editProfile.js"></script>
 
 <link
