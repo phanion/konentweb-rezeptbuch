@@ -76,7 +76,7 @@ public class SavedRecipeServlet extends HttpServlet {
 	}
 
 	/**
-	 * Gibt alle Rezepte in einer Liste zurÃ¼ck, die ein spezifizierter User gemerkt hat
+	 * Gibt alle Rezepte in einer Liste zurück, die ein spezifizierter User gemerkt hat
 	 * 
 	 * @param user Ein User
 	 * @return Liste von RezeptBeans

@@ -109,7 +109,7 @@ public class NeuesRezeptServlet extends HttpServlet {
 
 		request.setAttribute("message", message);
 
-		// http://stackoverflow.com/questions/12021087/passing-data-between-two-servlets
+		//Author: Tomasz Nurkiewicz URL: http://stackoverflow.com/questions/12021087/passing-data-between-two-servlets
 		getServletContext().getRequestDispatcher("/LoadRecipeServlet");
 		RequestDispatcher disp = request.getRequestDispatcher("/LoadRecipeServlet?id=" + rezept.getId());
 		disp.forward(request, response);
@@ -126,13 +126,13 @@ public class NeuesRezeptServlet extends HttpServlet {
 	}
 
 	/**
-	 * Liest ein RezeptBean ein, persistiert dieses in einer Tabelle und gibt das Rezept wieder zurück.
+	 * Liest ein RezeptBean ein, persistiert dieses in einer Tabelle und gibt das Rezept wieder zur�ck.
 	 * <p>
-	 * Der generierte ID-Schlüssel des Rezepts wird dabei aus der Datenbank gelesen und im RezeptBean hinterlegt.
-	 * Es werden sämtiche eingelesene Informationen zu Namen, Autor, Zubereitung und Bewertung ... des Rezepts abgespeichert.
+	 * Der generierte ID-Schl�ssel des Rezepts wird dabei aus der Datenbank gelesen und im RezeptBean hinterlegt.
+	 * Es werden samtiche eingelesene Informationen zu Namen, Autor, Zubereitung und Bewertung ... des Rezepts abgespeichert.
 	 * 
 	 * @param rezept
-	 *            Ein RezeptBean, das ein Rezeptes repräsentiert
+	 *            Ein RezeptBean, das ein Rezeptes reprasentiert
 	 * @return
 	 * @throws SQLException
 	 *             wenn ein Fehler beim Datenbankzugriff auftritt
@@ -176,7 +176,7 @@ public class NeuesRezeptServlet extends HttpServlet {
 	 * Dabei werden Rezept, Zutat, Einheit und Menge abgespeichert.
 	 * 
 	 * @param rezept
-	 *            Ein RezeptBean, das ein Rezeptes repräsentiert
+	 *            Ein RezeptBean, das ein Rezeptes reprasentiert
 	 * @throws SQLException
 	 *             wenn ein Fehler beim Datenbankzugriff auftritt
 	 */

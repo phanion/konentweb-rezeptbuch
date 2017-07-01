@@ -40,6 +40,11 @@ public class LoginServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
+	 *      
+	 *      
+	 * Das Servlet lädt den beim Login angegebenen Nutzer und vergleicht die Passwörter. Bei einer Übereinstimmung wird der User in der Session gespeichert.
+	 * 
+	 * Wenn der User nicht existiert oder die Passwörter nicht übereinstimmen wird eine Message auf der Loginseite ausgegeben.
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -60,6 +65,7 @@ public class LoginServlet extends HttpServlet {
 			con.close();
 			if (rs.next()) {
 				if (rs.getString("mail").equals(mail) && rs.getString("password").equals(password)) {
+					
 					User user = new User(rs.getLong("ID"), rs.getString("mail"), rs.getString("lastName"),
 							rs.getString("firstName"), rs.getString("password"), rs.getString("description"));
 
@@ -69,10 +75,9 @@ public class LoginServlet extends HttpServlet {
 							+ " wurde erfolgreich eingeloggt!";
 					
 					
-					RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
-					disp.forward(request, response);
+					response.sendRedirect("index.jsp");
 				} else
-					message = "Die Mail-Adresse und das Passwort stimmen nicht Ã¼berein.";
+					message = "Die Mail-Adresse und das Passwort stimmen nicht überein.";
 
 			} else
 				message = "Unter der von Ihnen angegebenen Mail-Adresse existiert kein Nutzer. Bitte registrieren Sie sich zuerst.";

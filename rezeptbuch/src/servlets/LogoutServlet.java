@@ -2,7 +2,6 @@ package servlets;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,8 +25,7 @@ public class LogoutServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Das Servlet löscht einfach den User aus der Session und sendet ein Redirect auf die Startseite
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -36,8 +34,7 @@ public class LogoutServlet extends HttpServlet {
 
 		session.removeAttribute("user");
 
-		RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
-		disp.forward(request, response);
+		response.sendRedirect("index.jsp");
 	}
 
 	/**

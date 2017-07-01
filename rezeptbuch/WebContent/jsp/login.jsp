@@ -16,7 +16,7 @@
 	href="${pageContext.request.contextPath}/main.css">
 <meta charset="utf-8">
 <base href="${pageContext.request.requestURI}" />
-<title>Kochrezepte - Login</title>
+<title>Rezeptbuch - Login</title>
 </head>
 
 <body>

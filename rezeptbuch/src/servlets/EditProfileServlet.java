@@ -1,5 +1,6 @@
 /**
  * Autor: Lorenz
+ * Refactoring: Florian
  */
 
 package servlets;
@@ -41,8 +42,8 @@ public class EditProfileServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Servlet zum Ändern des Nutzers
+	 * wie Registration-Servlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -140,6 +141,7 @@ public class EditProfileServlet extends HttpServlet {
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
+				// die Mail darf nicht bereits bei einem ANDEREN User (daher ID Prüfung) vorhanden sein
 				if (rs.getString(1).toLowerCase().equals(mail.toLowerCase()) && (rs.getLong(2) != id)) {
 					return false;
 				}

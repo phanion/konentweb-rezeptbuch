@@ -33,7 +33,7 @@ public class ProfileServlet extends HttpServlet {
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Wenn der Home-Button gedrÃ¼ckt wurde --> Leite weiter zur index.html
+		//Wenn der Home-Button gedrückt wurde --> Leite weiter zur index.html
 		System.out.println("ProfileServlet.doPost wurde aufgerufen");
 		System.out.println(request);
 				

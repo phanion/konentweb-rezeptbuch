@@ -1,6 +1,6 @@
 /**
  * Autor: Lorenz
- * 
+ * Refactoring: Florian
  */
 
 package servlets;
@@ -52,8 +52,12 @@ public class EditRecipeServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Das Servlet ändert die Rezeptdaten, Löscht die Zutaten aus der DB und
+	 * schreibt die aktuellen Zutaten in die DB und schickt anschließend eine
+	 * Mail an die Abonenten des Rezepts
+	 * 
+	 * Der Großteil wurde aus dem Servlet zum Erstellen der Rezepte übernommen
+	 * und angepasst
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -110,12 +114,12 @@ public class EditRecipeServlet extends HttpServlet {
 				updateRecipe(rezept);
 				replaceIngredients(rezept);
 				sendAboMails(rezept);
-				message = "Das Rezept wurde erfolgreich geÃ¤ndert!";
+				message = "Das Rezept wurde erfolgreich geandert!";
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		} else {
-			message = "Sie sind nicht berechtigt das Rezept zu Ã¤ndern.";
+			message = "Sie sind nicht berechtigt das Rezept zu ändern.";
 		}
 		request.setAttribute("message", message);
 
@@ -181,7 +185,7 @@ public class EditRecipeServlet extends HttpServlet {
 	 * Autor: Lorenz 
 	 * 
 	 * Es werden die Abonnenten des Rezepts aus der Datenbank
-	 * geladen und per Mail ï¿½ber die ï¿½nderung informiert.
+	 * geladen und per Mail über die Änderung informiert.
 	 * 
 	 * @throws SQLException
 	 */
