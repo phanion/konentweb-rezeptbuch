@@ -1,4 +1,4 @@
-@charset "UTF-8";
+@charset 'UTF-8';
 
 /* https://css-tricks.com/all-about-floats/ */
 .clearfix::after
@@ -16,18 +16,20 @@
 form,
 #editRecipe
 {
-	display: flex;
-	flex-flow: row wrap;
+    display: flex;
+
+    flex-flow: row wrap;
 }
 
 .hidden-block
 {
-	display: none !important;
+    display: none !important;
 }
 
 .labelfortextarea
 {
     display: inline-block;
+
     width: 100%;
     margin: 10px 0;
 }
@@ -92,12 +94,27 @@ dd
 }
 
 /* Abstände bei Überschriften */
-h1 { margin: 30px 0 10px; }
-h2 { margin: 20px 0 10px; }
-h3 { margin: 10px 0 5px; }
+h1
+{
+    margin: 30px 0 10px;
+}
+h2
+{
+    margin: 20px 0 10px;
+}
+h3
+{
+    margin: 10px 0 5px;
+}
 
-h1, h2, h3, h4, h5, h6 {
-	width: 100%;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+{
+    width: 100%;
 }
 
 input,
@@ -107,54 +124,53 @@ button,
 pre
 {
     font-size: 1em;
-    
+
     border-radius: 5px;
 }
 
-/* input:not([type='button']), */
-/* textarea */
-/* { */
-/* 	min-width: 12em; */
-/* } */
 
 h1 input[type='text'],
-h1 textarea {
-	width: inherit; /* Rezept-Titel in einer Zeile bei Input bzw. so breit wie h-Tag */
+h1 textarea
+{
+    width: 100%; /* Rezept-Titel in einer Zeile bei Input bzw. so breit wie h-Tag */
 }
 
 form button,
 form label
 {
-	margin: 15px 0;
+    margin: 15px 0;
 }
 
-form button + button {
-	margin-left: 10px;
+form button + button
+{
+    margin-left: 10px;
 }
 
 label
 {
+    font-weight: bold;
+
     display: inline-block;
-	
-	font-weight: bold;
+
     min-width: 12em;
-/*     padding: 5px 0; */
+    /*     padding: 5px 0; */
 
     text-align: left;
 }
 
 form > label,
 form > div > label,
-form label + input {
-	width: 50%;
+form label + input
+{
+    width: 50%;
 }
 
 main
 {
     margin: 20px 20%;
-/*     padding: 20px; */
-/*     margin: 0 20%; */
-/*     background: whitesmoke; */
+    /*     padding: 20px; */
+    /*     margin: 0 20%; */
+    /*     background: whitesmoke; */
 }
 
 main p
@@ -194,37 +210,41 @@ td
 th a,
 td a
 {
-	vertical-align: middle;
+    vertical-align: middle;
 }
 
 .buttonRow,
-.newLine 
+.newLine
 {
-	margin: 15px 0;
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: space-between;
+    display: flex;
+
+    margin: 15px 0;
+
+    flex-flow: row wrap;
+    justify-content: space-between;
 }
 
-.newLine > *:not(button) {
-	width: 30%
+.newLine > *:not(button)
+{
+    width: 30%;
 }
 
 .newLine > input,
 .newLine > select
 {
-	padding: 0;
-	margin: 0;
+    margin: 0;
+    padding: 0;
 }
 
 form div,
 form p
 {
-	width: 100%;
+    width: 100%;
 }
 
-#zutaten {
-	width: 100%;
+#zutaten
+{
+    width: 100%;
 }
 
 /* .zutatenZutat{ */
@@ -240,7 +260,8 @@ form p
 /* 	width: 3em; */
 /* } */
 
-.rec-img {
+.rec-img
+{
     width: 100%;
     height: auto;
     margin: 10px 0 30px;
@@ -252,50 +273,67 @@ Autor:				Mahdi (@mm241 on Codepen)
 */
 .commentBox:before
 {
-    border-color: #bbb rgba(0, 0, 0, 0);
-    border-style: solid;
-    border-width: 8px 8px 0;
+    position: absolute;
     bottom: -8px;
-    content: "";
-    display: block;
     left: 20px;
-    position: absolute;
-    width: 0;
-}
-.commentBox:after {
-    border-color: #FFFFFF rgba(0, 0, 0, 0);
-    border-style: solid;
-    border-width: 6px 6px 0;
-    bottom: -6px;
-    content: "";
+
     display: block;
-    left: 22px;
-    position: absolute;
+
     width: 0;
+
+    content: '';
+
+    border-width: 8px 8px 0;
+    border-style: solid;
+    border-color: #bbb rgba(0, 0, 0, 0);
 }
-.commentBox {
-    background: none repeat scroll 0 0 #FFFFFF;
+.commentBox:after
+{
+    position: absolute;
+    bottom: -6px;
+    left: 22px;
+
+    display: block;
+
+    width: 0;
+
+    content: '';
+
+    border-width: 6px 6px 0;
+    border-style: solid;
+    border-color: #fff rgba(0, 0, 0, 0);
+}
+.commentBox
+{
+    position: relative;
+
+    display: table;
+
+    min-width: 60%;
+    margin-bottom: 10px;
+    padding: 10px 10px;
+
     border: 1px solid #bbb;
     border-radius: 5px;
-    padding: 10px 10px;
-    position: relative;
-    margin-bottom: 10px;
-    display: table;
+    background: none repeat scroll 0 0 #fff;
+}
+
+#newComment
+{
     min-width: 60%;
 }
-
-#newComment {
-	min-width: 60%;
-}
-.commentContent {
-	word-break: break-all;
+.commentContent
+{
+    word-break: break-all;
 }
 
-#rating-label {
-	min-width: auto;
+#rating-label
+{
     width: auto;
+    min-width: auto;
+    margin: 10px 10px;
+    padding: 5px 10px;
+
     border: 1px solid #bbb;
     border-radius: 50%;
-    padding: 5px 10px;
-    margin: 10px 10px;
 }

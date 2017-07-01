@@ -209,9 +209,9 @@
 									value="${ingredient.unit}">
 								<button
 									type="button"
-									class="button deleteIng"
+									class="button-del deleteIng"
 									name="deleteIng"
-									value="Zutat entfernen">X</button>
+									value="Zutat entfernen"></button>
 							</div>
 						</c:forEach>
 					</div>
