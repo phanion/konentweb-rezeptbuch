@@ -275,6 +275,9 @@ form p
     min-width: 60%;
 }
 
+#newComment {
+	min-width: 60%;
+}
 .commentContent {
 	word-break: break-all;
 }
