@@ -16,7 +16,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Kochrezepte - Erstellen</title>
+<title>Rezeptbuch - Erstellen</title>
 <c:choose>
 	<c:when test="${empty user}">
 		<c:redirect url="login.jsp" />

@@ -43,9 +43,9 @@ public class DatabaseFunctions {
 
 
 	/**
-	 * Gibt eine Liste mit Rezepten zurÃ¼ck, die das eingegebene Suchwort enthalten.
+	 * Gibt eine Liste mit Rezepten zurück, die das eingegebene Suchwort enthalten.
 	 * <p>
-	 * DafÃ¼r wird eine Datenbankabfrage durchgefÃ¼hrt, und die Treffer in einer
+	 * Dafür wird eine Datenbankabfrage durchgeführt, und die Treffer in einer
 	 * Liste von RezeptBeans abgespeichert.
 	 * 
 	 * @param searchstring

@@ -78,7 +78,7 @@ public class RatingServlet extends HttpServlet {
 	}
 
 	/**
-	 * Eine Bewertung wird von einem User zu einem Rezept hinzugefÃ¼gt
+	 * Eine Bewertung wird von einem User zu einem Rezept hinzugefügt
 	 * <p>
 	 * Wenn das Rezept durch den Nutzer schon einmal bewertet wurde, wird die
 	 * alte Bewertung aktualisiert. Wenn es eine neue Bewertung durch den User

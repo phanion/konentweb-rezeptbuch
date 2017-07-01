@@ -1,3 +1,7 @@
+/**
+ * @author Lorenz
+ */
+
 package servlets;
 
 import java.io.IOException;
@@ -36,8 +40,9 @@ public class LoadImage extends HttpServlet {
 	private DataSource ds;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Servlet zum Laden von Bildern
+	 * 
+	 * Das Servlet ist so gebaut, dass Bilder von verschiedenen Tabellen geladen werden könnten
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

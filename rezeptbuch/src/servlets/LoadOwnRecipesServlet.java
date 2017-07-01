@@ -46,8 +46,7 @@ public class LoadOwnRecipesServlet extends HttpServlet {
 
     
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Das Servlet ladet die Rezepte des angemeldeten Nutzers
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

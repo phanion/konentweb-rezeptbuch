@@ -52,8 +52,10 @@ public class RegistrationServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * 
+	 *      
+	 * Das Servlet erstellt einen neuen User, wenn dieser noch nicht vorhanden ist und die eingegebenen Passwörter übereinstimmen.
+	 * Bei doppeltem User oder falschem Passwort wird eine Fehlermeldung auf der Registrierenseite ausgegeben.
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -112,7 +114,7 @@ public class RegistrationServlet extends HttpServlet {
 
 		}
 
-		// http://stackoverflow.com/questions/6452537/servlet-send-response-to-jsp
+		
 		request.setAttribute("message", message);
 		String target = (session.getAttribute("user") != null) ? "/index.jsp" : "/jsp/registration.jsp";
 		RequestDispatcher disp = request.getRequestDispatcher(target);
@@ -131,7 +133,7 @@ public class RegistrationServlet extends HttpServlet {
 	}
 
 	/**
-	 * PrÃ¼ft, ob die eingegebene E-Mail (und der zugehÃ¶rige Nutzer) bereits in
+	 * Prüft, ob die eingegebene E-Mail (und der zugehörige Nutzer) bereits in
 	 * der Datenbank vorhanden sind.
 	 * 
 	 * @param mail
@@ -210,7 +212,8 @@ public class RegistrationServlet extends HttpServlet {
 	/**
 	 * Sendet eine Willkommensnachricht an einen neuen Nutzer
 	 * <p>
-	 * @see https://dzone.com/articles/sending-email-using-javamail
+	 * @see Slim Ouertani   https://dzone.com/articles/sending-email-using-javamail
+	 * 
 	 * 
 	 * @param recipientMail Die E-Mail-Adresse des neuen Nutzers
 	 * @param recipientName Der Name des neuen Nutzers

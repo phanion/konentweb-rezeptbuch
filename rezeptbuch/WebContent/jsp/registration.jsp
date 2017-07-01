@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Kochrezepte - Registrierung</title>
+<title>Rezeptbuch - Registrierung</title>
 <script src="${pageContext.request.contextPath}/js/nav.js"></script>
 <link
 	rel="stylesheet"

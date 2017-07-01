@@ -1,3 +1,8 @@
+/**
+ * @author Lorenz
+ * 
+ */
+
 package servlets;
 
 import java.io.IOException;
@@ -42,10 +47,13 @@ public class LoadRecipeServlet extends HttpServlet {
 	@Resource(lookup = "jdbc/MyRezeptbuchPool")
 	private DataSource ds;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+/**
+ * Servlet zum Laden der Rezepte
+ * Das Servlet wird über die GET-Methode aufgerufen, damit die Parameter im Link sichtbar sind und die Seite als Lesezeichen im Browser gespeichert werden kann.
+ * 
+ * 
+ * 
+ */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -54,15 +62,26 @@ public class LoadRecipeServlet extends HttpServlet {
 		try {
 			RezeptBean recipe = loadRecipeFromDB(id);
 
-			HttpSession session = request.getSession();
-			User sessionUser = (User) session.getAttribute("user");
-
-			if (sessionUser != null) {
-				request.setAttribute("aboStatus", loadAbo(recipe, sessionUser));
-				request.setAttribute("currentRating", loadRating(recipe, sessionUser));
+			// Wenn die Methode loadRecipeFromDB kein Rezept zurück gibt wird
+			// nur eine Message an die jsp weitergegeben.
+			if (recipe == null) {
+				String message = "Das Rezept wurde nicht gefunden";
+				request.setAttribute("message", message);
 			}
 
-			request.setAttribute("rezept", recipe);
+			else {
+				//Wenn ein User eingeloggt ist wird geprüft, ob dieser User das Rezept bereits abonniert/sich gemerkt hat und ggf. wird die aktuelle Bewertung und der Abostatus geladen.
+				HttpSession session = request.getSession();
+				User sessionUser = (User) session.getAttribute("user");
+
+				if (sessionUser != null) {
+					request.setAttribute("aboStatus", loadAbo(recipe, sessionUser));
+					request.setAttribute("currentRating", loadRating(recipe, sessionUser));
+				}
+
+				request.setAttribute("rezept", recipe);
+
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -83,8 +102,8 @@ public class LoadRecipeServlet extends HttpServlet {
 	}
 
 	/**
-	 * Sucht in der Datenbank nach Rezepten zu einer Rezept-ID, und gibt ein
-	 * gefundenes Rezept zurÃ¼ck.
+	 * Sucht in der Datenbank nach Rezepten zu einer Rezept-ID, und gibt ein ggf.
+	 * gefundenes Rezept zurück.
 	 * 
 	 * @param id
 	 *            Des Rezept nach dem gesucht wird
@@ -136,7 +155,7 @@ public class LoadRecipeServlet extends HttpServlet {
 
 	/**
 	 * Sucht in der Datenbank nach Nutzern zu einer Nutzer-ID, und gibt einen
-	 * gefundenen Nutzer zurÃ¼ck.
+	 * gefundenen Nutzer zurück.
 	 * 
 	 * @param id
 	 *            Des Users nach dem gesucht wird
@@ -167,10 +186,10 @@ public class LoadRecipeServlet extends HttpServlet {
 
 	/**
 	 * Sucht in der Datenbank nach allen Zutaten zu einer Rezept-ID, und gibt
-	 * diese in einer Liste zurÃ¼ck
+	 * diese in einer Liste zurück
 	 * 
 	 * @param id
-	 *            ID-SchlÃ¼ssel des Rezepts
+	 *            ID-Schlüssel des Rezepts
 	 * @return Liste von Zutaten
 	 * @throws SQLException
 	 *             bei einem Datenbankfehler
@@ -193,7 +212,7 @@ public class LoadRecipeServlet extends HttpServlet {
 
 	/**
 	 * Sucht in der Datenbank nach allen Kommentaren zu einem Rezept, und gibt
-	 * diese in einer Liste zurÃ¼ck
+	 * diese in einer Liste zurück
 	 * 
 	 * @param recipe
 	 *            Ein RezeptBean, dessen Kommentare gesucht werden
@@ -220,7 +239,7 @@ public class LoadRecipeServlet extends HttpServlet {
 	}
 
 	/**
-	 * SchlÃ¤gt in der Datenbank nach, ob ein User ein Rezept bewertet hat
+	 * Schlägt in der Datenbank nach, ob ein User ein Rezept bewertet hat
 	 * 
 	 * @param recipe
 	 *            Ein Rezeptbean
@@ -249,7 +268,7 @@ public class LoadRecipeServlet extends HttpServlet {
 	}
 
 	/**
-	 * SchlÃ¤gt in der Datenbank nach, ob ein User ein Rezept abonniert hat
+	 * Schlägt in der Datenbank nach, ob ein User ein Rezept abonniert hat
 	 * 
 	 * @param recipe
 	 *            Ein Rezeptbean
