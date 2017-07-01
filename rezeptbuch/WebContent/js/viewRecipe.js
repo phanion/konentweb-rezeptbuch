@@ -22,8 +22,9 @@ function init() {
 // Die sichtbare Ausführung ist wegen dem Versand von Mails leicht verzögert.
 function addComment() {
 	var id = document.getElementById('id').value;
-	var comment = document.getElementById('newComment').value;
-
+	// Carriage Return wird durch ein Whitespace ersetzt, um Fehler im JSON Format zu vermeiden
+	var comment = document.getElementById('newComment').value.replace(/[\n\r]/g, ' ');
+	
 	if (comment != "" && comment != null && comment != undefined) {
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function() {

@@ -240,7 +240,10 @@ form p
     margin: 10px 0 30px;
 }
 
-/* Kommentarbox Idee: https://codepen.io/mm241/pen/Choyx */
+/* 
+Kommentarbox Idee: 	https://codepen.io/mm241/pen/Choyx 
+Autor:				Mahdi (@mm241 on Codepen)		
+*/
 .commentBox:before
 {
     border-color: #bbb rgba(0, 0, 0, 0);

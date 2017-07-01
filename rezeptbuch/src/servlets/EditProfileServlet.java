@@ -1,5 +1,6 @@
 /**
  * Autor: Lorenz
+ * Refactoring: Florian
  */
 
 package servlets;
@@ -140,6 +141,7 @@ public class EditProfileServlet extends HttpServlet {
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
+				// die Mail darf nicht bereits bei einem ANDEREN User (daher ID Prüfung) vorhanden sein
 				if (rs.getString(1).toLowerCase().equals(mail.toLowerCase()) && (rs.getLong(2) != id)) {
 					return false;
 				}

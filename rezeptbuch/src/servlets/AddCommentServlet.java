@@ -63,6 +63,8 @@ public class AddCommentServlet extends HttpServlet {
 
 		final Comment comment = new Comment();
 		final RezeptBean recipe = new RezeptBean();
+		
+		request.setCharacterEncoding("UTF-8");
 
 		recipe.setId(Long.parseLong(request.getParameter("recipe")));
 
