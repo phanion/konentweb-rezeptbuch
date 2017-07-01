@@ -24,6 +24,8 @@ import bean.User;
 
 /**
  * Servlet implementation class AboHandlingServlet
+ * 
+ * 
  */
 @WebServlet("/AboHandlingServlet")
 public class AboHandlingServlet extends HttpServlet {
@@ -40,8 +42,8 @@ public class AboHandlingServlet extends HttpServlet {
 	private DataSource ds;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Das Servlet fügt fir den Nutzer ein Abo hinzu bzw. entfernt es, je
+	 * nachdem welche "Action" beim Aufruf übergeben wird
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -82,6 +84,7 @@ public class AboHandlingServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
+	// Fügt das Abo für den Nutzer und das Rezept hinzu
 	public void addAbo(User user, RezeptBean recipe) throws SQLException {
 		final Connection con = ds.getConnection();
 
@@ -95,6 +98,7 @@ public class AboHandlingServlet extends HttpServlet {
 
 	}
 
+	// Löscht das Abo
 	public void deleteAbo(User user, RezeptBean recipe) throws SQLException {
 		final Connection con = ds.getConnection();
 

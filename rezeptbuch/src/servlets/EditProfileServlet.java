@@ -42,8 +42,8 @@ public class EditProfileServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Servlet zum Ändern des Nutzers
+	 * wie Registration-Servlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

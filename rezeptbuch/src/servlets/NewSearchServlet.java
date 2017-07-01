@@ -39,8 +39,8 @@ public class NewSearchServlet extends HttpServlet {
 	}
 
 	/**
-	 * Bei Aufruf via GET-Methode wird die Suchseite zurÃ¼ckgeliefert, so kann
-	 * auch Ã¼ber einen Direktlink eine Suche ausgefÃ¼hrt werden.
+	 * Bei Aufruf via GET-Methode wird die Suchseite zurückgeliefert, so kann
+	 * auch über einen Direktlink eine Suche ausgeführt werden.
 	 * <p>
 	 * 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -60,7 +60,7 @@ public class NewSearchServlet extends HttpServlet {
 
 	/**
 	 * Bei Aufruf via POST-Methode wird nur ein Fragment mit den Suchergebnissen
-	 * zurÃ¼ckgeliefert, nicht die gesamte Seite.
+	 * zurückgeliefert, nicht die gesamte Seite.
 	 * <p>
 	 * 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -86,10 +86,10 @@ public class NewSearchServlet extends HttpServlet {
 	}
 
 	/**
-	 * Gibt eine Liste mit Rezepten zurÃ¼ck, die den eingegebenen Suchstring
+	 * Gibt eine Liste mit Rezepten zurück, die den eingegebenen Suchstring
 	 * enthalten.
 	 * <p>
-	 * DafÃ¼r wird eine Datenbankabfrage durchgefÃ¼hrt, und die Treffer in einer
+	 * Dafür wird eine Datenbankabfrage durchgeführt, und die Treffer in einer
 	 * Liste von RezeptBeans (aktuell: HashMaps) abgespeichert. Es werden
 	 * Autorname, Rezeptname, Rezeptbeschreibung und Rezeptzutaten durchsucht.
 	 * Die Ergebnisliste wird nach der Anzahl der Treffer sortiert.

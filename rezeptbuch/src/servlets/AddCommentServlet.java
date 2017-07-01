@@ -1,3 +1,7 @@
+/**
+ * @author Lorenz
+ */
+
 package servlets;
 
 import java.io.IOException;
@@ -49,8 +53,9 @@ public class AddCommentServlet extends HttpServlet {
 	private Session mailSession;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Das Servlet fügt zu einem Rezept einen Kommentar hinzu und gibt diesen
+	 * Kommentar per JSON an die Seite zurück. Beim Erstellen des Kommentars
+	 * werden auch alle Abonennten benachrichtigt
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -93,7 +98,7 @@ public class AddCommentServlet extends HttpServlet {
 			con.close();
 
 			request.setAttribute("comment", comment);
-			
+
 			sendAboMails(recipe, comment);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/commentResponse.jsp");

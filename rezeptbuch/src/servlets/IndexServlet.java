@@ -42,8 +42,7 @@ public class IndexServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Servlet gibt eine Liste mit den 10 neuesten Rezepten zurück, die dann auf der Startseite angezeigt werden
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
