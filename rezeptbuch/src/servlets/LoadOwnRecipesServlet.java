@@ -79,7 +79,7 @@ public class LoadOwnRecipesServlet extends HttpServlet {
 		List<RezeptBean> recipes = new ArrayList<RezeptBean>();
 		
 		try (Connection con = ds.getConnection();
-				PreparedStatement ps = con.prepareStatement("SELECT * FROM recipes WHERE creator=?")) {
+				PreparedStatement ps = con.prepareStatement("SELECT * FROM recipes WHERE creator=? order by modified desc")) {
 			ps.setLong(1, user.getId());
 			ResultSet rs = ps.executeQuery();
 
