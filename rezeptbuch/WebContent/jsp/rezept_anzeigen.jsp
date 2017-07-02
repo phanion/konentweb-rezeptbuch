@@ -19,10 +19,10 @@
 <link
 	rel="stylesheet"
 	href="${pageContext.request.contextPath}/main.css">
-
+<script src="${pageContext.request.contextPath}/js/nav.js"></script>
 <!-- textarea.js sollte nach dem stylesheet kommen, Da es optische Dinge tut. -->
 <script src="${pageContext.request.contextPath}/js/textarea.js"></script>
-<script src="${pageContext.request.contextPath}/js/nav.js"></script>
+
 <!-- viewRecipe.js & editRecipe.js sollte nach textarea.js kommen, da sie die Funktionen aufrufen, die sonst nicht bekannt sind.-->
 <c:if test="${not empty user}">
 	<script src="${pageContext.request.contextPath}/js/viewRecipe.js"></script>

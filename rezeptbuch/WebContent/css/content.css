@@ -193,7 +193,7 @@ main p
     margin: 5px 0;
 }
 
-pre
+pre /* Nicht in Gebrauch */ 
 {
     font-family: 'Ubuntu Mono', monospace;
 
@@ -206,20 +206,22 @@ pre
 table
 {
     border-collapse: collapse;
+    width: 100%;
+    background: #fff;
+    border-radius: 10px
 }
 
-table th,
-td
+table th, table td
 {
     text-align: left;
 
-    border: 1px solid #424b54;
+/*     border: 1px solid #424b54; */
+
+    padding: 8px;
 }
 
-th,
-td
-{
-    padding: 8px;
+tr:hover {
+	background: #d1d1d1;
 }
 
 th a,
