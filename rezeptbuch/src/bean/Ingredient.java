@@ -1,5 +1,5 @@
 /**
- * Autor: Lorenz
+ * @author Lorenz
  */
 
 package bean;

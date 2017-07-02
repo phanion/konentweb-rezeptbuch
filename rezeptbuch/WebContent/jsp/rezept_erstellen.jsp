@@ -1,5 +1,5 @@
 <!-- 
-	Autor: Florien, Lorenz
+	Autor: Florian, Lorenz
 	Refactoring: Michael
 -->
 

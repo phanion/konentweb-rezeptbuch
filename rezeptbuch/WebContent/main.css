@@ -1,6 +1,10 @@
+/*
+ * @author Michael
+ */
+
 @CHARSET "UTF-8";
 
-/* Das ist das Haupt-CSS, hier werden die Unter-CSS zusammengefÃ¼hrt */
+/* Das ist das Haupt-CSS, hier werden die Unter-CSS zusammengeführt */
 
 @import url(css/content.css);
 @import url(css/nav.css);
@@ -26,7 +30,7 @@
 */
 
 /*
-	Verwendete Icons (bearbeitet), keine Lizenz benÃ¶tigt:
+	Verwendete Icons (bearbeitet), keine Lizenz benötigt:
 	
 	https://www.iconfinder.com/icons/2125607/blue_free_outline_people_profile_ui_icon
 	https://www.iconfinder.com/icons/314478/search_icon
@@ -35,12 +39,12 @@
 
 
 /*
-	Die Seite lÃ¤uft wie gewÃ¼nscht bei einer Bildschirmbreite von >= 1080px,
+	Die Seite läuft wie gewünscht bei einer Bildschirmbreite von >= 1080px,
  	sonst kommt es aufgrund der Minimalbreite von Buttons zu einem Umbruch in den Suchleisten 
  */
 
 /* 
-	z.T. an orientiert an Styleguide-VorschlÃ¤gen:
+	z.T. an orientiert an Styleguide-Vorschlägen:
 	https://google.github.io/styleguide/htmlcssguide.html
 	http://www.bbc.co.uk/guidelines/futuremedia/technical/css.shtml
 */
@@ -78,6 +82,6 @@ textarea[form]:disabled
 html,
 body
 {
-	/* Default-Background: Wichtig falls jemand merkwÃ¼rdige User Agent Stylesheets bzw. Browser-Einstellungen verwendet */
+	/* Default-Background: Wichtig falls jemand merkwürdige User Agent Stylesheets bzw. Browser-Einstellungen verwendet */
     background: #e8e8e8;
 }

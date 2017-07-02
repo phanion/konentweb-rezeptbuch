@@ -1,5 +1,5 @@
 /**
- * @author Lorenz, michael
+ * @author Lorenz, Michael
  */
 
 package servlets;

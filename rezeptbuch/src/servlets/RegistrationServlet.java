@@ -1,4 +1,4 @@
-/*
+/**
  * Autor: Lorenz
  * Refactoring: Michael
  * 

@@ -1,3 +1,7 @@
+/**
+ * @author Michael
+ */
+
 'use strict';
 
 document.addEventListener('DOMContentLoaded', init);

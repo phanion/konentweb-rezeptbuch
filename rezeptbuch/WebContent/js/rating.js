@@ -1,5 +1,5 @@
 /**
- * @author michael
+ * @author Michael
  * Refactoring: Lorenz
  */
 

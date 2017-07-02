@@ -1,6 +1,12 @@
+/*
+ * @author Michael
+ * Refactoring: Lorenz, Florian
+ */
+
+
 @charset 'UTF-8';
 
-/* √úbernommen von CHRIS COYIER: https://css-tricks.com/all-about-floats/ */
+/* ‹bernommen von CHRIS COYIER: https://css-tricks.com/all-about-floats/ */
 .clearfix::after
 {
     display: block;
@@ -107,7 +113,7 @@ dd
     width: 50%;
 }
 
-/* Abst√§nde bei √úberschriften */
+/* Abst‰nde bei ‹berschriften */
 h1
 {
     margin: 30px 0 10px;

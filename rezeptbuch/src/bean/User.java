@@ -1,3 +1,7 @@
+/**
+ * @author Lorenz
+ */
+
 package bean;
 
 /**
@@ -22,13 +26,6 @@ public class User {
 		this.password = password;
 		this.description = description;
 	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", mail=" + mail + ", lastName=" + lastName + ", firstName=" + firstName
-				+ ", password=" + password + ", description=" + description + "]";
-	}
-
 	
 	public Long getId() {
 		return id;
