@@ -48,6 +48,9 @@
 						disabled
 						placeholder="Rezepttitel">${rezept.name}</textarea>
 				</h1>
+				
+				<h2 class="authorname">${rezept.creator.firstName} ${rezept.creator.lastName}</h2>
+				
 				<%-- Je nach Abonnement-Status kann das Rezept gemerkt werden resp. entmerkt werden --%>
 				<c:if test="${not empty user}">
 
@@ -129,7 +132,6 @@
 			</div>
 
 			<div id="Details">
-				<h2>Details zum Rezept</h2>
 
 				<%-- Bild vom Rezept --%>
 				<c:if test="${not empty rezept.filename}">
