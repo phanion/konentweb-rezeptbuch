@@ -176,7 +176,7 @@ function addEventListenersAbos(){
 // var rowsCount = textareas[i].value.split(/\n|\r/).length;
 // textareas[i].setAttribute("rows", rowsCount);
 //		
-// //https://stackoverflow.com/questions/4814398/how-can-i-check-if-a-scrollbar-is-visible
+// //Autor: Reigel URL: https://stackoverflow.com/questions/4814398/how-can-i-check-if-a-scrollbar-is-visible
 // while(textareas[i].scrollHeight > textareas[i].clientHeight){
 // rowsCount = rowsCount + 1;
 // textareas[i].setAttribute("rows", rowsCount);

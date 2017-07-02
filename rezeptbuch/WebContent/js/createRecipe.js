@@ -27,7 +27,7 @@ function add() {
 	// Div erhält die Klasse "NewLine" um später auf alle zugreifen zu können
 	divNewLine.setAttribute("class", "newLine clearfix");
 
-	// http://stackoverflow.com/questions/34127450/dynamically-add-forminput-textbox-in-jsp
+	//Autor: sayee URL: http://stackoverflow.com/questions/34127450/dynamically-add-forminput-textbox-in-jsp
 	var paragraph = document.createElement("P")
 	var Menge = document.createElement("input");
 	Menge.setAttribute("type", "number");
@@ -96,7 +96,7 @@ function del() {
 // var rowsCount = textareas[i].value.split(/\n|\r/).length;
 // textareas[i].setAttribute("rows", rowsCount);
 //
-// //https://stackoverflow.com/questions/4814398/how-can-i-check-if-a-scrollbar-is-visible
+// //Autor: Reigel URL: https://stackoverflow.com/questions/4814398/how-can-i-check-if-a-scrollbar-is-visible
 // while (textareas[i].scrollHeight > textareas[i].clientHeight) {
 // rowsCount = rowsCount + 1;
 // textareas[i].setAttribute("rows", rowsCount);
