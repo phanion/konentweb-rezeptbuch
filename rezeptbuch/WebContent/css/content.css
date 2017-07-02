@@ -6,7 +6,7 @@
 
 @charset 'UTF-8';
 
-/* Übernommen von CHRIS COYIER: https://css-tricks.com/all-about-floats/ */
+/* ï¿½bernommen von CHRIS COYIER: https://css-tricks.com/all-about-floats/ */
 .clearfix::after
 {
     display: block;
@@ -113,7 +113,7 @@ dd
     width: 50%;
 }
 
-/* Abstände bei Überschriften */
+/* Abstï¿½nde bei ï¿½berschriften */
 h1
 {
     margin: 30px 0 10px;
@@ -149,6 +149,9 @@ p
     border-radius: 5px;
 }
 
+textarea {
+	resize: none;
+}
 
 h1 input[type='text'],
 h1 textarea
