@@ -23,14 +23,16 @@
 <base href="${pageContext.request.requestURI}" />
 
 
-<link
-	rel="stylesheet"
+<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/main.css">
-</head>
+
 
 <script src="${pageContext.request.contextPath}/js/nav.js"></script>
 <script src="${pageContext.request.contextPath}/js/textarea.js"></script>
 <script src="${pageContext.request.contextPath}/js/editProfile.js"></script>
+
+</head>
+
 
 
 <body>
@@ -40,8 +42,7 @@
 
 	<h1>Dein Profil</h1>
 	<div
-		id="button-bar"
-		style="display: flex; flex-flow: row wrap; margin-bottom: 1em;">
+		id="button-bar">
 		<button
 			id="profileDataButton"
 			type="button"

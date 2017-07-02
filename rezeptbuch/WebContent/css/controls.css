@@ -94,6 +94,12 @@ input + .button-input-search
 	flex: 1;
 }
 
+#button-bar{
+	display: flex;
+	flex-flow: row wrap;
+	margin-bottom: 1em;
+}
+
 #profileDataButton{
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;

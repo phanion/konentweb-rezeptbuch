@@ -345,12 +345,11 @@
 									title="sucks big time">1 star</label>
 							</fieldset>
 							<label
-								id="rating-label"
-								for="rating-form">${rezept.calculateRatingFloat()}</label>
+								id="rating-label">${rezept.calculateRatingFloat()}</label>
 						</form>
 
 
-						<div style="clear: both;"></div>
+						
 					</c:when>
 					<c:otherwise>
 						<p>Melden Sie sich an, um zu bewerten!
@@ -370,9 +369,9 @@
 							<div class="commentContent">${comment.comment}</div>
 							<c:if test="${not empty user}">
 								<c:if test="${user.id == comment.author.id}">
-									<td><a
+									<a
 										class="button-del"
-										href="/rezeptbuch/DeleteCommentServlet?id=${comment.id}&recipe=${rezept.id}"></a></td>
+										href="/rezeptbuch/DeleteCommentServlet?id=${comment.id}&recipe=${rezept.id}"></a>
 
 								</c:if>
 							</c:if>
