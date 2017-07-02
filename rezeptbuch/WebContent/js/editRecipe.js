@@ -87,7 +87,7 @@ function edit() {
 }
 
 function add() {
-	// http://stackoverflow.com/questions/34127450/dynamically-add-forminput-textbox-in-jsp
+	// Autor: sayee URL: http://stackoverflow.com/questions/34127450/dynamically-add-forminput-textbox-in-jsp
 	var divNewLine = document.createElement("div");
 	
 	// Div erhält die selbe Klasse wie die bereits erstellten Zutaten-Reihen, um später auf alle zugreifen zu können
