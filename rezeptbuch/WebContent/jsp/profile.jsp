@@ -40,8 +40,7 @@
 
 	<h1>Dein Profil</h1>
 	<div
-		id="button-bar"
-		style="display: flex; flex-flow: row wrap; margin-bottom: 1em;">
+		id="button-bar">
 		<button
 			id="profileDataButton"
 			type="button"

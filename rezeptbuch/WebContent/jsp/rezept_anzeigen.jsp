@@ -350,7 +350,7 @@
 						</form>
 
 
-						<div style="clear: both;"></div>
+						
 					</c:when>
 					<c:otherwise>
 						<p>Melden Sie sich an, um zu bewerten!
