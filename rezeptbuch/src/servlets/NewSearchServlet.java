@@ -1,3 +1,7 @@
+/**
+ * @author Michael
+ */
+
 package servlets;
 
 import java.io.IOException;
@@ -49,7 +53,6 @@ public class NewSearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		System.out.println("--------------" + request.getParameter("searchstring") + "---------------");
 
 		// HttpSession session = request.getSession();
 		request.setAttribute("searchstring", request.getParameter("searchstring"));

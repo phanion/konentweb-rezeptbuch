@@ -1,5 +1,5 @@
 /**
- * 
+ * @author Lorenz + Florian
  */
 
 'use strict';
@@ -11,11 +11,9 @@ function init() {
 			addComment);
 	document.getElementById('aboButton').addEventListener('click', aboHandling);
 	
-	// FUnktion aus textarea.js
+	// Funktion aus textarea.js
 	manageTextareas();
-//	resizeTextareas();
-//	document.getElementById('description').addEventListener('input', resizeTextareas);
-//	document.getElementById('newComment').addEventListener('input', resizeTextareas);
+
 
 }
 
@@ -99,18 +97,3 @@ function aboHandling() {
 	xmlhttp.send('recipe=' + recipe + '&action=' + action);
 
 }
-
-//function resizeTextareas(){
-//	var textareas = document.getElementsByTagName("textarea");
-//	
-//	for(var i = 0; i < textareas.length; i++){
-//		var rowsCount = textareas[i].value.split(/\n|\r/).length;
-//		textareas[i].setAttribute("rows", rowsCount);
-//		
-//		//Autor: Reigel URL: https://stackoverflow.com/questions/4814398/how-can-i-check-if-a-scrollbar-is-visible
-//		while(textareas[i].scrollHeight > textareas[i].clientHeight){
-//			rowsCount = rowsCount + 1;
-//			textareas[i].setAttribute("rows", rowsCount);
-//		}
-//	}
-//}

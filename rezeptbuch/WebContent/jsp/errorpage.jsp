@@ -1,3 +1,6 @@
+<%-- Autor: Michael 
+	http://www.jsptutorial.org/content/errorHandling --%>
+
 <%@ page errorPage="true" import="java.io.*"  language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" %>
 	

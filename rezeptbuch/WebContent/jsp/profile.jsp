@@ -1,4 +1,4 @@
-<!-- Refactoring: Lorenz, Flo, Michael -->
+<!-- Autor: Lorenz, Flo, Michael -->
 
 <%@ taglib
 	prefix="c"

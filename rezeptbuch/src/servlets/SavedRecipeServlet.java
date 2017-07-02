@@ -1,4 +1,5 @@
 /**
+ * @author Michael
  * Überarbeitung: Lorenz
  */
 
