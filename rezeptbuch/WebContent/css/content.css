@@ -363,3 +363,10 @@ Autor:				Mahdi (@mm241 on Codepen)
     border: 1px solid #bbb;
     border-radius: 20%;
 }
+
+.authorname 
+{
+	font-variant: all-petite-caps;
+	text-align: left;	
+    margin-top: -20px;	
+}
