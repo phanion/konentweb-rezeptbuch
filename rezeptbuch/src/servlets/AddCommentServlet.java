@@ -53,8 +53,8 @@ public class AddCommentServlet extends HttpServlet {
 	private Session mailSession;
 
 	/**
-	 * Das Servlet fügt zu einem Rezept einen Kommentar hinzu und gibt diesen
-	 * Kommentar per JSON an die Seite zurück. Beim Erstellen des Kommentars
+	 * Das Servlet fï¿½gt zu einem Rezept einen Kommentar hinzu und gibt diesen
+	 * Kommentar per JSON an die Seite zurï¿½ck. Beim Erstellen des Kommentars
 	 * werden auch alle Abonennten benachrichtigt
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -123,7 +123,7 @@ public class AddCommentServlet extends HttpServlet {
 
 	/**
 	 * Autor: Lorenz Es wird eine Mail an die Abbonenten gesendet, wenn ein
-	 * Kommentar zum Rezept hinzugefügt wird. Der Autor des Kommentars soll
+	 * Kommentar zum Rezept hinzugefï¿½gt wird. Der Autor des Kommentars soll
 	 * dabei keine Mail bekommen.
 	 * 
 	 * @throws SQLException
@@ -148,7 +148,7 @@ public class AddCommentServlet extends HttpServlet {
 					message.setSubject("Rezept wurde kommentiert");
 					message.setSentDate(new Date());
 					message.setContent("Hallo " + rs.getString("firstName") + " " + rs.getString("lastName")
-							+ ",<p>ndas von dir abonnierte Rezept " + rs.getString("name") + " wurde kommentiert.",
+							+ ",<p>das von dir abonnierte Rezept " + rs.getString("name") + " wurde kommentiert.",
 							"text/html; charset=utf-8");
 					Transport.send(message);
 				} catch (MessagingException ex) {

@@ -4,9 +4,9 @@
  */
 
 
-@charset 'UTF-8';
+@charset "UTF-8";
 
-/* �bernommen von CHRIS COYIER: https://css-tricks.com/all-about-floats/ */
+/* Übernommen von CHRIS COYIER: https://css-tricks.com/all-about-floats/ */
 .clearfix::after
 {
     display: block;
@@ -113,7 +113,7 @@ dd
     width: 50%;
 }
 
-/* Abst�nde bei �berschriften */
+/* Abstände bei Überschriften */
 h1
 {
     margin: 30px 0 10px;
