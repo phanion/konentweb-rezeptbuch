@@ -18,7 +18,7 @@
 	var="recipe">
 	<div class="search-entry clearfix">
 		<h2>
-			<a href="/rezeptbuch/LoadRecipeServlet?id=${recipe.id}">${recipe.name}</a>
+			<a class="recipe-title" href="/rezeptbuch/LoadRecipeServlet?id=${recipe.id}">${recipe.name}</a>
 		</h2>
 		<c:if test="${not empty recipe.getFilename()}">
 			<a href="/rezeptbuch/LoadRecipeServlet?id=${recipe.id}"><img

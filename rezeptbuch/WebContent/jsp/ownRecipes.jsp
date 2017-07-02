@@ -17,7 +17,7 @@
 			<div class="search-entry clearfix">
 
 				<h2>
-					<a href="/rezeptbuch/LoadRecipeServlet?id=${recipe.id}">${recipe.name}</a>
+					<a class="recipe-title" href="/rezeptbuch/LoadRecipeServlet?id=${recipe.id}">${recipe.name}</a>
 				</h2>
 				<c:if test="${not empty recipe.filename}">
 					<a href="/rezeptbuch/LoadRecipeServlet?id=${recipe.id}"><img
@@ -35,9 +35,9 @@
 							<c:otherwise>${recipe.ratingSum / recipe.ratingCount}</c:otherwise>
 						</c:choose>
 					</dd>
-					<dt>Erstellt am:</dt>
+					<dt>Erstellt am</dt>
 					<dd>${recipe.timestampToDate(recipe.created)}</dd>
-					<dt>Letzte Änderung:</dt>
+					<dt>Letzte Änderung</dt>
 					<dd>${recipe.timestampToDate(recipe.modified)}</dd>
 				</dl>
 			</div>

@@ -47,7 +47,7 @@
 	    })
 	})
 	
-	/* https://stackoverflow.com/questions/7542586/new-formdata-application-x-www-form-urlencoded */
+	/* CUIXIPING: https://stackoverflow.com/questions/7542586/new-formdata-application-x-www-form-urlencoded */
 	var  urlencodeFormData = function (fd) {
 	    var s = '';
 

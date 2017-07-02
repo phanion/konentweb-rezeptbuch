@@ -22,14 +22,16 @@
 
 <base href="${pageContext.request.requestURI}" />
 
-<script src="${pageContext.request.contextPath}/js/nav.js"></script>
-<script src="${pageContext.request.contextPath}/js/textarea.js"></script>
-<script src="${pageContext.request.contextPath}/js/editProfile.js"></script>
 
 <link
 	rel="stylesheet"
 	href="${pageContext.request.contextPath}/main.css">
 </head>
+
+<script src="${pageContext.request.contextPath}/js/nav.js"></script>
+<script src="${pageContext.request.contextPath}/js/textarea.js"></script>
+<script src="${pageContext.request.contextPath}/js/editProfile.js"></script>
+
 
 <body>
 	<%@ include file="./fragments/nav.jspf"%>
@@ -39,7 +41,7 @@
 	<h1>Dein Profil</h1>
 	<div
 		id="button-bar"
-		style="display: flex; flex-flow: row-wrap; margin-bottom: 1em;">
+		style="display: flex; flex-flow: row wrap; margin-bottom: 1em;">
 		<button
 			id="profileDataButton"
 			type="button"

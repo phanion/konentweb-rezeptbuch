@@ -38,7 +38,7 @@
 					<dt>Erstellt am</dt>
 					<dd>${recipe.timestampToDate(recipe.created) }</dd>
 				</dl>
-				<button name="deleteAbo" class="button" type="button">Deabonnieren</button>
+				<button name="deleteAbo" class="button" type="button">Nicht länger merken</button>
 				<input type="hidden" name="id" value="${recipe.getId()}"/>
 			</div>
 		</c:forEach>

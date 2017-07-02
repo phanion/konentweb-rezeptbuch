@@ -1,13 +1,13 @@
 <noscript>
 	<p>
-		Sehr geehrter Nutzer:<br> Bitte aktivieren Sie <strong>JavaScript</strong>,
+		Sehr geehrter Nutzer:<br>Bitte aktivieren Sie <strong>JavaScript</strong>,
 		um diese Webseite nutzen zu können.
 	</p>
 </noscript>
 <nav>
 	<div id="nav-content">
-		<div class="clearfix">
-			<ul id="navlist-left">
+		<div id="nav-lists">
+			<ul class="navlist">
 				<li>
 					<a href="/rezeptbuch/index.jsp">Startseite</a>
 				</li>
@@ -19,7 +19,7 @@
 				</c:if>
 			</ul>
 
-			<ul id="navlist-right">
+			<ul class="navlist">
 				<c:choose>
 					<c:when test="${not empty user}">
 						<li class="nav-but">
@@ -61,10 +61,9 @@
 				</li>
 			</ul>
 		</div>
-
 		<div
 			id="profile-container"
-			class="hide nav-container clearfix">
+			class="hide nav-container">
 			<div>
 				<c:choose>
 					<c:when test="${not empty user}">
@@ -89,7 +88,7 @@
 		</div>
 		<div
 			id="search-container"
-			class="hide nav-container clearfix">
+			class="hide nav-container">
 			<form
 				action="/rezeptbuch/newsearch"
 				method="get">

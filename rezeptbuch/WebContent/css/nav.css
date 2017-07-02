@@ -3,7 +3,7 @@
 #navlist-left
 {
     display: flex;
-    float: left;
+/*     float: left; */
 
     justify-content: center;
 }
@@ -11,9 +11,14 @@
 #navlist-right
 {
     display: flex;
-    float: right;
+/*     float: right; */
 
     justify-content: center;
+}
+
+.navlist {
+	display: flex;
+	justify-content: center;
 }
 
 #profile-container
@@ -198,4 +203,14 @@ nav form {
     background-color: #757c82;
 
     justify-content: center;
+    
+    
+    /**/
+
+}
+
+#nav-lists {
+	    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
 }

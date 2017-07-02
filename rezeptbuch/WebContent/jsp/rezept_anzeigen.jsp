@@ -16,14 +16,13 @@
 <meta charset="UTF-8">
 <title>Rezeptbuch - ${rezept.name}</title>
 
-<script src="${pageContext.request.contextPath}/js/nav.js"></script>
-
 <link
 	rel="stylesheet"
 	href="${pageContext.request.contextPath}/main.css">
 
 <!-- textarea.js sollte nach dem stylesheet kommen, Da es optische Dinge tut. -->
 <script src="${pageContext.request.contextPath}/js/textarea.js"></script>
+<script src="${pageContext.request.contextPath}/js/nav.js"></script>
 <!-- viewRecipe.js & editRecipe.js sollte nach textarea.js kommen, da sie die Funktionen aufrufen, die sonst nicht bekannt sind.-->
 <c:if test="${not empty user}">
 	<script src="${pageContext.request.contextPath}/js/viewRecipe.js"></script>
@@ -278,14 +277,7 @@
 
 			<div id="Bewertungen">
 				<h2>Bewertung</h2>
-
-				<%-- rating with stars--%>
-				<%-- unicode-#: &#9733 - full star (black star)--%>
-				<%-- unicode-#: &#9734 - empty star (white star)--%>
-				<%-- tutorial: https://css-tricks.com/star-ratings/ --%>
-
 				<div id="current-rating"></div>
-
 				<c:choose>
 					<c:when test="${not empty user }">
 						<form
@@ -306,7 +298,7 @@
 									type="radio"
 									id="star5"
 									name="rating"
-									value="5" />
+									value="5">
 								<label
 									class="star-label"
 									for="star5"
@@ -316,7 +308,7 @@
 									type="radio"
 									id="star4"
 									name="rating"
-									value="4" />
+									value="4">
 								<label
 									class="star-label"
 									for="star4"
@@ -326,7 +318,7 @@
 									type="radio"
 									id="star3"
 									name="rating"
-									value="3" />
+									value="3">
 								<label
 									class="star-label"
 									for="star3"
@@ -336,7 +328,7 @@
 									type="radio"
 									id="star2"
 									name="rating"
-									value="2" />
+									value="2">
 								<label
 									class="star-label"
 									for="star2"
@@ -346,7 +338,7 @@
 									type="radio"
 									id="star1"
 									name="rating"
-									value="1" />
+									value="1">
 								<label
 									class="star-label"
 									for="star1"

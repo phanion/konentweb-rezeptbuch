@@ -109,7 +109,9 @@ input + .button-input-search
 }
 
 button[name="deleteAbo"] {
-	float: right;
+/* 	float: right; */
+	    margin: auto;
+    display: block;
 }
 
 input

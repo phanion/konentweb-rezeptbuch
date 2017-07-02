@@ -1,6 +1,6 @@
 @charset 'UTF-8';
 
-/* https://css-tricks.com/all-about-floats/ */
+/* Übernommen von CHRIS COYIER: https://css-tricks.com/all-about-floats/ */
 .clearfix::after
 {
     display: block;
@@ -53,6 +53,16 @@ form,
     background: #fff;
 }
 
+.search-entry h1,
+.search-entry h2,
+.search-entry h3, 
+.search-entry h4, 
+.search-entry h5,
+.search-entry h6 
+{
+	margin: 0 0 12px;
+}
+
 .preview-img
 {
     float: left;
@@ -70,25 +80,29 @@ a ~ dl
     padding-left: 5%;
 }
 
-dt
-{
-    font-weight: bold;
-}
-
-/* Inspiriert von https://stackoverflow.com/questions/1713048/how-to-style-dt-and-dd-so-they-are-on-the-same-line */
 dl
 {
+    display: flex;
     float: left;
     overflow: hidden;
 
+	margin-bottom: 10px;
     width: 100%;
+
+    flex-flow: row wrap;
+}
+
+dt
+{
+    font-weight: bold;
 }
 
 dt,
 dd
 {
     display: inline-block;
-    float: left;
+/*     float: left; */
+	overflow: hidden;
 
     width: 50%;
 }
@@ -121,7 +135,8 @@ input,
 textarea,
 select,
 button,
-pre
+pre,
+p
 {
     font-size: 1em;
 
