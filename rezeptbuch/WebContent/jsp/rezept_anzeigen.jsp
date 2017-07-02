@@ -365,7 +365,7 @@
 						var="comment"
 						items="${rezept.comments}">
 						<div class="commentBox">
-							<h4>${comment.author.firstName}${comment.author.lastName}</h4>
+							<h4>${comment.author.firstName} ${comment.author.lastName}</h4>
 							<div class="commentContent">${comment.comment}</div>
 							<c:if test="${not empty user}">
 								<c:if test="${user.id == comment.author.id}">
