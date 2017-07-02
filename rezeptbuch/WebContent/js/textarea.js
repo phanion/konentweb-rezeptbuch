@@ -38,7 +38,7 @@ var sizeTextarea = function() {
 	this.disabled = false;
 	
 	this.style.height = 1 + 'px';
-	this.style.height = (this.scrollHeight)+'px';
+	this.style.height = this.scrollHeight+'px';
 	
 	this.disabled = dis;
 }
