@@ -1,7 +1,10 @@
 'use strict';
 
-document.addEventListener('DOMContentLoaded', manageTextareas);
+document.addEventListener('DOMContentLoaded', init);
 
+function init () {
+	manageTextareas();
+}
 
 /*
  * Angelehnt an Lösung von NicB:
