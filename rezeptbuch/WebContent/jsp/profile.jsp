@@ -23,14 +23,16 @@
 <base href="${pageContext.request.requestURI}" />
 
 
-<link
-	rel="stylesheet"
+<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/main.css">
-</head>
+
 
 <script src="${pageContext.request.contextPath}/js/nav.js"></script>
 <script src="${pageContext.request.contextPath}/js/textarea.js"></script>
 <script src="${pageContext.request.contextPath}/js/editProfile.js"></script>
+
+</head>
+
 
 
 <body>
