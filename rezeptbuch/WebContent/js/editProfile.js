@@ -140,10 +140,12 @@ function manageColors(callingButton) {
 }
 
 function deleteAbo(){
+	
 	var parent = this.parentElement;
 	
-	// https://www.w3schools.com/jsref/prop_element_nextelementsibling.asp
+	//Beginn: https://www.w3schools.com/jsref/prop_element_nextelementsibling.asp
 	var recipe = this.nextElementSibling.value;
+	//Ende
 	var action = 'deleteAbo';
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function() {

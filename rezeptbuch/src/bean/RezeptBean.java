@@ -205,8 +205,9 @@ public class RezeptBean implements Serializable {
 	}
 
 	public String timestampToDate(Timestamp timestamp) {
-		//Autor: ChssPly76 URL: https://stackoverflow.com/questions/1156468/how-to-format-a-java-sql-timestamp-for-displaying
+		//Beginn Autor: ChssPly76 URL: https://stackoverflow.com/questions/1156468/how-to-format-a-java-sql-timestamp-for-displaying
 		return new SimpleDateFormat("dd.MM.yyyy").format(timestamp);
+		//Ende
 	}
 	
 	

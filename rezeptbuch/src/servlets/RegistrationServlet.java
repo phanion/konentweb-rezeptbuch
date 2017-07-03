@@ -212,13 +212,16 @@ public class RegistrationServlet extends HttpServlet {
 	/**
 	 * Sendet eine Willkommensnachricht an einen neuen Nutzer
 	 * <p>
-	 * @see Slim Ouertani   https://dzone.com/articles/sending-email-using-javamail
+	 * 
 	 * 
 	 * 
 	 * @param recipientMail Die E-Mail-Adresse des neuen Nutzers
 	 * @param recipientName Der Name des neuen Nutzers
 	 */
+	
+	
 	public void sendWelcomeEmail(String recipientMail, String recipientName) {
+		//Beginn Beginn: Slim Ouertani   https://dzone.com/articles/sending-email-using-javamail
 		MimeMessage message = new MimeMessage(mailSession);
 
 		try {
@@ -233,6 +236,7 @@ public class RegistrationServlet extends HttpServlet {
 			ex.printStackTrace();
 		}
 	}
+	//Ende
 
 }
 

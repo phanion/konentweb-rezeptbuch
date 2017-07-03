@@ -27,7 +27,8 @@ function add() {
 	// Div erhält die Klasse "NewLine" um später auf alle zugreifen zu können
 	divNewLine.setAttribute("class", "newLine clearfix");
 
-	//Autor: sayee URL: http://stackoverflow.com/questions/34127450/dynamically-add-forminput-textbox-in-jsp
+	//Beginn: in Anlehnung an Autor: sayee URL: http://stackoverflow.com/questions/34127450/dynamically-add-forminput-textbox-in-jsp
+	
 	var paragraph = document.createElement("P")
 	var Menge = document.createElement("input");
 	Menge.setAttribute("type", "number");
@@ -83,6 +84,7 @@ function add() {
 
 	var div = document.getElementById("zutaten");
 	div.appendChild(divNewLine);
+	//Ende
 }
 
 function del() {

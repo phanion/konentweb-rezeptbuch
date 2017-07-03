@@ -109,10 +109,11 @@ public class NeuesRezeptServlet extends HttpServlet {
 
 		request.setAttribute("message", message);
 
-		//Author: Tomasz Nurkiewicz URL: http://stackoverflow.com/questions/12021087/passing-data-between-two-servlets
+		//Beginn: Author: Tomasz Nurkiewicz URL: http://stackoverflow.com/questions/12021087/passing-data-between-two-servlets
 		getServletContext().getRequestDispatcher("/LoadRecipeServlet");
 		RequestDispatcher disp = request.getRequestDispatcher("/LoadRecipeServlet?id=" + rezept.getId());
 		disp.forward(request, response);
+		//Ende
 	}
 
 	/**
