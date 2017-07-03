@@ -161,11 +161,12 @@ function del() {
 function deleteRecipe() {
 	var id = document.getElementById('id').value;
 
-	//https://www.w3schools.com/jsref/met_win_confirm.asp
+	//Beginn: https://www.w3schools.com/jsref/met_win_confirm.asp
 	confirm = window
 			.confirm("Sind Sie sicher, dass Sie dieses Rezept löschen möchten?");
 
 	if (confirm === true) {
+	//Ende
 
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function() {
